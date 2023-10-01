@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Model
+  xmlns:cmf="http://reference.niem.gov/specification/cmf/0.6/"
+  xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://reference.niem.gov/specification/cmf/0.6/">
+  <Namespace structures:id="jc3iedm">
+    <NamespaceURI>http://release.niem.gov/niem/codes/jc3iedm/5.0/</NamespaceURI>
+    <NamespacePrefixName>jc3iedm</NamespacePrefixName>
+    <DefinitionText>U.S. Department of Defense (DoD) Joint Consultation, Command and Control Information Exchange Data Model</DefinitionText>
+    <NamespaceKindCode>OTHERNIEM</NamespaceKindCode>
+  </Namespace>
+  <Namespace structures:id="mmucc">
+    <NamespaceURI>http://release.niem.gov/niem/codes/mmucc/5.0/</NamespaceURI>
+    <NamespacePrefixName>mmucc</NamespacePrefixName>
+    <DefinitionText>Model Minimum Uniform Crash Criteria</DefinitionText>
+    <NamespaceKindCode>OTHERNIEM</NamespaceKindCode>
+  </Namespace>
+  <Namespace structures:id="mo">
+    <NamespaceURI>http://release.niem.gov/niem/domains/militaryOperations/5.2/</NamespaceURI>
+    <NamespacePrefixName>mo</NamespacePrefixName>
+    <DefinitionText>MilOps - Distribution A</DefinitionText>
+    <NamespaceKindCode>DOMAIN</NamespaceKindCode>
+  </Namespace>
+  <Namespace structures:id="nc">
+    <NamespaceURI>http://release.niem.gov/niem/niem-core/5.0/</NamespaceURI>
+    <NamespacePrefixName>nc</NamespacePrefixName>
+    <DefinitionText>NIEM Core.</DefinitionText>
+    <NamespaceKindCode>CORE</NamespaceKindCode>
+  </Namespace>
+  <Namespace structures:id="xs">
+    <NamespaceURI>http://www.w3.org/2001/XMLSchema</NamespaceURI>
+    <NamespacePrefixName>xs</NamespacePrefixName>
+    <DefinitionText>The XML Schema definition language, which offers facilities for describing the structure and constraining the contents of XML documents.</DefinitionText>
+    <NamespaceKindCode>BUILTIN</NamespaceKindCode>
+  </Namespace>
+  <Property structures:id="jc3iedm.EventCategoryCode">
+    <Name>EventCategoryCode</Name>
+    <Namespace structures:ref="jc3iedm" xsi:nil="true" />
+    <DefinitionText>A designator for a category that some event falls under.</DefinitionText>
+    <Datatype structures:ref="jc3iedm.EventCategoryCodeType" xsi:nil="true" />
+  </Property>
+  <Property structures:id="mo.EventCategoryAbstract">
+    <Name>EventCategoryAbstract</Name>
+    <Namespace structures:ref="mo" xsi:nil="true" />
+    <DefinitionText>A data concept for the type or kind of an event.</DefinitionText>
+    <AbstractIndicator>true</AbstractIndicator>
+  </Property>
+  <Property structures:id="mo.SensorIdentification">
+    <Name>SensorIdentification</Name>
+    <Namespace structures:ref="mo" xsi:nil="true" />
+    <DefinitionText>An identification of a sensor.</DefinitionText>
+    <Class structures:ref="nc.IdentificationType" xsi:nil="true" />
+  </Property>
+  <Property structures:id="nc.AircraftCallSignIdentification">
+    <Name>AircraftCallSignIdentification</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>An identification of any combination of characters or pronounceable words, which identifies a communication facility, a command, an authority, an activity, or a unit; used primarily for establishing and maintaining communications.</DefinitionText>
+    <Class structures:ref="nc.IdentificationType" xsi:nil="true" />
+  </Property>
+  <Property structures:id="nc.Person">
+    <Name>Person</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A human being.</DefinitionText>
+    <Class structures:ref="nc.PersonType" xsi:nil="true" />
+  </Property>
+  <Property structures:id="nc.PersonFullName">
+    <Name>PersonFullName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A complete name of a person.</DefinitionText>
+    <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true" />
+  </Property>
+  <Property structures:id="nc.PersonGivenName">
+    <Name>PersonGivenName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A first name of a person.</DefinitionText>
+    <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true" />
+  </Property>
+  <Property structures:id="nc.PersonMiddleName">
+    <Name>PersonMiddleName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A middle name of a person.</DefinitionText>
+    <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true" />
+  </Property>
+  <Property structures:id="nc.PersonName">
+    <Name>PersonName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A combination of names and/or titles by which a person is known.</DefinitionText>
+    <Class structures:ref="nc.PersonNameType" xsi:nil="true" />
+  </Property>
+  <Property structures:id="nc.PersonSurName">
+    <Name>PersonSurName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A last name or family name of a person.</DefinitionText>
+    <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true" />
+  </Property>
+  <Class structures:id="nc.IdentificationType">
+    <Name>IdentificationType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A data type for a representation of an identity.</DefinitionText>
+  </Class>
+  <Class structures:id="nc.PersonNameType">
+    <Name>PersonNameType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A data type for a combination of names and/or titles by which a person is known.</DefinitionText>
+    <HasProperty>
+      <Property structures:ref="nc.PersonGivenName" xsi:nil="true" />
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="nc.PersonMiddleName" xsi:nil="true" />
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="nc.PersonSurName" xsi:nil="true" />
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="nc.PersonFullName" xsi:nil="true" />
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+  </Class>
+  <Class structures:id="nc.PersonType">
+    <Name>PersonType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A data type for a human being.</DefinitionText>
+    <HasProperty>
+      <Property structures:ref="nc.PersonName" xsi:nil="true" />
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+  </Class>
+  <Datatype structures:id="jc3iedm.EventCategoryCodeSimpleType">
+    <Name>EventCategoryCodeSimpleType</Name>
+    <Namespace structures:ref="jc3iedm" xsi:nil="true" />
+    <DefinitionText>A data type for a designator for a name which denotes the category that some event falls under.</DefinitionText>
+    <RestrictionOf>
+      <Datatype structures:ref="xs.token" xsi:nil="true" />
+    </RestrictionOf>
+  </Datatype>
+  <Datatype structures:id="jc3iedm.EventCategoryCodeType">
+    <Name>EventCategoryCodeType</Name>
+    <Namespace structures:ref="jc3iedm" xsi:nil="true" />
+    <DefinitionText>A data type for a designator for a name which denotes the category that some event falls under.</DefinitionText>
+  </Datatype>
+  <Datatype structures:id="mmucc.CrashHarmfulEventCodeSimpleType">
+    <Name>CrashHarmfulEventCodeSimpleType</Name>
+    <Namespace structures:ref="mmucc" xsi:nil="true" />
+    <DefinitionText>A data type for the injury or damage-producing event that characterizes the crash type.</DefinitionText>
+    <RestrictionOf>
+      <Datatype structures:ref="xs.token" xsi:nil="true" />
+    </RestrictionOf>
+  </Datatype>
+  <Datatype structures:id="mmucc.CrashHarmfulEventCodeType">
+    <Name>CrashHarmfulEventCodeType</Name>
+    <Namespace structures:ref="mmucc" xsi:nil="true" />
+    <DefinitionText>A data type for the injury or damage-producing event that characterizes the crash type.</DefinitionText>
+  </Datatype>
+  <Datatype structures:id="mmucc.VehicleDamageCodeSimpleType">
+    <Name>VehicleDamageCodeSimpleType</Name>
+    <Namespace structures:ref="mmucc" xsi:nil="true" />
+    <DefinitionText>A data type for events in sequence related to this motor vehicle, including both non-collision as well as collision events.</DefinitionText>
+    <RestrictionOf>
+      <Datatype structures:ref="xs.token" xsi:nil="true" />
+    </RestrictionOf>
+  </Datatype>
+  <Datatype structures:id="mmucc.VehicleDamageCodeType">
+    <Name>VehicleDamageCodeType</Name>
+    <Namespace structures:ref="mmucc" xsi:nil="true" />
+    <DefinitionText>A data type for events in sequence related to this motor vehicle, including both non-collision as well as collision events.</DefinitionText>
+  </Datatype>
+  <Datatype structures:id="nc.PersonNameTextType">
+    <Name>PersonNameTextType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A data type for a name by which a person is known, referred, or addressed.</DefinitionText>
+  </Datatype>
+  <Datatype structures:id="nc.ProperNameTextType">
+    <Name>ProperNameTextType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A data type for a word or phrase by which a person or thing is known, referred, or addressed.</DefinitionText>
+  </Datatype>
+  <Datatype structures:id="nc.TextType">
+    <Name>TextType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true" />
+    <DefinitionText>A data type for a character string.</DefinitionText>
+  </Datatype>
+  <Datatype structures:id="xs.string">
+    <Name>string</Name>
+    <Namespace structures:ref="xs" xsi:nil="true" />
+    <DefinitionText>A data type for character strings in XML.</DefinitionText>
+  </Datatype>
+  <Datatype structures:id="xs.token">
+    <Name>token</Name>
+    <Namespace structures:ref="xs" xsi:nil="true" />
+    <DefinitionText>A data type for tokenized strings.</DefinitionText>
+  </Datatype>
+  <SchemaDocument>
+    <NamespaceURI>http://release.niem.gov/niem/codes/jc3iedm/5.0/</NamespaceURI>
+    <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>xsd/codes/jc3iedm.xsd</DocumentFilePathText>
+    <NIEMVersionText>5.2</NIEMVersionText>
+    <SchemaVersionText>1</SchemaVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+    <NamespaceURI>http://release.niem.gov/niem/domains/militaryOperations/5.2/</NamespaceURI>
+    <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>xsd/domains/mo.xsd</DocumentFilePathText>
+    <NIEMVersionText>5.2</NIEMVersionText>
+    <SchemaVersionText>1</SchemaVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+    <NamespaceURI>http://www.w3.org/2001/XMLSchema</NamespaceURI>
+    <DocumentFilePathText>/null.xsd</DocumentFilePathText>
+    <NIEMVersionText>5.2</NIEMVersionText>
+    <SchemaVersionText />
+  </SchemaDocument>
+  <SchemaDocument>
+    <NamespaceURI>http://release.niem.gov/niem/niem-core/5.0/</NamespaceURI>
+    <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>xsd/niem-core.xsd</DocumentFilePathText>
+    <NIEMVersionText>5.2</NIEMVersionText>
+    <SchemaVersionText>1</SchemaVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+    <NamespaceURI>http://release.niem.gov/niem/structures/5.0/</NamespaceURI>
+    <DocumentFilePathText>xsd/niem/utility/structures.xsd</DocumentFilePathText>
+    <NIEMVersionText>5.0</NIEMVersionText>
+    <SchemaVersionText>5.0</SchemaVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+    <NamespaceURI>http://release.niem.gov/niem/codes/mmucc/5.0/</NamespaceURI>
+    <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>xsd/codes/mmucc.xsd</DocumentFilePathText>
+    <NIEMVersionText>5.2</NIEMVersionText>
+    <SchemaVersionText>1</SchemaVersionText>
+  </SchemaDocument>
+</Model>

@@ -1,0 +1,7 @@
+
+app:
+  baseUrl: http://localhost:8080/api/v2
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/niem-api-v2

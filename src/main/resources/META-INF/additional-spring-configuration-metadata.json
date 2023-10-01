@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "app",
+    "type": "java.lang.String",
+    "description": "Custom properties"
+  },
+  {
+    "name": "app.version",
+    "type": "java.lang.String",
+    "description": "Slot for the draft property from the build.gradle file'"
+  },
+  {
+    "name": "app.url",
+    "type": "java.lang.String",
+    "description": "Base url for the endpoints"
+  }
+]}

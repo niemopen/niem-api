@@ -1,0 +1,60 @@
+version: "0.2"
+ignorePaths: []
+dictionaryDefinitions: []
+dictionaries: []
+words:
+  - AKROTIRI
+  - ASHMORE
+  - BARTHELEMY
+  - BASSAS
+  - BOUVET
+  - BURKINA
+  - CABO
+  - CAICOS
+  - classpath
+  - CLASSTYPE
+  - CLIPPERTON
+  - CÔTE
+  - CUNHA
+  - D’IVOIRE
+  - DATAPROPERTY
+  - datatypes
+  - DHEKELIA
+  - ESWATINI
+  - EUSTATIUS
+  - FASO
+  - fkey
+  - FUTUNA
+  - GLORIOSO
+  - Hmmss
+  - HOWLAND
+  - ISLAS
+  - Jaxb
+  - KINGMAN
+  - KITTS
+  - LESTE
+  - Lucene
+  - MAARTEN
+  - MARINO
+  - MAYEN
+  - NAVASSA
+  - NUMKINDS
+  - OBJECTPROPERTY
+  - OTHERNIEM
+  - PARACEL
+  - plpgsql
+  - projectable
+  - reindex
+  - RICA
+  - SPRATLY
+  - stewardships
+  - subproperties
+  - Subproperty
+  - svrl
+  - TOKELAU
+  - TROMELIN
+  - unaccent
+  - whitespaces
+  - wonka
+ignoreWords: []
+import: []

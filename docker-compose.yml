@@ -1,0 +1,28 @@
+version: '3'
+services:
+ db:
+  container_name: artifactory.icl.gtri.org/niem-api/niem-api_db
+  build: db/.
+  image: postgres:9.6
+  restart: always
+  environment:
+       - POSTGRES_USER=postgres
+       - POSTGRES_PASSWORD=postgres
+       - POSTGRES_DB=niem
+  volumes:
+       - ./db/niem.sql:/home/niem.sql
+ api:
+  container_name: artifactory.icl.gtri.org/niem-api/niem-api_api
+  build: api/.
+  restart: always
+  ports:
+    - "8090:8080"
+  depends_on:
+    - db
+           # environment:
+                 # JAVA_OPTS: "-XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80"
+                 #CATALINA_OPTS: "-XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=80"
+networks:
+  default:
+      external:
+        name: proxy-net

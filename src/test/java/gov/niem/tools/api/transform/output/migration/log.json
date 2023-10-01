@@ -1,0 +1,3251 @@
+{
+  "tests": [
+    {
+      "id": "migrate-3.0-to-3.1",
+      "description": "Migrate NIEM Model 3.0 to 3.1",
+      "severity": "warning",
+      "ran": true,
+      "runtime": 0.993,
+      "results": [
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "warning",
+          "prefix": "biom",
+          "label": "biom:Biometric",
+          "object": "Property",
+          "message": "No migration available"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "warning",
+          "prefix": "biom",
+          "label": "biom:BiometricDataType",
+          "object": "Type",
+          "message": "No migration available"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "warning",
+          "prefix": "biom",
+          "label": "biom:BiometricID",
+          "object": "Property",
+          "message": "No migration available"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "warning",
+          "prefix": "j",
+          "label": "j:CrashFirstHarmfulEvent",
+          "object": "Property",
+          "message": "No migration available"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "warning",
+          "prefix": "j",
+          "label": "j:CrashFirstHarmfulEventCode",
+          "object": "Property",
+          "message": "No migration available"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded",
+          "comment": "Renamed from mmucc:CrashFirstHarmfulEventCodeSimpleType"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeType",
+          "object": "Type",
+          "message": "Migration succeeded",
+          "comment": "Renamed from mmucc:CrashFirstHarmfulEventCodeType"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded",
+          "comment": "Renamed from mmucc:ImpactAreaCodeSimpleType"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeType",
+          "object": "Type",
+          "message": "Migration succeeded",
+          "comment": "Renamed from mmucc:ImpactAreaCodeType"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:CallSignIdentification",
+          "object": "Property",
+          "message": "Migration succeeded",
+          "comment": "Renamed from mo:CallSignID"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:EventCategoryAbstract",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCode",
+          "object": "Property",
+          "message": "Migration succeeded",
+          "comment": "Renamed from mo:EventCategoryCode"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:SensorIdentification",
+          "object": "Property",
+          "message": "Migration succeeded",
+          "comment": "Renamed from mo:SensorID"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:IdentificationType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:Person",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonFullName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonGivenName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonMiddleName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonSurName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:ProperNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:TextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:string",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.0-to-3.1",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:token",
+          "object": "Type",
+          "message": "Migration succeeded"
+        }
+      ]
+    },
+    {
+      "id": "migrate-3.1-to-3.2",
+      "description": "Migrate NIEM Model 3.1 to 3.2",
+      "severity": "warning",
+      "ran": true,
+      "runtime": 0.433,
+      "results": [
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCode",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:CallSignIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:EventCategoryAbstract",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:SensorIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:IdentificationType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:Person",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonFullName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonGivenName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonMiddleName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonSurName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:ProperNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:TextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:string",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.1-to-3.2",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:token",
+          "object": "Type",
+          "message": "Migration succeeded"
+        }
+      ]
+    },
+    {
+      "id": "migrate-3.2-to-4.0",
+      "description": "Migrate NIEM Model 3.2 to 4.0",
+      "severity": "warning",
+      "ran": true,
+      "runtime": 0.391,
+      "results": [
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCode",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:CallSignIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:EventCategoryAbstract",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:SensorIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:IdentificationType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:Person",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonFullName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonGivenName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonMiddleName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonSurName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:ProperNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:TextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:string",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-3.2-to-4.0",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:token",
+          "object": "Type",
+          "message": "Migration succeeded"
+        }
+      ]
+    },
+    {
+      "id": "migrate-4.0-to-4.1",
+      "description": "Migrate NIEM Model 4.0 to 4.1",
+      "severity": "warning",
+      "ran": true,
+      "runtime": 0.404,
+      "results": [
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCode",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:CallSignIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:EventCategoryAbstract",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:SensorIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:IdentificationType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:Person",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonFullName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonGivenName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonMiddleName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonSurName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:ProperNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:TextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:string",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.0-to-4.1",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:token",
+          "object": "Type",
+          "message": "Migration succeeded"
+        }
+      ]
+    },
+    {
+      "id": "migrate-4.1-to-4.2",
+      "description": "Migrate NIEM Model 4.1 to 4.2",
+      "severity": "warning",
+      "ran": true,
+      "runtime": 0.367,
+      "results": [
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCode",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:CallSignIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:EventCategoryAbstract",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:SensorIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:IdentificationType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:Person",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonFullName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonGivenName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonMiddleName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonSurName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:ProperNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:TextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:string",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.1-to-4.2",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:token",
+          "object": "Type",
+          "message": "Migration succeeded"
+        }
+      ]
+    },
+    {
+      "id": "migrate-4.2-to-5.0",
+      "description": "Migrate NIEM Model 4.2 to 5.0",
+      "severity": "warning",
+      "ran": true,
+      "runtime": 0.363,
+      "results": [
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCode",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:AircraftCallSignIdentification",
+          "object": "Property",
+          "message": "Migration succeeded",
+          "comment": "Renamed from mo:CallSignIdentification"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:EventCategoryAbstract",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:SensorIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:IdentificationType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:Person",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonFullName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonGivenName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonMiddleName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonSurName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:ProperNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:TextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:string",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-4.2-to-5.0",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:token",
+          "object": "Type",
+          "message": "Migration succeeded"
+        }
+      ]
+    },
+    {
+      "id": "migrate-5.0-to-5.1",
+      "description": "Migrate NIEM Model 5.0 to 5.1",
+      "severity": "warning",
+      "ran": true,
+      "runtime": 0.34,
+      "results": [
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCode",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:EventCategoryAbstract",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:SensorIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:AircraftCallSignIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:IdentificationType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:Person",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonFullName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonGivenName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonMiddleName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonSurName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:ProperNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:TextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:string",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.0-to-5.1",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:token",
+          "object": "Type",
+          "message": "Migration succeeded"
+        }
+      ]
+    },
+    {
+      "id": "migrate-5.1-to-5.2",
+      "description": "Migrate NIEM Model 5.1 to 5.2",
+      "severity": "warning",
+      "ran": true,
+      "runtime": 0.36,
+      "results": [
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCode",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "jc3iedm",
+          "label": "jc3iedm:EventCategoryCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:CrashHarmfulEventCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeSimpleType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "mmucc",
+          "label": "mmucc:VehicleDamageCodeType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:EventCategoryAbstract",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "mo",
+          "label": "mo:SensorIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:AircraftCallSignIdentification",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:IdentificationType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:Person",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonFullName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonGivenName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonMiddleName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonNameType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonSurName",
+          "object": "Property",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:PersonType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:ProperNameTextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "nc",
+          "label": "nc:TextType",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:string",
+          "object": "Type",
+          "message": "Migration succeeded"
+        },
+        {
+          "testId": "migrate-5.1-to-5.2",
+          "status": "passed",
+          "prefix": "xs",
+          "label": "xs:token",
+          "object": "Type",
+          "message": "Migration succeeded"
+        }
+      ]
+    }
+  ],
+  "testResults": [
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "warning",
+      "prefix": "biom",
+      "label": "biom:Biometric",
+      "object": "Property",
+      "message": "No migration available"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "warning",
+      "prefix": "biom",
+      "label": "biom:BiometricDataType",
+      "object": "Type",
+      "message": "No migration available"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "warning",
+      "prefix": "biom",
+      "label": "biom:BiometricID",
+      "object": "Property",
+      "message": "No migration available"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "warning",
+      "prefix": "j",
+      "label": "j:CrashFirstHarmfulEvent",
+      "object": "Property",
+      "message": "No migration available"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "warning",
+      "prefix": "j",
+      "label": "j:CrashFirstHarmfulEventCode",
+      "object": "Property",
+      "message": "No migration available"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded",
+      "comment": "Renamed from mmucc:CrashFirstHarmfulEventCodeSimpleType"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeType",
+      "object": "Type",
+      "message": "Migration succeeded",
+      "comment": "Renamed from mmucc:CrashFirstHarmfulEventCodeType"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded",
+      "comment": "Renamed from mmucc:ImpactAreaCodeSimpleType"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeType",
+      "object": "Type",
+      "message": "Migration succeeded",
+      "comment": "Renamed from mmucc:ImpactAreaCodeType"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:CallSignIdentification",
+      "object": "Property",
+      "message": "Migration succeeded",
+      "comment": "Renamed from mo:CallSignID"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:EventCategoryAbstract",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCode",
+      "object": "Property",
+      "message": "Migration succeeded",
+      "comment": "Renamed from mo:EventCategoryCode"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:SensorIdentification",
+      "object": "Property",
+      "message": "Migration succeeded",
+      "comment": "Renamed from mo:SensorID"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:IdentificationType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:Person",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonFullName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonGivenName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonMiddleName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonSurName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:ProperNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:TextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:string",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.0-to-3.1",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:token",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCode",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:CallSignIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:EventCategoryAbstract",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:SensorIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:IdentificationType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:Person",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonFullName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonGivenName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonMiddleName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonSurName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:ProperNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:TextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:string",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.1-to-3.2",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:token",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCode",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:CallSignIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:EventCategoryAbstract",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:SensorIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:IdentificationType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:Person",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonFullName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonGivenName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonMiddleName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonSurName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:ProperNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:TextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:string",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-3.2-to-4.0",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:token",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCode",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:CallSignIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:EventCategoryAbstract",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:SensorIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:IdentificationType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:Person",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonFullName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonGivenName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonMiddleName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonSurName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:ProperNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:TextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:string",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.0-to-4.1",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:token",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCode",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:CallSignIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:EventCategoryAbstract",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:SensorIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:IdentificationType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:Person",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonFullName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonGivenName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonMiddleName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonSurName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:ProperNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:TextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:string",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.1-to-4.2",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:token",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCode",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:AircraftCallSignIdentification",
+      "object": "Property",
+      "message": "Migration succeeded",
+      "comment": "Renamed from mo:CallSignIdentification"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:EventCategoryAbstract",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:SensorIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:IdentificationType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:Person",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonFullName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonGivenName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonMiddleName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonSurName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:ProperNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:TextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:string",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-4.2-to-5.0",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:token",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCode",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:EventCategoryAbstract",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:SensorIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:AircraftCallSignIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:IdentificationType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:Person",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonFullName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonGivenName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonMiddleName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonSurName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:ProperNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:TextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:string",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.0-to-5.1",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:token",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCode",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "jc3iedm",
+      "label": "jc3iedm:EventCategoryCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:CrashHarmfulEventCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeSimpleType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "mmucc",
+      "label": "mmucc:VehicleDamageCodeType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:EventCategoryAbstract",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "mo",
+      "label": "mo:SensorIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:AircraftCallSignIdentification",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:IdentificationType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:Person",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonFullName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonGivenName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonMiddleName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonNameType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonSurName",
+      "object": "Property",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:PersonType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:ProperNameTextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "nc",
+      "label": "nc:TextType",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:string",
+      "object": "Type",
+      "message": "Migration succeeded"
+    },
+    {
+      "testId": "migrate-5.1-to-5.2",
+      "status": "passed",
+      "prefix": "xs",
+      "label": "xs:token",
+      "object": "Type",
+      "message": "Migration succeeded"
+    }
+  ],
+  "comment": "24 components migrated out of 29",
+  "info": 0,
+  "warnings": 5,
+  "errors": 0,
+  "passed": 192
+}

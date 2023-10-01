@@ -1,0 +1,24 @@
+openapi: '3.0.0'
+info:
+  title: NIEM API 2.0 CONFIG
+  description: Community support for common NIEM tool functionality to browse and search the model, build and migrate subsets, and check conformance
+  version: ${version}
+  contact:
+    name: NIEMOpen
+    url: https://niemopen.org
+servers:
+- url: http://localhost:8080/api/v2
+  description: Local machine
+- url: https://tools.niem.gov/api/v2
+  description: Production server
+- url: https://yellowkiwi06.icl.gtri.org/
+  description: Internal test server
+security:
+  - name:
+    - bearerAuthentication
+components:
+  securitySchemes:
+    bearerAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

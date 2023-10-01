@@ -1,0 +1,80 @@
+plugins {
+	id 'java'
+  id "com.github.ben-manes.versions" version "0.46.0"
+  id "io.freefair.lombok" version "8.0.1"
+	id 'io.spring.dependency-management' version '1.1.0'
+  id 'org.springdoc.openapi-gradle-plugin' version '1.6.0'
+	id 'org.springframework.boot' version '3.1.0'
+}
+
+group = 'gov.niem.tools'
+version = '2.0'
+project.ext.draft = '2.0-alpha6.2'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs/cmftool-0.6.1-SNAPSHOT/lib', include: '*.jar')
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
+  implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.1'
+  implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.15.1'
+  implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate6:2.15.1'
+  implementation 'com.fasterxml.jackson:jackson-bom:2.15.1'
+  implementation 'com.github.therapi:therapi-runtime-javadoc:0.15.0'
+  implementation 'commons-io:commons-io:2.12.0'
+  implementation 'net.lingala.zip4j:zip4j:2.11.5'
+  implementation 'net.sf.saxon:Saxon-HE:12.3'
+  implementation 'org.apache.commons:commons-csv:1.10.0'
+  implementation 'org.hibernate.orm:hibernate-envers:6.2.3.Final'
+  implementation 'org.hibernate.search:hibernate-search-mapper-orm-orm6:6.2.0.Alpha2'
+  implementation 'org.hibernate.search:hibernate-search-backend-lucene:6.2.0.Alpha2'
+  implementation 'org.json:json:20230227'
+  implementation 'org.postgresql:postgresql:42.6.0'
+  // implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+  // implementation 'org.springdoc:springdoc-openapi-javadoc:1.7.0'
+  implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.1.0'
+  // implementation 'org.springframework.boot:spring-boot-starter-security:3.1.0'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+  annotationProcessor 'com.github.therapi:therapi-runtime-javadoc-scribe:0.15.0'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+configurations.all {
+  resolutionStrategy {
+    failOnVersionConflict()
+  }
+}
+
+compileJava {
+  options.compilerArgs << '-parameters'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+openApi {
+  apiDocsUrl.set("http://localhost:8080/api/v2/api-docs")
+}
+
+processResources {
+  filesMatching(['application.yaml', 'swagger-config.yaml']) {
+    // Make application version available to the code and open-api file
+    expand(project.properties)
+  }
+}

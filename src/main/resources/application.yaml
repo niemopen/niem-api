@@ -1,0 +1,86 @@
+
+app:
+  draft: ${project.ext.draft?:PENDING_BUILD}
+  baseUrl: https://tools.niem.gov/api/v2
+
+logging:
+  level:
+    gov.niem.tools: DEBUG
+    org.hibernate: INFO
+    org.springframework.core.LocalVariableTableParameterNameDiscoverer: ERROR
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    web: DEBUG
+
+server:
+  compression:
+    enabled: true
+    mime-types:
+    - application/xml
+    - application/json
+    min-response-size: 1024
+  servlet:
+    context-path: /api/v2
+
+spring:
+  datasource:
+    # url: jdbc:postgresql://localhost:5432/niem-api-v2
+    url: jdbc:postgresql://niem-api_db_1:5432/niem-api-v2
+    # url: jdbc:postgresql://niem-api-mep_db_1:5432/niem-api-v2
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jackson:
+    # default-property-inclusion: non-null
+    serialization:
+      # wrap-root-value: true
+      indent-output: true
+    # mapper:
+    #   write-xml-declaration: true
+
+  jpa:
+    defer-datasource-initialization: true
+    generate-ddl: true
+    hibernate:
+      # ddl-auto: create
+      ddl-auto: none
+    properties:
+      enable_lazy_load_no_trans: true
+      format_sql: true
+      hbm2ddl:
+        import_files: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+        import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+        naming:
+          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+          physical-strategy: com.vladmihalcea.hibernate.naming.CamelCaseToSnakeCaseNamingStrategy
+      hibernate:
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        search:
+          backend:
+            analysis:
+              configurer: class:gov.niem.tools.api.core.config.AppLuceneAnalysisConfigurer
+            directory:
+              root: ./db/indexes
+              type: local-filesystem
+    show-sql: false
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  sql:
+    init:
+      mode: always
+
+springdoc:
+  api-docs.path: /api-docs
+  default-produces-media-type: application/json
+  swagger-ui:
+    supported-submit-methods:
+    - get
+    tags-sorter: alpha
+    # try-it-out-enabled: false
+  use-fqn: true
+  writer-with-default-pretty-printer: true
+  writer-with-order-by-keys: true

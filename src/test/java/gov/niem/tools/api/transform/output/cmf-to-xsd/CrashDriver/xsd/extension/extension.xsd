@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/>
+           xmlns:ext="http://training.niem.gov/CrashDriver/1.0/extension"
+           xmlns:j="http://release.niem.gov/niem/domains/jxdm/7.0/"
+           xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
+           xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xs-proxy="http://release.niem.gov/niem/proxy/niem-xs/5.0/"
+           ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument"
+           targetNamespace="http://training.niem.gov/CrashDriver/1.0/extension"
+           version="1">
+   <xs:annotation>
+      <xs:documentation>Extension schema for an example IEPD used to illustrate NIEM's technical
+      features.</xs:documentation>
+   </xs:annotation>
+   <xs:import namespace="http://release.niem.gov/niem/domains/jxdm/7.0/>
+              schemaLocation="../niem/domains/jxdm.xsd"/>
+   <xs:import namespace="http://release.niem.gov/niem/niem-core/5.0/>
+              schemaLocation="../niem/niem-core.xsd"/>
+   <xs:import namespace="http://release.niem.gov/niem/proxy/niem-xs/5.0/>
+              schemaLocation="../niem/adapters/niem-xs.xsd"/>
+   <xs:import namespace="http://release.niem.gov/niem/structures/5.0/>
+              schemaLocation="../niem/utility/structures.xsd"/>
+   <xs:complexType name="DriverLicenseAugmentationType">
+      <xs:annotation>
+         <xs:documentation>A data type for additional information about a DriverLicense</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="structures:AugmentationType">
+            <xs:sequence>
+               <xs:element ref="nc:ContactInformation" minOccurs="0"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:simpleType name="PrivacyCodeSimpleType">
+      <xs:annotation>
+         <xs:documentation>A data type for a code representing a kind of property.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:token">
+         <xs:enumeration value="PII">
+            <xs:annotation>
+               <xs:documentation>Personally Identifiable Information</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="MEDICAL">
+            <xs:annotation>
+               <xs:documentation>Medical Information</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="PrivacyCodeType">
+      <xs:annotation>
+         <xs:documentation>A data type for a code representing a kind of property.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="ext:PrivacyCodeSimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="PrivacyMetadataType">
+      <xs:annotation>
+         <xs:documentation>A data type for metadata about Privacy.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="structures:MetadataType">
+            <xs:sequence>
+               <xs:element ref="ext:PrivacyCode" minOccurs="0" maxOccurs="2"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="DriverLicenseAugmentation>
+               substitutionGroup="j:DriverLicenseAugmentationPoint"
+               type="ext:DriverLicenseAugmentationType">
+      <xs:annotation>
+         <xs:documentation>Additional information about a DriverLicense</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PersonDefenestrationIndicator>
+               substitutionGroup="j:CrashPersonAugmentationPoint"
+               type="xs-proxy:boolean">
+      <xs:annotation>
+         <xs:documentation>True if this person was thrown through a window; false otherwise.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PrivacyCode" type="ext:PrivacyCodeType">
+      <xs:annotation>
+         <xs:documentation>A code representing a kind of property.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PrivacyMetadata" type="ext:PrivacyMetadataType">
+      <xs:annotation>
+         <xs:documentation>Metadata about Privacy.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+</xs:schema>

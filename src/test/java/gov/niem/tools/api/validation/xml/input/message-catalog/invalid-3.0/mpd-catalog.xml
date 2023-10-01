@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<c:Catalog 
+    xmlns:cot="http://example.com/cot-niem/0.9/"
+    xmlns:c="http://reference.niem.gov/niem/resource/mpd/catalog/3.0/"
+    xmlns:structures="http://release.niem.gov/niem/structures/3.0/"
+    xmlns:nc="http://release.niem.gov/niem/niem-core/3.0/">
+    <c:MPD 
+        c:mpdURI="http://example.com/cot-iepd/0.9rc3/" 
+        c:mpdClassURIList=
+          "http://reference.niem.gov/niem/specification/model-package-description/3.0/#MPD
+          http://reference.niem.gov/niem/specification/model-package-description/3.0/#IEPD"
+        c:mpdName="cot-iepd">
+        <c:MPDInformation>
+            <c:AuthoritativeSources> 
+                <nc:EntityOrganization>
+                    <nc:OrganizationName>CoT Program Office</nc:OrganizationName>
+                    <nc:OrganizationPrimaryContactInformation>
+                        <nc:ContactWebsiteURI>https://partners.mitre.org/sites/CoTUserGroup/</nc:ContactWebsiteURI>
+                    </nc:OrganizationPrimaryContactInformation>
+                </nc:EntityOrganization>
+            </c:AuthoritativeSources>
+            <c:CreationDate>2014-08-04</c:CreationDate>
+            <c:StatusText>Release Candidate</c:StatusText>
+        </c:MPDInformation>
+        <c:IEPConformanceTarget structures:id="CoT-NIEM-IEP">
+            <nc:DescriptionText>
+                An IEP class equivalent to Cursor-on-Target 2.0 messages
+            </nc:DescriptionText>
+            <c:HasDocumentElement c:qualifiedNameList="cot:Event"/>
+            <c:XMLSchemaValid>
+                <c:XMLCatalog c:pathURI="base-xsd/xml-catalog.xml"/>
+            </c:XMLSchemaValid>
+            <c:SchematronValid>
+                <c:SchematronSchema c:pathURI="schematron/business-rules.sch"/>
+            </c:SchematronValid>
+            <c:EXIXMLSchema>
+                <c:XMLCatalog c:pathURI="exi-xsd/exi-xml-catalog.xml"/>
+                <c:XMLSchemaDocument c:pathURI="extension/cot-niem.xsd"/>
+            </c:EXIXMLSchema>
+            <c:IEPSampleXMLDocument c:pathURI="iep-samples/iep1.xml"/>
+        </c:IEPConformanceTarget>
+        <c:ReadMe c:pathURI="00-README.txt"/>
+        <c:MPDChangeLog c:pathURI="01-changelog.txt"></c:MPDChangeLog>
+        <c:ConformanceAssertion c:pathURI="02-conformance.txt"/>
+        <c:Wantlist c:pathURI="base-xsd/niem/wantlist.xml"/>
+        <c:ExtensionSchemaDocument c:pathURI="base-xsd/extension/cot-niem.xsd"/>
+        <c:ExtensionSchemaDocument c:pathURI="base-xsd/extension/cot-niem-codes.xsd"/>
+        <c:ReferenceSchemaDocument c:pathURI="base-xsd/extension/milops-future-ref.xsd"/>
+    </c:MPD>
+</c:Catalog>

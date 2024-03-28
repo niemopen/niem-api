@@ -47,7 +47,7 @@ public class VersionController {
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType) throws Exception {
     Version version = hub.versions.findOne(stewardKey, modelKey, versionKey);
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
-    version.addToCmfModel(cmfModel);
+    version.addToCmfModel(cmfModel, false);
     return CmfUtils.generateString(cmfModel, mediaType);
   }
 

@@ -381,6 +381,16 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
     }
   }
 
+  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel, Boolean includeContent) throws CMFException {
+    if (includeContent == true) {
+      addToCmfModel(cmfModel);
+    }
+    else {
+      // TODO: Load version properties once supported by CMF
+      return;
+    }
+  }
+
   @Override
   public org.mitre.niem.cmf.Model toCmf() {
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();

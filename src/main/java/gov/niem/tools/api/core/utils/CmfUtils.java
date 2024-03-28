@@ -2,7 +2,6 @@ package gov.niem.tools.api.core.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.nio.file.Path;
 
 import org.json.JSONObject;
@@ -23,6 +22,9 @@ public class CmfUtils {
 
     modelXMLWriter.writeXML(model, outputStream);
     String xml = outputStream.toString();
+
+    // TODO: Resolve CMF XML error at source in CMF tool
+    xml = xml.replace("cmf/0.8/\">", "cmf/0.8/\"");
 
     if (mediaType == AppMediaType.json) {
       JSONObject json = JsonUtils.xmlToJson(xml);
@@ -54,12 +56,17 @@ public class CmfUtils {
     File file = FileUtils.file(filepathString);
     // file.createNewFile();
 
-    // Write the CMF model to the new file
-    FileOutputStream fileOutputStream = new FileOutputStream(file);
+    // Write the CMF model to a string
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     ModelXMLWriter cmfWriter = new ModelXMLWriter();
-    cmfWriter.writeXML(cmf, fileOutputStream);
-    fileOutputStream.flush();
-    fileOutputStream.close();
+    cmfWriter.writeXML(cmf, byteArrayOutputStream);
+    String cmfString = byteArrayOutputStream.toString();
+
+    // TODO: Resolve CMF XML error at source in CMF tool
+    cmfString = cmfString.replace("cmf/0.8/\">", "cmf/0.8/\"");
+
+    // Write the CMF string to a file
+    FileUtils.saveFile(path, cmfString.getBytes());
 
     return file;
 

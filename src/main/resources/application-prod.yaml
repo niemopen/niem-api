@@ -1,0 +1,7 @@
+
+app:
+  baseUrl: https://tools.niem.gov/api/v2
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgresql.icl.gtri.org:5432/niem_api_v2

@@ -54,10 +54,8 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    # url: jdbc:postgresql://niem-mep-api-db-1:5432/niem-api-v2
-    # url: jdbc:postgresql://niem-api-db-1:5432/niem-api-v2
     # url: jdbc:postgresql://niem-api-db_1:5432/niem-api-v2
-    url: jdbc:postgresql://localhost:5432/niem-api-v2-2
+    url: jdbc:postgresql://localhost:5432/niem-api-v2
 
   jackson:
     # default-property-inclusion: non-null
@@ -71,10 +69,8 @@ spring:
     defer-datasource-initialization: true
     generate-ddl: true
     hibernate:
-      # ddl-auto: update
-      # ddl-auto: create-drop
-      # ddl-auto: create
-      ddl-auto: none
+      # ddl-auto: none
+      ddl-auto: validate
     # open-in-view: false
     properties:
       enable_lazy_load_no_trans: true

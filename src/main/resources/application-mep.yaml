@@ -1,0 +1,11 @@
+
+app:
+  baseUrl: https://tools.niem.gov/api/mep
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgresql.icl.gtri.org:5432/niem_api_mep
+
+server:
+  servlet:
+    context-path: /api/mep

@@ -1,0 +1,7 @@
+
+app:
+  baseUrl: http://yellowkiwi09.icl.gtri.org:8080/api/v2
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgresql.icl.gtri.org:5432/niem_api_v2_staging

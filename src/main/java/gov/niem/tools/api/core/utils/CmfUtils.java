@@ -66,7 +66,7 @@ public class CmfUtils {
     cmfString = cmfString.replace("cmf/0.8/\">", "cmf/0.8/\"");
 
     // Write the CMF string to a file
-    FileUtils.saveFile(path, cmfString.getBytes());
+    FileUtils.saveFile(file.toPath(), cmfString.getBytes());
 
     return file;
 

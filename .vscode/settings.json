@@ -1,0 +1,22 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "rest-client.environmentVariables": {
+    "localhost": {
+      "baseUrl": "http://localhost:8080/api/v2"
+    },
+    "prod": {
+      "baseUrl": "https://tools.niem.gov/api/v2"
+    },
+    "mep": {
+      "baseUrl": "https://tools.niem.gov/api/mep"
+    },
+    "$shared": {
+      "boundary": "----WebKitFormBoundary-------------------",
+      "format_cmf": "cmf",
+      "format_xsd": "xsd",
+      "format_owl": "owl",
+      "format_json": "json_schema"
+    }
+  },
+}

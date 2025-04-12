@@ -1,0 +1,27 @@
+
+### Transform Request - Body parameter "to" renamed as "wrong"
+
+@url = {{baseUrl}}/transforms/models
+
+@from = {{format_cmf}}
+@to = {{format_cmf}}
+@filename = CrashDriver.cmf.xml
+@file = ../../../transform/{{filename}}
+
+POST {{url}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="from"
+
+{{from}}
+--{{boundary}}
+Content-Disposition: form-data; name="wrong"
+
+{{to}}
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{filename}}"
+Content-Type: application/xml
+
+< {{file}}
+--{{boundary}}--

@@ -1,0 +1,27 @@
+
+### Migration Request Template
+
+@url = {{baseUrl}}/migration/cmf
+
+@from = 3.0
+@to = 4.0
+@filename = niem-3.0-subset.cmf.xml
+@file = ../../migration/{{filename}}
+
+POST {{url}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="from"
+
+{{from}}
+--{{boundary}}
+Content-Disposition: form-data; name="to"
+
+{{to}}
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{filename}}"
+Content-Type: application/xml
+
+< {{file}}
+--{{boundary}}--

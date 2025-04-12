@@ -33,12 +33,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
-import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 
 /**
  * A parent class for Property and Type.
@@ -50,16 +47,6 @@ import jakarta.persistence.UniqueConstraint;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Table(
-  uniqueConstraints = {@UniqueConstraint(
-    name = "component_namespace_name_key", columnNames = { "namespace_id", "name" })
-  },
-  indexes = {
-    @Index(name = "component_namespace_prefix_idx", columnList = "namespace_prefix"),
-    @Index(name = "component_namespace_id_idx", columnList = "namespace_id"),
-    @Index(name = "component_name_idx", columnList = "name")
-  }
-)
 @Indexed
 public abstract class Component<T extends BaseNamespaceEntity<T>> extends BaseNamespaceEntity<T> {
 

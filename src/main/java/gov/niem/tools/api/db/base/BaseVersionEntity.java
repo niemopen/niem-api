@@ -14,11 +14,9 @@ import gov.niem.tools.api.db.model.Model;
 import gov.niem.tools.api.db.version.Version;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,11 +35,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Table(
-  indexes = {
-    @Index(name = "is_original_idx", columnList = "is_original")
-  }
-)
 public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends BaseModelEntity {
 
   @JsonIgnore

@@ -66,7 +66,10 @@ import java.util.Set;
   indexes = {
     @Index(name = "property_category_idx", columnList = "category"),
     @Index(name = "property_group_id_idx", columnList = "group_id"),
-    @Index(name = "property_type_id_idx", columnList = "type_id")
+    @Index(name = "property_type_id_idx", columnList = "type_id"),
+    @Index(name = "property_namespace_prefix_idx", columnList = "namespace_prefix"),
+    @Index(name = "property_namespace_id_idx", columnList = "namespace_id"),
+    @Index(name = "property_name_idx", columnList = "name")
   }
 )
 @Indexed

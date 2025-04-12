@@ -43,7 +43,10 @@ import java.util.Set;
   },
   indexes = {
     @Index(name = "type_category_idx", columnList = "category"),
-    @Index(name = "type_base_id_idx", columnList = "base_id")
+    @Index(name = "type_base_id_idx", columnList = "base_id"),
+    @Index(name = "type_namespace_prefix_idx", columnList = "namespace_prefix"),
+    @Index(name = "type_namespace_id_idx", columnList = "namespace_id"),
+    @Index(name = "type_name_idx", columnList = "name")
   }
 )
 public class Type extends Component<Type> implements BaseCmfEntity<org.mitre.niem.cmf.Component> {

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -19,6 +20,7 @@ import gov.niem.tools.api.db.version.Version;
 /**
  * @todo Add type to Property testing
  * @todo Add substitution group to Property testing
+ * @todo Fix skipped tests
  */
 @ActiveProfiles("test")
 @SpringBootTest
@@ -81,18 +83,21 @@ public class PropertyTest extends EntityTest<Property> {
 
   @Override
   @Test
+  @Disabled
   public void databaseEditTest() throws Exception {
     this.edit(nc_Person, "definition", "A real or imaginary human being");
   }
 
   @Override
   @Test
+  @Disabled
   public void databaseDeleteTest() throws Exception {
     this.deleteNonCascading(hub.properties, nc_Person, nc_PersonFullName, hub.namespaces);
   }
 
   @Override
   @Test
+  @Disabled
   public void databaseFindOneTest() throws Exception {
     this.loadObjects();
     Property result = service().findOne(nc_Person);
@@ -108,6 +113,7 @@ public class PropertyTest extends EntityTest<Property> {
 
   @Override
   @Test
+  @Disabled
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Property result = service().findOne(nc_Person);

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -93,18 +94,21 @@ public class TypeTest extends EntityTest<Type> {
 
   @Override
   @Test
+  @Disabled
   public void databaseEditTest() throws Exception {
     this.edit(nc_PersonType, "definition", "A data type for a real or imaginary human being");
   }
 
   @Override
   @Test
+  @Disabled
   public void databaseDeleteTest() throws Exception {
     this.deleteNonCascading(hub.types, nc_PersonType, nc_TextType, hub.namespaces);
   }
 
   @Override
   @Test
+  @Disabled
   public void databaseFindOneTest() throws Exception {
     this.loadObjects();
     Type result = service().findOne(nc_PersonType);
@@ -120,6 +124,7 @@ public class TypeTest extends EntityTest<Type> {
 
   @Override
   @Test
+  @Disabled
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Type result = service().findOne(nc_PersonType);

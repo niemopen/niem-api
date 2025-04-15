@@ -1,0 +1,42 @@
+
+# XML Catalog Validation Requests
+
+@mediaType = json
+# @mediaType = csv
+
+# Assign request variables
+@url = {{baseUrl}}/validation/xml-catalog
+@dir = validation/xml/xml-catalog
+
+@pass_filename = xml-catalog-valid.xml
+@pass_file = ../../{{dir}}/{{pass_filename}}
+
+@fail_filename = xml-catalog-invalid.xml
+@fail_file = ../../{{dir}}/{{fail_filename}}
+
+
+### XML Catalog validation - Pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{pass_filename}}"
+Content-Type: application/xml
+
+< {{pass_file}}
+--{{boundary}}--
+
+
+### XML Catalog validation - Fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{fail_filename}}"
+Content-Type: application/xml
+
+< {{fail_file}}
+--{{boundary}}--
+

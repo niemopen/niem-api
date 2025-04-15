@@ -1,0 +1,39 @@
+
+# XSD File Validation Requests
+
+@mediaType = json
+# @mediaType = csv
+
+# Assign request variables
+@url = {{baseUrl}}/validation/schemas/xml
+@dir = validation/xml/single
+
+@pass_filename = person.xsd
+@pass_file = ../../{{dir}}/{{pass_filename}}
+
+@fail_filename = person-invalid.xsd
+@fail_file = ../../{{dir}}/{{fail_filename}}
+
+### XSD file validation - Pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{pass_filename}}"
+Content-Type: application/xml
+
+< {{pass_file}}
+--{{boundary}}--
+
+### XSD file validation - Fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{fail_filename}}"
+Content-Type: application/xml
+
+< {{fail_file}}
+--{{boundary}}--

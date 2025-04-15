@@ -1,0 +1,41 @@
+
+# CMF Validation Requests
+
+# @mediaType = json
+@mediaType = csv
+
+# Assign request variables
+@url = {{baseUrl}}/validation/cmf/xml
+@dir = validation/xml/cmf
+
+@pass_filename = CrashDriver.cmf.xml
+@pass_file = ../../{{dir}}/{{pass_filename}}
+
+@fail_filename = CrashDriver-invalid.cmf.xml
+@fail_file = ../../{{dir}}/{{fail_filename}}
+
+
+### CMF Validation - Pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{pass_filename}}"
+Content-Type: application/xml
+
+< {{pass_file}}
+--{{boundary}}--
+
+
+### CMF Validation - Fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{fail_filename}}"
+Content-Type: application/xml
+
+< {{fail_file}}
+--{{boundary}}--

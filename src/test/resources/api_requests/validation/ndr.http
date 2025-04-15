@@ -1,0 +1,40 @@
+
+# NDR Validation Requests
+
+@mediaType = json
+# @mediaType = csv
+
+# Assign request variables
+@url = {{baseUrl}}/validation/schemas/ndr
+@dir = validation/ndr
+
+@pass_filename = CrashDriver-6.0.zip
+@pass_file = ../../{{dir}}/{{pass_filename}}
+
+@fail_filename = Crash Driver IEPD-invalid.zip
+@fail_file = ../../{{dir}}/{{fail_filename}}
+
+### NDR Validation - Pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{pass_filename}}"
+Content-Type: application/xml
+
+< {{pass_file}}
+--{{boundary}}--
+
+
+### NDR Validation - Fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{fail_filename}}"
+Content-Type: application/xml
+
+< {{fail_file}}
+--{{boundary}}--

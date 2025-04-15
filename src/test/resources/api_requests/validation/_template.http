@@ -1,0 +1,74 @@
+
+# Validation Request Template
+
+@mediaType = json
+# @mediaType = csv
+
+# CMF validation test files
+@cmf_url = {{baseUrl}}/validation/cmf/xml
+@cmf_dir = validation/xml/cmf
+@cmf_pass = CrashDriver.cmf.xml
+@cmf_fail = CrashDriver-invalid.cmf.xml
+
+# XML instance files to test against single XSD files
+@xml_url = {{baseUrl}}/validation/instances/xml
+@xml_dir = validation/xml/single
+@xml_pass = person.xml
+@xml_fail = person-invalid.xml
+
+# Single XSD files
+@xsd_url = {{baseUrl}}/validation/schemas/xml
+@xsd_dir = {{xml_dir}}
+@xsd_pass = person.xsd
+@xsd_fail = person-invalid.xsd
+
+# Single XML instance files to test against a zipfile of XSDs
+@xml_multi_url = {{xml_url}}
+@xml_multi_dir = validation/xml/multi
+@xml_multi_pass = CrashDriverSample.xml
+@xml_multi_fail = CrashDriverSample-invalid.xml
+
+# XSD zip files
+@xsd_multi_url = {{xsd_url}}
+@xsd_multi_dir = {{xml_multi_url}}
+@xsd_multi_pass = CrashDriver-valid.zip
+@xsd_multi_fail = CrashDriver invalid.zip
+
+# Message catalog
+@cat_url = {{baseUrl}}/validation/message-catalog
+@cat_3_pass_dir = validation/xml/message-catalog/valid-3.0
+@cat_3_fail_dir = validation/xml/message-catalog/invalid-3.0
+@cat_5_pass_dir = validation/xml/message-catalog/valid-5.0
+@cat_3_fail_dir = validation/xml/message-catalog/invalid-5.0
+@cat_3 = mpd-catalog.xml
+@cat_5 = iepd-catalog.xml
+
+# Message specification
+@iepd_url = {{baseUrl}}/validation/message-specification
+@iepd_dir = validation/ndr
+@iepd_pass = CrashDriver-6.0.zip
+@iepd_pass = Crash Driver IEPD-invalid.zip
+
+# XML catalog
+@xml_cat_url = {{baseUrl}}/validation/xml-catalog
+@xml_cat_dir = validation/xml/xml-catalog
+@xml_cat_pass = xml-catalog-valid.xml
+@xml_cat_fail = xml-catalog-invalid.xml
+
+
+# Assign request variables
+@url = {{cmf_url}}
+@filename = {{cmf_pass}}
+@file = ../../{{cmf_dir}}/{{filename}}
+
+
+POST {{url}}
+# POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{filename}}"
+Content-Type: application/xml
+
+< {{file}}
+--{{boundary}}--

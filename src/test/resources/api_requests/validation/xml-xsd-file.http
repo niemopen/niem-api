@@ -1,0 +1,98 @@
+
+# XML with XSD single file Validation Requests
+
+@mediaType = json
+# @mediaType = csv
+
+# Assign request variables
+@url = {{baseUrl}}/validation/instances/xml
+@dir = validation/xml/single
+
+@pass_xml_filename = person.xml
+@pass_xml_file = ../../{{dir}}/{{pass_xml_filename}}
+
+@pass_xsd_filename = person.xsd
+@pass_xsd_file = ../../{{dir}}/{{pass_xsd_filename}}
+
+
+@fail_xml_filename = person-invalid.xml
+@fail_xml_file = ../../{{dir}}/{{fail_xml_filename}}
+
+@fail_xsd_filename = person-invalid.xsd
+@fail_xsd_file = ../../{{dir}}/{{fail_xsd_filename}}
+
+
+### XML Validation Request - XML pass + XSD pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="xml"; filename="{{pass_xml_filename}}"
+Content-Type: application/xml
+
+< {{pass_xml_file}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="xsd"; filename="{{pass_xsd_filename}}"
+Content-Type: application/xml
+
+< {{pass_xsd_file}}
+--{{boundary}}--
+
+
+### XML Validation Request - XML fail + XSD pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="xml"; filename="{{fail_xml_filename}}"
+Content-Type: application/xml
+
+< {{fail_xml_file}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="xsd"; filename="{{pass_xsd_filename}}"
+Content-Type: application/xml
+
+< {{pass_xsd_file}}
+--{{boundary}}--
+
+
+### XML Validation Request - XML pass + XSD fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="xml"; filename="{{pass_xml_filename}}"
+Content-Type: application/xml
+
+< {{pass_xml_file}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="xsd"; filename="{{fail_xsd_filename}}"
+Content-Type: application/xml
+
+< {{fail_xsd_file}}
+--{{boundary}}--
+
+
+### XML Validation Request - XML fail + XSD fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="xml"; filename="{{fail_xml_filename}}"
+Content-Type: application/xml
+
+< {{fail_xml_file}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="xsd"; filename="{{fail_xsd_filename}}"
+Content-Type: application/xml
+
+< {{fail_xsd_file}}
+--{{boundary}}--

@@ -1,0 +1,39 @@
+
+# XSD Validation Requests
+
+@mediaType = json
+# @mediaType = csv
+
+# Assign request variables
+@url = {{baseUrl}}/validation/schemas/xml
+@dir = validation/xml/multi
+
+@pass_filename = CrashDriver-valid.zip
+@pass_file = ../../{{dir}}/{{pass_filename}}
+
+@fail_filename = CrashDriver invalid.zip
+@fail_file = ../../{{dir}}/{{fail_filename}}
+
+### XSD zip file validation - Pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{pass_filename}}"
+Content-Type: application/xml
+
+< {{pass_file}}
+--{{boundary}}--
+
+### XSD zip file validation - Fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{fail_filename}}"
+Content-Type: application/xml
+
+< {{fail_file}}
+--{{boundary}}--

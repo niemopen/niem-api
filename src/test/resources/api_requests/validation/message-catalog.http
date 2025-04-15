@@ -1,0 +1,69 @@
+
+# Message Catalog Validation Requests
+
+@mediaType = json
+# @mediaType = csv
+
+# Assign request variables
+@url = {{baseUrl}}/validation/message-catalog
+@dir = validation/xml/message-catalog
+
+@filename_3 = mpd-catalog.xml
+@pass_file_3 = ../../{{dir}}/valid-3.0/{{filename_3}}
+@fail_file_3 = ../../{{dir}}/invalid-3.0/{{filename_3}}
+
+@filename_5 = iepd-catalog.xml
+@pass_file_5 = ../../{{dir}}/valid-5.0/{{filename_5}}
+@fail_file_5 = ../../{{dir}}/invalid-5.0/{{filename_5}}
+
+
+### 3.0 Message Catalog Validation - Pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{filename_3}}"
+Content-Type: application/xml
+
+< {{pass_file_3}}
+--{{boundary}}--
+
+
+### 3.0 Message Catalog Validation - Fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{filename_3}}"
+Content-Type: application/xml
+
+< {{fail_file_3}}
+--{{boundary}}--
+
+
+### 5.0 Message Catalog Validation - Pass test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{filename_5}}"
+Content-Type: application/xml
+
+< {{pass_file_5}}
+--{{boundary}}--
+
+
+### 5.0 Message Catalog Validation - Fail test case
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{filename_5}}"
+Content-Type: application/xml
+
+< {{fail_file_5}}
+--{{boundary}}--

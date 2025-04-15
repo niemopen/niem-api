@@ -19,4 +19,5 @@
       "format_json": "json_schema"
     }
   },
+  "java.debug.settings.onBuildFailureProceed": true,
 }

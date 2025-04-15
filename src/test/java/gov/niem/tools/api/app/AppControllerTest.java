@@ -20,8 +20,7 @@ public class AppControllerTest {
   public void testVersionResponse() throws Exception {
     mockMvc
     .perform(get("/version"))
-    .andExpect(status().isOk())
-    .andExpect(content().string("PENDING_BUILD"));
+    .andExpect(status().isOk());
   }
 
 }

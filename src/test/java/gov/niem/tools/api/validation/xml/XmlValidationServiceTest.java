@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.xml.sax.SAXException;
 
-import gov.niem.tools.api.core.utils.FileUtils;
+import gov.niem.tools.api.TestUtils;
 import gov.niem.tools.api.validation.TestResult;
 import lombok.extern.log4j.Log4j2;
 
@@ -22,15 +22,13 @@ public class XmlValidationServiceTest {
   @Autowired
   XmlValidationService xmlValidationService;
 
-  public final static String curDir = "./src/test/java/gov/niem/tools/api/validation/xml/";
-
   /**
    * Test XML schema validation of a single, small, valid XSD file
    * returns a passed test result.
    */
   @Test
   public void checkXsdValidation_Single_Valid() throws IOException, SAXException {
-    File xsdFile = FileUtils.file(curDir + "input/single/person.xsd");
+    File xsdFile = TestUtils.getResourcesFile("validation/xml/single/person.xsd");
     File[] xsdFiles = {xsdFile};
 
     gov.niem.tools.api.validation.Test test = xmlValidationService.validateXsd(xsdFiles);
@@ -47,7 +45,7 @@ public class XmlValidationServiceTest {
    */
   @Test
   public void checkXsdValidation_Single_Invalid() throws IOException, SAXException {
-    File xsdFile = FileUtils.file(curDir + "input/single/person-invalid.xsd");
+    File xsdFile = TestUtils.getResourcesFile("validation/xml/single/person-invalid.xsd");
     File[] xsdFiles = {xsdFile};
 
     gov.niem.tools.api.validation.Test test = xmlValidationService.validateXsd(xsdFiles);
@@ -72,7 +70,10 @@ public class XmlValidationServiceTest {
    */
   @Test
   public void checkXsdValidation_Multi_Valid() throws Exception {
-    File zipFile = FileUtils.file(curDir + "input/multi/Crash Driver IEPD.zip");
+    File zipFile = TestUtils.getResourcesFile("validation/xml/multi/CrashDriver-valid.zip");
+
+    System.out.println("absolute path: " + zipFile.getAbsolutePath());
+    System.out.println("exists: " + zipFile.exists());
 
     gov.niem.tools.api.validation.Test test = xmlValidationService.validateXsdZip(zipFile);
     xmlValidationService.logTestResults(test);
@@ -82,13 +83,13 @@ public class XmlValidationServiceTest {
   }
 
   /**
-   * Test XML schema validation of multiple invalid XSD files
-   * returns errors.
+   * Test XML schema validation of multiple invalid XSD files returns errors.
+   * Note: Filename spaces in resources folder are not handled correctly.
    * @throws Exception
    */
   @Test
   public void checkXsdValidation_Multi_Invalid() throws Exception {
-    File zipFile = FileUtils.file(curDir + "input/multi/Crash Driver IEPD-invalid.zip");
+    File zipFile = TestUtils.getResourcesFile("validation/xml/multi/CrashDriver-invalid.zip");
 
     gov.niem.tools.api.validation.Test test = xmlValidationService.validateXsdZip(zipFile);
     xmlValidationService.logTestResults(test);
@@ -107,8 +108,8 @@ public class XmlValidationServiceTest {
    */
   @Test
   public void checkXmlValidation_Single_Valid() throws IOException, SAXException {
-    File xmlFile = FileUtils.file(curDir + "input/single/person.xml");
-    File xsdFile = FileUtils.file(curDir + "input/single/person.xsd");
+    File xmlFile = TestUtils.getResourcesFile("validation/xml/single/person.xml");
+    File xsdFile = TestUtils.getResourcesFile("validation/xml/single/person.xsd");
 
     this.testXmlValidation(xmlFile, xsdFile, 0, 0);
   }
@@ -119,8 +120,8 @@ public class XmlValidationServiceTest {
    */
   @Test
   public void checkXmlValidation_Single_Invalid() throws IOException, SAXException {
-    File xmlFile = FileUtils.file(curDir + "input/single/person-invalid.xml");
-    File xsdFile = FileUtils.file(curDir + "input/single/person.xsd");
+    File xmlFile = TestUtils.getResourcesFile("validation/xml/single/person-invalid.xml");
+    File xsdFile = TestUtils.getResourcesFile("validation/xml/single/person.xsd");
 
     gov.niem.tools.api.validation.Test[] tests = this.testXmlValidation(xmlFile, xsdFile, 0, 3);
 
@@ -134,8 +135,8 @@ public class XmlValidationServiceTest {
 
   @Test
   public void checkXmlValidation_Single_Valid_InvalidSchema() throws SAXException, IOException {
-    File xmlFile = FileUtils.file(curDir + "input/single/person.xml");
-    File xsdFile = FileUtils.file(curDir + "input/single/person-invalid.xsd");
+    File xmlFile = TestUtils.getResourcesFile("validation/xml/single/person.xml");
+    File xsdFile = TestUtils.getResourcesFile("validation/xml/single/person-invalid.xsd");
 
     this.testXmlValidation(xmlFile, xsdFile, 3, 1);
 

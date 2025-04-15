@@ -1,46 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Model
-  xmlns="http://reference.niem.gov/specification/cmf/0.6/"
-       xmlns:cmf="http://reference.niem.gov/specification/cmf/0.6/"
-       xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  xmlns="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
+  xmlns:cmf="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <Namespace structures:id="aamva_d20">
       <NamespaceURI>http://release.niem.gov/niem/codes/aamva_d20/5.0/</NamespaceURI>
-      <NamespacePrefixName>aamva_d20</NamespacePrefixName>
+      <NamespacePrefixText>aamva_d20</NamespacePrefixText>
       <DefinitionText>Motor vehicle administration codes from the Data Dictionary for Traffic Record
       Systems, maintained by AAMVA, the American Association of Motor Vehicle Administrators.</DefinitionText>
       <NamespaceKindCode>OTHERNIEM</NamespaceKindCode>
    </Namespace>
    <Namespace structures:id="exch">
       <NamespaceURI>http://training.niem.gov/CrashDriver/1.0/</NamespaceURI>
-      <NamespacePrefixName>exch</NamespacePrefixName>
+      <NamespacePrefixText>exch</NamespacePrefixText>
       <DefinitionText>Exchange schema for an example IEPD used to illustrate NIEM's technical
       features.</DefinitionText>
       <NamespaceKindCode>EXTENSION</NamespaceKindCode>
-      <MyExtension>Stuff</MyExtension>
    </Namespace>
    <Namespace structures:id="ext">
       <NamespaceURI>http://training.niem.gov/CrashDriver/1.0/extension</NamespaceURI>
-      <NamespacePrefixName>ext</NamespacePrefixName>
+      <NamespacePrefixText>ext</NamespacePrefixText>
       <DefinitionText>Extension schema for an example IEPD used to illustrate NIEM's technical
       features.</DefinitionText>
       <NamespaceKindCode>EXTENSION</NamespaceKindCode>
+      <AugmentRecord>
+         <Class structures:ref="j.CrashPersonType" xsi:nil="true"/>
+         <Property structures:ref="ext.PersonDefenestrationIndicator" xsi:nil="true"/>
+         <AugmentationIndex>-1</AugmentationIndex>
+         <MinOccursQuantity>0</MinOccursQuantity>
+         <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+      </AugmentRecord>
+      <AugmentRecord>
+         <Class structures:ref="j.DriverLicenseType" xsi:nil="true"/>
+         <Property structures:ref="nc.ContactInformation" xsi:nil="true"/>
+         <AugmentationIndex>0</AugmentationIndex>
+         <MinOccursQuantity>0</MinOccursQuantity>
+         <MaxOccursQuantity>1</MaxOccursQuantity>
+      </AugmentRecord>
    </Namespace>
-   <Namespace structures:id="j">
+   <Namespace>
       <NamespaceURI>http://release.niem.gov/niem/domains/jxdm/7.0/</NamespaceURI>
-      <NamespacePrefixName>j</NamespacePrefixName>
+      <NamespacePrefixText>j</NamespacePrefixText>
       <DefinitionText>Justice</DefinitionText>
       <NamespaceKindCode>DOMAIN</NamespaceKindCode>
    </Namespace>
    <Namespace structures:id="nc">
       <NamespaceURI>http://release.niem.gov/niem/niem-core/5.0/</NamespaceURI>
-      <NamespacePrefixName>nc</NamespacePrefixName>
+      <NamespacePrefixText>nc</NamespacePrefixText>
       <DefinitionText>NIEM Core.</DefinitionText>
       <NamespaceKindCode>CORE</NamespaceKindCode>
    </Namespace>
    <Namespace structures:id="xs">
       <NamespaceURI>http://www.w3.org/2001/XMLSchema</NamespaceURI>
-      <NamespacePrefixName>xs</NamespacePrefixName>
+      <NamespacePrefixText>xs</NamespacePrefixText>
       <NamespaceKindCode>XSD</NamespaceKindCode>
    </Namespace>
    <Property structures:id="exch.CrashDriverInfo">
@@ -98,7 +111,7 @@
       <DefinitionText>A motor vehicle driver involved into a traffic accident.</DefinitionText>
       <Class structures:ref="j.CrashDriverType" xsi:nil="true"/>
    </Property>
-   <Property structures:ids="j.CrashPassenger">
+   <Property structures:id="j.CrashPassenger">
       <Name>CrashPassenger</Name>
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A motor vehicle passenger involved in a traffic accident.</DefinitionText>
@@ -166,7 +179,7 @@
       <Class structures:ref="j.MetadataType" xsi:nil="true"/>
    </Property>
    <Property structures:id="j.PersonChargeAssociation">
-      <Names>PersonChargeAssociation</Names>
+      <Name>PersonChargeAssociation</Name>
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>An association between a person and a charge issued to that person.</DefinitionText>
       <Class structures:ref="j.PersonChargeAssociationType" xsi:nil="true"/>
@@ -329,8 +342,14 @@
    <Property structures:id="nc.PersonName">
       <Name>PersonName</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
-      <DefinitionText>A combination of names and/or titles by which a person is known.</DefinitionText>
       <Class structures:ref="nc.PersonNameType" xsi:nil="true"/>
+   </Property>
+   <Property structures:id="nc.personNameCommentText">
+      <Name>personNameCommentText</Name>
+      <Namespace structures:ref="nc" xsi:nil="true"/>
+      <DefinitionText>A comment about a kind of name for a person.</DefinitionText>
+      <Datatype structures:ref="xs.string" xsi:nil="true"/>
+      <AttributeIndicator>true</AttributeIndicator>
    </Property>
    <Property structures:id="nc.PersonSurName">
       <Name>PersonSurName</Name>
@@ -352,43 +371,36 @@
       <Class structures:ref="nc.PersonType" xsi:nil="true"/>
       <ReferenceableIndicator>true</ReferenceableIndicator>
    </Property>
-   <Property structures:id="nc.personNameCommentText">
-      <Name>personNameCommentText</Name>
-      <Namespace structures:ref="nc" xsi:nil="true"/>
-      <DefinitionText>A comment about a kind of name for a person.</DefinitionText>
-      <Datatype structures:ref="xs.string" xsi:nil="true"/>
-      <AttributeIndicator>true</AttributeIndicator>
-   </Property>
    <Class structures:id="exch.CrashDriverInfoType">
       <Name>CrashDriverInfoType</Name>
       <Namespace structures:ref="exch" xsi:nil="true"/>
       <DefinitionText>A data type for a collection of information about the driver of a vehicle in a crash.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
-         <Property structures:ref="nc.Person" xsi:nil="true"/>
+      <HasProperty>
+         <Property structures:ref="nc.Person"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="j.Crash" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="3">
+      <HasProperty>
          <Property structures:ref="j.PersonChargeAssociation" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="4">
+      <HasProperty>
          <Property structures:ref="j.Charge" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="5">
+      <HasProperty>
          <Property structures:ref="j.Metadata" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="6">
+      <HasProperty>
          <Property structures:ref="ext.PrivacyMetadata" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
@@ -398,8 +410,7 @@
       <Name>PrivacyMetadataType</Name>
       <Namespace structures:ref="ext" xsi:nil="true"/>
       <DefinitionText>A data type for metadata about Privacy.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
-         <Property structures:ref="ext.PrivacyCode" xsi:nil="true"/>
+      <HasProperty>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>2</MaxOccursQuantity>
       </HasProperty>
@@ -408,12 +419,12 @@
       <Name>ChargeType</Name>
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A data type for a formal allegation that a specific person has committed a specific offense.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="j.ChargeDescriptionText" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="j.ChargeFelonyIndicator" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -423,12 +434,12 @@
       <Name>CrashDriverType</Name>
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A data type for a motor vehicle driver involved in a traffic accident.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.RoleOfPerson" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="j.DriverLicense" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -438,7 +449,7 @@
       <Name>CrashPassengerType</Name>
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A data type for a motor vehicle passenger involved into a Traffic Accident.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.RoleOfPerson" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -449,21 +460,21 @@
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A data type for any person involved in a traffic accident.</DefinitionText>
       <AugmentableIndicator>true</AugmentableIndicator>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.RoleOfPerson" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="j.CrashPersonInjury" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="3">
+      <HasProperty>
          <Property structures:ref="ext.PersonDefenestrationIndicator" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
-         <MaxOccursQuantity>1</MaxOccursQuantity>
-         <AugmentationElementNamespace structures:ref="ext" xsi:nil="true"/>
+         <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+         <AugmentationNamespace structures:ref="ext" xsi:nil="true"/>
       </HasProperty>
    </Class>
    <Class structures:id="j.CrashType">
@@ -471,17 +482,17 @@
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A data type for a traffic accident.</DefinitionText>
       <ExtensionOfClass structures:ref="j.DrivingIncidentType" xsi:nil="true"/>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="j.CrashVehicle" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="j.CrashPerson" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="3">
+      <HasProperty>
          <Property structures:ref="nc.Location" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -491,12 +502,12 @@
       <Name>CrashVehicleType</Name>
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A data type for a motor vehicle involved in a traffic accident.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="j.CrashDriver" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="j.CrashPassenger" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
@@ -513,16 +524,16 @@
       <DefinitionText>A data type for a license issued to a person granting driving privileges.</DefinitionText>
       <AugmentableIndicator>true</AugmentableIndicator>
       <ExtensionOfClass structures:ref="j.DriverLicenseBaseType" xsi:nil="true"/>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="j.DriverLicenseCardIdentification" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="nc.ContactInformation" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
-         <AugmentationTypeNamespace structures:ref="ext" xsi:nil="true"/>
+         <AugmentationNamespace structures:ref="ext" xsi:nil="true"/>
       </HasProperty>
    </Class>
    <Class structures:id="j.DrivingIncidentType">
@@ -535,12 +546,12 @@
       <Name>MetadataType</Name>
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A data type for information that further qualifies the kind of data represented.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="j.CriminalInformationIndicator" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="j.IntelligenceInformationIndicator" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -551,17 +562,17 @@
       <Namespace structures:ref="j" xsi:nil="true"/>
       <DefinitionText>A data type for an association between a person and a charge.</DefinitionText>
       <ExtensionOfClass structures:ref="nc.AssociationType" xsi:nil="true"/>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.Person" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="j.Charge" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="3">
+      <HasProperty>
          <Property structures:ref="j.JuvenileAsAdultIndicator" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -571,7 +582,7 @@
       <Name>ActivityType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a single or set of related actions, events, or process steps.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.ActivityDate" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -586,7 +597,7 @@
       <Name>ContactInformationType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for how to contact a person or an organization.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.ContactMeansAbstract" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
@@ -596,7 +607,7 @@
       <Name>DateType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a calendar date.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.DateRepresentation" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -606,7 +617,7 @@
       <Name>IdentificationType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a representation of an identity.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.IdentificationID" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -622,12 +633,12 @@
       <Name>InjuryType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a form of harm or damage sustained by a person.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.InjuryDescriptionText" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="nc.InjurySeverityAbstract" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -637,17 +648,17 @@
       <Name>LatitudeCoordinateType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a measurement of the angular distance between a point on the Earth and the Equator.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.LatitudeDegreeValue" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="nc.LatitudeMinuteValue" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="3">
+      <HasProperty>
          <Property structures:ref="nc.LatitudeSecondValue" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -657,12 +668,12 @@
       <Name>Location2DGeospatialCoordinateType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a location identified by latitude and longitude.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.GeographicCoordinateLatitude" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="nc.GeographicCoordinateLongitude" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -672,7 +683,7 @@
       <Name>LocationType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for geospatial location.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.LocationGeospatialCoordinateAbstract" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -682,17 +693,17 @@
       <Name>LongitudeCoordinateType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a measurement of the angular distance between a point on the Earth and the Prime Meridian.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.LongitudeDegreeValue" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="nc.LongitudeMinuteValue" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="3">
+      <HasProperty>
          <Property structures:ref="nc.LongitudeSecondValue" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -702,17 +713,17 @@
       <Name>PersonNameType</Name>
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a combination of names and/or titles by which a person is known.</DefinitionText>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.PersonGivenName" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="nc.PersonMiddleName" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="3">
+      <HasProperty>
          <Property structures:ref="nc.PersonSurName" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -721,6 +732,7 @@
          <Property structures:ref="nc.personNameCommentText" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
+         <DefinitionText>A comment about a kind of name for a person.</DefinitionText>
       </HasProperty>
    </Class>
    <Class structures:id="nc.PersonType">
@@ -728,12 +740,12 @@
       <Namespace structures:ref="nc" xsi:nil="true"/>
       <DefinitionText>A data type for a human being.</DefinitionText>
       <AugmentableIndicator>true</AugmentableIndicator>
-      <HasProperty structures:sequenceID="1">
+      <HasProperty>
          <Property structures:ref="nc.PersonBirthDate" xsi:nil="true"/>
          <MinOccursQuantity>0</MinOccursQuantity>
          <MaxOccursQuantity>1</MaxOccursQuantity>
       </HasProperty>
-      <HasProperty structures:sequenceID="2">
+      <HasProperty>
          <Property structures:ref="nc.PersonName" xsi:nil="true"/>
          <MinOccursQuantity>1</MinOccursQuantity>
          <MaxOccursQuantity>unbounded</MaxOccursQuantity>
@@ -778,12 +790,12 @@
       <RestrictionOf>
          <Datatype structures:ref="xs.token" xsi:nil="true"/>
          <Enumeration>
-            <StringValue>PII</StringValue>
-            <DefinitionText>Personally Identifiable Information</DefinitionText>
-         </Enumeration>
-         <Enumeration>
             <StringValue>MEDICAL</StringValue>
             <DefinitionText>Medical Information</DefinitionText>
+         </Enumeration>
+         <Enumeration>
+            <StringValue>PII</StringValue>
+            <DefinitionText>Personally Identifiable Information</DefinitionText>
          </Enumeration>
       </RestrictionOf>
    </Datatype>
@@ -793,9 +805,6 @@
       <DefinitionText>A data type for a minute of a degree, with a restricted range of 0 (inclusive) to 60 (exclusive).</DefinitionText>
       <RestrictionOf>
          <Datatype structures:ref="xs.decimal" xsi:nil="true"/>
-         <WhiteSpace>
-            <WhiteSpaceValueCode>collapse</WhiteSpaceValueCode>
-         </WhiteSpace>
          <MaxExclusive>
             <StringValue>60.0</StringValue>
             <DefinitionText>The highest value allowed (exclusive).</DefinitionText>
@@ -812,9 +821,6 @@
       <DefinitionText>A data type for a second of a minute, with a restricted range of 0 (inclusive) to 60 (exclusive).</DefinitionText>
       <RestrictionOf>
          <Datatype structures:ref="xs.decimal" xsi:nil="true"/>
-         <WhiteSpace>
-            <WhiteSpaceValueCode>collapse</WhiteSpaceValueCode>
-         </WhiteSpace>
          <MaxExclusive>
             <StringValue>60.0</StringValue>
             <DefinitionText>The maximum value for an angular second.</DefinitionText>
@@ -831,9 +837,6 @@
       <DefinitionText>A data type for a degree of latitude.</DefinitionText>
       <RestrictionOf>
          <Datatype structures:ref="xs.decimal" xsi:nil="true"/>
-         <WhiteSpace>
-            <WhiteSpaceValueCode>collapse</WhiteSpaceValueCode>
-         </WhiteSpace>
          <MaxInclusive>
             <StringValue>90.0</StringValue>
             <DefinitionText>The maximum value for a latitude degree.</DefinitionText>
@@ -850,9 +853,6 @@
       <DefinitionText>A data type for a degree of longitude.</DefinitionText>
       <RestrictionOf>
          <Datatype structures:ref="xs.decimal" xsi:nil="true"/>
-         <WhiteSpace>
-            <WhiteSpaceValueCode>collapse</WhiteSpaceValueCode>
-         </WhiteSpace>
          <MaxInclusive>
             <StringValue>180.0</StringValue>
             <DefinitionText>The maximum value for a longitude degree.</DefinitionText>
@@ -908,51 +908,65 @@
       <Namespace structures:ref="xs" xsi:nil="true"/>
    </Datatype>
    <SchemaDocument>
+      <NamespacePrefixText>ext</NamespacePrefixText>
       <NamespaceURI>http://training.niem.gov/CrashDriver/1.0/extension</NamespaceURI>
       <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
-      <DocumentFilePathText>xsd/extension/extension.xsd</DocumentFilePathText>
-      <NIEMVersionText>5.0</NIEMVersionText>
+      <DocumentFilePathText>extension/extension.xsd</DocumentFilePathText>
+      <NIEMVersionText>5</NIEMVersionText>
       <SchemaVersionText>1</SchemaVersionText>
+      <SchemaLanguageName>en-US</SchemaLanguageName>
    </SchemaDocument>
    <SchemaDocument>
+      <NamespacePrefixText>xs-proxy</NamespacePrefixText>
       <NamespaceURI>http://release.niem.gov/niem/proxy/niem-xs/5.0/</NamespaceURI>
-      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
-      <DocumentFilePathText>xsd/niem/adapters/niem-xs.xsd</DocumentFilePathText>
-      <NIEMVersionText>5.0</NIEMVersionText>
+      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
+      <DocumentFilePathText>niem/adapters/niem-xs.xsd</DocumentFilePathText>
+      <NIEMVersionText>5</NIEMVersionText>
       <SchemaVersionText>1</SchemaVersionText>
+      <SchemaLanguageName>en-US</SchemaLanguageName>
    </SchemaDocument>
    <SchemaDocument>
+      <NamespacePrefixText>aamva_d20</NamespacePrefixText>
       <NamespaceURI>http://release.niem.gov/niem/codes/aamva_d20/5.0/</NamespaceURI>
-      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
-      <DocumentFilePathText>xsd/niem/codes/aamva_d20.xsd</DocumentFilePathText>
-      <NIEMVersionText>5.0</NIEMVersionText>
+      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
+      <DocumentFilePathText>niem/codes/aamva_d20.xsd</DocumentFilePathText>
+      <NIEMVersionText>5</NIEMVersionText>
       <SchemaVersionText>1</SchemaVersionText>
+      <SchemaLanguageName>en-US</SchemaLanguageName>
    </SchemaDocument>
    <SchemaDocument>
+      <NamespacePrefixText>j</NamespacePrefixText>
       <NamespaceURI>http://release.niem.gov/niem/domains/jxdm/7.0/</NamespaceURI>
-      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
-      <DocumentFilePathText>xsd/niem/domains/jxdm.xsd</DocumentFilePathText>
-      <NIEMVersionText>5.0</NIEMVersionText>
+      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
+      <DocumentFilePathText>niem/domains/jxdm.xsd</DocumentFilePathText>
+      <NIEMVersionText>5</NIEMVersionText>
       <SchemaVersionText>1</SchemaVersionText>
+      <SchemaLanguageName>en-US</SchemaLanguageName>
    </SchemaDocument>
    <SchemaDocument>
+      <NamespacePrefixText>structures</NamespacePrefixText>
       <NamespaceURI>http://release.niem.gov/niem/structures/5.0/</NamespaceURI>
-      <DocumentFilePathText>xsd/niem/utility/structures.xsd</DocumentFilePathText>
-      <NIEMVersionText>5.0</NIEMVersionText>
+      <DocumentFilePathText>niem/utility/structures.xsd</DocumentFilePathText>
+      <NIEMVersionText>5</NIEMVersionText>
       <SchemaVersionText>5.0</SchemaVersionText>
+      <SchemaLanguageName>en-US</SchemaLanguageName>
    </SchemaDocument>
    <SchemaDocument>
+      <NamespacePrefixText>exch</NamespacePrefixText>
       <NamespaceURI>http://training.niem.gov/CrashDriver/1.0/</NamespaceURI>
       <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
-      <DocumentFilePathText>xsd/extension/CrashDriver.xsd</DocumentFilePathText>
-      <NIEMVersionText>5.0</NIEMVersionText>
+      <DocumentFilePathText>extension/CrashDriver.xsd</DocumentFilePathText>
+      <NIEMVersionText>5</NIEMVersionText>
       <SchemaVersionText>1</SchemaVersionText>
+      <SchemaLanguageName>en-US</SchemaLanguageName>
    </SchemaDocument>
    <SchemaDocument>
+      <NamespacePrefixText>nc</NamespacePrefixText>
       <NamespaceURI>http://release.niem.gov/niem/niem-core/5.0/</NamespaceURI>
-      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
-      <DocumentFilePathText>xsd/niem/niem-core.xsd</DocumentFilePathText>
-      <NIEMVersionText>5.0</NIEMVersionText>
+      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
+      <DocumentFilePathText>niem/niem-core.xsd</DocumentFilePathText>
+      <NIEMVersionText>5</NIEMVersionText>
       <SchemaVersionText>1</SchemaVersionText>
+      <SchemaLanguageName>en-US</SchemaLanguageName>
    </SchemaDocument>
 </Model>

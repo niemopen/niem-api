@@ -4,26 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import gov.niem.tools.api.core.utils.FileUtils;
+import gov.niem.tools.api.TestUtils;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @SpringBootTest(classes = {XsdNodeMap.class})
 public class XsdNodeMapTest {
 
-  String curDir = XmlValidationServiceTest.curDir;
-
   /**
    * Test finding the applicable XML tag and component name given a line number.
    */
   @Test
-  public void checkLineNumbers() throws FileNotFoundException {
-    File xsdFile = FileUtils.file(curDir + "input/single/person.xsd");
+  public void checkLineNumbers() throws Exception {
+    File xsdFile = TestUtils.getResourcesFile("validation/xml/single/person.xsd");
     XsdNodeMap nodeMap = new XsdNodeMap();
     nodeMap.load(xsdFile);
 

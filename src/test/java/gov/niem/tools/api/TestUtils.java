@@ -12,6 +12,8 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import gov.niem.tools.api.core.utils.FileUtils;
+
 public class TestUtils {
 
   public static String getResourcesFileText(String path) throws IOException {
@@ -20,6 +22,11 @@ public class TestUtils {
 
   public static URL getResourcesFileUri(String path) throws IOException {
     return IOUtils.resourceToURL("/" + path);
+  }
+
+  public static File getResourcesFile(String path) throws IOException {
+    URL url = TestUtils.getResourcesFileUri(path);
+    return FileUtils.file(url.getPath());
   }
 
   public static MultipartFile getMultipartFile(String path) throws IOException, URISyntaxException {

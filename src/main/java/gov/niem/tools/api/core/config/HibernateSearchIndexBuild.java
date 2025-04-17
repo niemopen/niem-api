@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 
 import gov.niem.tools.api.search.SearchService;
 import jakarta.transaction.Transactional;
@@ -19,7 +20,7 @@ public class HibernateSearchIndexBuild implements ApplicationListener < Applicat
    */
   @Override
   @Transactional
-  public void onApplicationEvent(ApplicationReadyEvent event) {
+  public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {
     // searchService.runIndexer();
   }
 

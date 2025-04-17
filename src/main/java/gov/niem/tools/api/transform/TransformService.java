@@ -235,6 +235,10 @@ public class TransformService {
     stringWriter.flush();
     stringWriter.close();
 
+    if (results == null) {
+      throw new Exception("Transform results are null");
+    }
+
     return results.getBytes();
 
   }

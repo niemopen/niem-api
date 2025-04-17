@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.lang.NonNull;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -64,12 +65,13 @@ public class Config {
   public WebMvcConfigurer corsConfigurer() {
     return new WebMvcConfigurer() {
       @Override
-      public void addCorsMappings(CorsRegistry registry) {
+
+      public void addCorsMappings(@NonNull CorsRegistry registry) {
         registry.addMapping("/**");
       }
 
       @Override
-      public void configureContentNegotiation(final ContentNegotiationConfigurer configurer) {
+      public void configureContentNegotiation(@NonNull final ContentNegotiationConfigurer configurer) {
         configurer
             .favorParameter(true)
             .parameterName("mediaType")

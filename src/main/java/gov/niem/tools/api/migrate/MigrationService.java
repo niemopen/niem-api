@@ -190,6 +190,7 @@ public class MigrationService {
     }
 
     // Find the migrated property
+    @SuppressWarnings("null")
     Property newProperty = oldProperty.getNext();
 
     // Add the migrated property to the new CMF model
@@ -258,6 +259,7 @@ public class MigrationService {
     }
 
     // Find the migrated type
+    @SuppressWarnings("null")
     Type newType = oldType.getNext();
 
     this.addComponentToCmf(newType, newCmf, test, oldType, true);

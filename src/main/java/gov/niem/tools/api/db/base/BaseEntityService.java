@@ -32,11 +32,8 @@ public abstract class BaseEntityService<T extends BaseEntity> {
       object = this.merge(object);
     }
     else {
-      // Ensure the ID from the object is valid
-      T result = this.repository().getReferenceById(object.getId());
-      if (result == null) {
-        throw new EntityNotFoundException(object);
-      }
+      // Ensure getting the ID from the object doesn't throw an exception
+      this.repository().getReferenceById(object.getId());
     }
   }
 

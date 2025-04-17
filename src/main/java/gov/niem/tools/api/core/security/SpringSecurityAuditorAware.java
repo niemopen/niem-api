@@ -3,11 +3,12 @@ package gov.niem.tools.api.core.security;
 import java.util.Optional;
 
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.lang.NonNull;
 
 public class SpringSecurityAuditorAware implements AuditorAware<String> {
 
   @Override
-  public Optional<String> getCurrentAuditor() {
+  public @NonNull Optional<String> getCurrentAuditor() {
     // SecurityContext context = SecurityContextHolder.getContext();
     // Authentication authentication = context.getAuthentication();
     // var niemUserPrincipal = (NiemUserPrincipal) authentication.getPrincipal();

@@ -1,0 +1,40 @@
+
+### Search properties or types
+
+@scope = properties
+# @scope = types
+
+# Property search field examples
+@niemVersionNumber = 5.2
+@token = arm
+@substring = arm
+@prefix = nc
+@type = date
+@isAbstract = false
+@isElement = true
+@offset = 10
+@limit = 10
+
+# Type search field examples
+@niemVersionNumber = 5.2
+@token = arm
+@substring = arm
+@prefix = nc
+@isElement = true
+@offset = 10
+@limit = 10
+
+
+# Search criteria
+@criteria = token=arm
+# @criteria = substring=arm
+# @criteria = substring=arm&substring=service
+# @criteria = substring=arm&substring=service&prefix=mo&prefix=usmtf
+# @criteria = substring=arm&substring=service&prefix=em
+# @criteria = substring=arm&substring=service&prefix=em&isAbstract=false
+# @criteria = substring=arm&substring=service&prefix=em&isAbstract=false&type=date
+# @criteria = token=person&type=date
+# @criteria = isElement=false
+
+
+GET https://tools.niem.gov/api/v2/search/{{scope}}?{{criteria}}

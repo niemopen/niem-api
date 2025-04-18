@@ -1,0 +1,11 @@
+
+@steward = niem
+@model = model
+@version = 5.2
+@prefix = nc
+
+### Get all namespaces from a given version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces
+
+### Get a specific namespace from a given version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}

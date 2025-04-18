@@ -1,0 +1,23 @@
+
+@steward = niem
+@model = model
+@version = 5.2
+@abstract_qname = nc:PersonHairColorAbstract
+@substitution_qname = nc:PersonHairColorText
+@attribute_qname = nc:personNameCommentText
+@object_qname = biom:Biometric
+
+@properties = properties
+# @properties = properties.cmf
+
+### Get an abstract property
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{abstract_qname}}
+
+### Get a substitution property
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{substitution_qname}}
+
+### Get an attribute property
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{attribute_qname}}
+
+### Get an object property
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{object_qname}}

@@ -1,0 +1,26 @@
+
+@steward = niem
+@model = model
+@version = 5.2
+@class_qname = nc:PersonType
+@datatype_qname = nc:AddressCategoryCodeSimpleType
+@datatype_class_qname = nc:AddressCategoryCodeType
+@extended_qname = nc:VehicleType
+
+@types = types
+# @types = types.cmf
+
+@mediaType = mediaType=json
+# @mediaType = mediaType=xml
+
+### Get a class type (CCC)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{class_qname}}?{{mediaType}}
+
+### Get a datatype (simple)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{datatype_qname}}?{{mediaType}}
+
+### Get a datatype class (CSC)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{datatype_class_qname}}?{{mediaType}}
+
+### Get a class type with a parent (CCC)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{extended_qname}}?{{mediaType}}

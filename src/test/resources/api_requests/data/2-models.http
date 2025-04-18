@@ -1,0 +1,24 @@
+
+@steward1 = niem
+@model1 = model
+
+@steward2 = acme-co
+@model2 = crash-driver
+
+### Get all models
+GET {{baseUrl}}/stewards/*/models
+
+### Get all models from a given steward (1)
+GET {{baseUrl}}/stewards/{{steward1}}/models
+
+### Get all models from a given steward (2)
+GET {{baseUrl}}/stewards/{{steward2}}/models
+
+### Get a specific model
+GET {{baseUrl}}/stewards/{{steward1}}/models/{{model1}}
+
+### Get a specific model
+GET {{baseUrl}}/stewards/{{steward1}}/models/{{model2}}
+
+### Get a specific model
+GET {{baseUrl}}/stewards/{{steward2}}/models/{{model2}}

@@ -1,0 +1,10 @@
+
+### App version
+GET {{baseUrl}}/version
+
+### Supported CMF tool version
+GET {{baseUrl}}/version/cmftool
+
+### Supported CMF version
+GET {{baseUrl}}/version/cmf
+

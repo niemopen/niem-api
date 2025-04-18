@@ -1,0 +1,13 @@
+
+@steward1 = niem
+@steward2 = acme-co
+
+### Get all stewards
+GET {{baseUrl}}/stewards
+
+### Get a steward (niem)
+GET {{baseUrl}}/stewards/{{steward1}}
+
+### Get a steward (acme)
+GET {{baseUrl}}/stewards/{{steward2}}
+

@@ -1,0 +1,16 @@
+
+@steward = niem
+@model = model
+@version = 5.2
+@class_qname = nc:PersonNameType
+@child_qname = nc:PersonGivenName
+
+
+### Get all child properties of a given class
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties
+
+### Get a specific child property of a given class
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/{{child_qname}}
+
+### Get all container types for a given property
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{child_qname}}/subproperties

@@ -2,9 +2,9 @@
 <stylesheet
   version="2.0"
   xmlns:catalog="urn:oasis:names:tc:entity:xmlns:xml:catalog"
-  xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/3.0/"
+  xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/6.0/"
   xmlns:impl="http://example.org/impl"
-  xmlns:nf="https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#NDRFunctions"
+  xmlns:nf="https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#NDRFunctions"
   xmlns:saxon="http://saxon.sf.net/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns="http://www.w3.org/1999/XSL/Transform">
@@ -53,7 +53,7 @@
     <variable name="context-target-namespace-uri" as="xs:anyURI?" select="nf:get-target-namespace($context)"/>
     <choose>
       <!-- this SHOULD work for target namespace = xs:anyURI('') -->
-      <when test="exists($context-target-namespace-uri)                    
+      <when test="exists($context-target-namespace-uri)
                   and exactly-one($context-target-namespace-uri) = $namespace-uri">
         <sequence select="root($context)/xs:schema"/>
       </when>

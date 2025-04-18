@@ -189,6 +189,39 @@ The variables declared in this file will be imported into `application.yaml` if 
 
 There or other ways to include these variables, such as via system or user environment variables and via CI/CD settings.
 
+### Convert Schematron rules to XSL files
+
+NDR validation is currently run against XML Schemas by applying NDR Schematron rules converted to Schematron Validation Report Language (SVRL) XML Stylesheets (XSL).
+
+**To generate new XSL files:**
+
+- Download the NDR Schematron rules (`.sch` files) and the associated `ndr-functions.xsl` file from https://github.com/niemopen/niem-naming-design-rules.
+
+- Apply the `iso_svrl_for_xslt2.xsl` stylesheet in this projects `/src/main/resources/validation/ndr/` directory to convert Schematron to a stylesheet that generates SVRL.
+
+  See more, including additional stylesheets to assemble included files, at https://github.com/Schematron/stf/tree/master/iso-schematron-xslt2.
+
+**Apply stylesheet in Oxygen**
+
+- Open the Schematron rule file
+- Go to `Document` / `Transformation` / `Configure Transformation Scenario`
+- Create a new scenario:
+  - Select `XML transformation with XSLT`
+  - Name the scenario, e.g., "Schematron to SVRL XSL"
+  - In the `XSLT` tab, `XSL URL` field, select the `iso_svrl_for_xslt2.xsl` file.
+  - In the `Output` tab, change `Output file` to `Prompt for file`.
+- Apply the new scenario to the `.sch` file.
+
+**Apply stylesheet via the command line using Saxon jars**
+
+```sh
+java net.sf.saxon.Transform -s:source -xsl:stylesheet -o:output
+```
+
+- Source: Schematron file
+- Stylesheet: `iso_svrl_for_xslt2.xsl`
+- Output: Path and filename for results, e.g., `niem-ndr-rules-5.0-ref.xsl`
+
 ### Testing
 
 A separate database schema (`test`) is used for testing purposes.

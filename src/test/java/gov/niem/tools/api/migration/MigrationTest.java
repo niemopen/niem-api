@@ -32,6 +32,7 @@ public class MigrationTest {
   @Transactional
   public void checkMigrationSingleIteration() throws Exception {
     MultipartFile multipartFile = TestUtils.getMultipartFile(PATH_CMF);
+    @SuppressWarnings("unused")
     byte[] bytes = migrationService.migrateCmf("niem", "model", "3.0", "3.1", multipartFile);
     assertTrue(true);
   }
@@ -43,6 +44,7 @@ public class MigrationTest {
   @Transactional
   public void checkMigrationMultiIteration() throws Exception {
     MultipartFile multipartFile = TestUtils.getMultipartFile(PATH_CMF);
+    @SuppressWarnings("unused")
     byte[] bytes = migrationService.migrateCmf("niem", "model", "3.0", "3.2", multipartFile);
     assertTrue(true);
   }

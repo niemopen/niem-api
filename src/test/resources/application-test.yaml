@@ -1,7 +1,5 @@
 
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/niem-api-v2?currentSchema=test
   jpa:
     hibernate:
       ddl-auto: create

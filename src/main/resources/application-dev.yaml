@@ -4,4 +4,6 @@ app:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/niem-api-v2
+    url: ${POSTGRES_URL_LOCAL}
+    username: ${POSTGRES_USER_LOCAL}
+    password: ${POSTGRES_PASSWORD_LOCAL}

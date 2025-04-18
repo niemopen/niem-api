@@ -4,7 +4,9 @@ app:
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgresql.icl.gtri.org:5432/niem_api_mep
+    url: ${POSTGRES_URL_MEP}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
 
 server:
   servlet:

@@ -183,18 +183,11 @@ Note: When reviewing Javadoc warnings, correct the original `src` file, not the 
 
 ### Environment variables
 
-Create file `src/main/resources/secrets.yaml` to declare any application properties that should not be made publicly available.  This file has already been added to `.gitignore`.
+You can optionally create file `.env` to define postgresql url, username and password values.
 
-A example file is shown below:
+The variables declared in this file will be imported into `application.yaml` if available via the `spring.config.import` property.
 
-```yaml
-spring:
-  datasource:
-    username: my_username
-    password: my_password
-```
-
-The properties declared in this file will be imported into `application.yaml` via the `spring.config.import` property.
+There or other ways to include these variables, such as via system or user environment variables and via CI/CD settings.
 
 ### Testing
 

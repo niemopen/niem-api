@@ -50,12 +50,10 @@ server:
 
 spring:
   config:
-    import: secrets.yaml
+    import: optional:file:.env[.properties]
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    # url: jdbc:postgresql://niem-api-db_1:5432/niem-api-v2
-    url: jdbc:postgresql://localhost:5432/niem-api-v2
 
   jackson:
     # default-property-inclusion: non-null
@@ -107,6 +105,9 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+
+  profiles:
+    default: dev
 
   sql:
     init:

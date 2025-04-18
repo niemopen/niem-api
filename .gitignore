@@ -42,3 +42,4 @@ src/test/resources/transform/CrashDriver/
 src/test/resources/validation/ndr/CrashDriver-6.0/
 src/test/resources/validation/xml/multi/Crash Driver IEPD/
 niem-api.xpr
+.env

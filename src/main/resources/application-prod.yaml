@@ -4,4 +4,6 @@ app:
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgresql.icl.gtri.org:5432/niem_api_v2
+    url: ${POSTGRES_URL_PROD}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}

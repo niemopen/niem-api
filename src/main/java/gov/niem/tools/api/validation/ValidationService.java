@@ -18,7 +18,11 @@ public class ValidationService {
 
   public ResponseEntity<byte[]> returnResultsAsCsv(Results results, MultipartFile file) throws Exception {
     Object[] testResults = results.getTestResults().toArray();
-    String csvString = CsvUtils.toString(testResults);
+
+    // Support CSV file with header only when test results are empty
+    String[] headerColumns = {"testId", "status", "entity", "entityCategory", "message", "location", "comment"};
+
+    String csvString = CsvUtils.toString(testResults, headerColumns);
     String filename = String.format("%s-validation-report-%s.csv", file.getOriginalFilename(), AppUtils.getTimestamp()).replaceAll(" ", "-");
     return ResponseUtils.getResponseFileCsv(csvString, filename);
   }

@@ -15,7 +15,7 @@ public class CsvUtils {
    */
   public static void save(File file, Object[] data) throws Exception {
     JsonNode jsonTree = CsvUtils.getJsonNode(data);
-    CsvSchema csvSchema = CsvUtils.build(data, jsonTree);
+    CsvSchema csvSchema = CsvUtils.schemaWithData(data, jsonTree);
     CsvMapper csvMapper = new CsvMapper();
     csvMapper
     .writerFor(JsonNode.class)
@@ -26,16 +26,16 @@ public class CsvUtils {
   /**
    * Return the given object array formatted as a CSV with column headers as a string.
    */
-  public static String toString(Object[] data) throws Exception {
+  public static String toString(Object[] data, String[] columns) throws Exception {
     JsonNode jsonTree = CsvUtils.getJsonNode(data);
-    CsvSchema csvSchema = CsvUtils.build(data, jsonTree);
+    CsvSchema csvSchema = data.length > 0 ? CsvUtils.schemaWithData(data, jsonTree) : CsvUtils.schemaWithHeaderOnly(columns);
     CsvMapper csvMapper = new CsvMapper();
     return csvMapper
     .writer(csvSchema)
     .writeValueAsString(jsonTree);
   }
 
-  private static CsvSchema build(Object[] data, JsonNode jsonTree) throws Exception {
+  private static CsvSchema schemaWithData(Object[] data, JsonNode jsonTree) throws Exception {
 
     Builder csvSchemaBuilder = CsvSchema.builder();
 
@@ -46,6 +46,16 @@ public class CsvUtils {
     });
 
     return csvSchemaBuilder.build().withHeader();
+  }
+
+  private static CsvSchema schemaWithHeaderOnly(String[] columns) {
+    Builder builder = CsvSchema.builder();
+
+    for (String column : columns) {
+      builder.addColumn(column);
+    }
+
+    return builder.setUseHeader(true).build();
   }
 
   private static JsonNode getJsonNode(Object[] data) throws Exception {

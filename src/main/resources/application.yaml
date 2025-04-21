@@ -55,6 +55,10 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
 
+  devtools:
+    restart:
+      exclude: "src/test/resources/**"
+
   jackson:
     # default-property-inclusion: non-null
     serialization:

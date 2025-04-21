@@ -74,6 +74,8 @@ public class NdrValidationService {
       this.buildTransformer(tempPath, "5.0", "ext");
       this.buildTransformer(tempPath, "6.0", "ref");
       this.buildTransformer(tempPath, "6.0", "ext");
+      this.buildTransformer(tempPath, "6.0", "msg");
+      this.buildTransformer(tempPath, "6.0", "sub");
     }
   }
 
@@ -98,8 +100,8 @@ public class NdrValidationService {
       regex = "http://reference.niem.gov/niem/specification/naming-and-design-rules/(.*)/#(.*)SchemaDocument";
     }
     // NDR 6.0
-    else if (conformanceTargets.contains("https://docs.oasis-open.org/niemopen/ns/specification/XNDR/")) {
-      regex = "https://docs.oasis-open.org/niemopen/ns/specification/XNDR/(.*)/#(.*)SchemaDocument";
+    else if (conformanceTargets.contains("https://docs.oasis-open.org/niemopen/ns/specification/NDR/")) {
+      regex = "https://docs.oasis-open.org/niemopen/ns/specification/NDR/(.*)/#(.*)SchemaDocument";
     }
     else {
       return null;
@@ -115,12 +117,20 @@ public class NdrValidationService {
     String version = matcher.group(1);
     String target = matcher.group(2);
 
+    int major = Integer.parseInt( String.valueOf(version.charAt(0)) );
+
     switch (target) {
       case "Reference":
         target = "ref";
         break;
       case "Extension":
         target = "ext";
+        break;
+      case "Message":
+        target = major >= 6 ? "msg" : null;
+        break;
+      case "Subset":
+        target = major >= 6 ? "sub" : null;
         break;
       default:
         return null;
@@ -189,11 +199,15 @@ public class NdrValidationService {
       String ndrKey = this.getXsdNdrKey(conformanceTargets);
       Xslt30Transformer transformer = this.transformers.get(ndrKey);
 
-      if (ndrKey == null || transformer == null) {
-        // TODO: Report no transformer found
+      if (ndrKey == null) {
         String message = "NO CONFORMANCE TARGET FOUND.  UNABLE TO RUN VALIDATION TESTS.";
         String comment = "Unless this is an external standard, NIEM schemas should contain a conformance target which indicates which NDR rule set to use for conformance validation.  See https://niem.github.io/reference/concepts/namespace/#conformance-targets-1 for more.";
         this.skipTest(tests, test, file, Severity.warning, Status.warning, message, comment);
+        continue;
+      }
+      else if (transformer == null) {
+        String message = "NO MATCHING RULE SET FOUND.  UNABLE TO RUN VALIDATION TESTS.";
+        this.skipTest(tests, test, file, Severity.warning, Status.warning, message, "");
         continue;
       }
 
@@ -315,7 +329,15 @@ public class NdrValidationService {
     log.debug(result.location);
     log.debug(expression);
 
-    Node node = ValidationUtils.getXpathResult(document, xPath, expression);
+    Node node = null;
+
+    try {
+      node = ValidationUtils.getXpathResult(document, xPath, expression);
+    }
+    catch (Exception exception) {
+      log.error(exception.getMessage());
+    }
+
     if (node != null) {
       result.entityCategory = node.getNodeName();
       log.info(result.entityCategory);

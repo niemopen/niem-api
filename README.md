@@ -127,6 +127,18 @@ Migration issues will need to be resolved manually.
 
 - [x] **NDR conformance** - Validate NIEM XML schemas against NDR REF and EXT Schematron rules.
 
+  > [!NOTE]
+  > NDR 3.0 rules that cannot be validated in Schematron and are set to always throw errors to encourage alternative validation by the user are not tested here.  These rules were subsequently changed to text rules in NDR 4.0, no longer throwing automatic errors:
+  >
+  > - Rule 4-3: Schema is CTAS-conformant
+  > - Rule 7-1: Document is an XML document
+  > - Rule 7-2: Document uses XML namespaces properly
+  > - Rule 7-3: Document is a schema document
+  > - Rule 9-83: Target namespace is absolute URI
+
+  > [!WARNING]
+  > Note: 6.0 NDR conformance validation currently uses an older set of draft rules based on the 5.0 rule set but updated to 6.0 namespaces and rule numbers.  Support for the latest 6.0 NDR PSD01 rules is still pending. See issue #74 for the issue status.
+
 - [ ] **JSON** - Validate a JSON instance document against its provided JSON schema.
 
 - [ ] **JSON schema** - Validate a JSON schema document against the JSON schema specification.
@@ -221,6 +233,12 @@ java net.sf.saxon.Transform -s:source -xsl:stylesheet -o:output
 - Source: Schematron file
 - Stylesheet: `iso_svrl_for_xslt2.xsl`
 - Output: Path and filename for results, e.g., `niem-ndr-rules-5.0-ref.xsl`
+
+**Post transform**
+
+- Add the following line to the XSL results to include the `ndr-functions-#.#.xsl` file, with the appropriate NDR version number:
+
+  `<xsl:include xmlns:sch="http://purl.oclc.org/dsdl/schematron" href="ndr-functions-#.#.xsl"/>`
 
 ### Testing
 

@@ -20,6 +20,7 @@
    <xsl:variable name="document-uri">
       <xsl:value-of select="document-uri(/)"/>
    </xsl:variable>
+   <xsl:include xmlns:sch="http://purl.oclc.org/dsdl/schematron" href="ndr-functions-6.0.xsl" />
    <!--PHASES-->
    <!--PROLOG-->
    <xsl:output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"

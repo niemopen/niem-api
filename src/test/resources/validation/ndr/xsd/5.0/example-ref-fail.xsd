@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-           xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/6.0/"
+           xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
            xmlns:ext="http://training.niem.gov/CrashDriver/1.1/extension"
-           xmlns:j="https://docs.oasis-open.org/niemopen/ns/model/domains/justice/6.0/"
-           xmlns:nc="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
-           xmlns:niem-xs="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/"
-           xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+           xmlns:j="http://release.niem.gov/niem/domains/jxdm/7.0/"
+           xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
+           xmlns:niem-xs="http://release.niem.gov/niem/proxy/niem-xs/5.0/"
+           xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument"
+           ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument"
            xml:lang="en-US"
            targetNamespace="http://training.niem.gov/CrashDriver/1.1/extension"
            version="1">
@@ -15,14 +15,18 @@
       <xs:documentation>Extension schema for an example IEPD used to illustrate NIEM's technical
       features.</xs:documentation>
    </xs:annotation>
-   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/" schemaLocation="../adapters/niem-xs.xsd"/>
-   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="../utility/structures.xsd"/>
-   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/domains/justice/6.0/" schemaLocation="../niem/domains/jxdm.xsd"/>
-   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" schemaLocation="../niem/niem-core.xsd"/>
-   <xs:complexType name="DriverLicenseAugmentationType">
-      <xs:annotation>
-         <xs:documentation>A data type for additional information about a driver license.</xs:documentation>
-      </xs:annotation>
+  <xs:import namespace="http://release.niem.gov/niem/proxy/xsd/5.0/"
+    schemaLocation="https://release.niem.gov/niem/proxy/xsd/5.0/xs.xsd" />
+
+  <xs:import namespace="http://release.niem.gov/niem/structures/5.0/"
+    schemaLocation="https://release.niem.gov/niem/utility/structures/5.0/structures.xsd" />
+
+  <xs:import namespace="http://release.niem.gov/niem/domains/jxdm/7.0/"
+    schemaLocation="https://release.niem.gov/niem/domains/jxdm/7.0/jxdm.xsd" />
+
+  <xs:import namespace="http://release.niem.gov/niem/niem-core/5.0/"
+    schemaLocation="https://release.niem.gov/niem/niem-core/5.0/niem-core.xsd" />
+   <xs:complexType name="DriverLicenseType">
       <xs:complexContent>
          <xs:extension base="structures:AugmentationType">
             <xs:sequence>
@@ -37,11 +41,7 @@
       </xs:annotation>
       <xs:simpleContent>
          <xs:restriction base="niem-xs:token">
-            <xs:enumeration value="MEDICAL">
-               <xs:annotation>
-                  <xs:documentation>Medical Information</xs:documentation>
-               </xs:annotation>
-            </xs:enumeration>
+            <xs:enumeration value="MEDICAL"/>
             <xs:enumeration value="PII">
                <xs:annotation>
                   <xs:documentation>Personally Identifiable Information</xs:documentation>
@@ -62,14 +62,14 @@
          </xs:extension>
       </xs:complexContent>
    </xs:complexType>
-   <xs:element name="DriverLicenseAugmentation" 
+   <xs:element name="DriverLicenseAugmentation"
                substitutionGroup="j:DriverLicenseAugmentationPoint"
-               type="ext:DriverLicenseAugmentationType">
+               type="ext:DriverLicenseType">
       <xs:annotation>
-         <xs:documentation>Additional information about a driver license.</xs:documentation>
+         <xs:documentation>Some stuff about a driver license.</xs:documentation>
       </xs:annotation>
    </xs:element>
-   <xs:element name="PersonDefenestrationIndicator" 
+   <xs:element name="PersonDefenestrationIndicator"
                substitutionGroup="j:CrashPersonAugmentationPoint"
                type="niem-xs:boolean">
       <xs:annotation>

@@ -1,0 +1,124 @@
+
+# NDR Validation XSD File Requests
+
+@mediaType = json
+# @mediaType = csv
+
+# Assign request variables
+# @version = 3.0
+# @version = 4.0
+# @version = 5.0
+@version = 6.0
+
+@url = {{baseUrl}}/validation/schemas/ndr
+@dir = validation/ndr/xsd/{{version}}
+
+### NDR Validation - Pass test case (REF)
+@ref_pass_filename = example-ref-pass.xsd
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{ref_pass_filename}}"
+Content-Type: application/xml
+
+< ../../{{dir}}/{{ref_pass_filename}}
+--{{boundary}}--
+
+
+### NDR Validation - Fail test case (REF)
+@ref_fail_filename = example-ref-fail.xsd
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{ref_fail_filename}}"
+Content-Type: application/xml
+
+< ../../{{dir}}/{{ref_fail_filename}}
+--{{boundary}}--
+
+### NDR Validation - Pass test case (EXT)
+@ext_pass_filename = example-ext-pass.xsd
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{ext_pass_filename}}"
+Content-Type: application/xml
+
+< ../../{{dir}}/{{ext_pass_filename}}
+--{{boundary}}--
+
+
+### NDR Validation - Fail test case (EXT)
+@ext_fail_filename = example-ext-fail.xsd
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{ext_fail_filename}}"
+Content-Type: application/xml
+
+< ../../{{dir}}/{{ext_fail_filename}}
+--{{boundary}}--
+
+####################### NEW TARGETS FOR 6.0 #############################################
+
+### NDR Validation - Pass test case (MSG)
+@msg_pass_filename = example-msg-pass.xsd
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{msg_pass_filename}}"
+Content-Type: application/xml
+
+< ../../{{dir}}/{{msg_pass_filename}}
+--{{boundary}}--
+
+
+### NDR Validation - Fail test case (MSG)
+@msg_fail_filename = example-msg-fail.xsd
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{msg_fail_filename}}"
+Content-Type: application/xml
+
+< ../../{{dir}}/{{msg_fail_filename}}
+--{{boundary}}--
+
+### NDR Validation - Pass test case (SUB)
+@sub_pass_filename = example-sub-pass.xsd
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{sub_pass_filename}}"
+Content-Type: application/xml
+
+< ../../{{dir}}/{{sub_pass_filename}}
+--{{boundary}}--
+
+
+### NDR Validation - Fail test case (SUB)
+@sub_fail_filename = example-sub-fail.xsd
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{sub_fail_filename}}"
+Content-Type: application/xml
+
+< ../../{{dir}}/{{sub_fail_filename}}
+--{{boundary}}--

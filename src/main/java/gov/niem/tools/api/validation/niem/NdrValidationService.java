@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +22,11 @@ import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gov.niem.tools.api.core.utils.FileUtils;
 import gov.niem.tools.api.validation.Test;
@@ -228,12 +235,29 @@ public class NdrValidationService {
 
   }
 
+  private Map<String, String[]> loadRuleNumberMap() throws StreamReadException, DatabindException, IOException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    String resourcePath = "/validation/ndr/ndr-5.0-to-6.0-ruleNumbers.json";
+    // InputStream inputStream = HashMap.class.getResourceAsStream(resourcePath);
+    InputStream inputStream = getClass().getResourceAsStream(resourcePath);
+    return objectMapper.readValue(inputStream, new TypeReference<Map<String, String[]>>() {});
+  }
+
+  /**
+   * @todo Remove NDR 5.0 to 6.0 rule number mapping code once changes to support new
+   * NDR 6.0 rules are implemented and the 6.0 XSL files provide the real numbers.
+   */
   private List<Test> processResults(File file, String filename, String ndrKey, Document document, XPath xPath) throws IOException, XPathExpressionException {
 
     List<Test> tests = new LinkedList<>();
 
     BufferedReader reader = new BufferedReader(new FileReader(file));
     String line = reader.readLine();
+
+    Map<String, String[]> ruleNumberMap = null;
+    if (ndrKey.startsWith("6.0")) {
+      ruleNumberMap = this.loadRuleNumberMap();
+    }
 
     while (line != null) {
       if (!line.startsWith("   <svrl:active-pattern ")) {
@@ -248,6 +272,16 @@ public class NdrValidationService {
       // Rule title
       line = reader.readLine();
       String ruleTitle = line.split("\"")[1];
+
+      // Handle 6.0 rule number mapping (first entry)
+      String[] updatedRuleNumbers = null;
+      if (ruleNumberMap != null) {
+        updatedRuleNumbers = ruleNumberMap.get(ruleId);
+        if (updatedRuleNumbers != null && updatedRuleNumbers.length > 0) {
+          // Replace parsed rule number with first entry from the mapping
+          ruleId = updatedRuleNumbers[0];
+        }
+      }
 
       Test test = new Test("validate-ndr-" + ruleId);
       test.ruleNumber = ruleId;
@@ -302,6 +336,22 @@ public class NdrValidationService {
           test.ran = true;
           test.results.add(result);
           this.getLocation(result, expression, document, xPath);
+        }
+
+
+        // Temporary special processing for 6.0 rules
+        if (ndrKey.startsWith("6.0")) {
+          if (updatedRuleNumbers == null) {
+            // 5.0 rule number did not map to 6.0 rule set
+            test.ruleNumber += " [NDR 5.0-only rule]";
+          }
+          else {
+            if (updatedRuleNumbers != null && updatedRuleNumbers.length > 1) {
+              // Note the additional 6.0 rule numbers when one 5.0 rule maps to multiple 6.0 rules
+              String[] remainingRuleNumbers = Arrays.copyOfRange(updatedRuleNumbers, 1, updatedRuleNumbers.length);
+              result.comment += String.format(" Also see NDR 6.0 rule(s) %s", remainingRuleNumbers.toString());
+            }
+          }
         }
 
         line = reader.readLine();

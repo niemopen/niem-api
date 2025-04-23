@@ -125,22 +125,22 @@ public class SubpropertyService extends BaseEntityService<Subproperty> {
 
   public Set<Subproperty> findByType(String stewardKey, String modelKey, String versionNumber, String qname) throws Exception {
     Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
-    return repo.findByVersionIdAndType_Namespace_PrefixAndType_Name(version.getId(), Component.getPrefix(qname), Component.getName(qname));
+    return repo.findByVersionIdAndType_Namespace_PrefixAndType_NameOrderBySequenceAsc(version.getId(), Component.getPrefix(qname), Component.getName(qname));
   }
 
   public Set<Subproperty> findByType(Type type) throws Exception {
     String qname = type.getQname();
-    return repo.findByVersionIdAndType_Namespace_PrefixAndType_Name(type.getVersion().getId(), Component.getPrefix(qname), Component.getName(qname));
+    return repo.findByVersionIdAndType_Namespace_PrefixAndType_NameOrderBySequenceAsc(type.getVersion().getId(), Component.getPrefix(qname), Component.getName(qname));
   }
 
   public Set<Subproperty> findByProperty(String stewardKey, String modelKey, String versionNumber, String qname) throws Exception {
     Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
-    return repo.findByVersionIdAndProperty_Namespace_PrefixAndProperty_Name(version.getId(), Component.getPrefix(qname), Component.getName(qname));
+    return repo.findByVersionIdAndProperty_Namespace_PrefixAndProperty_NameOrderByType_NameAsc(version.getId(), Component.getPrefix(qname), Component.getName(qname));
   }
 
   public Set<Subproperty> findByProperty(Property property) throws Exception {
     String qname = property.getQname();
-    return repo.findByVersionIdAndProperty_Namespace_PrefixAndProperty_Name(property.getVersion().getId(), Component.getPrefix(qname), Component.getName(qname));
+    return repo.findByVersionIdAndProperty_Namespace_PrefixAndProperty_NameOrderByType_NameAsc(property.getVersion().getId(), Component.getPrefix(qname), Component.getName(qname));
   }
 
   public Set<Subproperty> findByVersion(String stewardKey, String modelKey, String versionNumber) throws Exception {
@@ -150,12 +150,12 @@ public class SubpropertyService extends BaseEntityService<Subproperty> {
 
   public Set<Subproperty> findByTypePrefix(String stewardKey, String modelKey, String versionNumber, String prefix) throws Exception {
     Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionNumber, prefix);
-    return repo.findByVersionIdAndType_Namespace_Prefix(namespace.getVersion().getId(), prefix);
+    return repo.findByVersionIdAndType_Namespace_PrefixOrderByType_NameAscSequenceAsc(namespace.getVersion().getId(), prefix);
   }
 
   public Set<Subproperty> findByPropertyPrefix(String stewardKey, String modelKey, String versionNumber, String prefix) throws Exception {
     Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionNumber, prefix);
-    return repo.findByVersionIdAndProperty_Namespace_Prefix(namespace.getVersion().getId(), prefix);
+    return repo.findByVersionIdAndProperty_Namespace_PrefixOrderByType_NameAscSequence(namespace.getVersion().getId(), prefix);
   }
 
   public void assertRequiredLocalFields(Subproperty subproperty) throws FieldNotFoundException {

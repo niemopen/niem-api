@@ -2,7 +2,7 @@
 # CMF Validation Requests
 
 @mediaType = json
-@mediaType = csv
+# @mediaType = csv
 
 # Assign request variables
 @url = {{baseUrl}}/validation/cmf/xml

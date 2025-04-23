@@ -22,7 +22,7 @@ Content-Type: multipart/form-data; boundary={{boundary}}
 
 --{{boundary}}
 Content-Disposition: form-data; name="file"; filename="{{pass_filename}}"
-Content-Type: application/xml
+Content-Type: application/zip
 
 < {{pass_file}}
 --{{boundary}}--
@@ -35,7 +35,7 @@ Content-Type: multipart/form-data; boundary={{boundary}}
 
 --{{boundary}}
 Content-Disposition: form-data; name="file"; filename="{{fail_filename}}"
-Content-Type: application/xml
+Content-Type: application/zip
 
 < {{fail_file}}
 --{{boundary}}--

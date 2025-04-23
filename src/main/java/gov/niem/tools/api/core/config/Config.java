@@ -1,5 +1,7 @@
 package gov.niem.tools.api.core.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -79,7 +81,10 @@ public class Config {
             .defaultContentType(MediaType.APPLICATION_JSON)
             .mediaType("xml", MediaType.APPLICATION_XML)
             .mediaType("json", MediaType.APPLICATION_JSON)
-            .mediaType("text", MediaType.TEXT_PLAIN);
+            .mediaType("text", MediaType.TEXT_PLAIN)
+            .strategies(List.of(
+              new EnsureApplicationJsonNegotiationStrategy()
+            ));;
       }
     };
   }

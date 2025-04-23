@@ -147,13 +147,14 @@ public class NdrValidationService {
 
   }
 
-  private void skipTest(List<Test> tests, Test test, File file, Severity severity, Status status, String message, String comment) {
+  private void skipTest(List<Test> tests, Test test, File file, Severity severity, Status status, String entityCategory, String message, String comment) {
     log.info(String.format("%s - %s", file.getName(), message));
     TestResult result = new TestResult(test.id);
     result.status = status;
     result.message = message;
     result.comment = comment == null ? "" : comment;
     result.location = file.getName();
+    result.entityCategory = entityCategory;
     test.results.add(result);
     test.endTest();
     test.ran = false;
@@ -183,21 +184,20 @@ public class NdrValidationService {
 
       if (file.getName().endsWith("structures.xsd") || file.getName().endsWith("code-lists-instance.xsd") || file.getName().endsWith("code-lists-schema-appinfo.xsd") || file.getName().endsWith("conformanceTargets.xsd") || file.getName().endsWith("appinfo.xsd")) {
         String message = "Skipped validation on NIEM utility schema.";
-        this.skipTest(tests, test, file, Severity.info, Status.info, message, null);
+        this.skipTest(tests, test, file, Severity.info, Status.info, "utility", message, null);
         continue;
       }
 
       if (targetNamespace == null) {
-        // TODO: Handle no target namespace
         String message = "No target namespace found.  This attribute is required for NIEM conformant schemas.";
         String comment = "This warning can be ignored for external standards that are properly handled via NIEM adapter types";
-        this.skipTest(tests, test, file, Severity.warning, Status.warning, message, comment);
+        this.skipTest(tests, test, file, Severity.warning, Status.warning, null, message, comment);
         continue;
       }
 
       if (skipNiem == true && targetNamespace.startsWith("http://release.niem.gov/niem/")) {
         String message = "Skipped validation on schema with a reserved NIEM uri ('http://release.niem.gov/niem/').";
-        this.skipTest(tests, test, file, Severity.info, Status.info, message, null);
+        this.skipTest(tests, test, file, Severity.info, Status.info, null, message, null);
         continue;
       }
 
@@ -207,14 +207,14 @@ public class NdrValidationService {
       Xslt30Transformer transformer = this.transformers.get(ndrKey);
 
       if (ndrKey == null) {
-        String message = "NO CONFORMANCE TARGET FOUND.  UNABLE TO RUN VALIDATION TESTS.";
+        String message = "NO NDR CONFORMANCE TARGET FOUND.  UNABLE TO RUN VALIDATION TESTS.";
         String comment = "Unless this is an external standard, NIEM schemas should contain a conformance target which indicates which NDR rule set to use for conformance validation.  See https://niem.github.io/reference/concepts/namespace/#conformance-targets-1 for more.";
-        this.skipTest(tests, test, file, Severity.warning, Status.warning, message, comment);
+        this.skipTest(tests, test, file, Severity.warning, Status.warning, "no ndr", message, comment);
         continue;
       }
       else if (transformer == null) {
         String message = "NO MATCHING RULE SET FOUND.  UNABLE TO RUN VALIDATION TESTS.";
-        this.skipTest(tests, test, file, Severity.warning, Status.warning, message, "");
+        this.skipTest(tests, test, file, Severity.warning, Status.warning, null, message, "");
         continue;
       }
 

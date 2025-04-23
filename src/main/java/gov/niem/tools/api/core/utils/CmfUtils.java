@@ -2,16 +2,77 @@ package gov.niem.tools.api.core.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 
 import org.json.JSONObject;
 import org.mitre.niem.cmf.HasProperty;
 import org.mitre.niem.cmf.Model;
+import org.mitre.niem.xsd.ModelXMLReader;
 import org.mitre.niem.xsd.ModelXMLWriter;
+import org.springframework.web.multipart.MultipartFile;
 
+import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
+import gov.niem.tools.api.core.exceptions.BadRequestException;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class CmfUtils {
+
+  /**
+   * Checks that the given file contains the URI for the currently-supported
+   * version of CMF, and if so, loads it into a CMF Model object.
+   */
+  public static Model loadCMF(MultipartFile multipartFile) throws IOException, BadRequestException {
+
+    // Throw exception if the given file is the supported version of CMF
+    CmfUtils.checkVersion(multipartFile);
+
+    // Load CMF model
+    ModelXMLReader modelXMLReader = new ModelXMLReader();
+    Model cmf = modelXMLReader.readXML(multipartFile.getInputStream());
+
+    // Throw exception with error messages if CMF did not load
+    if (cmf == null) {
+      log.debug("Load failed: Could not parse CMF");
+      modelXMLReader.getMessages().forEach(message -> log.debug(message));
+      String errorMessages = String.join(", ", modelXMLReader.getMessages());
+      throw new BadRequestException(errorMessages);
+    }
+
+    return cmf;
+
+  }
+
+  /**
+   * Checks that the given file contains the URI for the currently-supported
+   * version of CMF.
+   */
+  public static void checkVersion(MultipartFile multipartFile) throws IOException, BadRequestException {
+    String cmfString = FileUtils.getFileText(multipartFile);
+    CmfUtils.checkVersion(cmfString);
+  }
+
+  /**
+   * Checks that the given file contains the URI for the currently-supported
+   * version of CMF.
+   */
+  public static void checkVersion(File file) throws IOException {
+    String cmfString = FileUtils.getFileText(file.toPath());
+    CmfUtils.checkVersion(cmfString);
+  }
+
+  /**
+   * Checks that the given CMF string contains the URI for the currently-supported
+   * version of CMF.
+   */
+  public static void checkVersion(String cmfString) throws BadRequestException {
+    if (!cmfString.contains(Config.cmfUri)) {
+      String errorMessage = String.format("Only CMF version %s is currently supported", Config.cmfVersion);
+      throw new BadRequestException(errorMessage);
+    }
+  }
 
   /**
    * Generate CMF model as an CMF XML or JSON string

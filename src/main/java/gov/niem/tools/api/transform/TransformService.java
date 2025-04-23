@@ -1,7 +1,6 @@
 package gov.niem.tools.api.transform;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.file.Files;
@@ -28,19 +27,18 @@ import org.mitre.niem.xsd.ModelFromXSD;
 import org.mitre.niem.xsd.ModelToN5XSD;
 import org.mitre.niem.xsd.ModelToSrcXSD;
 import org.mitre.niem.xsd.ModelToXSD;
-import org.mitre.niem.xsd.ModelXMLReader;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.core.exceptions.BadRequestException;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.core.utils.FileUtils;
 import gov.niem.tools.api.core.utils.ZipUtils;
 import lombok.extern.log4j.Log4j2;
 
-@Service @Log4j2
+@Log4j2
+@Service
 public class TransformService {
 
   /**
@@ -164,22 +162,7 @@ public class TransformService {
         break;
 
       case cmf:
-
-        // Check that the CMF file has the right version
-        String cmfText = FileUtils.getFileText(inputFile);
-        if (!cmfText.contains(Config.cmfUri)) {
-          throw new BadRequestException(String.format("Only CMF version %s is supported.", Config.cmfVersion));
-        }
-
-        // Read a given CMF file and load into a new CMF model.
-        FileInputStream inputStream = new FileInputStream(inputFile.toFile());
-        ModelXMLReader modelReader = new ModelXMLReader();
-        cmf = modelReader.readXML(inputStream);
-        if (cmf == null) {
-          log.info("Load input failed: Could not parse CMF");
-          modelReader.getMessages().forEach(message -> log.info(message));
-          throw new BadRequestException(String.join(", ", modelReader.getMessages()));
-        }
+        cmf = CmfUtils.loadCMF(multipartInputFile);
         break;
 
       default:

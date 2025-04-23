@@ -285,8 +285,12 @@ public class FileUtils {
     org.apache.commons.io.FileUtils.writeByteArrayToFile(path.toFile(), bytes);
   }
 
-  public static String getFileText(Path path) throws Exception {
+  public static String getFileText(Path path) throws IOException {
     return Files.readString(path, StandardCharsets.UTF_8);
+  }
+
+  public static String getFileText(MultipartFile multipartFile) throws IOException {
+    return new String(multipartFile.getBytes(), StandardCharsets.UTF_8);
   }
 
   /**

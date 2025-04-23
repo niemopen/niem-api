@@ -10,7 +10,6 @@ import org.mitre.niem.cmf.ClassType;
 import org.mitre.niem.cmf.Datatype;
 import org.mitre.niem.cmf.HasProperty;
 import org.mitre.niem.cmf.RestrictionOf;
-import org.mitre.niem.xsd.ModelXMLReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,7 +63,7 @@ public class MigrationService {
    * @param from Current version of the model provided by the user
    * @param to Version to which the model should be migrated
    */
-  public byte[] migrateCmf(String stewardKey, String modelKey, String from, String to, MultipartFile file) throws Exception {
+  public byte[] migrateCmf(String stewardKey, String modelKey, String from, String to, MultipartFile multipartFile) throws Exception {
 
     log.info("Migrate %s/%s CMF from version [%s] to [%s]", stewardKey, modelKey, from, to);
 
@@ -78,12 +77,7 @@ public class MigrationService {
     Version oldVersion = hub.versions.findOne(stewardKey, modelKey, from);
 
     // Read a given CMF file and load into a new CMF model.
-    ModelXMLReader modelReader = new ModelXMLReader();
-    org.mitre.niem.cmf.Model oldCmf = modelReader.readXML(file.getInputStream());
-
-    if (oldCmf == null) {
-      throw new BadRequestException("Could not load provided file as CMF");
-    }
+    org.mitre.niem.cmf.Model oldCmf = CmfUtils.loadCMF(multipartFile);
 
     // Count the number of original properties and types for general metrics for the migration report
     int oldTotalComponentCount = oldCmf.getComponentList().size();
@@ -108,7 +102,7 @@ public class MigrationService {
     // Log a summary of the migration results
     results.comment = this.getMigrationComment(oldTotalComponentCount, newCmf.getComponentList().size());
 
-    byte[] bytes = this.saveOutput(newCmf, results, file, from, to);
+    byte[] bytes = this.saveOutput(newCmf, results, multipartFile, from, to);
     return bytes;
 
   }

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
 import gov.niem.tools.api.core.exceptions.BadRequestException;
+import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.core.utils.FileUtils;
 import gov.niem.tools.api.core.utils.ZipUtils;
 import gov.niem.tools.api.validation.Test;
@@ -111,7 +112,8 @@ public class NiemValidationService {
     return this.validateCmf(file);
   }
 
-  public Test validateCmf(File cmfFile) throws IOException, SAXException {
+  public Test validateCmf(File cmfFile) throws IOException, SAXException, BadRequestException {
+    CmfUtils.checkVersion(cmfFile);
     Source[] xsdSources = ValidationUtils.getClasspathXsdSources("validation/cmf/v0.8");
     Test test = xmlValidationService.validateXmlOnly(cmfFile, xsdSources, "validate-cmf", "Validate a CMF against the NIEM Common Model Format Specification");
     return test;

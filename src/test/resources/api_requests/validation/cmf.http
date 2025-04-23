@@ -1,7 +1,7 @@
 
 # CMF Validation Requests
 
-# @mediaType = json
+@mediaType = json
 @mediaType = csv
 
 # Assign request variables
@@ -14,6 +14,11 @@
 @fail_filename = CrashDriver-invalid.cmf.xml
 @fail_file = ../../{{dir}}/{{fail_filename}}
 
+@unsupported_version_filename = CrashDriver-0.6.cmf.xml
+@unsupported_version_file = ../../transform/{{unsupported_version_filename}}
+
+@invalid_format_filename = CrashDriver.owl.ttl
+@invalid_format_file = ../../transform/{{invalid_format_filename}}
 
 ### CMF Validation - Pass test case
 
@@ -38,4 +43,30 @@ Content-Disposition: form-data; name="file"; filename="{{fail_filename}}"
 Content-Type: application/xml
 
 < {{fail_file}}
+--{{boundary}}--
+
+
+### CMF Validation - Unsupported CMF version
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{unsupported_version_filename}}"
+Content-Type: application/xml
+
+< {{unsupported_version_file}}
+--{{boundary}}--
+
+
+### CMF Validation - Invalid input format
+
+POST {{url}}?mediaType={{mediaType}}
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{invalid_format_filename}}"
+Content-Type: application/xml
+
+< {{invalid_format_file}}
 --{{boundary}}--

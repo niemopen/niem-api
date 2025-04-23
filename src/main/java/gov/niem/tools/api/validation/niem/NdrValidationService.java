@@ -285,6 +285,7 @@ public class NdrValidationService {
 
       Test test = new Test("validate-ndr-" + ruleId);
       test.ruleNumber = ruleId;
+      test.ruleUrl = this.getRuleUrl(ndrKey, ruleId);
       test.results = new LinkedList<>();
       test.notes = String.format("Validated %s with NDR %s rules", filename, ndrKey);
 
@@ -365,6 +366,21 @@ public class NdrValidationService {
 
     reader.close();
     return tests;
+  }
+
+  private String getRuleUrl(String ndrKey, String ruleId) {
+    String version = ndrKey.substring(0, 3);
+    switch (version) {
+      case "3.0":
+        return "https://reference.niem.gov/niem/specification/naming-and-design-rules/3.0/niem-ndr-3.0.html#" + ruleId;
+      case "4.0":
+        return "https://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/niem-ndr-4.0.html#" + ruleId;
+      case "5.0":
+        return "https://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/niem-ndr-5.0.html#" + ruleId;
+      case "6.0":
+        return "https://niemopen.github.io/niem-naming-design-rules/ndr-v6.0-psd01.html#" + ruleId;
+    }
+    return "";
   }
 
   private void getLocation(TestResult result, String location, Document document, XPath xPath) throws XPathExpressionException {

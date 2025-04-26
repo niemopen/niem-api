@@ -1,7 +1,7 @@
 
 # NIEM API 2.0
 
-This is a Java Spring Boot REST API and backend implementation for NIEM tool functionality.  It includes support for model management, search, transformations, migrations, and validation.
+This is a Java Spring Boot REST API and backend implementation for NIEM tool functionality.  It includes support for NIEM and NIEM-based community models, search, transformations, NIEM subset migrations, and validation.
 
 ## Purpose
 
@@ -49,7 +49,10 @@ The following model features are not yet implemented:
 - [ ] Namespace local terminology
 - [ ] NIEM 1.0 - 2.1 reference properties
 - [ ] NIEM 2.0 - 2.1 augmentations
-- [ ] Special EXT namespace support
+- [ ] Special EXT namespace support, including
+  - [ ] Facets on datatype classes (complex types with simple content)
+  - [ ] Class restriction
+  - [ ] choice blocks
 
 The API currently only supports read access to NIEM data models.  The ability to create, update, and delete models and their contents will be added in the future:
 
@@ -109,7 +112,7 @@ Outputs:
 Note that if a component cannot be migrated, there are two possible reasons:
 
 - The component does not have a counterpart in a later version.
-- The component does have a counterpart, but the migration rule has not been added and there is no link between the two.
+- The component does have a counterpart, but the migration rule has not been added so there is no link between the two.
 
 Migration issues will need to be resolved manually.
 
@@ -128,7 +131,7 @@ Migration issues will need to be resolved manually.
 - [x] **NDR conformance** - Validate NIEM XML schemas against NDR REF and EXT Schematron rules.
 
   > [!NOTE]
-  > NDR 3.0 rules that cannot be validated in Schematron and are set to always throw errors to encourage alternative validation by the user are not tested here.  These rules were subsequently changed to text rules in NDR 4.0, no longer throwing automatic errors:
+  > There are 5 NDR 3.0 rules that were set to always throw errors to encourage user evaluation.  These rules were subsequently changed to text rules in NDR 4.0, no longer throwing automatic errors.  These 3.0 rules have been disabled here for more consistent rule handling.
   >
   > - Rule 4-3: Schema is CTAS-conformant
   > - Rule 7-1: Document is an XML document
@@ -136,8 +139,10 @@ Migration issues will need to be resolved manually.
   > - Rule 7-3: Document is a schema document
   > - Rule 9-83: Target namespace is absolute URI
 
+  **NDR 6.0 Status**
+
   > [!WARNING]
-  > Note: 6.0 NDR conformance validation currently uses an older set of draft rules based on the 5.0 rule set but updated to 6.0 namespaces and rule numbers.  Support for the latest 6.0 NDR PSD01 rules is still pending. See issue #74 for the issue status.
+  > NDR 6.0 conformance validation currently uses an older set of draft rules based on the 5.0 rule set but updated to 6.0 namespaces and rule numbers.  Support for the latest 6.0 NDR PSD01 rules requires additional work and is still pending. See issue #74 for the issue status.
 
 - [ ] **JSON** - Validate a JSON instance document against its provided JSON schema.
 
@@ -149,19 +154,51 @@ Migration issues will need to be resolved manually.
 
 - [ ] **Type QA** - Check a type for NDR conformance issues.
 
+## Notes
+
+### Terminology
+
+**Type**
+
+This application uses `Type` to encompass what the NDR now refers to as classes and datatypes.
+
+**Subproperty**
+
+This application uses `Subproperty` (based on XML Schema terminology sub-elements and sub-attributes).  The NDR now refers to these as Child Property Associations.
+
 ## Developers
 
 ### Build
+
+Build jars and run tests:
 
 ```sh
 ./gradlew build
 ```
 
+Run the application:
+
+```sh
+./gradlew bootRun
+```
+
+Prepare a new version of the application:
+
+- [ ] Update the version number in field `project.ext.draft` of file `build.gradle`
+- [ ] Run tests
+- [ ] Build JavaDocs
+- *Note: Ignore JavaDoc warnings for `use of default constructor, which does not provide a comment` when the class itself is documented*
+- [ ] Build OpenAPI JSON file
+- [ ] Build the application
+- [ ] Deploy the application
+- [ ] Update the search index
+- [ ] Test endpoints
+
 ### OpenAPI documentation
 
 API documentation files:
 
-- **OpenAPI JSON** available at https://tools.niem.gov/api/v2/api-docs or `/docs/openapi.json`.
+- **OpenAPI JSON** available at https://tools.niem.gov/api/v2/api-docs or in the project repo under `/docs/openapi.json`.
 - **Swagger HTML** available at https://tools.niem.gov/api/v2/swagger-ui/index.html.
 
 Build documentation:
@@ -172,20 +209,22 @@ Build documentation:
 
 Known issues:
 
-- [ ] OpenAPI schema components are not picking up JavaDoc definitions for methods that are overridden, either in the parent or the child.  This is why definitions are being repeated in the `@Schema` annotations.
+- [ ] JavaDoc definitions for overridden methods
+
+  OpenAPI schema components are not picking up JavaDoc definitions for methods that are overridden, either in the parent or the child.  This is why definitions are being repeated in the `@Schema` annotations.
 
 - [ ] Request body parameters.
 
-OpenAPI annotation `@RequestParam` should be able to be used for request body parameters for endpoints that consume multipart form data.  These instead are being generated as query parameters in the OpenAPI documentation.
+  OpenAPI annotation `@RequestParam` should be able to be used for request body parameters for endpoints that consume multipart form data.  These instead are being generated as query parameters in the OpenAPI documentation.
 
-`@RequestPart` can be used to document request body parameters, but has the following drawbacks when compared to `@RequestParam`:
+  `@RequestPart` can be used to document request body parameters, but has the following drawbacks when compared to `@RequestParam`:
 
-- Allowable values are not listed in the OpenAPI documentation for params with an enum type.  These parameters are simply marked as strings.
-- Default values are not listed.
-- Example values are not listed.
-- Type conversion in the controllers for parameters types besides Strings or multipart files is not automatically handled.
+  - Allowable values are not listed in the OpenAPI documentation for params with an enum type.  These parameters are simply marked as strings.
+  - Default values are not listed.
+  - Example values are not listed.
+  - Type conversion in the controllers for parameters types besides Strings or multipart files is not automatically handled.
 
-To simplify the code, the `@RequestParam` annotation is being used despite the incorrect marking of request body parameters as query parameters.  Additional documentation has been added to each of the parameters as the simplest workaround.
+  To simplify the code, the `@RequestParam` annotation is being used despite the incorrect marking of request body parameters as query parameters.  Additional documentation has been added to each of the parameters as the simplest workaround.
 
 ### Lombok
 
@@ -195,9 +234,9 @@ Note: When reviewing Javadoc warnings, correct the original `src` file, not the 
 
 ### Environment variables
 
-You can optionally create file `.env` to define postgresql url, username and password values.
+You can create file `.env` to define postgresql url, username and password values.
 
-The variables declared in this file will be imported into `application.yaml` if available via the `spring.config.import` property.
+The variables declared in this file will be imported into `application.yaml` if available via the `spring.config.import` property (optional import).
 
 There or other ways to include these variables, such as via system or user environment variables and via CI/CD settings.
 
@@ -236,9 +275,16 @@ java net.sf.saxon.Transform -s:source -xsl:stylesheet -o:output
 
 **Post transform**
 
-- Add the following line to the XSL results to include the `ndr-functions-#.#.xsl` file, with the appropriate NDR version number:
+- Add the following line to the XSL results to include the `ndr-functions-#.#.xsl` file, with the appropriate NDR version number manually added to the `ndr-functions` filename to support multiple versions:
 
   `<xsl:include xmlns:sch="http://purl.oclc.org/dsdl/schematron" href="ndr-functions-#.#.xsl"/>`
+
+**Notes**
+
+As mentioned above under the Features > Validation > Conformance Validation section, the following adjustments have been made:
+
+- NDR 3.0: Removed Schematron testing for rules that cannot be evaluated in Schematron and always throw errors.
+- NDR 6.0: Older draft rule set with updated URIs and rule numbers is being used until additional support needed for the latest rule set can be added.
 
 ### Testing
 

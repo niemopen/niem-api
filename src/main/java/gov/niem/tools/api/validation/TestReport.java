@@ -12,20 +12,13 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 /**
- * An individual test result.
- *
- * <p>Separate tests and results are useful for cases when validators are able to create
- * a separate test for each kind of issue (e.g., a property declaration without a definition).
- * Each occurrence of that issue would be recorded as a separate result.
- *
- * <p>In some cases, tests and results might not be able to be grouped and each failed test
- * will have a single result.
+ * A test report that consists of a list of tests that may (or may not) have been run.
  */
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Results {
+public class TestReport {
 
   /**
    * Supported formats for the validation results file (e.g., json, csv)

@@ -2,7 +2,7 @@ package gov.niem.tools.api.validation;
 
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.type.Type;
-import gov.niem.tools.api.validation.Results.ResultsFormat;
+import gov.niem.tools.api.validation.TestReport.ResultsFormat;
 import gov.niem.tools.api.validation.niem.NiemValidationService;
 import gov.niem.tools.api.validation.xml.XmlValidationService;
 
@@ -62,7 +62,7 @@ public class ValidationController {
       @RequestParam(required = false, defaultValue = "json") ResultsFormat mediaType
   ) throws Exception {
 
-    Results results = new Results();
+    TestReport results = new TestReport();
     Test test = xmlValidationService.validateXsd(file);
     results.tests.add(test);
     return this.handleResults(results, mediaType, file);
@@ -82,7 +82,7 @@ public class ValidationController {
       @RequestParam(required = false, defaultValue = "json") ResultsFormat mediaType
   ) throws Exception {
 
-    Results results = new Results();
+    TestReport results = new TestReport();
     Test[] tests = this.xmlValidationService.validateXml(xml, xsd);
     results.tests.addAll(Arrays.asList(tests));
     return this.handleResults(results, mediaType, xml);
@@ -99,7 +99,7 @@ public class ValidationController {
       @RequestPart MultipartFile file,
       @RequestParam(required = false, defaultValue = "json") ResultsFormat mediaType
   ) throws Exception {
-    Results results = new Results();
+    TestReport results = new TestReport();
     Test test = this.xmlValidationService.validateXmlCatalog(file);
     results.tests.add(test);
     return this.handleResults(results, mediaType, file);
@@ -118,7 +118,7 @@ public class ValidationController {
       @RequestParam(required = false, defaultValue = "json") ResultsFormat mediaType
   ) throws Exception {
 
-    Results results = new Results();
+    TestReport results = new TestReport();
     Test test = niemValidationService.validateMessageCatalog(file);
     results.tests.add(test);
     return this.handleResults(results, mediaType, file);
@@ -136,7 +136,7 @@ public class ValidationController {
       @RequestParam(required = false, defaultValue = "json") ResultsFormat mediaType
   ) throws Exception {
 
-    Results results = new Results();
+    TestReport results = new TestReport();
     Test test = niemValidationService.validateCmf(file);
     results.tests.add(test);
     return this.handleResults(results, mediaType, file);
@@ -164,7 +164,7 @@ public class ValidationController {
       @RequestParam(required = false, defaultValue = "json") ResultsFormat mediaType
   ) throws Exception {
 
-    Results results = new Results();
+    TestReport results = new TestReport();
     List<Test> tests = niemValidationService.validateMessageSpecification(file);
     results.tests.addAll(tests);
     return this.handleResults(results, mediaType, file);
@@ -183,7 +183,7 @@ public class ValidationController {
       @RequestParam(required = false, defaultValue = "json") ResultsFormat mediaType
   ) throws Exception {
 
-    Results results = new Results();
+    TestReport results = new TestReport();
     List<Test> tests = niemValidationService.validateXsdWithNdr(file);
     results.tests.addAll(tests);
     return this.handleResults(results, mediaType, file);
@@ -196,7 +196,7 @@ public class ValidationController {
    */
   @Hidden
   @PostMapping(value = "schemas/json")
-  public Results getSchemaJsonValidation(@RequestPart MultipartFile file) {
+  public TestReport getSchemaJsonValidation(@RequestPart MultipartFile file) {
     // TODO: Validate JSON Schema
     return null;
   }
@@ -206,7 +206,7 @@ public class ValidationController {
    */
   @Hidden
   @PostMapping(value = "schemas/qa")
-  public Results getSchemaQaValidation(@RequestPart MultipartFile file) {
+  public TestReport getSchemaQaValidation(@RequestPart MultipartFile file) {
     // TODO: Run QA on schemas
     return null;
   }
@@ -219,7 +219,7 @@ public class ValidationController {
    */
   @Hidden
   @PostMapping(value = "instances/json")
-  public Results getInstanceJsonValidation(
+  public TestReport getInstanceJsonValidation(
       @RequestPart MultipartFile json,
       @RequestPart MultipartFile jsonSchema) {
     // TODO: Validate JSON Instance
@@ -231,7 +231,7 @@ public class ValidationController {
    */
   @Hidden
   @PostMapping(value = "cmf/ndr")
-  public Results getCmfNdrValidation(@RequestPart MultipartFile file) {
+  public TestReport getCmfNdrValidation(@RequestPart MultipartFile file) {
     // TODO: Validate a CMF file against model-related NDR rules.
     return null;
   }
@@ -241,7 +241,7 @@ public class ValidationController {
    */
   @Hidden
   @PostMapping(value = "cmf/qa")
-  public Results getCmfQaValidation(@RequestPart MultipartFile file) {
+  public TestReport getCmfQaValidation(@RequestPart MultipartFile file) {
     // TODO: Run QA against a CMF file.
     return null;
   }
@@ -255,7 +255,7 @@ public class ValidationController {
    */
   @Hidden
   @PostMapping(value = "properties/qa")
-  public Results getPropertyQaValidation(
+  public TestReport getPropertyQaValidation(
       @RequestPart Property property,
       @PathVariable(required = false) String niemVersionNumber) {
     // TODO: Validate property
@@ -271,7 +271,7 @@ public class ValidationController {
    */
   @Hidden
   @PostMapping(value = "types/qa")
-  public Results getTypeQaValidation(
+  public TestReport getTypeQaValidation(
       @RequestPart Type type,
       @PathVariable(required = false) String niemVersionNumber) {
     // Validate type
@@ -281,7 +281,7 @@ public class ValidationController {
   /**
    * Return validation results as JSON or a CSV.
    */
-  private Object handleResults(Results results, ResultsFormat mediaType, MultipartFile file)
+  private Object handleResults(TestReport results, ResultsFormat mediaType, MultipartFile file)
       throws Exception {
 
     results.setDefaultComment();

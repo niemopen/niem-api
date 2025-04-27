@@ -22,7 +22,7 @@ public class ValidationService {
   /**
    * Return validation results as a CSV file.
    */
-  public ResponseEntity<byte[]> returnResultsAsCsv(Results results, MultipartFile file)
+  public ResponseEntity<byte[]> returnResultsAsCsv(TestReport results, MultipartFile file)
       throws Exception {
     Object[] testResults = results.getTestResults().toArray();
 

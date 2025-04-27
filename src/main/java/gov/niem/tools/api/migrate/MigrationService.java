@@ -15,9 +15,9 @@ import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.subproperty.Subproperty;
 import gov.niem.tools.api.db.type.Type;
 import gov.niem.tools.api.db.version.Version;
-import gov.niem.tools.api.validation.Results;
 import gov.niem.tools.api.validation.Test;
 import gov.niem.tools.api.validation.Test.Severity;
+import gov.niem.tools.api.validation.TestReport;
 import gov.niem.tools.api.validation.TestResult;
 import gov.niem.tools.api.validation.TestResult.Status;
 
@@ -72,7 +72,7 @@ public class MigrationService {
     checkParams(stewardKey, modelKey, from, to);
 
     // Initialize the migration report
-    Results results = new Results();
+    TestReport results = new TestReport();
 
     // Load the original version
     Version oldVersion = hub.versions.findOne(stewardKey, modelKey, from);
@@ -118,7 +118,7 @@ public class MigrationService {
    * @param results Migration report to be updated with results of this migration.
    */
   private org.mitre.niem.cmf.Model migrateCmf(Version oldVersion,
-      org.mitre.niem.cmf.Model oldCmf, Results results) throws Exception {
+      org.mitre.niem.cmf.Model oldCmf, TestReport results) throws Exception {
 
     // Create new test to capture issues from migrating current version to the next version and
     // start the migration timer
@@ -543,7 +543,7 @@ public class MigrationService {
    * Saves the migration results to a JSON file and a CSV file.
    * Zips the files and returns the results.
    */
-  private byte[] saveOutput(org.mitre.niem.cmf.Model cmf, Results results,
+  private byte[] saveOutput(org.mitre.niem.cmf.Model cmf, TestReport results,
       MultipartFile file, String from, String to) throws Exception {
 
     // Set up temp directory for files to be exported
@@ -582,7 +582,7 @@ public class MigrationService {
    * Initialize a new test to capture success and issues for a migration between
    * two consecutive versions.
    */
-  private Test initTest(Results results, Version oldVersion) {
+  private Test initTest(TestReport results, Version oldVersion) {
 
     // Create a new test and start the run clock
     Test test = new Test();

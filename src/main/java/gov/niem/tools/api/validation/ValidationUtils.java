@@ -125,14 +125,13 @@ public class ValidationUtils {
 
   /**
    * Gets the values of the given schema-level attribute.
-   *
-   * @todo Fix expression hardcoded to conformance targets.
    */
   public static String getXsdRootAttributeValue(Document document, XPath xpath,
       String attributeName) throws XPathExpressionException {
     // TODO: Fix namespace-aware xpath
     // String expression = "//xs:schema/@ct:conformanceTargets";
-    String expression = "//*[local-name()='schema']/@*[local-name()='conformanceTargets']";
+    String expression = String.format("//*[local-name()='schema']/@*[local-name()='%s']",
+        attributeName);
     return ValidationUtils.getXpathResultText(document, xpath, expression);
   }
 

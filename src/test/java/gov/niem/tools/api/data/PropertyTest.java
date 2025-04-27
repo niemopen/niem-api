@@ -1,22 +1,25 @@
 package gov.niem.tools.api.data;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import gov.niem.tools.api.Application;
 import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.property.PropertyService;
 import gov.niem.tools.api.db.type.TypeService;
-import jakarta.transaction.Transactional;
 
-@SpringBootTest(classes={Application.class, Config.class, PropertyService.class, Property.class})
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+/**
+ * Pull property data from a loaded database to ensure expected field values are returned.
+ */
+@SpringBootTest(classes = {Application.class, Config.class, PropertyService.class, Property.class})
 public class PropertyTest {
 
   @Autowired
@@ -51,7 +54,8 @@ public class PropertyTest {
   @Test
   @Transactional
   public void testPropertyAbstract() {
-    Property property = propertyService.findOne("niem", "model", "6.0", "nc:AddressCategoryAbstract");
+    Property property = propertyService.findOne("niem", "model", "6.0",
+        "nc:AddressCategoryAbstract");
     assertEquals("AddressCategoryAbstract", property.getName());
     assertNull(property.getGroup());
     assertNull(property.getType());

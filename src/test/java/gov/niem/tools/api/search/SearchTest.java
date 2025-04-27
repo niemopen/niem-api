@@ -1,22 +1,21 @@
 package gov.niem.tools.api.search;
 
+import gov.niem.tools.api.db.property.Property;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.hibernate.search.engine.search.query.SearchResult;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import gov.niem.tools.api.db.property.Property;
-import jakarta.transaction.Transactional;
-
 /**
- * Tests component searches
+ * Tests component searches.
  */
 @SpringBootTest
 public class SearchTest {
@@ -25,6 +24,8 @@ public class SearchTest {
   SearchService searchService;
 
   /**
+   * Test property searches by token.
+   *
    * @todo Fix search property tokens test.  Currently returns no results.
    */
   @Test
@@ -32,7 +33,8 @@ public class SearchTest {
   @Disabled
   public void testPropertySearchTokens() {
     String[] tokens = {"arm"};
-    SearchResult<Property> results = searchService.searchProperty("6.0", tokens, null, null, null, null, null, null, null, null, null, null, null);
+    SearchResult<Property> results = searchService.searchProperty("6.0", tokens, null, null,
+        null, null, null, null, null, null, null, null, null);
 
     List<Property> properties = results.hits();
     assertTrue(properties.size() > 0);
@@ -56,6 +58,8 @@ public class SearchTest {
   }
 
   /**
+   * Test property searches by substring.
+   *
    * @todo Fix search property tokens test.  Currently returns no results.
    */
   @Test
@@ -63,7 +67,8 @@ public class SearchTest {
   @Disabled
   public void testPropertySearchSubstrings() {
     String[] substrings = {"arm"};
-    SearchResult<Property> results = searchService.searchProperty("6.0", null, substrings, null, null, null, null, null, null, null, null, null, null);
+    SearchResult<Property> results = searchService.searchProperty("6.0", null, substrings,
+        null, null, null, null, null, null, null, null, null, null);
 
     List<Property> properties = results.hits();
     assertTrue(properties.size() > 0);

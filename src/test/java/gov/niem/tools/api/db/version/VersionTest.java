@@ -1,19 +1,21 @@
 package gov.niem.tools.api.db.version;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-
 import gov.niem.tools.api.db.EntityTest;
 import gov.niem.tools.api.db.TestData;
 import gov.niem.tools.api.db.model.Model;
 import gov.niem.tools.api.db.steward.Steward;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+
+/**
+ * Test database operations for versions.
+ */
 @ActiveProfiles("test")
 @SpringBootTest
 public class VersionTest extends EntityTest<Version> {
@@ -22,14 +24,14 @@ public class VersionTest extends EntityTest<Version> {
   Steward acme;
 
   Model niem;
-  Model crash_nmo;
-  Model crash_acme;
+  Model crashNmo;
+  Model crashAcme;
 
-  Version niem_v1;
-  Version niem_v2;
+  Version niemV1;
+  Version niemV2;
 
-  Version crash_acme_v1;
-  Version crash_acme_v2;
+  Version crashAcmeV1;
+  Version crashAcmeV2;
 
   @Override
   protected VersionService service() {
@@ -45,57 +47,57 @@ public class VersionTest extends EntityTest<Version> {
 
     // Add models to the database
     niem = hub.models.add(TestData.Models.niem(nmo));
-    crash_nmo = hub.models.add(TestData.Models.crash(nmo));
-    crash_acme = hub.models.add(TestData.Models.crash(acme));
+    crashNmo = hub.models.add(TestData.Models.crash(nmo));
+    crashAcme = hub.models.add(TestData.Models.crash(acme));
 
     // Initialize data for NIEM model versions
-    niem_v1 = TestData.Versions.major(niem, "1.0");
-    niem_v2 = TestData.Versions.minor(niem, "1.1");
+    niemV1 = TestData.Versions.major(niem, "1.0");
+    niemV2 = TestData.Versions.minor(niem, "1.1");
 
-    niem_v1.setNiemVersion(niem_v1);
-    niem_v2.setNiemVersion(niem_v2);
+    niemV1.setNiemVersion(niemV1);
+    niemV2.setNiemVersion(niemV2);
 
     // Initialize data for ACME crash IEPD versions
-    crash_acme_v1 = TestData.Versions.major(crash_acme, "1.0", niem_v1);
-    crash_acme_v2 = TestData.Versions.minor(crash_acme, "1.1", niem_v2);
+    crashAcmeV1 = TestData.Versions.major(crashAcme, "1.0", niemV1);
+    crashAcmeV2 = TestData.Versions.minor(crashAcme, "1.1", niemV2);
   }
 
   @Override
   protected void loadObjects() throws Exception {
-    niem_v1 = hub.versions.add(niem_v1);
-    niem_v2 = hub.versions.add(niem_v2);
+    niemV1 = hub.versions.add(niemV1);
+    niemV2 = hub.versions.add(niemV2);
 
-    crash_acme_v1 = hub.versions.add(crash_acme_v1);
-    crash_acme_v2 = hub.versions.add(crash_acme_v2);
+    crashAcmeV1 = hub.versions.add(crashAcmeV1);
+    crashAcmeV2 = hub.versions.add(crashAcmeV2);
   }
 
   @Override
   @Test
   public void databaseAddTest() {
-    this.add(niem_v1);
-    this.add(niem_v2);
-    niem_v1.setNiemVersion(niem_v1);
-    this.add(crash_acme_v1);
-    this.add(crash_acme_v2);
+    this.add(niemV1);
+    this.add(niemV2);
+    niemV1.setNiemVersion(niemV1);
+    this.add(crashAcmeV1);
+    this.add(crashAcmeV2);
   }
 
   @Override
   @Test
   public void databaseAddDuplicateTest() {
-    this.addDuplicate(crash_acme_v1);
+    this.addDuplicate(crashAcmeV1);
   }
 
   @Override
   @Test
   public void databaseEditTest() throws Exception {
-    crash_acme_v1.setDraft("1");
-    this.edit(crash_acme_v1, "draft", "2");
+    crashAcmeV1.setDraft("1");
+    this.edit(crashAcmeV1, "draft", "2");
   }
 
   @Override
   @Test
   public void databaseDeleteTest() throws Exception {
-    this.deleteNonCascading(hub.versions, crash_acme_v1, crash_acme_v2, hub.models);
+    this.deleteNonCascading(hub.versions, crashAcmeV1, crashAcmeV2, hub.models);
   }
 
   @Override
@@ -119,17 +121,17 @@ public class VersionTest extends EntityTest<Version> {
   @Test
   public void objectLabelTest() throws Exception {
     this.loadObjects();
-    Version result = hub.versions.findOne(crash_acme_v1);
+    Version result = hub.versions.findOne(crashAcmeV1);
     assertEquals("acme-co/crash-driver/1.0", result.getFullIdentifier());
   }
 
   @Override
   @Test
   public void objectSerializationTest() throws Exception {
-    serializeObject(niem_v1);
-    serializeObject(niem_v2);
-    serializeObject(crash_acme_v1);
-    serializeObject(crash_acme_v2);
+    serializeObject(niemV1);
+    serializeObject(niemV2);
+    serializeObject(crashAcmeV1);
+    serializeObject(crashAcmeV2);
   }
 
 }

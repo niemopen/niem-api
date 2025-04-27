@@ -1,17 +1,19 @@
 package gov.niem.tools.api.validation.xml;
 
+import gov.niem.tools.api.core.utils.FileUtils;
+import gov.niem.tools.api.validation.ValidationUtils;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Path;
-
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import gov.niem.tools.api.core.utils.FileUtils;
-import gov.niem.tools.api.validation.ValidationUtils;
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * Test supporting utility functions for validation.
+ */
 @Log4j2
 @SpringBootTest(classes = {XmlValidationUtilsTest.class})
 public class XmlValidationUtilsTest {
@@ -24,7 +26,8 @@ public class XmlValidationUtilsTest {
   public void checkTemporaryPath() throws Exception {
     Path tempPath = ValidationUtils.createTempFolder();
     String relativePathString = "Crash Driver\\xsd\\extension.xsd";
-    testRelativeFilePath(tempPath.toString() + "\\" + relativePathString, relativePathString.replaceAll("\\\\", "/"));
+    testRelativeFilePath(tempPath.toString() + "\\" + relativePathString,
+        relativePathString.replaceAll("\\\\", "/"));
     FileUtils.deleteTempDir(tempPath);
   }
 
@@ -38,7 +41,8 @@ public class XmlValidationUtilsTest {
         "C:/test/niem-api/xml/input/single/person-invalid.xsd");
   }
 
-  private void testRelativeFilePath(String fullPathString, String expectedString) throws IOException {
+  private void testRelativeFilePath(String fullPathString, String expectedString)
+      throws IOException {
     String canonicalPathString = FileUtils.file(fullPathString.replace("file:///", "")).getCanonicalPath();
 
     String resultString = XmlValidationUtils.getRelativePath(canonicalPathString);

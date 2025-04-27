@@ -5,4 +5,5 @@
   <suppress checks="JavadocStyleCheck"
     files="GeneratedObject.java"
     lines="50-9999" />
+  <suppress checks=".*" files="[\\/]build[\\/]" />
 </suppressions>

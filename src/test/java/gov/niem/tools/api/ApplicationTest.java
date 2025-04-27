@@ -9,8 +9,8 @@ class ApplicationTest {
   /**
    * Checks that the app will be able to run.
    */
-	@Test
-	public void checkContextLoads() {
-	}
+  @Test
+  public void checkContextLoads() {
+  }
 
 }

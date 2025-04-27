@@ -1,20 +1,22 @@
 package gov.niem.tools.api.db.steward;
 
+import gov.niem.tools.api.db.EntityTest;
+import gov.niem.tools.api.db.TestData;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import gov.niem.tools.api.db.EntityTest;
-import gov.niem.tools.api.db.TestData;
-
+/**
+ * Test database operations for stewards.
+ */
 @ActiveProfiles("test")
 @SpringBootTest
 public class StewardTest extends EntityTest<Steward> {

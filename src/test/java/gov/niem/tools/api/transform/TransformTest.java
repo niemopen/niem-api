@@ -1,17 +1,12 @@
 package gov.niem.tools.api.transform;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.multipart.MultipartFile;
-
 import gov.niem.tools.api.Application;
 import gov.niem.tools.api.TestUtils;
 import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.core.exceptions.BadRequestException;
 import gov.niem.tools.api.core.utils.FileUtils;
 import gov.niem.tools.api.core.utils.ZipUtils;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,35 +18,40 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Tests transforms to or from CMF.
  */
-@SpringBootTest(classes={TransformService.class, Application.class, Config.class})
+@SpringBootTest(classes = {TransformService.class, Application.class, Config.class})
 public class TransformTest {
 
   @Autowired
   TransformService transformService;
 
   // Full model files
-  private final String PATH_CRASH_DRIVER_CMF = "transform/CrashDriver.cmf.xml";
-  private final String PATH_CRASH_DRIVER_JSON = "transform/CrashDriver.schema.json";
-  private final String PATH_CRASH_DRIVER_OWL = "transform/CrashDriver.owl.ttl";
-  private final String PATH_CRASH_DRIVER_XSD_ZIP = "transform/CrashDriver.zip";
+  private static final String PATH_CRASH_DRIVER_CMF = "transform/CrashDriver.cmf.xml";
+  private static final String PATH_CRASH_DRIVER_JSON = "transform/CrashDriver.schema.json";
+  private static final String PATH_CRASH_DRIVER_OWL = "transform/CrashDriver.owl.ttl";
+  private static final String PATH_CRASH_DRIVER_XSD_ZIP = "transform/CrashDriver.zip";
 
   // Single namespace files
-  private final String PATH_CORE_CMF = "transform/niem-core.cmf.xml";
-  private final String PATH_CORE_XSD = "transform/niem-core.xsd";
+  private static final String PATH_CORE_CMF = "transform/niem-core.cmf.xml";
+  private static final String PATH_CORE_XSD = "transform/niem-core.xsd";
 
   // Invalid CMF file
-  private final String PATH_CRASH_DRIVER_CMF_INVALID = "transform/CrashDriver-0.6.cmf.xml";
+  private static final String PATH_CRASH_DRIVER_CMF_INVALID = "transform/CrashDriver-0.6.cmf.xml";
 
   /**
    * Check that a CMF file for a single namespace can be read in and regenerated
    * in the expected canonical format (e.g., sorted, regular formatting, etc.),
    */
   @Test
-  public void checkCMFtoCMF_single() throws Exception {
+  public void checkCmfToCmf_single() throws Exception {
     String expected = TestUtils.getResourcesFileText(PATH_CORE_CMF);
     String actual = getTransformAsString(TransformFrom.cmf, TransformTo.cmf, PATH_CORE_CMF);
     assertEquals(expected, actual);
@@ -62,7 +62,7 @@ public class TransformTest {
    * in the expected canonical format (e.g., sorted, regular formatting, etc.),
    */
   @Test
-  public void checkCMFtoCMF_multi() throws Exception {
+  public void checkCmfToCmf_multi() throws Exception {
     String expected = TestUtils.getResourcesFileText(PATH_CRASH_DRIVER_CMF);
     String actual = getTransformAsString(TransformFrom.cmf, TransformTo.cmf, PATH_CRASH_DRIVER_CMF);
     assertEquals(expected, actual);
@@ -72,7 +72,7 @@ public class TransformTest {
    * Check that a single XML Schema file can be converted into the expected CMF.
    */
   @Test
-  public void checkXSDtoCMF() throws Exception {
+  public void checkXsdToCmf() throws Exception {
     String expected = TestUtils.getResourcesFileText(PATH_CORE_CMF);
     String actual = getTransformAsString(TransformFrom.xsd, TransformTo.cmf, PATH_CORE_XSD);
     assertEquals(expected, actual);
@@ -82,7 +82,7 @@ public class TransformTest {
    * Check that a set of XML Schemas in a zip file can be converted into the expected CMF.
    */
   @Test
-  public void checkXSD_ZIPtoCMF() throws Exception {
+  public void checkXsdZipToCmf() throws Exception {
     String expected = TestUtils.getResourcesFileText(PATH_CRASH_DRIVER_CMF);
     String actual = getTransformAsString(TransformFrom.xsd, TransformTo.cmf, PATH_CRASH_DRIVER_XSD_ZIP);
     assertEquals(expected, actual);
@@ -93,7 +93,7 @@ public class TransformTest {
    * XML Schemas in a zip file.
    */
   @Test
-  public void checkCMFtoXSD_ZIP() throws Exception {
+  public void checkCmfToXsdZip() throws Exception {
     // Run the CMF to XSD transform with a full model
     byte[] bytes = getTransformAsBytes(TransformFrom.cmf, TransformTo.xsd, PATH_CRASH_DRIVER_CMF);
 
@@ -123,10 +123,10 @@ public class TransformTest {
       String expectedPathString = actualPath.toString().replace(actualZipDir.toString(), expectedZipDir.toString());
 
       Path expectedPath = expectedPaths
-      .stream()
-      .filter(path -> path.toString().equals(expectedPathString))
-      .findFirst()
-      .orElse(null);
+          .stream()
+          .filter(path -> path.toString().equals(expectedPathString))
+          .findFirst()
+          .orElse(null);
 
       assertNotNull(expectedPath);
 
@@ -146,7 +146,7 @@ public class TransformTest {
    * Check that a CMF file can be converted to the expected JSON Schema file.
    */
   @Test
-  public void checkCMFtoJSONSchema() throws Exception {
+  public void checkCmfToJsonSchema() throws Exception {
     String expected = TestUtils.getResourcesFileText(PATH_CRASH_DRIVER_JSON);
     String actual = getTransformAsString(TransformFrom.cmf, TransformTo.json_schema, PATH_CRASH_DRIVER_CMF);
     assertEquals(expected, actual);
@@ -156,7 +156,7 @@ public class TransformTest {
    * Check that a CMF file can be converted to the expected OWL file.
    */
   @Test
-  public void checkCMFtoOWL() throws Exception {
+  public void checkCmfToOwl() throws Exception {
     String expected = TestUtils.getResourcesFileText(PATH_CRASH_DRIVER_OWL);
     String actual = getTransformAsString(TransformFrom.cmf, TransformTo.owl, PATH_CRASH_DRIVER_CMF);
     assertEquals(expected, actual);
@@ -167,7 +167,9 @@ public class TransformTest {
    */
   @Test
   public void checkInvalidCmf() throws Exception {
-    BadRequestException exception = assertThrows(BadRequestException.class, () -> getTransformAsString(TransformFrom.cmf, TransformTo.cmf, PATH_CRASH_DRIVER_CMF_INVALID));
+    BadRequestException exception = assertThrows(BadRequestException.class,
+        () -> getTransformAsString(TransformFrom.cmf,
+            TransformTo.cmf, PATH_CRASH_DRIVER_CMF_INVALID));
 
     assertTrue(exception.getMessage().contains("Only CMF version"));
   }
@@ -200,7 +202,8 @@ public class TransformTest {
    * Run the transform and return the results as a byte array, which can be converted
    * to a string or saved as a zip file.
    */
-  private byte[] getTransformAsBytes(TransformFrom from, TransformTo to, String inputResourcePath) throws Exception {
+  private byte[] getTransformAsBytes(TransformFrom from, TransformTo to, String inputResourcePath)
+      throws Exception {
     MultipartFile inputFile = TestUtils.getMultipartFile(inputResourcePath);
     return transformService.transform(from, to, inputFile);
   }
@@ -209,13 +212,15 @@ public class TransformTest {
    * Run the transform and convert the results to a string.  Can be uses for transforms that
    * return a single text file (as opposed to a zip file).
    */
-  private String getTransformAsString(TransformFrom from, TransformTo to, String inputResourcePath) throws Exception {
+  private String getTransformAsString(TransformFrom from, TransformTo to, String inputResourcePath)
+      throws Exception {
     byte[] bytes = getTransformAsBytes(from, to, inputResourcePath);
     return new String(bytes);
   }
 
   /**
    * Calls the testFileExtension helper, with shouldPassTest = true.
+   *
    * @param from - Specified format of the model being transformed.
    * @param extension - File extension that should be obtained from the input.
    */
@@ -225,6 +230,7 @@ public class TransformTest {
 
   /**
    * Calls the testFileExtension helper, with shouldPassTest = false.
+   *
    * @param from - Specified format of the model being transformed.
    * @param extension - File extension that should be obtained from the input.
    */
@@ -234,16 +240,18 @@ public class TransformTest {
 
   /**
    * Test if the file extension is valid based on the given "from" value.
+   *
    * @param from - Specified format of the model being transformed.
    * @param extension - File extension that should be obtained from the input.
    * @param shouldPassTest - True if the test is expected to pass; false
-   * if the test is expected to fail.
+   *     if the test is expected to fail.
    */
   private void testFileExtension(String from, String extension, Boolean shouldPassTest) {
 
     String message = String.format("from %s with file extension %s", from, extension);
 
-    Executable test = () -> TransformService.checkInputFileExtension(TransformFrom.valueOf(from), extension);
+    Executable test = () -> TransformService.checkInputFileExtension(
+          TransformFrom.valueOf(from), extension);
 
     if (shouldPassTest) {
       assertDoesNotThrow(test, message + " should pass");

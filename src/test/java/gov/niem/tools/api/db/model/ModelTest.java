@@ -1,5 +1,9 @@
 package gov.niem.tools.api.db.model;
 
+import gov.niem.tools.api.db.EntityTest;
+import gov.niem.tools.api.db.TestData;
+import gov.niem.tools.api.db.steward.Steward;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -8,10 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import gov.niem.tools.api.db.EntityTest;
-import gov.niem.tools.api.db.TestData;
-import gov.niem.tools.api.db.steward.Steward;
-
+/**
+ * Test database operations for models.
+ */
 @ActiveProfiles("test")
 @SpringBootTest
 public class ModelTest extends EntityTest<Model> {
@@ -21,8 +24,8 @@ public class ModelTest extends EntityTest<Model> {
   static Steward acme;
 
   Model niem;
-  Model crash_nmo;
-  Model crash_acme;
+  Model crashNmo;
+  Model crashAcme;
 
   @Override
   protected ModelService service() {
@@ -38,8 +41,8 @@ public class ModelTest extends EntityTest<Model> {
 
     // Load data into model objects, but do not add to the database
     niem = TestData.Models.niem(nmo);
-    crash_nmo = TestData.Models.crash(nmo);
-    crash_acme = TestData.Models.crash(acme);
+    crashNmo = TestData.Models.crash(nmo);
+    crashAcme = TestData.Models.crash(acme);
   }
 
   /**
@@ -48,35 +51,35 @@ public class ModelTest extends EntityTest<Model> {
   @Override
   protected void loadObjects() throws Exception {
     niem = hub.models.add(niem);
-    crash_nmo = hub.models.add(crash_nmo);
-    crash_acme = hub.models.add(crash_acme);
+    crashNmo = hub.models.add(crashNmo);
+    crashAcme = hub.models.add(crashAcme);
   }
 
   @Override
   @Test
   public void databaseAddTest() {
     this.add(niem);
-    this.add(crash_nmo);
-    this.add(crash_acme);
+    this.add(crashNmo);
+    this.add(crashAcme);
   }
 
   @Override
   @Test
   public void databaseAddDuplicateTest() {
-    this.addDuplicate(crash_acme);
+    this.addDuplicate(crashAcme);
   }
 
   @Override
   @Test
   public void databaseEditTest() throws Exception {
-    this.edit(crash_acme, "fullName", "ACME Crash Driver IEPD");
+    this.edit(crashAcme, "fullName", "ACME Crash Driver IEPD");
   }
 
   @Override
   @Test
   public void databaseDeleteTest() throws Exception {
     // Make sure a model can be deleted and the number of stewards does not change
-    this.deleteNonCascading(hub.models, niem, crash_nmo, hub.stewards);
+    this.deleteNonCascading(hub.models, niem, crashNmo, hub.stewards);
   }
 
   @Override
@@ -99,7 +102,7 @@ public class ModelTest extends EntityTest<Model> {
   @Test
   public void objectLabelTest() throws Exception {
     this.loadObjects();
-    Model result = hub.models.findOne(crash_acme);
+    Model result = hub.models.findOne(crashAcme);
     assertEquals("acme-co/crash-driver", result.getFullIdentifier());
   }
 
@@ -107,7 +110,7 @@ public class ModelTest extends EntityTest<Model> {
   @Test
   public void objectSerializationTest() throws Exception {
     serializeObject(niem);
-    serializeObject(crash_acme);
+    serializeObject(crashAcme);
   }
 
 }

@@ -1,16 +1,18 @@
 package gov.niem.tools.api.validation.xml;
 
+import gov.niem.tools.api.TestUtils;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.File;
-
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import gov.niem.tools.api.TestUtils;
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * Tests mapping of XSD line numbers to component names and styles.
+ */
 @Log4j2
 @SpringBootTest(classes = {XsdNodeMap.class})
 public class XsdNodeMapTest {

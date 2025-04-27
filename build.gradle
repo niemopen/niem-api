@@ -111,7 +111,7 @@ checkstyleMain {
 }
 
 checkstyleTest {
-  source = 'src/main/test'
+  source = 'src/test'
 }
 
 // JAVADOC SUPPORT ****************************************

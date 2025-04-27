@@ -1,22 +1,24 @@
 package gov.niem.tools.api.validation.xml;
 
+import gov.niem.tools.api.TestUtils;
+import gov.niem.tools.api.validation.TestResult;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.xml.sax.SAXException;
 
-import gov.niem.tools.api.TestUtils;
-import gov.niem.tools.api.validation.TestResult;
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * Test XML validation.
+ */
 @Log4j2
-@SpringBootTest(classes={XmlValidationService.class})
+@SpringBootTest(classes = {XmlValidationService.class})
 public class XmlValidationServiceTest {
 
   @Autowired
@@ -64,9 +66,7 @@ public class XmlValidationServiceTest {
   }
 
   /**
-   * Test XML schema validation of multiple valid XSD files
-   * returns a passed test result.
-   * @throws Exception
+   * Test XML schema validation of multiple valid XSD files returns a passed test result.
    */
   @Test
   public void checkXsdValidation_Multi_Valid() throws Exception {
@@ -85,7 +85,6 @@ public class XmlValidationServiceTest {
   /**
    * Test XML schema validation of multiple invalid XSD files returns errors.
    * Note: Filename spaces in resources folder are not handled correctly.
-   * @throws Exception
    */
   @Test
   public void checkXsdValidation_Multi_Invalid() throws Exception {
@@ -142,9 +141,11 @@ public class XmlValidationServiceTest {
 
   }
 
-  private gov.niem.tools.api.validation.Test[] testXmlValidation(File xmlFile, File xsdFile, int expectedXsdErrorCount, int expectedXmlErrorCount) throws SAXException, IOException {
+  private gov.niem.tools.api.validation.Test[] testXmlValidation(File xmlFile, File xsdFile,
+      int expectedXsdErrorCount, int expectedXmlErrorCount) throws SAXException, IOException {
 
-    gov.niem.tools.api.validation.Test[] tests = xmlValidationService.validateXml(xmlFile, new File[] {xsdFile});
+    gov.niem.tools.api.validation.Test[] tests = xmlValidationService.validateXml(xmlFile,
+        new File[] {xsdFile});
 
     assertEquals(2, tests.length);
 
@@ -162,8 +163,11 @@ public class XmlValidationServiceTest {
 
     if (expectedXsdErrorCount > 0) {
       // XSD invalid.  XML should also return one error result.
-      assertEquals(expectedXsdErrorCount, xsdTest.countErrors(), "An invalid XSD file should return error results.");
-      assertEquals(1, xmlTest.countErrors(), "Validation should fail for an XML file with an invalid schema");
+      assertEquals(expectedXsdErrorCount, xsdTest.countErrors(),
+          "An invalid XSD file should return error results.");
+
+      assertEquals(1, xmlTest.countErrors(),
+          "Validation should fail for an XML file with an invalid schema");
     }
     else if (expectedXmlErrorCount == 0) {
       // XSD valid.  For XML, expect 1 pass result, 0 error results
@@ -173,7 +177,9 @@ public class XmlValidationServiceTest {
     else {
       // XSD valid.  For XML, expect 0 pass results, given number of error results
       assertEquals(0, xmlTest.countPassed(), "An invalid XML file should have no passing results.");
-      assertEquals(expectedXmlErrorCount, xmlTest.countErrors(), "An invalid XML file should have the expected number of error results");
+
+      assertEquals(expectedXmlErrorCount, xmlTest.countErrors(),
+          "An invalid XML file should have the expected number of error results");
     }
 
     return tests;

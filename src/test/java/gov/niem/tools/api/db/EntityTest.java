@@ -1,25 +1,26 @@
 package gov.niem.tools.api.db;
 
+import gov.niem.tools.api.db.base.BaseEntity;
+import gov.niem.tools.api.db.base.BaseEntityService;
+import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.transaction.Transactional;
 import java.lang.reflect.Method;
 import java.util.Optional;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import gov.niem.tools.api.db.base.BaseEntity;
-import gov.niem.tools.api.db.base.BaseEntityService;
-import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
-import jakarta.transaction.Transactional;
-
+/**
+ * Common methods for testing database operations.
+ */
 @ActiveProfiles("test")
 @Transactional
 @SpringBootTest
@@ -110,7 +111,8 @@ public abstract class EntityTest<T extends BaseEntity> {
     this.service().add(object);
 
     // Update the given field on the object and call the edit function to save the changes
-    Method setter = object.getClass().getMethod("set" + StringUtils.capitalize(fieldName), String.class);
+    Method setter = object.getClass().getMethod("set" + StringUtils.capitalize(fieldName),
+        String.class);
     setter.invoke(object, fieldValue);
     this.service().edit(object.getId(), object);
 
@@ -126,8 +128,8 @@ public abstract class EntityTest<T extends BaseEntity> {
    * is removed via cascading delete.
    */
   protected <U extends BaseEntity> void deleteCascading(
-    BaseEntityService<T> primaryService, T entity1, T entity2,
-    BaseEntityService<U> relatedService) throws Exception {
+      BaseEntityService<T> primaryService, T entity1, T entity2,
+      BaseEntityService<U> relatedService) throws Exception {
     this.delete(primaryService, entity1, entity2, relatedService, true);
   }
 
@@ -136,8 +138,8 @@ public abstract class EntityTest<T extends BaseEntity> {
    * is not removed via cascading delete.
    */
   protected <U extends BaseEntity> void deleteNonCascading(
-    BaseEntityService<T> primaryService, T entity1, T entity2,
-    BaseEntityService<U> relatedService) throws Exception {
+      BaseEntityService<T> primaryService, T entity1, T entity2,
+      BaseEntityService<U> relatedService) throws Exception {
     this.delete(primaryService, entity1, entity2, relatedService, false);
   }
 
@@ -146,16 +148,12 @@ public abstract class EntityTest<T extends BaseEntity> {
    * is either present or removed via cascading delete.
    */
   private <U extends BaseEntity> void delete(
-    BaseEntityService<T> primaryService, T entity1, T entity2,
-    BaseEntityService<U> relatedService, Boolean cascadeDelete) throws Exception {
+      BaseEntityService<T> primaryService, T entity1, T entity2,
+      BaseEntityService<U> relatedService, Boolean cascadeDelete) throws Exception {
 
     // Add two entities to the primary service
     primaryService.add(entity1);
     primaryService.add(entity2);
-
-    // Count the number of entities in the primary and related services
-    Long initialPrimaryCount = primaryService.repository().count();
-    Long initialRelatedCount = relatedService.repository().count();
 
     // Delete one entity
     primaryService.delete(entity1);
@@ -166,6 +164,10 @@ public abstract class EntityTest<T extends BaseEntity> {
 
     assertTrue(result1.isEmpty());
     assertTrue(result2.isPresent());
+
+    // Count the number of entities in the primary and related services
+    Long initialPrimaryCount = primaryService.repository().count();
+    Long initialRelatedCount = relatedService.repository().count();
 
     // Get the new counts
     Long updatedPrimaryCount = primaryService.repository().count();

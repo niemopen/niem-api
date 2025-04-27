@@ -8,16 +8,25 @@ import gov.niem.tools.api.db.steward.Steward;
 import gov.niem.tools.api.db.type.Type;
 import gov.niem.tools.api.db.version.Version;
 
+/**
+ * Reusable data for model and database testing.
+ */
 public class TestData {
 
   protected static Steward nmo = Stewards.nmo();
   protected static Steward acme = Stewards.acme();
 
+  /**
+   * Reusable steward test data.
+   */
   public class Stewards {
 
     public static String nmoKey = "nmo";
     public static String acmeKey = "acme-co";
 
+    /**
+     * Test steward ACME.
+     */
     public static Steward acme() {
       return Steward.builder()
           .shortName("ACME Co")
@@ -35,6 +44,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Test steward NMO.
+     */
     public static Steward nmo() {
       return Steward.builder()
           .shortName("NMO")
@@ -48,11 +60,17 @@ public class TestData {
 
   }
 
+  /**
+   * Reusable test data for models.
+   */
   public class Models {
 
     public static String niemKey = "niem";
     public static String crashKey = "crash-driver";
 
+    /**
+     * A test NIEM reference model.
+     */
     public static Model niem(Steward steward) {
       return Model.builder()
           .category(Model.Category.reference)
@@ -65,11 +83,16 @@ public class TestData {
           .build();
     }
 
+    /**
+     * A test crash message model.
+     */
     public static Model crash(Steward steward) {
+      String description = "This example IEPD is designed for the training program. It exercises most of the features in the NDR.";
+
       return Model.builder()
           .category(Model.Category.message)
           .objective(Model.Objective.example)
-          .description("This example IEPD is designed for the training program. It exercises most of the features in the NDR.")
+          .description(description)
           .fullName("Crash Driver Report IEPD")
           .repo("https://github.com/niem/niem-training.git")
           .shortName("Crash Driver")
@@ -79,14 +102,23 @@ public class TestData {
 
   }
 
+  /**
+   * Reusable test data for versions.
+   */
   public class Versions {
 
+    /**
+     * Create a test major version.
+     */
     public static Version major(Model model, String versionNumber, Version niemVersion) {
       Version version = Versions.major(model, versionNumber);
       version.setNiemVersion(niemVersion);
       return version;
     }
 
+    /**
+     * Create a test major version.
+     */
     public static Version major(Model model, String versionNumber) {
       return Version.builder()
           .category(Version.Category.major)
@@ -95,12 +127,18 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Create a test minor version.
+     */
     public static Version minor(Model model, String versionNumber, Version niemVersion) {
       Version version = Versions.minor(model, versionNumber);
       version.setNiemVersion(niemVersion);
       return version;
     }
 
+    /**
+     * Create a test minor version.
+     */
     public static Version minor(Model model, String versionNumber) {
       return Version.builder()
           .category(Version.Category.minor)
@@ -111,8 +149,14 @@ public class TestData {
 
   }
 
+  /**
+   * Reusable test data for namespaces.
+   */
   public class Namespaces {
 
+    /**
+     * Creates a test Core namespace.
+     */
     public static Namespace core(Version version) {
       return Namespace.builder()
           .version(version)
@@ -121,6 +165,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Creates a test domain namespace.
+     */
     public static Namespace domain(Version version, String prefix) {
       return Namespace.builder()
           .version(version)
@@ -129,6 +176,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Creates a test XML Schema namespace.
+     */
     public static Namespace xs(Version version) {
       return Namespace.builder()
           .version(version)
@@ -139,8 +189,14 @@ public class TestData {
 
   }
 
+  /**
+   * Reusable test data for properties.
+   */
   public class Properties {
 
+    /**
+     * Creates a test Person element property.
+     */
     public static Property person(Namespace namespace) {
       return Property.builder()
           .namespace(namespace)
@@ -150,6 +206,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Creates a test PersonFullName element property.
+     */
     public static Property personFullName(Namespace namespace) {
       return Property.builder()
           .namespace(namespace)
@@ -159,6 +218,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Creates a test sourceText attribute property.
+     */
     public static Property sourceText(Namespace namespace) {
       return Property.builder()
           .namespace(namespace)
@@ -171,8 +233,14 @@ public class TestData {
 
   }
 
+  /**
+   * Test data for types.
+   */
   public class Types {
 
+    /**
+     * Creates a test Person type (CCC).
+     */
     public static Type personType(Namespace namespace) {
       return Type.builder()
           .namespace(namespace)
@@ -183,6 +251,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Creates a test Object type (CCC).
+     */
     public static Type objectType(Namespace namespace) {
       return Type.builder()
           .namespace(namespace)
@@ -193,6 +264,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Creates a test Text type (CSC).
+     */
     public static Type textType(Namespace namespace) {
       return Type.builder()
           .namespace(namespace)
@@ -203,6 +277,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Creates a test Code simple type (simple).
+     */
     public static Type codeSimpleType(Namespace namespace) {
       return Type.builder()
           .namespace(namespace)
@@ -213,6 +290,9 @@ public class TestData {
           .build();
     }
 
+    /**
+     * Creates a test string type (simple).
+     */
     public static Type xsStringType(Namespace namespace) {
       return Type.builder()
           .namespace(namespace)

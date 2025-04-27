@@ -1,15 +1,17 @@
 package gov.niem.tools.api.validation.xml;
 
+import gov.niem.tools.api.TestUtils;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import gov.niem.tools.api.TestUtils;
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * Tests mapping of XML line numbers to element names.
+ */
 @Log4j2
 @SpringBootTest(classes = {XmlNodeMap.class})
 public class XmlNodeMapTest {
@@ -42,12 +44,14 @@ public class XmlNodeMapTest {
     node = nodeMap.get(6);
     assertEquals("city", node.name);
 
+    String message = "Should walk up to city and not return the closing address tag";
+
     // Check closing tags aren't counted
     node = nodeMap.get(7);
-    assertEquals("city", node.name, "Should walk up to city and not return the closing address tag");
+    assertEquals("city", node.name, message);
 
     node = nodeMap.get(15);
-    assertEquals("city", node.name, "Should wak up to city and not return the closing individual tag");
+    assertEquals("city", node.name, message);
 
   }
 

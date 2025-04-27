@@ -1,20 +1,5 @@
 package gov.niem.tools.api.validation.niem;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.xml.transform.Source;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.xml.sax.SAXException;
-
 import gov.niem.tools.api.core.exceptions.BadRequestException;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.core.utils.FileUtils;
@@ -25,6 +10,22 @@ import gov.niem.tools.api.validation.TestResult.Status;
 import gov.niem.tools.api.validation.ValidationUtils;
 import gov.niem.tools.api.validation.xml.XmlValidationService;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import javax.xml.transform.Source;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.xml.sax.SAXException;
+
+/**
+ * Validates artifacts against NIEM rules.
+ */
 @Service
 public class NiemValidationService {
 
@@ -39,6 +40,9 @@ public class NiemValidationService {
     v5;
   }
 
+  /**
+   * Validate the given zip file against NIEM message specification rules and guidance.
+   */
   public List<Test> validateMessageSpecification(MultipartFile multipartFile) throws Exception {
 
     List<Test> tests = new LinkedList<Test>();
@@ -80,18 +84,27 @@ public class NiemValidationService {
 
   }
 
+  /**
+   * Validate the given file against NIEM message catalog rules.
+   */
   public Test validateMessageCatalog(MultipartFile multipartFile) throws Exception {
     Path tempPath = ValidationUtils.createTempFolder();
     File file = FileUtils.saveFile(multipartFile, tempPath).toFile();
     return this.validateMessageCatalog(file);
   }
 
-  public Test validateMessageCatalog(File xmlFile) throws SAXException, IOException, URISyntaxException {
+  /**
+   * Validate the given file against NIEM message catalog rules.
+   */
+  public Test validateMessageCatalog(File xmlFile)
+      throws SAXException, IOException, URISyntaxException {
     Version version = this.getVersionFromMessageCatalog(xmlFile);
     String testId = "validate-message-catalog";
     String description = "Validate a MPD or IEPD catalog against the NIEM message catalog schema";
     if (version == null) {
-      return this.failTest(testId, description, Status.error, "No message catalog with a recognized name found", "Recognized message catalog names are mpd-catalog.xml (for version 3.0 of the IEPD specification) or iepd-catalog.xml (for version 5.0 of the IEPD specification)");
+      String message = "No message catalog with a recognized name found";
+      String comments = "Recognized message catalog names are mpd-catalog.xml (for version 3.0 of the IEPD specification) or iepd-catalog.xml (for version 5.0 of the IEPD specification)";
+      return this.failTest(testId, description, Status.error, message, comments);
     }
 
     String xsdPathString = "validation/message-catalog/" + version.toString();
@@ -100,32 +113,54 @@ public class NiemValidationService {
     return test;
   }
 
-  public Test testMessageCatalogValidation(List<Test> tests, File xmlFile) throws SAXException, IOException, URISyntaxException {
+  /**
+   * Creates a new test to record the outcome of a message catalog validation for the
+   * given file and adds it to the given list of tests.
+   */
+  public Test testMessageCatalogValidation(List<Test> tests, File xmlFile)
+      throws SAXException, IOException, URISyntaxException {
     Test test = this.validateMessageCatalog(xmlFile);
     tests.add(test);
     return test;
   }
 
+  /**
+   * Validates the given file against the CMF schemas.
+   */
   public Test validateCmf(MultipartFile multipartFile) throws Exception {
     Path tempPath = ValidationUtils.createTempFolder();
     File file = FileUtils.saveFile(multipartFile, tempPath).toFile();
     return this.validateCmf(file);
   }
 
+  /**
+   * Validates the given file against the CMF schemas.
+   */
   public Test validateCmf(File cmfFile) throws IOException, SAXException, BadRequestException {
     CmfUtils.checkVersion(cmfFile);
     Source[] xsdSources = ValidationUtils.getClasspathXsdSources("validation/cmf/v0.8");
-    Test test = xmlValidationService.validateXmlOnly(cmfFile, xsdSources, "validate-cmf", "Validate a CMF against the NIEM Common Model Format Specification");
+    String description = "Validate a CMF against the NIEM Common Model Format Specification";
+    Test test = xmlValidationService.validateXmlOnly(cmfFile, xsdSources,
+        "validate-cmf", description);
     return test;
   }
 
-  private Test failTest(List<Test> tests, String testId, String description, Status status, String message, String comment) {
+  /**
+   * Creates a test to record the outcome of a failed validation and adds it to the
+   * given list of tests.
+   */
+  private Test failTest(List<Test> tests, String testId, String description,
+      Status status, String message, String comment) {
     Test test = this.failTest(testId, description, status, message, comment);
     tests.add(test);
     return test;
   }
 
-  private Test failTest(String testId, String description, Status status, String message, String comment) {
+  /**
+   * Creates a test to record the outcome of a failed validation.
+   */
+  private Test failTest(String testId, String description, Status status,
+      String message, String comment) {
     Test test = new Test(testId, description);
     test.category = "validation";
     test.ran = true;
@@ -154,17 +189,27 @@ public class NiemValidationService {
     return null;
   }
 
+  /**
+   * Creates a test to record the outcome of a XML Schema validation and adds it to
+   * the given list of tests.
+   */
   private void testXsdValidation(List<Test> tests, File[] files) throws SAXException, IOException {
     try {
       Test test = xmlValidationService.validateXsd(files);
       tests.add(test);
     }
     catch (SAXException exception) {
-      this.failTest(tests, "xsd-validation", "Validate XML schemas", Status.error, "The validator encountered a fatal exception", exception.getLocalizedMessage());
+      String message = "The validator encountered a fatal exception";
+      this.failTest(tests, "xsd-validation", "Validate XML schemas", Status.error,
+          message, exception.getLocalizedMessage());
     }
 
   }
 
+  /**
+   * Creates a test to record the outcome of the validation of a XML catalog and adds it
+   * to the given list of tests.
+   */
   private void testXmlCatalogsValidation(List<Test> tests, List<File> files) throws Exception {
     List<File> catalogFiles = this.findFilenameList(files, "xml-catalog.xml");
     for (File catalogFile : catalogFiles) {
@@ -173,6 +218,11 @@ public class NiemValidationService {
     }
   }
 
+  /**
+   * Validates the given XML Schema or zip file against NDR rules.
+   * Returns separate tests for each failed rule, with each occurrence as its own
+   * result under that test.
+   */
   public List<Test> validateXsdWithNdr(MultipartFile multipartFile) throws Exception {
     Path tempPath = ValidationUtils.createTempFolder();
     File inputFile = FileUtils.saveFile(multipartFile, tempPath).toFile();
@@ -188,7 +238,7 @@ public class NiemValidationService {
     }
     else if (extension.equals("xsd")) {
       // Process single XSD file
-      Path xsdPath = FileUtils.saveFile(multipartFile, tempPath) ;
+      Path xsdPath = FileUtils.saveFile(multipartFile, tempPath);
       files.add(xsdPath.toFile());
     }
     else {
@@ -212,11 +262,16 @@ public class NiemValidationService {
   //   return tests;
   // }
 
-  // private void componentQaResult(Test test, Status status, String message, String comment, String field, String prefix, String entity, String problemValue) {
-  //   TestResult result = new TestResult(test.id, status, prefix, entity, "property", message, null, null, null, comment, problemValue);
+  // private void componentQaResult(Test test, Status status, String message, String comment,
+  //     String field, String prefix, String entity, String problemValue) {
+  //   TestResult result = new TestResult(test.id, status, prefix, entity, "property",
+  //       message, null, null, null, comment, problemValue);
   //   test.results.add(result);
   // }
 
+  /**
+   * Unzips the given file to the given path and returns the list of files.
+   */
   private List<File> loadFiles(Path path, MultipartFile multipartFile) throws Exception {
     File inputFile = FileUtils.saveFile(multipartFile, path).toFile();
     ZipUtils.unzip(inputFile.toPath(), path);
@@ -226,6 +281,9 @@ public class NiemValidationService {
     return files;
   }
 
+  /**
+   * Finds the message catalog file in the given list of files.
+   */
   private File findMessageCatalog(List<File> files) {
     // Try MPD Specification 3.0
     File file = this.findFilename(files, "mpd-catalog.xml");
@@ -243,6 +301,9 @@ public class NiemValidationService {
     return null;
   }
 
+  /**
+   * Finds a file in the given list of files with the given filename.
+   */
   private File findFilename(List<File> files, String filename) {
     return files
         .stream()
@@ -251,6 +312,9 @@ public class NiemValidationService {
         .orElse(null);
   }
 
+  /**
+   * Finds all files in the given list of files with the given filename.
+   */
   private List<File> findFilenameList(List<File> files, String filename) {
     return files.stream().filter(f -> f.getName().equals(filename)).toList();
   }

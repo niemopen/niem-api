@@ -1,21 +1,20 @@
 package gov.niem.tools.api.validation.xml;
 
+import gov.niem.tools.api.validation.Test;
+import gov.niem.tools.api.validation.Test.Severity;
+import gov.niem.tools.api.validation.TestResult;
+import gov.niem.tools.api.validation.TestResult.Status;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
+import lombok.Getter;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-
-import gov.niem.tools.api.validation.Test;
-import gov.niem.tools.api.validation.Test.Severity;
-import gov.niem.tools.api.validation.TestResult;
-import gov.niem.tools.api.validation.TestResult.Status;
-import lombok.Getter;
 
 /**
  * Custom error handler to catch and log SAX exceptions.  This overrides the default
@@ -32,6 +31,15 @@ public class XmlErrorHandler implements ErrorHandler {
   @Getter
   private Test test;
 
+  /**
+   * Creates the custom XML error handler.
+   *
+   * <p>For each given file, builds the XML or XSD node map, mapping names to line numbers.
+   *
+   * @param files - XML files to use to look up component names based on exception line numbers
+   * @param nodeMapTemplate - Empty XML or XSD node map
+   * @param test - The test object in which to record information about validation errors
+   */
   public XmlErrorHandler(File[] files, XmlNodeMap nodeMapTemplate, Test test) throws IOException {
     this.exceptions = new ArrayList<>();
     this.test = test;
@@ -51,6 +59,9 @@ public class XmlErrorHandler implements ErrorHandler {
 
   }
 
+  /**
+   * Initializes the test results with a new linked list and starts the test run clock.
+   */
   private void initTest() {
     this.test.results = new LinkedList<>();
     this.test.startTest();

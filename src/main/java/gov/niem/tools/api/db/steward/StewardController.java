@@ -2,22 +2,27 @@ package gov.niem.tools.api.db.steward;
 
 import gov.niem.tools.api.db.ServiceHub;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
+/**
+ * REST controller for stewards.
+ */
 @Validated
 @RestController
 @Tag(name = "Data-1: Stewards",
-  description = "A group or entity responsible for managing NIEM content.")
+    description = "A group or entity responsible for managing NIEM content.")
 public class StewardController {
 
   @Autowired
@@ -32,35 +37,42 @@ public class StewardController {
   }
 
   @GetMapping("/stewards")
-  @Operation(summary="Get all stewards")
+  @Operation(summary = "Get all stewards")
   @ResponseStatus(code = HttpStatus.OK)
   public List<Steward> getStewards() throws Exception {
     return hub.stewards.repository().findAll();
   }
 
-  // @PostMapping(path="/stewards")
-  // @Operation(summary="Create a steward")
+  // @PostMapping(path = "/stewards")
+  // @Operation(summary = "Create a steward")
   // public ResponseEntity<String> postSteward(@RequestBody Steward steward) throws Exception {
   //   String message = hub.stewards.add(steward);
   //   return AppUtils.getResponseOkString(message);
   // }
 
-  // @PutMapping(path="/stewards/{stewardKey}")
-  // @Operation(summary="Updated a steward")
-  // public ResponseEntity<String> putSteward(@PathVariable String stewardKey, @RequestBody Steward updatedSteward, BindingResult bindingResult) throws Exception {
+  // @PutMapping(path = "/stewards/{stewardKey}")
+  // @Operation(summary = "Updated a steward")
+  // public ResponseEntity<String> putSteward(
+  //     @PathVariable String stewardKey,
+  //     @RequestBody Steward updatedSteward,
+  //     BindingResult bindingResult
+  // ) throws Exception {
   //   String message = hub.stewards.edit(stewardKey, updatedSteward);
   //   return AppUtils.getResponseOkString(message);
   // }
 
-  // @PatchMapping(path="/stewards/{stewardKey}")
-  // @Operation(summary="Updated specific fields on a steward")
-  // public ResponseEntity<String> patchSteward(@PathVariable String stewardKey, Steward updatedSteward) throws Exception {
+  // @PatchMapping(path = "/stewards/{stewardKey}")
+  // @Operation(summary = "Updated specific fields on a steward")
+  // public ResponseEntity<String> patchSteward(
+  //     @PathVariable String stewardKey,
+  //     Steward  updatedSteward
+  // ) throws Exception {
   //   String message = hub.stewards.edit(stewardKey, updatedSteward);
   //   return AppUtils.getResponseOkString(message);
   // }
 
-  // @DeleteMapping(path="/stewards/{stewardKey}")
-  // @Operation(summary="Delete a steward")
+  // @DeleteMapping(path = "/stewards/{stewardKey}")
+  // @Operation(summary = "Delete a steward")
   // public ResponseEntity<String> deleteSteward(@PathVariable String stewardKey) throws Exception {
   //   String message = hub.stewards.delete(stewardKey);
   //   return AppUtils.getResponseOkString(message);

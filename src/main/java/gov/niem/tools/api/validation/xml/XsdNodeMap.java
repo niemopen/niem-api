@@ -7,12 +7,14 @@ import java.io.FileReader;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
 
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * Maps XML Schema components (elements, attributes, complex types, and simple types)
+ * to line numbers.
+ */
 @Log4j2
 public class XsdNodeMap extends XmlNodeMap {
 
@@ -22,6 +24,10 @@ public class XsdNodeMap extends XmlNodeMap {
   String regex = "<(xs:|xsd:)?(element|attribute|complexType|simpleType).*name=[\"']([A-Za-z0-9-_]*)";
   Pattern pattern = Pattern.compile(regex);
 
+  /**
+   * Process the given XSD file to ad entries to the map object for line numbers
+   * and XSD nodes (element, attribute, complex type, and simple type names and style).
+   */
   public void load(File file) throws FileNotFoundException {
 
     BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -37,14 +43,16 @@ public class XsdNodeMap extends XmlNodeMap {
         String prefix = Objects.toString(matcher.group(1), "");
         XmlNode node = new XmlNode(prefix + matcher.group(2), matcher.group(3));
         log.debug("{} {} {}", file.getName(), Integer.toString(currentLineNumber), node);
-        this.map.put(currentLineNumber+1, node);
-
+        this.map.put(currentLineNumber + 1, node);
       }
 
     }
 
   }
 
+  /**
+   * Initializes a new instance of this class.
+   */
   public XsdNodeMap create() {
     return new XsdNodeMap();
   }

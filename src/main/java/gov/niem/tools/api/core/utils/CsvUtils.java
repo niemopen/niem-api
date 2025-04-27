@@ -1,13 +1,15 @@
 package gov.niem.tools.api.core.utils;
 
-import java.io.File;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
+import java.io.File;
 
+/**
+ * CSV-related utility functions.
+ */
 public class CsvUtils {
 
   /**
@@ -18,9 +20,9 @@ public class CsvUtils {
     CsvSchema csvSchema = CsvUtils.schemaWithData(data, jsonTree);
     CsvMapper csvMapper = new CsvMapper();
     csvMapper
-    .writerFor(JsonNode.class)
-    .with(csvSchema)
-    .writeValue(file, jsonTree);
+        .writerFor(JsonNode.class)
+        .with(csvSchema)
+        .writeValue(file, jsonTree);
   }
 
   /**
@@ -28,7 +30,9 @@ public class CsvUtils {
    */
   public static String toString(Object[] data, String[] columns) throws Exception {
     JsonNode jsonTree = CsvUtils.getJsonNode(data);
-    CsvSchema csvSchema = data.length > 0 ? CsvUtils.schemaWithData(data, jsonTree) : CsvUtils.schemaWithHeaderOnly(columns);
+    CsvSchema csvSchema = data.length > 0
+        ? CsvUtils.schemaWithData(data, jsonTree)
+        : CsvUtils.schemaWithHeaderOnly(columns);
     CsvMapper csvMapper = new CsvMapper();
     return csvMapper
     .writer(csvSchema)

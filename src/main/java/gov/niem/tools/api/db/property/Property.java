@@ -1,16 +1,19 @@
 package gov.niem.tools.api.db.property;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
 import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.component.Component;
 import gov.niem.tools.api.db.subproperty.Subproperty;
 import gov.niem.tools.api.db.type.Type;
 
+import org.mitre.niem.cmf.CMFException;
+import org.mitre.niem.cmf.ClassType;
+import org.mitre.niem.cmf.Datatype;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
@@ -25,9 +28,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-
 import org.hibernate.Hibernate;
 import org.hibernate.envers.Audited;
 import org.hibernate.proxy.HibernateProxy;
@@ -38,17 +48,11 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.ObjectPath;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyValue;
-import org.mitre.niem.cmf.CMFException;
-import org.mitre.niem.cmf.ClassType;
-import org.mitre.niem.cmf.Datatype;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * A property represents a concept, idea, or thing.
- * @see <a href="https://niem.github.io/reference/concepts/property/">NIEM Property info</a>
+ *
+ * @see <a href = "https://niem.github.io/reference/concepts/property/">NIEM Property info</a>
  */
 @Entity
 @Audited
@@ -60,20 +64,22 @@ import java.util.Set;
 @JacksonXmlRootElement(localName = "api:Property")
 @Schema(name = "Property")
 @Table(
-  uniqueConstraints = {@UniqueConstraint(
-    name = "property_namespace_name_key", columnNames = { "namespace_id", "name" })
-  },
-  indexes = {
-    @Index(name = "property_category_idx", columnList = "category"),
-    @Index(name = "property_group_id_idx", columnList = "group_id"),
-    @Index(name = "property_type_id_idx", columnList = "type_id"),
-    @Index(name = "property_namespace_prefix_idx", columnList = "namespace_prefix"),
-    @Index(name = "property_namespace_id_idx", columnList = "namespace_id"),
-    @Index(name = "property_name_idx", columnList = "name")
-  }
+    uniqueConstraints = {
+      @UniqueConstraint(
+        name = "property_namespace_name_key", columnNames = { "namespace_id", "name" })
+    },
+    indexes = {
+      @Index(name = "property_category_idx", columnList = "category"),
+      @Index(name = "property_group_id_idx", columnList = "group_id"),
+      @Index(name = "property_type_id_idx", columnList = "type_id"),
+      @Index(name = "property_namespace_prefix_idx", columnList = "namespace_prefix"),
+      @Index(name = "property_namespace_id_idx", columnList = "namespace_id"),
+      @Index(name = "property_name_idx", columnList = "name")
+    }
 )
 @Indexed
-public class Property extends Component<Property> implements BaseCmfEntity<org.mitre.niem.cmf.Property> {
+public class Property extends Component<Property>
+    implements BaseCmfEntity<org.mitre.niem.cmf.Property> {
 
   /**
    * A type that describes the structure and value set of the property.
@@ -81,9 +87,10 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
   @JsonIgnore
   @Nullable
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="type_id", referencedColumnName="id")
+  @JoinColumn(name = "type_id", referencedColumnName = "id")
   @IndexedEmbedded(includeDepth = 1)
-  @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "dataProperties")))
+  @AssociationInverseSide(
+      inversePath = @ObjectPath(@PropertyValue(propertyName = "dataProperties")))
   private Type type;
 
   /**
@@ -92,11 +99,14 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
   @JsonIgnore
   @Nullable
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="group_id", referencedColumnName="id")
+  @JoinColumn(name = "group_id", referencedColumnName = "id")
   // @IndexedEmbedded(includeDepth = 1)
   // @IndexingDependency(reindexOnUpdate = ReindexOnUpdate.SHALLOW)
   private Property group;
 
+  /**
+   * A kind of property indicating whether is is a concrete element, abstract element, or attribute.
+   */
   public enum Category {
     /**
      * A typical element, which may be used in instances.
@@ -115,7 +125,7 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
   }
 
   /**
-   * A kind of property
+   * A kind of property.
    */
   @Builder.Default
   @Enumerated(EnumType.STRING)
@@ -152,7 +162,7 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
    * Makes sure a potential Hibernate proxy is initialized.
    */
   public Property getGroup() {
-   Property group = this.group;
+    Property group = this.group;
     if (group instanceof HibernateProxy) {
       group = Hibernate.unproxy(group, Property.class);
     }
@@ -172,9 +182,10 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
 
   // TODO: referenceTarget
   // /**
-  //  * Legacy NIEM support (pre NIEM 3.0) for reference target appinfo on reference properties (properties with type 's:ReferenceType').
+  //  * Legacy NIEM support (pre NIEM 3.0) for reference target appinfo on
+  //  * reference properties (properties with type 's:ReferenceType').
   //  */
-  // @OneToOne @JoinColumn(name="reference_target_id", referencedColumnName="id")
+  // @OneToOne @JoinColumn(name = "reference_target_id", referencedColumnName = "id")
   // private Type referenceTarget;
 
   /**
@@ -183,7 +194,7 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
   @JsonProperty("isElement")
   public boolean isElement() {
     return this.category != Category.attribute;
-  };
+  }
 
   /**
    * True if the property is an attribute; false if the property is a regular or abstract element.
@@ -191,7 +202,7 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
   @JsonProperty("isAttribute")
   public boolean isAttribute() {
     return this.category == Category.attribute;
-  };
+  }
 
   /**
    * True if the property is an element and is abstract; false otherwise.
@@ -199,7 +210,7 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
   @JsonProperty("isAbstract")
   public boolean isAbstract() {
     return this.category == Category.abstract_element;
-  };
+  }
 
   // /**
   //  * A namespace prefix for a property's type.
@@ -244,11 +255,6 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
   // @Schema(example = "A data type for a code set identifying an eye color of a person.")
   // public String getTypeDefinition() {
   //   return this.type == null ? null : this.type.getName();
-  // }
-
-  // TODO: Remove original basics
-  // public ComponentBasics<Property> getGroupBasics() {
-  //   return this.group == null ? null : new ComponentBasics<Property>(this.group);
   // }
 
   @JsonProperty("type")
@@ -323,39 +329,41 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
 
   @Override
   @Schema(
-  example = Config.BASE_URL + "/stewards/niem/models/crash-driver/version/1.1/properties/nc:PersonGivenName",
-  description = "An endpoint to get information about a property.")
+      example = Config.BASE_URL + "/stewards/niem/models/crash-driver/version/1.1/properties/nc:PersonGivenName",
+      description = "An endpoint to get information about a property.")
   public String getRoute() {
     String versionRoute = this.getVersion().getRoute();
     return String.format("%s/properties/%s", versionRoute, this.getQname());
   }
 
   @Override
-  @Schema(example = "Property", description = "A kind of NIEM entity, such as a Namespace or a Property.")
+  @Schema(
+      example = "Property",
+      description = "A kind of NIEM entity, such as a Namespace or a Property.")
   public String getClassName() {
     return super.getClassName();
   }
 
   @Override
   @Schema(
-    example = "niem/crash-driver/1.1/nc:PersonGivenName",
-    description = "A unique identifier.  For a property, this is combines the stewardKey, modelKey, versionNumber, prefix, and name fields.")
+      example = "niem/crash-driver/1.1/nc:PersonGivenName",
+      description = "A unique identifier.  For a property, this is combines the stewardKey, modelKey, versionNumber, prefix, and name fields.")
   public String getFullIdentifier() {
     return this.getVersion().getFullIdentifier() + "/" + this.getQname();
   }
 
   @Override
   @Schema(
-    example = "nc:PersonGivenName",
-    description = "An identifier, unique within its immediate scope.  For a property, this is the same as the qname field (unique within its version).")
+      example = "nc:PersonGivenName",
+      description = "An identifier, unique within its immediate scope.  For a property, this is the same as the qname field (unique within its version).")
   public String getLocalIdentifier() {
     return this.getQname();
   }
 
   @Override
-    @Schema(
-    example = "NIEM Crash Driver 1.1: nc:PersonGivenName",
-    description = "A steward short name, model short name, version number, and qualified property name.")
+  @Schema(
+      example = "NIEM Crash Driver 1.1: nc:PersonGivenName",
+      description = "A steward short name, model short name, version number, and qualified property name.")
   public String getTitle() {
     return super.getTitle();
   }
@@ -377,13 +385,13 @@ public class Property extends Component<Property> implements BaseCmfEntity<org.m
 
     // Set type info
     if (this.type != null) {
-      org.mitre.niem.cmf.Namespace typeNS = this.type.getNamespace().toCmf();
+      org.mitre.niem.cmf.Namespace typeNamespace = this.type.getNamespace().toCmf();
       if (this.type.isComplexContent()) {
-        ClassType classType = new ClassType(typeNS, this.type.getName());
+        ClassType classType = new ClassType(typeNamespace, this.type.getName());
         cmfProperty.setClassType(classType);
       }
       else {
-        Datatype datatype = new Datatype(typeNS, this.type.getName());
+        Datatype datatype = new Datatype(typeNamespace, this.type.getName());
         cmfProperty.setDatatype(datatype);
       }
     }

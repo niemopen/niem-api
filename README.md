@@ -182,10 +182,11 @@ Run the application:
 ./gradlew bootRun
 ```
 
-Prepare a new version of the application:
+**Build a new version of the application:**
 
 - [ ] Update the version number in field `project.ext.draft` of file `build.gradle`
 - [ ] Run tests
+- [ ] Run checkstyle
 - [ ] Build JavaDocs
 - *Note: Ignore JavaDoc warnings for `use of default constructor, which does not provide a comment` when the class itself is documented*
 - [ ] Build OpenAPI JSON file

@@ -1,20 +1,15 @@
 package gov.niem.tools.api.db.facet;
 
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.Formula;
-import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
-import org.hibernate.proxy.HibernateProxy;
-import org.mitre.niem.cmf.CMFException;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
 import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.base.BaseNamespaceEntity;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.type.Type;
+
+import org.mitre.niem.cmf.CMFException;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,7 +25,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.Formula;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.proxy.HibernateProxy;
 
+/**
+ * A constraint on a datatype, such as an enumeration or a pattern.
+ */
 @Entity
 @Audited
 @Data
@@ -41,16 +44,17 @@ import lombok.NoArgsConstructor;
 @JacksonXmlRootElement(localName = "api:Facet")
 @Schema(name = "Facet")
 @Table(
-  // uniqueConstraints = {@UniqueConstraint(
-  //   name = "facet_type_category_value", columnNames = {"type_id", "category", "value"}
-  // )},
-  indexes = {
-    @Index(name = "facet_type_key", columnList = "type_id"),
-    @Index(name = "facet_category_key", columnList = "category"),
-    @Index(name = "facet_value_key", columnList = "value")
-  }
+    // uniqueConstraints = {@UniqueConstraint(
+    //   name = "facet_type_category_value", columnNames = {"type_id", "category", "value"}
+    // )},
+    indexes = {
+      @Index(name = "facet_type_key", columnList = "type_id"),
+      @Index(name = "facet_category_key", columnList = "category"),
+      @Index(name = "facet_value_key", columnList = "value")
+    }
 )
-public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<org.mitre.niem.cmf.Facet> {
+public class Facet extends BaseNamespaceEntity<Facet>
+    implements BaseCmfEntity<org.mitre.niem.cmf.Facet> {
 
   /**
    * Type that contains the facet.
@@ -75,6 +79,9 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
   @Formula("(SELECT namespace.version_id FROM namespace INNER JOIN type on namespace.id = type.namespace_id WHERE type.id = type_id)")
   private Long versionId;
 
+  /**
+   * Kinds of facet categories, such as enumeration, pattern, and length.
+   */
   public enum Category {
     enumeration,
     pattern,
@@ -101,6 +108,9 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
 
   private String definition;
 
+  /**
+   * Creates a new facet with the given fields on the given type.
+   */
   public Facet(Type type, Category category, String value, String definition) {
     this.setType(type);
     this.setCategory(category);
@@ -111,14 +121,20 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
     this.setQname(type.getPrefix() + ":" + type.getName());
   }
 
+  /**
+   * Gets the Namespace that contains the type of this facet.
+   */
   @JsonIgnore
   public Namespace getNamespace() {
     return this.type == null ? null : this.type.getNamespace();
   }
 
+  /**
+   * Gets the Type that contains this facet.
+   */
   @JsonIgnore
   public Type getType() {
-   Type type = this.type;
+    Type type = this.type;
     if (type instanceof HibernateProxy) {
       type = Hibernate.unproxy(type, Type.class);
     }
@@ -132,8 +148,8 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
 
   @Override
   @Schema(
-    example = Config.BASE_URL + "/stewards/niem/models/model/versions/5.2/types/nc:AddressCategoryCodeType/enumeration=residential",
-    description = "An endpoint to get information about a facet.")
+      example = Config.BASE_URL + "/stewards/niem/models/model/versions/5.2/types/nc:AddressCategoryCodeType/enumeration=residential",
+      description = "An endpoint to get information about a facet.")
   public String getRoute() {
     if (this.type == null) {
       return null;
@@ -143,15 +159,17 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
   }
 
   @Override
-  @Schema(example = "Facet", description = "A kind of NIEM entity, such as a Namespace or a Property.")
+  @Schema(
+      example = "Facet",
+      description = "A kind of NIEM entity, such as a Namespace or a Property.")
   public String getClassName() {
     return super.getClassName();
   }
 
   @Override
   @Schema(
-    example = "niem/model/5.2/nc:AddressCategoryCodeSimpleType/enumeration=residential",
-    description = "A unique identifier.  For a facet, this is combines the stewardKey, modelKey, versionNumber, qualified type, facet category, and facet value fields.")
+      example = "niem/model/5.2/nc:AddressCategoryCodeSimpleType/enumeration=residential",
+      description = "A unique identifier.  For a facet, this is combines the stewardKey, modelKey, versionNumber, qualified type, facet category, and facet value fields.")
   public String getFullIdentifier() {
     if (this.type == null) {
       return null;
@@ -161,16 +179,16 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
 
   @Override
   @Schema(
-    example = "nc:AddressCategoryCodeSimpleType/enumeration=residential",
-    description = "An identifier, unique within its immediate scope.  For a facet, this is the qname of its type followed by facet category and value (unique within its version starting with NIEM 6.0).")
+      example = "nc:AddressCategoryCodeSimpleType/enumeration=residential",
+      description = "An identifier, unique within its immediate scope.  For a facet, this is the qname of its type followed by facet category and value (unique within its version starting with NIEM 6.0).")
   public String getLocalIdentifier() {
     return String.format("%s/%s=%s", this.qname, this.category, this.value);
   }
 
   @Override
   @Schema(
-    example = "NIEM Model 5.2: nc:PersonType contains nc:PersonName",
-    description = "A steward short name, model short name, version number, qualified type name, and qualified property name.")
+      example = "NIEM Model 5.2: nc:PersonType contains nc:PersonName",
+      description = "A steward short name, model short name, version number, qualified type name, and qualified property name.")
   public String getTitle() {
     if (this.type == null) {
       return null;
@@ -178,6 +196,9 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
     return String.format("%s %s %s", this.getType().getTitle(), this.category, this.value);
   }
 
+  /**
+   * Adds this facet to the given CMF model.
+   */
   public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
     if (this.type == null) {
       return;
@@ -190,6 +211,9 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
     datatype.getRestrictionOf().addFacet(this.toCmf());
   }
 
+  /**
+   * Converts this facet to a CMF facet object.
+   */
   public org.mitre.niem.cmf.Facet toCmf() throws CMFException {
     org.mitre.niem.cmf.Facet cmfFacet = new org.mitre.niem.cmf.Facet();
     cmfFacet.setDefinition(this.definition);
@@ -202,7 +226,7 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
    * CMF Facet.facetKind values must be upper camel case.
    */
   public String getCmfFacetKind(Category category) {
-    switch(category) {
+    switch (category) {
       case enumeration:
         return "Enumeration";
       case fractionDigits:
@@ -227,8 +251,9 @@ public class Facet extends BaseNamespaceEntity<Facet> implements BaseCmfEntity<o
         return "TotalDigits";
       case whiteSpace:
         return "WhiteSpace";
+      default:
+        return null;
     }
-    return null;
   }
 
 }

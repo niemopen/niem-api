@@ -1,20 +1,44 @@
 package gov.niem.tools.api.db.namespace;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
 import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.base.BaseVersionEntity;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.type.Type;
 import gov.niem.tools.api.db.version.Version;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
 
+import org.mitre.niem.cmf.CMFException;
+import org.mitre.niem.cmf.SchemaDocument;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import org.hibernate.envers.Audited;
 import org.hibernate.proxy.HibernateProxy;
@@ -24,15 +48,6 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexingDependency;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
-import org.mitre.niem.cmf.CMFException;
-import org.mitre.niem.cmf.SchemaDocument;
-
-import jakarta.persistence.*;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * A collection of properties and types managed by an authoritative source.
@@ -47,18 +62,19 @@ import java.util.Set;
 @JacksonXmlRootElement(localName = "api:Namespace")
 @Schema(name = "Namespace")
 @Table(
-  uniqueConstraints = {@UniqueConstraint(
-    name = "namespace_version_prefix_key", columnNames = { "version_id", "prefix" })
-  },
-  indexes = {
-    @Index(name = "namespace_category_idx", columnList = "category"),
-    @Index(name = "namespace_draft_idx", columnList = "draft"),
-    @Index(name = "namespace_prefix_idx", columnList = "prefix"),
-    @Index(name = "namespace_uri_idx", columnList = "uri")
-  }
+    uniqueConstraints = {@UniqueConstraint(
+        name = "namespace_version_prefix_key", columnNames = { "version_id", "prefix" })
+    },
+    indexes = {
+      @Index(name = "namespace_category_idx", columnList = "category"),
+      @Index(name = "namespace_draft_idx", columnList = "draft"),
+      @Index(name = "namespace_prefix_idx", columnList = "prefix"),
+      @Index(name = "namespace_uri_idx", columnList = "uri")
+    }
 )
 @Indexed
-public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEntity<org.mitre.niem.cmf.Namespace> {
+public class Namespace extends BaseVersionEntity<Namespace>
+    implements BaseCmfEntity<org.mitre.niem.cmf.Namespace> {
 
   /**
    * Model version in which this entity is defined.
@@ -66,14 +82,16 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
   @JsonIgnore
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(foreignKey = @ForeignKey(name = "version_fkey"))
-  @IndexedEmbedded(includeDepth = 0, includePaths = {"versionNumber", "niemVersion.versionNumber", "model.shortName"})
+  @IndexedEmbedded(
+      includeDepth = 0,
+      includePaths = {"versionNumber", "niemVersion.versionNumber", "model.shortName"})
   @IndexingDependency(reindexOnUpdate = ReindexOnUpdate.SHALLOW)
   private Version version;
 
   /**
    * A short, non-normative identifier for a namespace.
    */
-  @Column(nullable=false)
+  @Column(nullable = false)
   @JacksonXmlProperty(localName = "api:NamespacePrefixID")
   @Schema(example = "nc")
   @KeywordField(sortable = Sortable.YES)
@@ -101,6 +119,9 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
   @Schema(example = "NIEM Core.")
   private String definition;
 
+  /**
+   * Kinds of namespaces, such as core, domain, code, adapter, and extension.
+   */
   public enum Category {
     core,
     domain,
@@ -135,7 +156,12 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
   @Schema(example = "alpha2")
   private String draft;
 
-  public enum NDRTarget {
+  /**
+   * Kinds of NDR targets, such as REF and EXT.
+   *
+   * @todo Support NDR 6.0 MSG and SUB targets.
+   */
+  public enum NdrTarget {
     REF,
     EXT
   }
@@ -147,8 +173,13 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
   @JacksonXmlProperty(localName = "api:NamespaceNDRTargetCode")
   @Schema(example = "EXT")
   @Enumerated(EnumType.STRING)
-  private NDRTarget target;
+  private NdrTarget target;
 
+  /**
+   * Kinds of schema generation options, representing schemas that have to be
+   * built, schemas that are to be included as static files, and schemas that
+   * do not have to be included at all (e.g., the schema for XML Schema).
+   */
   public enum Generation {
     build,
     static_file,
@@ -158,11 +189,10 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
   /**
    * A means by which a namespace should be generated.
    * <ul>
-   * <li>build: Generate by assembling its properties and types</li>
-   * <li>static_file: Include it's pre-built file (e.g., externals and
-   * utilities)</li>
-   * <li>none: Namespace may be referenced but does not need to be included (e.g.,
-   * XML Schema)</li>
+   *   <li>build: Generate by assembling its properties and types</li>
+   *   <li>static_file: Include it's pre-built file (e.g., externals and utilities)</li>
+   *   <li>none: Namespace may be referenced but does not need to be included
+   *     (e.g., XML Schema)</li>
    * </ul>
    * Defaults to "build".
    */
@@ -204,8 +234,11 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
   @OrderBy("qname")
   private Set<Property> properties = new HashSet<Property>();
 
+  /**
+   * Gets the version to which this namespace belongs.
+   */
   public Version getVersion() {
-   Version version = this.version;
+    Version version = this.version;
     if (version instanceof HibernateProxy) {
       version = Hibernate.unproxy(version, Version.class);
     }
@@ -231,54 +264,63 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
 
   @Override
   @Schema(
-    example = Config.BASE_URL + "/stewards/niem/models/crash-driver/version/1.1/namespaces/nc",
-    description = "An endpoint to get information about a namespace.")
+      example = Config.BASE_URL + "/stewards/niem/models/crash-driver/version/1.1/namespaces/nc",
+      description = "An endpoint to get information about a namespace.")
   public String getRoute() {
     String versionRoute = this.version.getRoute();
     return String.format("%s/namespaces/%s", versionRoute, this.prefix);
   }
 
   @Override
-  @Schema(example = "Namespace", description = "A kind of NIEM entity, such as a Namespace or a Property.")
+  @Schema(
+      example = "Namespace",
+      description = "A kind of NIEM entity, such as a Namespace or a Property.")
   public String getClassName() {
     return super.getClassName();
   }
 
   @Override
   @Schema(
-    example = "niem/crash-driver/1.1/nc",
-    description = "A unique identifier.  For a namespace, this is combines the stewardKey, modelKey, versionNumber, and prefix fields.")
+      example = "niem/crash-driver/1.1/nc",
+      description = "A unique identifier.  For a namespace, this is combines the stewardKey, modelKey, versionNumber, and prefix fields.")
   public String getFullIdentifier() {
     return String.format("%s/%s", this.getVersion().getFullIdentifier(), this.getPrefix());
   }
 
   @Override
   @Schema(
-    example = "nc",
-    description = "An identifier, unique within its immediate scope.  For a namespace, this is the same as the prefix field (unique within its version).")
+      example = "nc",
+      description = "An identifier, unique within its immediate scope.  For a namespace, this is the same as the prefix field (unique within its version).")
   public String getLocalIdentifier() {
     return this.prefix;
   }
 
   @Override
   @Schema(
-    example = "NIEM Crash Driver 1.1: NIEM Core",
-    description = "A steward short name, model short name, version number, and namespace name (if provided) or prefix.")
+      example = "NIEM Crash Driver 1.1: NIEM Core",
+      description = "A steward short name, model short name, version number, and namespace name (if provided) or prefix.")
   public String getTitle() {
     String namespaceLabel = this.name == null ? this.prefix : this.name;
     return String.format("%s: %s", this.getVersion().getTitle(), namespaceLabel);
   }
 
+  /**
+   * Gets the conformance target URI based on the target and NIEM version number
+   * of this namespace.
+   */
   public String getConformanceTarget() {
     Set<String> unsupported = Set.of("1.0", "2.0", "2.1");
     if (this.target == null || unsupported.contains(this.getNiemVersionNumber())) {
       return null;
     }
     String ndrVersion = this.getNiemVersionNumber().replaceAll(".\\d$", ".0");
-    String targetName = this.target == NDRTarget.REF ? "Reference" : "Extension";
+    String targetName = this.target == NdrTarget.REF ? "Reference" : "Extension";
     return String.format("http://reference.niem.gov/niem/specification/naming-and-design-rules/%s/#%sSchemaDocument", ndrVersion, targetName);
   }
 
+  /**
+   * Gets key fields about a namespace.
+   */
   @JsonIgnore
   public Map<String, String> toSummary() {
     Map<String, String> map = new HashMap<>();
@@ -289,6 +331,9 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
     return map;
   }
 
+  /**
+   * Adds this namespace to the given CMF model.
+   */
   public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
     // Skip namespaces already supported by CMF
     if (this.prefix.equals("xml")) {
@@ -312,16 +357,22 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
     cmfModel.addSchemaDoc(this.uri, schemaDocument);
   }
 
+  /**
+   * Converts this namespace to a CMF namespace object.
+   */
   public org.mitre.niem.cmf.Namespace toCmf() throws CMFException {
-    org.mitre.niem.cmf.Namespace n = new org.mitre.niem.cmf.Namespace();
-    n.setDefinition(this.definition);
-    n.setNamespacePrefix(this.prefix);
-    n.setNamespaceURI(this.uri);
-    n.setKind(this.categoryToCmf(this.category));
+    org.mitre.niem.cmf.Namespace cmfNamespace = new org.mitre.niem.cmf.Namespace();
+    cmfNamespace.setDefinition(this.definition);
+    cmfNamespace.setNamespacePrefix(this.prefix);
+    cmfNamespace.setNamespaceURI(this.uri);
+    cmfNamespace.setKind(this.categoryToCmf(this.category));
     // TODO: Namespace CMF properties, classes, datatypes
-    return n;
+    return cmfNamespace;
   }
 
+  /**
+   * Converts CMF namespace categories to API namespace categories.
+   */
   public Category categoryFromCmf(int kind) {
     switch (kind) {
       case org.mitre.niem.cmf.NamespaceKind.NSK_CORE:
@@ -340,12 +391,15 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
         return Category.built_in;
       case org.mitre.niem.cmf.NamespaceKind.NSK_XSD:
         return Category.built_in;
+      default:
+        return Category.other;
     }
-    return Category.other;
   }
 
   /**
-   * From CMF: cmf/NamespaceKind.java
+   * Converts API namespace categories to CMF namespace categories.
+   *
+   * <p>From CMF: cmf/NamespaceKind.java
    * NSK_EXTENSION = 0; has conformance assertion, not in NIEM model
    * NSK_DOMAIN    = 1; domain schema
    * NSK_CORE      = 2; niem core schema
@@ -403,8 +457,9 @@ public class Namespace extends BaseVersionEntity<Namespace> implements BaseCmfEn
         return org.mitre.niem.cmf.NamespaceKind.NSK_OTHERNIEM;
       case built_in:
         return org.mitre.niem.cmf.NamespaceKind.NSK_UNKNOWN;
+      default:
+        return org.mitre.niem.cmf.NamespaceKind.NSK_UNKNOWN;
     }
-    return org.mitre.niem.cmf.NamespaceKind.NSK_UNKNOWN;
   }
 
 }

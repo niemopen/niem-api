@@ -26,6 +26,7 @@ words:
   - DATAPROPERTY
   - datasource
   - datatypes
+  - delombok
   - DHEKELIA
   - dists
   - ESWATINI
@@ -48,6 +49,7 @@ words:
   - KINGMAN
   - KITTS
   - LESTE
+  - linelength
   - lingala
   - logfile
   - Lucene
@@ -78,6 +80,7 @@ words:
   - TROMELIN
   - unaccent
   - vaadin
+  - vladmihalcea
   - webmvc
   - whitespaces
   - wonka

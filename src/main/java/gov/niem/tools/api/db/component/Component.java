@@ -1,20 +1,27 @@
 package gov.niem.tools.api.db.component;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
 import gov.niem.tools.api.db.base.BaseNamespaceEntity;
 import gov.niem.tools.api.db.namespace.Namespace;
+
+import org.mitre.niem.cmf.CMFException;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Formula;
@@ -27,18 +34,11 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextFi
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
-import org.mitre.niem.cmf.CMFException;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
 
 /**
  * A parent class for Property and Type.
+ *
+ * @param <T> - A subclass of Component, i.e., Property or Type.
  */
 @MappedSuperclass
 @Audited
@@ -126,6 +126,9 @@ public abstract class Component<T extends BaseNamespaceEntity<T>> extends BaseNa
     return StringUtils.splitByCharacterTypeCamelCase(this.name);
   }
 
+  /**
+   * Returns key fields about a component.
+   */
   @JsonIgnore
   public Map<String, String> toSummary() {
     Map<String, String> map = new HashMap<>();

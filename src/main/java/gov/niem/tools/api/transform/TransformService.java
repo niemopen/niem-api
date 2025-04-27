@@ -1,5 +1,17 @@
 package gov.niem.tools.api.transform;
 
+import gov.niem.tools.api.core.exceptions.BadRequestException;
+import gov.niem.tools.api.core.utils.CmfUtils;
+import gov.niem.tools.api.core.utils.FileUtils;
+import gov.niem.tools.api.core.utils.ZipUtils;
+
+import org.mitre.niem.cmf.Component;
+import org.mitre.niem.cmf.Datatype;
+import org.mitre.niem.cmf.Model;
+import org.mitre.niem.cmf.Namespace;
+import org.mitre.niem.cmf.Property;
+import org.mitre.niem.cmf.SchemaDocument;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -14,13 +26,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import org.mitre.niem.cmf.Component;
-import org.mitre.niem.cmf.Datatype;
-import org.mitre.niem.cmf.Model;
-import org.mitre.niem.cmf.Namespace;
-import org.mitre.niem.cmf.Property;
-import org.mitre.niem.cmf.SchemaDocument;
+import lombok.extern.log4j.Log4j2;
 import org.mitre.niem.json.ModelToJSON;
 import org.mitre.niem.rdf.ModelToOWL;
 import org.mitre.niem.xsd.ModelFromXSD;
@@ -31,12 +37,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import gov.niem.tools.api.core.exceptions.BadRequestException;
-import gov.niem.tools.api.core.utils.CmfUtils;
-import gov.niem.tools.api.core.utils.FileUtils;
-import gov.niem.tools.api.core.utils.ZipUtils;
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * Operations to support model transformations.
+ */
 @Log4j2
 @Service
 public class TransformService {
@@ -49,9 +52,11 @@ public class TransformService {
    * @param to - A supported NIEM model format to be transformed into
    * @param multipartInputFile - A file or files to be transformed
    */
-  public byte[] transform(TransformFrom from, TransformTo to, MultipartFile multipartInputFile) throws Exception {
+  public byte[] transform(TransformFrom from, TransformTo to, MultipartFile multipartInputFile)
+      throws Exception {
 
-    log.info(String.format("Transform %s from %s to %s", FileUtils.getFilename(multipartInputFile), from, to));
+    log.info(String.format("Transform %s from %s to %s",
+        FileUtils.getFilename(multipartInputFile), from, to));
 
     // Get the input filename base and extension
     String inputFilenameBase = FileUtils.getFilenameBase(multipartInputFile);
@@ -75,11 +80,13 @@ public class TransformService {
 
   /**
    * Checks to make sure user input is valid.
+   *
    * @param from - A supported NIEM model format to be transformed
    * @param to - A supported NIEM model format to be transformed into
    * @param inputExtension - The file extension of the model to be transformed
    */
-  public static void checkInput(TransformFrom from, TransformTo to, String inputExtension) throws BadRequestException {
+  public static void checkInput(TransformFrom from, TransformTo to, String inputExtension)
+      throws BadRequestException {
     // Check that the input file extension is valid for the given from parameter
     checkInputFileExtension(from, inputExtension);
   }
@@ -91,7 +98,8 @@ public class TransformService {
    * @param from - A supported NIEM model format to be transformed
    * @param inputExtension - The file extension of the model to be transformed
    */
-  public static void checkInputFileExtension(TransformFrom from, String inputExtension) throws BadRequestException {
+  public static void checkInputFileExtension(TransformFrom from, String inputExtension)
+      throws BadRequestException {
     switch (from) {
       case xsd:
         if (inputExtension.equals("xsd") || inputExtension.equals("zip")) {
@@ -102,6 +110,8 @@ public class TransformService {
         if (inputExtension.equals("cmf") || inputExtension.equals("cmf.xml")) {
           return;
         }
+        break;
+      default:
         break;
     }
 
@@ -114,7 +124,8 @@ public class TransformService {
    * Convert the input file from the given `from` format to the given
    * `to` format.
    */
-  public Model loadInput(TransformFrom from, MultipartFile multipartInputFile, String inputExtension) throws Exception {
+  public Model loadInput(TransformFrom from, MultipartFile multipartInputFile,
+      String inputExtension) throws Exception {
 
     Path tempInputFolder = FileUtils.createTempDir("transform-load-input");
 
@@ -145,16 +156,18 @@ public class TransformService {
             files.removeIf(file -> file.getFileName().toString().equals("localTerminology.xsd"));
 
             // Zip folder may also contain xml-catalog.xml files
-            List<Path> catalogs = FileUtils.getFilePathsFromDirWithFilename(tempInputFolder, "xml-catalog");
+            List<Path> catalogs = FileUtils.getFilePathsFromDirWithFilename(tempInputFolder,
+                "xml-catalog");
             files.addAll(catalogs);
             break;
           default:
             // Handle unexpected input format for a transformation from XSD
-            throw new BadRequestException(String.format("%s is not supported as an input format for a NIEM transformation from XSD", inputExtension));
+            String message = String.format("%s is not supported as an input format for a NIEM transformation from XSD", inputExtension);
+            throw new BadRequestException(message);
         }
 
-        ModelFromXSD modelFromXSD = new ModelFromXSD();
-        cmf = modelFromXSD.createModel(files.stream()
+        ModelFromXSD modelFromXsd = new ModelFromXSD();
+        cmf = modelFromXsd.createModel(files.stream()
           .map(path -> path.toString())
           .toArray(String[]::new)
         );
@@ -162,12 +175,13 @@ public class TransformService {
         break;
 
       case cmf:
-        cmf = CmfUtils.loadCMF(multipartInputFile);
+        cmf = CmfUtils.loadCmf(multipartInputFile);
         break;
 
       default:
         // Handle unexpected input cases
-        throw new BadRequestException(String.format("%s is not supported as a NIEM transformation input", from));
+        String message = String.format("%s is not supported as a NIEM transformation input", from);
+        throw new BadRequestException(message);
     }
 
     FileUtils.deleteTempDir(tempInputFolder);
@@ -206,9 +220,12 @@ public class TransformService {
         return generateXsdOutput(model, filenameBase);
 
       case json_schema:
-        ModelToJSON modelToJSON = new ModelToJSON(model);
-        modelToJSON.writeJSON(printWriter);
+        ModelToJSON modelToJson = new ModelToJSON(model);
+        modelToJson.writeJSON(printWriter);
         results = stringWriter.toString();
+        break;
+
+      default:
         break;
     }
 
@@ -242,14 +259,14 @@ public class TransformService {
     String niem6UriBase = "https://docs.oasis-open.org/niemopen/ns/model";
 
     Boolean isNiem6 = model.getNamespaceList().stream()
-    .filter(namespace -> namespace.getNamespaceURI().contains(niem6UriBase))
-    .findAny()
-    .isPresent();
+        .filter(namespace -> namespace.getNamespaceURI().contains(niem6UriBase))
+        .findAny()
+        .isPresent();
 
-    ModelToXSD modelToXSD = isNiem6 ? new ModelToSrcXSD(model) : new ModelToN5XSD(model);
+    ModelToXSD modelToXsd = isNiem6 ? new ModelToSrcXSD(model) : new ModelToN5XSD(model);
 
     // Transform the CMF file to XSDs and write to the new directory above
-    modelToXSD.writeXSD(xsdDir.toFile());
+    modelToXsd.writeXSD(xsdDir.toFile());
 
     // Fix the transform output
     fixXsdOutput(model, xsdDir);
@@ -268,7 +285,7 @@ public class TransformService {
   }
 
   /**
-   * Fix errors in the XSD output transform
+   * Fix errors in the XSD output transform.
    *
    * @todo Get fix for CMF tool XSD output
    */
@@ -278,10 +295,10 @@ public class TransformService {
     List<Path> xsdPaths = FileUtils.getFilePathsFromDirWithExtension(xsdDir, "xsd");
 
     List<Property> properties = model.getComponentList()
-      .stream()
-      .filter(component -> component.asProperty() != null)
-      .map(component -> component.asProperty())
-      .collect(Collectors.toList());
+        .stream()
+        .filter(component -> component.asProperty() != null)
+        .map(component -> component.asProperty())
+        .collect(Collectors.toList());
 
     for (Path xsdPath : xsdPaths) {
       String xsd = FileUtils.getFileText(xsdPath);
@@ -388,7 +405,8 @@ public class TransformService {
     return xsd;
   }
 
-  private String fixXsdElement(Model model, List<Property> properties, MatchResult matchResult, Set<Namespace> namespaces) {
+  private String fixXsdElement(Model model, List<Property> properties,
+      MatchResult matchResult, Set<Namespace> namespaces) {
 
     String substitutionGroupQname = matchResult.group(1);
     String typeQname = matchResult.group(2);
@@ -399,7 +417,8 @@ public class TransformService {
     Property property = getProperty(properties, substitutionGroupQname, typeQname, definition);
 
     if (property != null) {
-      String newText = oldText.replace("<xs:element", String.format("<xs:element name=\"%s\"", property.getName()));
+      String newText = oldText.replace("<xs:element",
+          String.format("<xs:element name=\"%s\"", property.getName()));
       addDependencyNamespaces(property, namespaces);
       return newText;
     }
@@ -420,22 +439,27 @@ public class TransformService {
   }
 
 
-  private Property getProperty(List<Property> properties, String substitutionGroupQname, String typeQname, String definition) {
+  private Property getProperty(List<Property> properties, String substitutionGroupQname,
+      String typeQname, String definition) {
     return properties.stream()
-        .filter( property -> {
+        .filter(property -> {
           // Check if definition matches (both same value or both null)
           if (!equalOrNull(property.getDefinition(), definition)) {
             return false;
           }
 
           // Check if substitution group matches (both same qname or both null)
-          String actualSubstitutionGroupQName = property.getSubPropertyOf() == null ? null : property.getSubPropertyOf().getQName();
+          String actualSubstitutionGroupQname = property.getSubPropertyOf() == null
+              ? null
+              : property.getSubPropertyOf().getQName();
 
-          if (!equalOrNull(actualSubstitutionGroupQName, substitutionGroupQname)) {
+          if (!equalOrNull(actualSubstitutionGroupQname, substitutionGroupQname)) {
             return false;
           }
 
-          String actualTypeQname = property.getClassType() == null ? null : property.getClassType().getQName();
+          String actualTypeQname = property.getClassType() == null
+              ? null
+              : property.getClassType().getQName();
 
           boolean hasDatatype = false;
 
@@ -452,7 +476,8 @@ public class TransformService {
           if (hasDatatype == true) {
             Datatype datatype = property.getDatatype();
             String typeName = typeQname.substring(typeQname.indexOf(":") + 1);
-            if (datatype.getName().equals(typeName) && datatype.getQName().contains("xs") && typeQname.contains("xs")) {
+            if (datatype.getName().equals(typeName)
+                && datatype.getQName().contains("xs") && typeQname.contains("xs")) {
               return true;
             }
           }
@@ -498,11 +523,11 @@ public class TransformService {
   private String fixCmfOutput(String cmfString) {
 
     // 1. Replace errant closing tag in CMF output after default xmlns declaration
-    final String BAD_TEXT = "xmlns=\"https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/\">\n";
+    final String badText = "xmlns=\"https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/\">\n";
 
-    final String GOOD_TEXT = "xmlns=\"https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/\"\n";
+    final String goodText = "xmlns=\"https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/\"\n";
 
-    cmfString = cmfString.replace(BAD_TEXT, GOOD_TEXT);
+    cmfString = cmfString.replace(badText, goodText);
 
     // 2. Replace extra spaces before xmlns prefix declarations
     cmfString = cmfString.replaceAll("       xmlns", "  xmlns");
@@ -531,6 +556,10 @@ public class TransformService {
 
   }
 
+  /**
+   * Get the output filename with extension based on the kind of transformation
+   * and the original filename.
+   */
   public String getOutputFilename(TransformTo to, String filenameBase) throws Exception {
     switch (to) {
       case cmf:
@@ -541,10 +570,14 @@ public class TransformService {
         return filenameBase + ".zip";
       case json_schema:
         return filenameBase + ".schema.json";
+      default:
+        throw new Exception("Unknown transformation format");
     }
-    throw new Exception("Unknown transformation format");
   }
 
+  /**
+   * Get the content media type for the response based on the kind of transformation.
+   */
   public MediaType getOutputMediaType(TransformTo to) throws Exception {
     switch (to) {
       case cmf:
@@ -555,8 +588,9 @@ public class TransformService {
         return MediaType.TEXT_PLAIN;
       case xsd:
         return MediaType.valueOf("application/zip");
+      default:
+        throw new Exception("Unknown transformation format");
     }
-    throw new Exception("Unknown transformation format");
   }
 
 }

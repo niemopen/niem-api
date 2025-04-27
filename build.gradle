@@ -5,12 +5,16 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
   id 'org.springdoc.openapi-gradle-plugin' version '1.9.0'
 	id 'org.springframework.boot' version '3.4.4'
+  id 'checkstyle'
 }
 
 group = 'gov.niem.tools'
 version = '2.0'
-project.ext.draft = '2.0-alpha06:SNAPSHOT'
-sourceCompatibility = '17'
+project.ext.draft = '2.0-alpha06'
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
 	mavenCentral()
@@ -89,6 +93,19 @@ javadoc {
 
 openApi {
   apiDocsUrl.set("http://localhost:8080/api/v2/api-docs")
+}
+
+checkstyle {
+  println "Checkstyle version " + checkstyle.toolVersion
+  toolVersion = "9.3"
+}
+
+checkstyleMain {
+  source = 'src/main/java/gov/niem/tools/api'
+}
+
+checkstyleTest {
+  source = 'src/main/test'
 }
 
 processResources {

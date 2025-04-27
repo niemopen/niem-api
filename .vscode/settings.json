@@ -1,6 +1,20 @@
 {
   "java.compile.nullAnalysis.mode": "automatic",
+  "java.completion.importOrder": [
+    // "java",
+    // "javax",
+    "gov.niem.tools",
+    "org.mitre.niem.cmf",
+    "#",
+    ""
+  ],
   "java.configuration.updateBuildConfiguration": "automatic",
+  "java.checkstyle.configuration": "${workspaceFolder}\\config\\checkstyle\\checkstyle.xml",
+  "java.checkstyle.properties": {
+    "config_loc": "${workspaceFolder}/config/checkstyle"
+  },
+  "java.checkstyle.version": "9.3",
+  "java.debug.settings.onBuildFailureProceed": true,
   "rest-client.environmentVariables": {
     "localhost": {
       "baseUrl": "http://localhost:8080/api/v2"
@@ -19,5 +33,19 @@
       "format_json": "json_schema"
     }
   },
-  "java.debug.settings.onBuildFailureProceed": true,
+  "todo-tree.filtering.passGlobsToRipgrep": true,
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules/*/**",
+    "**/docs/*"
+  ],
+  "todo-tree.filtering.ignoreGitSubmodules": true,
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]"
+  ],
 }

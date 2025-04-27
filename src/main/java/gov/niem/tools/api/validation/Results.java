@@ -1,23 +1,35 @@
 package gov.niem.tools.api.validation;
 
-import java.util.LinkedList;
-import java.util.List;
+import gov.niem.tools.api.validation.TestResult.Status;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import gov.niem.tools.api.validation.TestResult.Status;
+import java.util.LinkedList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * An individual test result.
+ *
+ * <p>Separate tests and results are useful for cases when validators are able to create
+ * a separate test for each kind of issue (e.g., a property declaration without a definition).
+ * Each occurrence of that issue would be recorded as a separate result.
+ *
+ * <p>In some cases, tests and results might not be able to be grouped and each failed test
+ * will have a single result.
+ */
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Results {
 
+  /**
+   * Supported formats for the validation results file (e.g., json, csv)
+   */
   public enum ResultsFormat {
     json,
     csv;
@@ -31,6 +43,9 @@ public class Results {
   @JsonProperty("comment")
   public String comment;
 
+  /**
+   * Consolidates results from each test into a single test result list.
+   */
   @JsonIgnore
   public List<TestResult> getTestResults() {
     List<TestResult> testResults = new LinkedList<TestResult>();
@@ -68,7 +83,8 @@ public class Results {
   }
 
   public void setDefaultComment() {
-    this.comment = String.format("Errors: %d.  Warnings: %d.  Informative messages: %d.  Passed: %d.", this.getErrors(), this.getWarnings(), this.getInfo(), this.getPassed());
+    this.comment = String.format("Errors: %d.  Warnings: %d.  Info: %d.  Passed: %d.",
+      this.getErrors(), this.getWarnings(), this.getInfo(), this.getPassed());
   }
 
 }

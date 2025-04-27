@@ -1,22 +1,17 @@
 package gov.niem.tools.api.db.base;
 
-import java.util.Map;
-
-import org.hibernate.Hibernate;
-import org.hibernate.envers.Audited;
-import org.hibernate.proxy.HibernateProxy;
+import gov.niem.tools.api.db.model.Model;
+import gov.niem.tools.api.db.version.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
-import gov.niem.tools.api.db.model.Model;
-import gov.niem.tools.api.db.version.Version;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,9 +19,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.Hibernate;
+import org.hibernate.envers.Audited;
+import org.hibernate.proxy.HibernateProxy;
 
 /**
  * Adds reusable methods for entities that belong to a version: Namespace, Property, etc.
+ *
+ * @param <T> A class for a kind of entity that that supports versioning and migration rules to
+ *     create previous and next links between releases, such as Namespace, Property, Type, or Facet.
  */
 @MappedSuperclass
 @Audited
@@ -48,7 +49,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="prev_id", referencedColumnName="id")
+  @JoinColumn(name = "prev_id", referencedColumnName = "id")
   public T prev;
 
   /**
@@ -58,7 +59,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="next_id", referencedColumnName="id")
+  @JoinColumn(name = "next_id", referencedColumnName = "id")
   public T next;
 
   /**
@@ -92,18 +93,15 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
    * original entity. The value is null if this entity is actually defined by its
    * version rather than reused from another model as part of a subset.
    *
-   * <p>
-   * Example 1: NIEM model 5.2 is the original source of property "nc:Person".
+   * <p>Example 1: NIEM model 5.2 is the original source of property "nc:Person".
    * In this case, this property is itself the original and has no other original
    * source to point to.  The value of {@literal original} is null.
    *
-   * <p>
-   * Example 2: Acme Crash Driver 1.0 reuses property nc:Person from NIEM model 5.2
+   * <p>Example 2: Acme Crash Driver 1.0 reuses property nc:Person from NIEM model 5.2
    * and is not its original source.  The value of {@literal original} is a reference
    * to the NIEM model 5.2 nc:Person property.
    *
-   * <p>
-   * Although most information about an entity will be duplicated between the original
+   * <p>Although most information about an entity will be duplicated between the original
    * and its usages via subsets, tracking the usages of each entity independently
    * supports subset-approved customizations, like adjusted cardinality, custom
    * namespace prefixes, property aliases, inlined substitutions, and flattened types.
@@ -115,6 +113,9 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
   @JoinColumn(name = "original_id", referencedColumnName = "id")
   T original;
 
+  /**
+   * For a component in a subset, gets the component from the original source.
+   */
   @SuppressWarnings("unchecked")
   public T getOriginal() {
     T original = this.original;
@@ -183,6 +184,9 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
   @Schema(example = "false")
   private boolean isDeprecated = false;
 
+  /**
+   * Gets the version database id.
+   */
   @JsonIgnore
   public Long getVersionId() {
     if (this.getVersion() == null) {
@@ -209,6 +213,9 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
     return this.getVersion().getVersionNumber();
   }
 
+  /**
+   * Gets the NIEM Version object that is compatible with this object.
+   */
   @JsonIgnore
   public Version getNiemVersion() {
     if (this.getVersion() == null) {
@@ -217,9 +224,9 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
     return this.getVersion().getNiemVersion();
   }
 
-  // /**
-  //  * A number which identifies a version within a model.
-  //  */
+  /**
+   * Gets the NIEM Version number (string) that is compatible with this object.
+   */
   // @JacksonXmlProperty(localName = "api:VersionBaseNIEMVersionNumberID")
   // @Schema(example = "5.2")
   @JsonIgnore
@@ -230,6 +237,9 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
     return this.getNiemVersion().getVersionNumber();
   }
 
+  /**
+   * Gets the Model that defines this object.
+   */
   @JsonIgnore
   public Model getModel() {
     if (this.getVersion() == null) {

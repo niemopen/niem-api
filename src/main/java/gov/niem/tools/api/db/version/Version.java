@@ -1,11 +1,6 @@
 
 package gov.niem.tools.api.db.version;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
 import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.base.BaseModelEntity;
@@ -14,10 +9,41 @@ import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.steward.Steward;
 import gov.niem.tools.api.db.type.Type;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
 
+import org.mitre.niem.cmf.CMFException;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import org.hibernate.envers.Audited;
 import org.hibernate.proxy.HibernateProxy;
@@ -30,11 +56,6 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmb
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexingDependency;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.ObjectPath;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyValue;
-import org.mitre.niem.cmf.CMFException;
-
-import jakarta.persistence.*;
-
-import java.util.*;
 
 /**
  * A specific version or release of a model.
@@ -49,14 +70,15 @@ import java.util.*;
 @JacksonXmlRootElement(localName = "api:Version")
 @Schema(name = "Version")
 @Table(
-  uniqueConstraints={ @UniqueConstraint(
-    name = "version_model_number_key", columnNames={"model_id", "versionNumber"})
-  },
-  indexes = {
-    @Index(name = "version_is_published_idx", columnList = "isPublished"),
-    @Index(name = "version_version_number_idx", columnList = "versionNumber"),
-    @Index(name = "version_category_idx", columnList = "category")
-  }
+    uniqueConstraints = { @UniqueConstraint(
+        name = "version_model_number_key",
+        columnNames = {"model_id", "versionNumber"})
+    },
+    indexes = {
+      @Index(name = "version_is_published_idx", columnList = "isPublished"),
+      @Index(name = "version_version_number_idx", columnList = "versionNumber"),
+      @Index(name = "version_category_idx", columnList = "category")
+    }
 )
 public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.niem.cmf.Model> {
 
@@ -71,7 +93,7 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
    * A number which identifies a version of a model, such as "5.2" or "1.0.1".
    */
   @NonNull
-  @Column(nullable=false)
+  @Column(nullable = false)
   @JacksonXmlProperty(localName = "api:VersionNumberID")
   @Schema(example = "1.1")
   @GenericField(sortable = Sortable.YES, projectable = Projectable.YES)
@@ -144,9 +166,13 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
    * project future plans for the IEPD.
    */
   @JacksonXmlProperty(localName = "c:StatusText")
-  @Schema(example = "Finalized for NIEM 5.0-series training; due to be updated after the publication of NIEM 6.0.")
+  @Schema(
+      example = "Finalized for NIEM 5.0-series training; due to be updated after the publication of NIEM 6.0.")
   private String status;
 
+  /**
+   * Kinds of versions, such as major, minor, patch, core supplement, and domain update.
+   */
   public enum Category {
     major,
     minor,
@@ -234,7 +260,7 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
    * The Hibernate proxy (from lazy loading) is initialized.
    */
   public Version getPrev() {
-   Version prev = this.prev;
+    Version prev = this.prev;
     if (prev instanceof HibernateProxy) {
       prev = Hibernate.unproxy(prev, Version.class);
     }
@@ -246,7 +272,7 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
    * The Hibernate proxy (from lazy loading) is initialized.
    */
   public Version getNext() {
-   Version next = this.next;
+    Version next = this.next;
     if (next instanceof HibernateProxy) {
       next = Hibernate.unproxy(next, Version.class);
     }
@@ -260,12 +286,15 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-  @JoinColumn(name = "niem_version_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "niem_version_fkey"))
+  @JoinColumn(
+      name = "niem_version_id",
+      referencedColumnName = "id", foreignKey = @ForeignKey(name = "niem_version_fkey"))
   @IndexedEmbedded(includeDepth = 0, includePaths = {"versionNumber"})
   @IndexingDependency(reindexOnUpdate = ReindexOnUpdate.SHALLOW)
   private Version niemVersion;
 
   /**
+   * Gets the model to which the version belongs.
    * Makes sure a potential Hibernate proxy is initialized.
    */
   public Model getModel() {
@@ -277,6 +306,7 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
   }
 
   /**
+   * Gets the reference model from the NIEM steward.
    * Makes sure a potential Hibernate proxy is initialized.
    */
   @JsonIgnore
@@ -288,6 +318,9 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
     return version;
   }
 
+  /**
+   * Gets the NIEM version number compatible with this version of the model.
+   */
   public String getNiemVersionNumber() {
     if (this.getNiemVersion() != null) {
       return this.getNiemVersion().getVersionNumber();
@@ -302,8 +335,8 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
 
   @Override
   @Schema(
-    example = Config.BASE_URL + "/stewards/niem/models/crash-driver/version/1.1",
-    description = "An endpoint to get information about a version.")
+      example = Config.BASE_URL + "/stewards/niem/models/crash-driver/version/1.1",
+      description = "An endpoint to get information about a version.")
   public String getRoute() {
     String modelRoute = this.model.getRoute();
     return String.format("%s/versions/%s", modelRoute, this.versionNumber);
@@ -311,41 +344,47 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
 
   @Override
   @Schema(
-    example = "Version",
-    description = "A kind of NIEM entity, such as a Namespace or a Property.")
+      example = "Version",
+      description = "A kind of NIEM entity, such as a Namespace or a Property.")
   public String getClassName() {
     return super.getClassName();
   }
 
   @Override
   @Schema(
-    example = "niem/crash-driver/1.1",
-    description = "A unique identifier.  For a version, this is combines the stewardKey, modelKey, and versionNumber fields.")
+      example = "niem/crash-driver/1.1",
+      description = "A unique identifier.  For a version, this is combines the stewardKey, modelKey, and versionNumber fields.")
   public String getFullIdentifier() {
     return this.getModel().getFullIdentifier() + "/" + this.versionNumber;
   }
 
   @Override
   @Schema(
-    example = "1.1",
-    description = "An identifier, unique within its immediate scope.  For a version, this is the same as the versionNumber field (unique within its model).")
+      example = "1.1",
+      description = "An identifier, unique within its immediate scope.  For a version, this is the same as the versionNumber field (unique within its model).")
   public String getLocalIdentifier() {
     return this.versionNumber;
   }
 
   @Override
   @Schema(
-    example = "NIEM Crash Driver 1.1",
-    description = "A steward short name, model short name, and version number.")
+      example = "NIEM Crash Driver 1.1",
+      description = "A steward short name, model short name, and version number.")
   public String getTitle() {
     return String.format("%s %s", this.getModel().getTitle(), this.getVersionNumber());
   }
 
+  /**
+   * Gets the steward from the model that this version belongs to.
+   */
   @JsonIgnore
   public Steward getSteward() {
     return this.getModel().getSteward();
   }
 
+  /**
+   * Gets key fields about a version.
+   */
   @JsonIgnore
   public Map<String, String> toSummary() {
     Map<String, String> map = new HashMap<>();
@@ -368,20 +407,24 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
 
   @Override
   public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
-    for(Namespace namespace : this.namespaces) {
+    for (Namespace namespace : this.namespaces) {
       // Add properties
-      for(Property property : namespace.getProperties()) {
+      for (Property property : namespace.getProperties()) {
         property.addToCmfModel(cmfModel);
       }
 
       // Add types
-      for(Type type : namespace.getTypes()) {
+      for (Type type : namespace.getTypes()) {
         type.addToCmfModel(cmfModel);
       }
     }
   }
 
-  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel, Boolean includeContent) throws CMFException {
+  /**
+   * Adds the namespaces, properties, and types in this model to the given CMF model.
+   */
+  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel, Boolean includeContent)
+      throws CMFException {
     if (includeContent == true) {
       addToCmfModel(cmfModel);
     }

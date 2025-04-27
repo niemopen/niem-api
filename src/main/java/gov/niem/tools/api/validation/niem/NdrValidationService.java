@@ -1,5 +1,17 @@
 package gov.niem.tools.api.validation.niem;
 
+import gov.niem.tools.api.core.utils.FileUtils;
+import gov.niem.tools.api.validation.Test;
+import gov.niem.tools.api.validation.Test.Severity;
+import gov.niem.tools.api.validation.TestResult;
+import gov.niem.tools.api.validation.TestResult.Status;
+import gov.niem.tools.api.validation.ValidationUtils;
+
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,28 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
-
-import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DatabindException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import gov.niem.tools.api.core.utils.FileUtils;
-import gov.niem.tools.api.validation.Test;
-import gov.niem.tools.api.validation.Test.Severity;
-import gov.niem.tools.api.validation.TestResult;
-import gov.niem.tools.api.validation.TestResult.Status;
-import gov.niem.tools.api.validation.ValidationUtils;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
@@ -42,7 +35,14 @@ import net.sf.saxon.s9api.Serializer;
 import net.sf.saxon.s9api.Xslt30Transformer;
 import net.sf.saxon.s9api.XsltCompiler;
 import net.sf.saxon.s9api.XsltExecutable;
+import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
+/**
+ * Validates XML Schemas against NDR validation rules.
+ */
 @Log4j2
 @Service
 public class NdrValidationService {
@@ -52,6 +52,9 @@ public class NdrValidationService {
 
   private Map<String, Xslt30Transformer> transformers = new HashMap<>();
 
+  /**
+   * Initializes NDR Schematron XSL rule files after application initialization.
+   */
   @PostConstruct
   public void init() {
     try {
@@ -67,6 +70,9 @@ public class NdrValidationService {
     return String.format("%s-%s", version, target);
   }
 
+  /**
+   * Loads NDR Schematron XSL files.
+   */
   private void initTransformers() throws IOException, SaxonApiException {
     if (this.transformers.size() == 0) {
       Path tempPath = FileUtils.createTempDir("validation-ndr");
@@ -86,7 +92,11 @@ public class NdrValidationService {
     }
   }
 
-  private void buildTransformer(Path tempPath, String version, String target) throws IOException, SaxonApiException {
+  /**
+   * Compiles and loads NDR stylesheets to prepare for validation requests.
+   */
+  private void buildTransformer(Path tempPath, String version, String target)
+      throws IOException, SaxonApiException {
 
     String ndrKey = this.getNdrKey(version, target);
     String filepathString = String.format("niem-ndr-rules-%s.xsl", ndrKey);
@@ -124,7 +134,7 @@ public class NdrValidationService {
     String version = matcher.group(1);
     String target = matcher.group(2);
 
-    int major = Integer.parseInt( String.valueOf(version.charAt(0)) );
+    int major = Integer.parseInt(String.valueOf(version.charAt(0)));
 
     switch (target) {
       case "Reference":
@@ -147,7 +157,8 @@ public class NdrValidationService {
 
   }
 
-  private void skipTest(List<Test> tests, Test test, File file, Severity severity, Status status, String entityCategory, String message, String comment) {
+  private void skipTest(List<Test> tests, Test test, File file, Severity severity,
+      Status status, String entityCategory, String message, String comment) {
     log.info(String.format("%s - %s", file.getName(), message));
     TestResult result = new TestResult(test.id);
     result.status = status;
@@ -161,6 +172,12 @@ public class NdrValidationService {
     tests.add(test);
   }
 
+  /**
+   * Validate the given files against NDR rules.
+   *
+   * @param skipNiem - True to skip validation on files with target namespaces
+   *     from the NIEM reference model.
+   */
   public List<Test> validateXsdWithNdr(List<File> files, Boolean skipNiem) throws Exception {
 
     List<Test> tests = new LinkedList<>();
@@ -169,20 +186,26 @@ public class NdrValidationService {
       skipNiem = true;
     }
 
-    XPath xPath = ValidationUtils.getXpath();
+    XPath xpath = ValidationUtils.getXpath();
 
     List<File> xsdFiles = files.stream().filter(file -> file.getName().endsWith(".xsd")).toList();
 
     for (File file : xsdFiles) {
-      Test test = new Test("validate-ndr", "Validate NIEM XML schemas against NDR conformance rules");
+      Test test = new Test("validate-ndr",
+          "Validate NIEM XML schemas against NDR conformance rules");
       test.startTest();
       test.results = new LinkedList<>();
 
       Document document = ValidationUtils.getDocument(file);
 
-      String targetNamespace = ValidationUtils.getXsdRootAttributeValue(document, xPath, "targetNamespace");
+      String targetNamespace = ValidationUtils.getXsdRootAttributeValue(document,
+          xpath, "targetNamespace");
 
-      if (file.getName().endsWith("structures.xsd") || file.getName().endsWith("code-lists-instance.xsd") || file.getName().endsWith("code-lists-schema-appinfo.xsd") || file.getName().endsWith("conformanceTargets.xsd") || file.getName().endsWith("appinfo.xsd")) {
+      if (file.getName().endsWith("structures.xsd")
+          || file.getName().endsWith("code-lists-instance.xsd")
+          || file.getName().endsWith("code-lists-schema-appinfo.xsd")
+          || file.getName().endsWith("conformanceTargets.xsd")
+          || file.getName().endsWith("appinfo.xsd")) {
         String message = "Skipped validation on NIEM utility schema.";
         this.skipTest(tests, test, file, Severity.info, Status.info, "utility", message, null);
         continue;
@@ -201,7 +224,8 @@ public class NdrValidationService {
         continue;
       }
 
-      String conformanceTargets = ValidationUtils.getXsdRootAttributeValue(document, xPath, "conformanceTargets");
+      String conformanceTargets = ValidationUtils.getXsdRootAttributeValue(document,
+          xpath, "conformanceTargets");
 
       String ndrKey = this.getXsdNdrKey(conformanceTargets);
       Xslt30Transformer transformer = this.transformers.get(ndrKey);
@@ -209,7 +233,8 @@ public class NdrValidationService {
       if (ndrKey == null) {
         String message = "NO NDR CONFORMANCE TARGET FOUND.  UNABLE TO RUN VALIDATION TESTS.";
         String comment = "Unless this is an external standard, NIEM schemas should contain a conformance target which indicates which NDR rule set to use for conformance validation.  See https://niem.github.io/reference/concepts/namespace/#conformance-targets-1 for more.";
-        this.skipTest(tests, test, file, Severity.warning, Status.warning, "no ndr", message, comment);
+        this.skipTest(tests, test, file, Severity.warning, Status.warning,
+            "no ndr", message, comment);
         continue;
       }
       else if (transformer == null) {
@@ -225,7 +250,8 @@ public class NdrValidationService {
       out.setOutputProperty(Serializer.Property.INDENT, "yes");
       transformer.transform(new StreamSource(file), out);
 
-      List<Test> ndrResults = this.processResults(tempResultsFiles, file.getName(), ndrKey, document, xPath);
+      List<Test> ndrResults = this.processResults(tempResultsFiles,
+          file.getName(), ndrKey, document, xpath);
       FileUtils.deleteTempFile(tempResultsFiles);
 
       tests.addAll(ndrResults);
@@ -235,7 +261,8 @@ public class NdrValidationService {
 
   }
 
-  private Map<String, String[]> loadRuleNumberMap() throws StreamReadException, DatabindException, IOException {
+  private Map<String, String[]> loadRuleNumberMap()
+      throws StreamReadException, DatabindException, IOException {
     ObjectMapper objectMapper = new ObjectMapper();
     String resourcePath = "/validation/ndr/ndr-5.0-to-6.0-ruleNumbers.json";
     // InputStream inputStream = HashMap.class.getResourceAsStream(resourcePath);
@@ -244,10 +271,13 @@ public class NdrValidationService {
   }
 
   /**
+   * Convert results in a SVRL format into a validation report.
+   *
    * @todo Remove NDR 5.0 to 6.0 rule number mapping code once changes to support new
-   * NDR 6.0 rules are implemented and the 6.0 XSL files provide the real numbers.
+   *     NDR 6.0 rules are implemented and the 6.0 XSL files provide the real numbers.
    */
-  private List<Test> processResults(File file, String filename, String ndrKey, Document document, XPath xPath) throws IOException, XPathExpressionException {
+  private List<Test> processResults(File file, String filename, String ndrKey,
+      Document document, XPath xpath) throws IOException, XPathExpressionException {
 
     List<Test> tests = new LinkedList<>();
 
@@ -292,7 +322,7 @@ public class NdrValidationService {
       // Results
       line = reader.readLine();
 
-      while (line!= null && !line.startsWith("   <svrl:active-pattern ")) {
+      while (line != null && !line.startsWith("   <svrl:active-pattern ")) {
 
         TestResult result = new TestResult(test.id);
         result.message = ruleTitle;
@@ -316,7 +346,7 @@ public class NdrValidationService {
           result.comment = comment.replace("      <svrl:text>", "").replace("</svrl:text>", "");
           test.ran = true;
           test.results.add(result);
-          this.getLocation(result, expression, document, xPath);
+          this.getLocation(result, expression, document, xpath);
         }
         else if (line.startsWith("   <svrl:successful-report")) {
           // Report warning
@@ -336,7 +366,7 @@ public class NdrValidationService {
           result.comment = comment.replace("      <svrl:text>", "").replace("</svrl:text>", "");
           test.ran = true;
           test.results.add(result);
-          this.getLocation(result, expression, document, xPath);
+          this.getLocation(result, expression, document, xpath);
         }
 
 
@@ -349,8 +379,10 @@ public class NdrValidationService {
           else {
             if (updatedRuleNumbers != null && updatedRuleNumbers.length > 1) {
               // Note the additional 6.0 rule numbers when one 5.0 rule maps to multiple 6.0 rules
-              String[] remainingRuleNumbers = Arrays.copyOfRange(updatedRuleNumbers, 1, updatedRuleNumbers.length);
-              result.comment += String.format(" Also see NDR 6.0 rule(s) %s", remainingRuleNumbers.toString());
+              String[] remainingRuleNumbers = Arrays.copyOfRange(updatedRuleNumbers,
+                  1, updatedRuleNumbers.length);
+              result.comment += String.format(" Also see NDR 6.0 rule(s) %s",
+                  remainingRuleNumbers.toString());
             }
           }
         }
@@ -379,11 +411,13 @@ public class NdrValidationService {
         return "https://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/niem-ndr-5.0.html#" + ruleId;
       case "6.0":
         return "https://niemopen.github.io/niem-naming-design-rules/ndr-v6.0-psd01.html#" + ruleId;
+      default:
+        return "";
     }
-    return "";
   }
 
-  private void getLocation(TestResult result, String location, Document document, XPath xPath) throws XPathExpressionException {
+  private void getLocation(TestResult result, String location, Document document, XPath xpath)
+      throws XPathExpressionException {
 
     String expression = location
         .replaceFirst("^ *location=\"", "")
@@ -398,7 +432,7 @@ public class NdrValidationService {
     Node node = null;
 
     try {
-      node = ValidationUtils.getXpathResult(document, xPath, expression);
+      node = ValidationUtils.getXpathResult(document, xpath, expression);
     }
     catch (Exception exception) {
       log.error(exception.getMessage());

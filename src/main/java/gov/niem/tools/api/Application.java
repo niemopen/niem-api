@@ -1,30 +1,29 @@
 package gov.niem.tools.api;
 
+import gov.niem.tools.api.core.config.Config;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import gov.niem.tools.api.core.config.Config;
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Contact;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.servers.Server;
-
 /**
- * Commonly used functionality behind NIEM supported tools
+ * Commonly used functionality for NIEM supported tools.
  */
 @SpringBootApplication
 @EnableJpaRepositories
 public class Application {
 
   /**
-   * Runs the REST API and backend
-   * @param args - Command-line arguments
+   * Runs the REST API and backend.
    */
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 
   /**
    * Set basic OpenAPI information for the project.
@@ -33,13 +32,14 @@ public class Application {
    * @return - An OpenAPI object configured with NIEM API defaults.
    */
   @Bean
-  public OpenAPI customOpenAPI() {
+  public OpenAPI customOpenApi() {
+    String description = "Community support for common NIEM tool functionality to browse and search the model, build and migrate subsets, and check conformance";
+
     return new OpenAPI()
       .info(
           new Info()
               .title("NIEM API 2.0")
-              .description(
-                  "Community support for common NIEM tool functionality to browse and search the model, build and migrate subsets, and check conformance")
+              .description(description)
               .version(Config.draft)
               .contact(
                   new Contact()

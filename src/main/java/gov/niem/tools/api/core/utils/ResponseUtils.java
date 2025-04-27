@@ -4,8 +4,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+/**
+ * HTTP response-related utility functions.
+ */
 public class ResponseUtils {
 
+  /**
+   * Returns a response entity with the given filename set in the header and bytes set in the body.
+   */
   public static ResponseEntity<byte[]> getResponseFile(byte[] bytes, String filename) {
     return ResponseEntity
       .ok()
@@ -17,7 +23,12 @@ public class ResponseUtils {
       .body(bytes);
   }
 
-  public static ResponseEntity<byte[]> getResponseFile(byte[] bytes, String filename, MediaType mediaType) {
+  /**
+   * Returns a response entity with the given filename set in the header, bytes set in the body,
+   * and the content type set to the given media type.
+   */
+  public static ResponseEntity<byte[]> getResponseFile(byte[] bytes, String filename,
+      MediaType mediaType) {
     return ResponseEntity
       .ok()
       .contentType(mediaType)
@@ -29,23 +40,39 @@ public class ResponseUtils {
       .body(bytes);
   }
 
+  /**
+   * Returns a response entity for a zip file.
+   */
   public static ResponseEntity<byte[]> getResponseFileZip(byte[] bytes, String filename) {
     return getResponseFile(bytes, filename, MediaType.valueOf("application/zip"));
   }
 
-  public static ResponseEntity<byte[]> getResponseFileJSON(byte[] bytes, String filename) {
+  /**
+   * Returns a response entity for a JSON file.
+   */
+  public static ResponseEntity<byte[]> getResponseFileJson(byte[] bytes, String filename) {
     return getResponseFile(bytes, filename, MediaType.APPLICATION_JSON);
   }
 
+  /**
+   * Returns a response entity for a text file.
+   */
   public static ResponseEntity<byte[]> getResponseFileText(byte[] bytes, String filename) {
     return getResponseFile(bytes, filename, MediaType.TEXT_PLAIN);
   }
 
-  public static ResponseEntity<byte[]> getResponseFileXML(byte[] bytes, String filename) {
+  /**
+   * Returns a response entity for an XML file.
+   */
+  public static ResponseEntity<byte[]> getResponseFileXml(byte[] bytes, String filename) {
     return getResponseFile(bytes, filename, MediaType.APPLICATION_XML);
   }
 
+  /**
+   * Returns a response entity for a CSV file.
+   */
   public static ResponseEntity<byte[]> getResponseFileCsv(String data, String filename) {
+    // TODO: Check for content type text/csv
     // ResponseEntity<byte[]> response = getResponseFile(data.getBytes(), filename);
     // HttpHeaders headers = response.getHeaders();
     // headers.add("Content-Type", "text/csv");

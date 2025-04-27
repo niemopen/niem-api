@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
+/**
+ * Zipfile-related utility functions.
+ */
 public class ZipUtils {
 
   /**
-   * Adds a file to the given zip file and return a byte array.
-   * @param files - List of files to be zipped
-   * @throws ZipException
+   * Returns a byte array for a zipfile of the given list of files.
    */
   public static byte[] zip(List<File> files) throws Exception {
     // Set up temp zip file
@@ -31,11 +31,9 @@ public class ZipUtils {
 
   /**
    * Zips the contents of the given source directory to the specified path.
-   * @param sourceDir - Folder to be zipped
-   * @param zipFilePathString - Path for the new zip file
-   * @throws ZipException
    */
-  public static void zip(File sourceDir, String zipFilePathString) throws ZipException, IOException {
+  public static void zip(File sourceDir, String zipFilePathString)
+      throws ZipException, IOException {
     ZipFile zipFile = new ZipFile(zipFilePathString);
     zipFile.addFolder(sourceDir);
     zipFile.close();
@@ -43,11 +41,9 @@ public class ZipUtils {
 
   /**
    * Adds a file to the given zip file.
-   * @param zipFilePathString - Path for the new zip file
-   * @param files - List of files to be zipped
-   * @throws ZipException
    */
-  public static ZipFile zip(String zipFilePathString, List<File> files) throws ZipException, IOException {
+  public static ZipFile zip(String zipFilePathString, List<File> files)
+      throws ZipException, IOException {
     ZipFile zipFile = new ZipFile(zipFilePathString);
     zipFile.addFiles(files);
     return zipFile;
@@ -55,7 +51,7 @@ public class ZipUtils {
 
   /**
    * Unzips the zip file at the given path to a temporary folder.
-   * @param zipPath - Path where the zip file is located.
+   *
    * @return - Path to the temporary folder where the files have been extracted.
    */
   public static Path unzip(Path zipPath) throws IOException {
@@ -65,7 +61,7 @@ public class ZipUtils {
 
   /**
    * Unzips the zip file at the given path to a temporary folder.
-   * @param zipPath - Path where the zip file is located.
+   *
    * @return - Path to the temporary folder where the files have been extracted.
    */
   public static Path unzip(Path zipPath, Path outputDir) throws IOException {

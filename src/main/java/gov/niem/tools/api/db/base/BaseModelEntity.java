@@ -1,12 +1,12 @@
 package gov.niem.tools.api.db.base;
 
-import java.util.Map;
+import gov.niem.tools.api.db.model.Model;
+import gov.niem.tools.api.db.steward.Steward;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import gov.niem.tools.api.db.model.Model;
-import gov.niem.tools.api.db.steward.Steward;
 import jakarta.persistence.MappedSuperclass;
+import java.util.Map;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -25,10 +25,13 @@ public abstract class BaseModelEntity extends BaseStewardEntity {
   @JsonIgnore
   public abstract Model getModel();
 
+  /**
+   * Gets the key of the model in which this entity belongs.
+   */
   // @JacksonXmlProperty(localName = "api:ModelKeyID")
   // @Schema(
-  //   example = "niem",
-  //   description = "A human-readable and url-friendly steward identifier generated from the steward shortName field."
+  //     example = "niem",
+  //    description = "A human-readable and url-friendly steward identifier generated from the steward shortName field."
   // )
   @JsonIgnore
   public String getModelKey() {
@@ -57,8 +60,8 @@ public abstract class BaseModelEntity extends BaseStewardEntity {
 
   // @JacksonXmlProperty(localName = "api:ModelShortName")
   // @Schema(
-  //   example = "NIEM",
-  //   description = "A short name or acronym used to identify a steward. This could be the name of an organization or unit, a program name, or other kind of authoritative source."
+  //     example = "NIEM",
+  //     description = "A short name or acronym used to identify a steward. This could be the name of an organization or unit, a program name, or other kind of authoritative source."
   // )
   // public String getModelShortName() {
   //   if (this.getModel() == null) {
@@ -67,6 +70,9 @@ public abstract class BaseModelEntity extends BaseStewardEntity {
   //   return this.getModel().getShortName();
   // }
 
+  /**
+   * Gets the Steward which is responsible for managing this entity.
+   */
   @JsonIgnore
   public Steward getSteward() {
     if (this.getModel() == null) {

@@ -2,7 +2,6 @@ package gov.niem.tools.api.core.config;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.http.MediaType;
 import org.springframework.lang.NonNull;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
@@ -28,7 +27,7 @@ public class EnsureApplicationJsonNegotiationStrategy extends HeaderContentNegot
     }
 
     boolean includesApplicationJson = mediaTypes.stream()
-    .anyMatch(mediaType -> mediaType.includes(MediaType.APPLICATION_JSON));
+        .anyMatch(mediaType -> mediaType.includes(MediaType.APPLICATION_JSON));
 
     if (!includesApplicationJson) {
       mediaTypes.add(MediaType.APPLICATION_JSON);

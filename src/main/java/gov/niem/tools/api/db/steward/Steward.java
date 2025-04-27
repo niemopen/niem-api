@@ -1,17 +1,38 @@
 package gov.niem.tools.api.db.steward;
 
+import gov.niem.tools.api.core.config.Config;
+import gov.niem.tools.api.db.base.BaseEntity;
+import gov.niem.tools.api.db.model.Model;
+import gov.niem.tools.api.db.niem.genc.CountryAlpha3CodeType;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-
-import gov.niem.tools.api.db.model.Model;
-import gov.niem.tools.api.db.niem.genc.CountryAlpha3CodeType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import gov.niem.tools.api.core.config.Config;
-import gov.niem.tools.api.db.base.BaseEntity;
-import lombok.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Index;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-
 import org.hibernate.annotations.Formula;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -22,11 +43,6 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.ObjectPath;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyValue;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-
-import java.util.*;
 
 /**
  * A program, group, or other entity responsible for managing NIEM content.
@@ -42,10 +58,10 @@ import java.util.*;
 @Schema(name = "Steward")
 @Indexed
 @Table(indexes = {
-  @Index(name="steward_category_idx", columnList = "category"),
-  @Index(name="steward_country_idx", columnList = "country"),
-  @Index(name="steward_short_name_idx", columnList = "shortName"),
-  @Index(name="steward_unit_idx", columnList = "unit")
+  @Index(name = "steward_category_idx", columnList = "category"),
+  @Index(name = "steward_country_idx", columnList = "country"),
+  @Index(name = "steward_short_name_idx", columnList = "shortName"),
+  @Index(name = "steward_unit_idx", columnList = "unit")
 })
 public class Steward extends BaseEntity {
 
@@ -65,7 +81,7 @@ public class Steward extends BaseEntity {
    * A short name or acronym used to identify a steward.  This could be the name of an
    * organization or unit, a program name, or other kind of authoritative source.
    */
-  @NotBlank(message="shortName is required")
+  @NotBlank(message = "shortName is required")
   @Column(unique = true, nullable = false)
   @JacksonXmlProperty(localName = "api:StewardShortName")
   @Schema(example = "NIEM")
@@ -80,6 +96,9 @@ public class Steward extends BaseEntity {
   // @FullTextField
   private String fullName;
 
+  /**
+   * General kinds of stewards, such as Federal, State, Local, Industry, Nonprofit, etc.
+   */
   public enum Category {
     Federal,
     State,
@@ -107,7 +126,8 @@ public class Steward extends BaseEntity {
    */
   @Column(columnDefinition = "text")
   @JacksonXmlProperty(localName = "nc:OrganizationDescriptionText")
-  @Schema(example = "A community-driven, standards-based approach to defining information exchange packages for multiple business domains.")
+  @Schema(
+      example = "A community-driven, standards-based approach to defining information exchange packages for multiple business domains.")
   private String description;
 
   /**
@@ -173,7 +193,7 @@ public class Steward extends BaseEntity {
    * A set of models which belong to the steward.
    */
   @JsonIgnore @Builder.Default @ToString.Exclude @EqualsAndHashCode.Exclude
-  @OneToMany(mappedBy="steward", cascade = CascadeType.PERSIST, orphanRemoval = true)
+  @OneToMany(mappedBy = "steward", cascade = CascadeType.PERSIST, orphanRemoval = true)
   @OrderBy("shortName")
   @NotAudited
   @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "steward")))
@@ -202,32 +222,32 @@ public class Steward extends BaseEntity {
 
   @Override
   @Schema(
-    example = Config.BASE_URL + "/stewards/niem",
-    description = "An endpoint to get information about a steward.")
+      example = Config.BASE_URL + "/stewards/niem",
+      description = "An endpoint to get information about a steward.")
   public String getRoute() {
     return String.format("%s/stewards/%s", Config.baseUrl, this.stewardKey);
   }
 
   @Override
   @Schema(
-    example = "Steward",
-    description = "A kind of NIEM entity, such as a Namespace or a Property.")
+      example = "Steward",
+      description = "A kind of NIEM entity, such as a Namespace or a Property.")
   public String getClassName() {
     return super.getClassName();
   }
 
   @Override
   @Schema(
-    example = "niem",
-    description = "A unique identifier.  For a steward, this is the the same as the stewardKey field.")
+      example = "niem",
+      description = "A unique identifier.  For a steward, this is the stewardKey field.")
   public String getFullIdentifier() {
     return this.getStewardKey();
   }
 
   @Override
   @Schema(
-    example = "niem",
-    description = "An identifier, unique within its immediate scope.  For a steward, this is the same as the stewardKey field.")
+      example = "niem",
+      description = "A scoped identifier.  For a steward, this is the stewardKey field.")
   public String getLocalIdentifier() {
     return this.getFullIdentifier();
   }
@@ -239,20 +259,26 @@ public class Steward extends BaseEntity {
   }
 
   /**
-   * Route to the NIEM steward
+   * Route to the NIEM steward.
    */
   @JsonIgnore
   public String getNiemRoute() {
     return String.format("%s/stewards/%s", Config.baseUrl, niemStewardKey);
   }
 
+  /**
+   * Get a model belonging to the steward with the given model key.
+   */
   public Optional<Model> getModelOptional(String modelKey) {
     return this.getModels()
     .stream()
-    .filter(m -> m.getModelKey().equals(modelKey) )
+    .filter(m -> m.getModelKey().equals(modelKey))
     .findFirst();
   }
 
+  /**
+   * Get key fields about a steward.
+   */
   @JsonIgnore
   public Map<String, String> toSummary() {
     Map<String, String> map = new HashMap<>();
@@ -296,7 +322,9 @@ public class Steward extends BaseEntity {
   // public HashMap<String, String> getHistoricalModelRoutes() {
   //   HashMap<String, String> map = new HashMap<String, String>();
   //   for(Model model : this.getHistoricalStewardship()) {
-  //     map.put(model.getShortName(), AppUtils.getModelRoute(this.getStewardKey(), model.getModelKey()));
+  //     map.put(model.getShortName(),
+  //       AppUtils.getModelRoute(this.getStewardKey(), model.getModelKey())
+  //     );
   //   }
   //   return map;
   // }

@@ -1,17 +1,19 @@
 package gov.niem.tools.api.validation;
 
-import java.util.LinkedList;
-import java.util.List;
+import gov.niem.tools.api.validation.TestResult.Status;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import gov.niem.tools.api.validation.TestResult.Status;
+import java.util.LinkedList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Information about a validation test.
+ */
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -19,11 +21,14 @@ import lombok.RequiredArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Test {
 
+  /**
+   * Kinds of test severity (error, warning, info).
+   */
   public enum Severity {
     error,
     warning,
     info
-  };
+  }
 
   @Builder.Default
   public Status status = Status.unset;
@@ -48,7 +53,7 @@ public class Test {
   public String notes;
   public boolean ran;
 
-  /** Test runtime in seconds */
+  /** Test runtime in seconds. */
   public float runtime;
 
   @JsonIgnore
@@ -66,15 +71,24 @@ public class Test {
     this.description = description;
   }
 
+  /**
+   * Starts the test and stores the current time for the test runtime calculation.
+   */
   public void startTest() {
     this.start = System.currentTimeMillis();
   }
 
+  /**
+   * Starts the test and stores the current time for the test runtime calculation.
+   */
   public void startTest(Severity severity) {
     this.startTest();
     this.severity = severity;
   }
 
+  /**
+   * Marks the test as ran and calculates the runtime.
+   */
   public void endTest() {
     long end = System.currentTimeMillis();
     this.ran = true;

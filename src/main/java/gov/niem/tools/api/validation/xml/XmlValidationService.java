@@ -1,5 +1,12 @@
 package gov.niem.tools.api.validation.xml;
 
+import gov.niem.tools.api.core.utils.FileUtils;
+import gov.niem.tools.api.core.utils.ZipUtils;
+import gov.niem.tools.api.validation.Test;
+import gov.niem.tools.api.validation.TestResult;
+import gov.niem.tools.api.validation.TestResult.Status;
+import gov.niem.tools.api.validation.ValidationUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,19 +19,14 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
-import gov.niem.tools.api.core.utils.FileUtils;
-import gov.niem.tools.api.core.utils.ZipUtils;
-import gov.niem.tools.api.validation.Test;
-import gov.niem.tools.api.validation.TestResult;
-import gov.niem.tools.api.validation.TestResult.Status;
-import gov.niem.tools.api.validation.ValidationUtils;
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * Validate XML files against XML schemas.
+ */
 @Log4j2
 @Service
 public class XmlValidationService {
@@ -35,7 +37,6 @@ public class XmlValidationService {
 
   /**
    * Validate the given XML schema files against the W3C XML Schema specification.
-   * @throws IOException
    */
   public Test validateXsd(File[] xsdFiles) throws SAXException, IOException {
 
@@ -60,9 +61,28 @@ public class XmlValidationService {
   }
 
   /**
+   * Runs XML schema validation on a single XSD file or a zip file of XSDs.
+   */
+  public Test validateXsd(MultipartFile multipartFile) throws Exception {
+    Path tempFolder = ValidationUtils.createTempFolder();
+    File inputFile = FileUtils.saveFile(multipartFile, tempFolder).toFile();
+    Test test;
+    if (inputFile.getName().endsWith(".xsd")) {
+      File[] files = {inputFile};
+      test = this.validateXsd(files);
+    }
+    else {
+      test = this.validateXsdZip(inputFile);
+    }
+    // TODO: Cannot delete temp folder because of a file lock
+    // FileUtils.deleteTempDir(tempFolder);
+    return test;
+  }
+
+  /**
    * Validate the XSD files from the given zip file against the W3C XML Schema specification.
    *
-   * TODO: Unknown file lock prevents temporary folder from being deleted.
+   * @todo: Unknown file lock prevents temporary folder from being deleted.
    */
   public Test validateXsdZip(File zipFile) throws Exception {
 
@@ -83,29 +103,11 @@ public class XmlValidationService {
   }
 
   /**
-   * Runs XML schema validation on a single XSD file or a zip file of XSDs.
-   */
-  public Test validateXsd(MultipartFile multipartFile) throws Exception {
-    Path tempFolder = ValidationUtils.createTempFolder();
-    File inputFile = FileUtils.saveFile(multipartFile, tempFolder).toFile();
-    Test test;
-    if (inputFile.getName().endsWith(".xsd")) {
-      File[] files = {inputFile};
-      test = this.validateXsd(files);
-    }
-    else {
-      test = this.validateXsdZip(inputFile);
-    }
-    // TODO: Cannot delete temp folder because of a file lock
-    // FileUtils.deleteTempDir(tempFolder);
-    return test;
-  }
-
-  /**
    * Validate an XML file against the given XML schemas.
    * Returns early with validation errors if the given XML schemas do not validate.
    */
-  public Test validateXmlOnly(File xmlFile, File[] xsdFiles, String testId, String description) throws SAXException, IOException {
+  public Test validateXmlOnly(File xmlFile, File[] xsdFiles, String testId, String description)
+      throws SAXException, IOException {
     Test test = this.validateXmlOnly(xmlFile, xsdFiles);
     test.id = testId;
     test.description = description;
@@ -125,7 +127,8 @@ public class XmlValidationService {
    * Validate an XML file against the given XML schemas.
    * Returns early with validation errors if the given XML schemas do not validate.
    */
-  public Test validateXmlOnly(File xmlFile, Source[] xsdSources, String testId, String description) throws SAXException, IOException {
+  public Test validateXmlOnly(File xmlFile, Source[] xsdSources, String testId, String description)
+      throws SAXException, IOException {
 
     SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     Schema schema = schemaFactory.newSchema(xsdSources);
@@ -134,7 +137,8 @@ public class XmlValidationService {
 
     Validator validator = schema.newValidator();
     XmlNodeMap xmlNodeMap = new XmlNodeMap();
-    XmlErrorHandler xmlErrorHandler = new XmlErrorHandler(new File[] {xmlFile}, xmlNodeMap, xmlTest);
+    XmlErrorHandler xmlErrorHandler = new XmlErrorHandler(new File[] {xmlFile},
+        xmlNodeMap, xmlTest);
     validator.setErrorHandler(xmlErrorHandler);
 
     // Prepare the XML input files and validate
@@ -167,7 +171,7 @@ public class XmlValidationService {
     // Return test early if schemas did not validate
     if (xsdTest.status == Status.error) {
       TestResult result = new TestResult(xmlTest.id);
-      result.message = "XML validation did not run because given XML schemas had validation errors.";
+      result.message = "XML validation did not run because given XML schemas had validation errors";
       result.status = Status.error;
 
       xmlTest.status = Status.error;
@@ -181,7 +185,8 @@ public class XmlValidationService {
     // Switch to a new XML validation test and build the XML validator.
     Validator validator = schema.newValidator();
     XmlNodeMap xmlNodeMap = new XmlNodeMap();
-    XmlErrorHandler xmlErrorHandler = new XmlErrorHandler(new File[] {xmlFile}, xmlNodeMap, xmlTest);
+    XmlErrorHandler xmlErrorHandler = new XmlErrorHandler(new File[] {xmlFile},
+        xmlNodeMap, xmlTest);
     validator.setErrorHandler(xmlErrorHandler);
 
     // Prepare the XML input files and validate
@@ -192,7 +197,11 @@ public class XmlValidationService {
     return new Test[] {xsdTest, xmlTest};
   }
 
-  public Test[] validateXml(MultipartFile multipartXmlFile, MultipartFile multipartXsdFile) throws Exception {
+  /**
+   * Validate the given XML file with the given XSD (single file) or XSD zipfile.
+   */
+  public Test[] validateXml(MultipartFile multipartXmlFile, MultipartFile multipartXsdFile)
+      throws Exception {
     Path tempPath = ValidationUtils.createTempFolder();
     File xmlFile = FileUtils.saveFile(multipartXmlFile, tempPath).toFile();
     File xsdFile = FileUtils.saveFile(multipartXsdFile, tempPath).toFile();
@@ -214,6 +223,9 @@ public class XmlValidationService {
 
   }
 
+  /**
+   * Validate the given XML file with the OASIS schema for XML catalogs.
+   */
   public Test validateXmlCatalog(MultipartFile xml) throws Exception {
     Path tempPath = ValidationUtils.createTempFolder();
     File xmlFile = FileUtils.saveFile(xml, tempPath).toFile();
@@ -221,15 +233,20 @@ public class XmlValidationService {
 
   }
 
+  /**
+   * Validate the given XML file with the OASIS schema for XML catalogs.
+   */
   public Test validateXmlCatalog(File xmlFile) throws Exception {
     Path tempPath = ValidationUtils.createTempFolder();
-    File xsdFile = ValidationUtils.convertClassPathResourceToFile(tempPath, "validation/catalog.xsd", "catalog.xsd");
+    File xsdFile = ValidationUtils.convertClassPathResourceToFile(tempPath,
+        "validation/catalog.xsd", "catalog.xsd");
 
     // Validation should return two results: XSD validation and XML validation
     Test[] resultTests = this.validateXml(xmlFile, new File[] {xsdFile});
 
     // Only return the result for the user's catalog file.
-    return this.getXmlTest(resultTests, "validate-xml-catalog", "Validate an XML catalog file against the OASIS specification");
+    return this.getXmlTest(resultTests, "validate-xml-catalog",
+        "Validate an XML catalog file against the OASIS specification");
   }
 
 
@@ -264,7 +281,6 @@ public class XmlValidationService {
   /**
    * Returns a SchemaFactory with a custom error handler that catches and logs
    * all exception if possible instead of exiting on the first encountered exception.
-   * @throws IOException
    */
   private SchemaFactory getSchemaFactory(File[] xsdFiles) throws IOException {
     SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -295,7 +311,8 @@ public class XmlValidationService {
    * Gets a new XML Schema validation test.
    */
   private Test createXsdTest() {
-    return this.createTest("validate-xsd", "Validate XML schema files against the W3C specification");
+    return this.createTest("validate-xsd",
+        "Validate XML schema files against the W3C specification");
   }
 
   private Test getXsdTest() {
@@ -305,7 +322,6 @@ public class XmlValidationService {
   /**
    * Convert the given XML files into an array of Source objects to be used
    * by the validator.
-   * @throws IOException
    */
   private Source[] convertFilesToSource(File[] xmlFiles) throws IOException {
 
@@ -347,7 +363,8 @@ public class XmlValidationService {
     for (TestResult result : test.results) {
       log.error("{}: {}", result.status, result.message);
       log.error("  {}", result.location);
-      log.error("  line:{} col:{} - {} '{}'", result.line, result.column, result.entityCategory, result.entity);
+      log.error("  line:{} col:{} - {} '{}'", result.line,
+          result.column, result.entityCategory, result.entity);
     }
   }
 

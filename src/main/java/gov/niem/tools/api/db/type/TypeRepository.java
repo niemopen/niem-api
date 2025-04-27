@@ -2,6 +2,9 @@ package gov.niem.tools.api.db.type;
 
 import gov.niem.tools.api.db.component.ComponentRepository;
 
+/**
+ * Repository interface for finding and managing types in the database.
+ */
 public interface TypeRepository extends ComponentRepository<Type> {
 
   // TODO: Clean up type repository

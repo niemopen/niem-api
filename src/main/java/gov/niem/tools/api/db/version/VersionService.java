@@ -1,8 +1,5 @@
 package gov.niem.tools.api.db.version;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import gov.niem.tools.api.db.base.BaseEntityService;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
@@ -10,13 +7,19 @@ import gov.niem.tools.api.db.exceptions.FieldNotFoundException;
 import gov.niem.tools.api.db.model.Model;
 import gov.niem.tools.api.db.model.ModelService;
 import gov.niem.tools.api.db.steward.Steward;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+/**
+ * Operations supporting versions.
+ */
 @Service
 public class VersionService extends BaseEntityService<Version> {
 
@@ -40,7 +43,8 @@ public class VersionService extends BaseEntityService<Version> {
   }
 
   // @Transactional
-  // public Version add(String stewardKey, String modelKey, String versionNumber, String previousVersionNumber) throws Exception {
+  // public Version add(String stewardKey, String modelKey, String versionNumber,
+  //     String previousVersionNumber) throws Exception {
   //   // Set the previous version field on the given version
   //   Version previousVersion = this.findOne(stewardKey, modelKey, previousVersionNumber);
 
@@ -58,6 +62,10 @@ public class VersionService extends BaseEntityService<Version> {
   //   return version;
   // }
 
+  /**
+   * Creates a new version in the database with the fields in the given version object
+   * and adds it to the model with the given model fields.
+   */
   @Transactional
   public Version add(String stewardKey, String modelKey, Version version) throws Exception {
     Model model = modelService.findOne(stewardKey, modelKey);
@@ -65,17 +73,26 @@ public class VersionService extends BaseEntityService<Version> {
     return super.add(version);
   }
 
+  /**
+   * Creates a new version in the database with the given version number and adds it
+   * to the given model.
+   */
   @Transactional
   public Version add(Model model, String versionNumber) throws Exception {
     Version version = Version.builder()
-    .model(model)
-    .versionNumber(versionNumber)
-    .build();
+        .model(model)
+        .versionNumber(versionNumber)
+        .build();
     return super.add(version);
   }
 
+  /**
+   * Updates a version in the database with the given fields to the fields in the
+   * given version object.
+   */
   @Transactional
-  public Version edit(String oldStewardKey, String oldModelKey, String oldVersionNumber, Version updatedVersion) throws Exception {
+  public Version edit(String oldStewardKey, String oldModelKey, String oldVersionNumber,
+      Version updatedVersion) throws Exception {
     Version oldVersion = this.findOne(oldStewardKey, oldModelKey, oldVersionNumber);
 
     // TODO: Collision check
@@ -83,6 +100,9 @@ public class VersionService extends BaseEntityService<Version> {
     return this.edit(oldVersion.getId(), updatedVersion);
   }
 
+  /**
+   * Deletes a version in the database with the given fields.
+   */
   @Transactional
   public void delete(String stewardKey, String modelKey, String versionNumber) throws Exception {
     Version version = this.findOne(stewardKey, modelKey, versionNumber);
@@ -96,33 +116,59 @@ public class VersionService extends BaseEntityService<Version> {
   //   this.saveExisting(version);
   // }
 
+  /**
+   * Finds all versions in the database.
+   */
   public List<Version> findAll() {
     return repo.findAll();
   }
 
+  /**
+   * Finds the version in the database with the identifying fields from the given
+   * version object.
+   */
   public Version findOne(Version version) throws EntityNotFoundException {
     return this.findOne(version.getStewardKey(), version.getModelKey(), version.getVersionNumber());
   }
 
-  public Optional<Version> findOneOptional(String stewardKey, String modelKey, String versionNumber) {
-    return repo.findOneByModel_Steward_StewardKeyAndModel_ModelKeyAndVersionNumber(stewardKey, modelKey, versionNumber);
-  }
-
-  public Version findOne(String stewardKey, String modelKey, String versionNumber) throws EntityNotFoundException {
+  /**
+   * Finds the version in the database with the given fields.
+   */
+  public Version findOne(String stewardKey, String modelKey, String versionNumber)
+      throws EntityNotFoundException {
     return this.findOneOptional(stewardKey, modelKey, versionNumber)
     .orElseThrow(() -> this.getNotFoundException(versionNumber));
   }
 
+  /**
+   * Optionally finds the version in the database with the given fields.
+   */
+  public Optional<Version> findOneOptional(String stewardKey, String modelKey,
+      String versionNumber) {
+    return repo.findOneByModel_Steward_StewardKeyAndModel_ModelKeyAndVersionNumber(
+      stewardKey, modelKey, versionNumber);
+  }
+
+  /**
+   * Finds the version from the NIEM reference model with the given version number.
+   */
   public Version findOneNiem(String versionNumber) throws EntityNotFoundException {
     return this.findOne(Steward.niemStewardKey, Model.niemModelKey, versionNumber);
   }
 
+  /**
+   * Finds all versions in the model with the given fields.
+   */
   public Set<Version> findByKeys(String stewardKey, String modelKey) throws Exception {
     Model model = modelService.findOne(stewardKey, modelKey);
     return model.getVersions();
   }
 
-  public Long findId(String stewardKey, String modelKey, String versionNumber) throws EntityNotFoundException {
+  /**
+   * Finds the version with the given fields.
+   */
+  public Long findId(String stewardKey, String modelKey, String versionNumber)
+      throws EntityNotFoundException {
     Version version = this.findOne(stewardKey, modelKey, versionNumber);
     return version.getId();
   }
@@ -131,11 +177,15 @@ public class VersionService extends BaseEntityService<Version> {
     assertFieldNotNullAndNotEmpty("versionNumber", version.getVersionNumber());
   }
 
+  /**
+   * Checks the the database does not contain another version with the same
+   * identifying fields as the given version object.
+   */
   public void assertUnique(Version version) throws EntityNotUniqueException {
     repo
-    .findOneByModel_Steward_StewardKeyAndModel_ModelKeyAndVersionNumber(
-      version.getStewardKey(), version.getModelKey(), version.getVersionNumber())
-    .ifPresent(v -> this.throwNotUnique(v));
+        .findOneByModel_Steward_StewardKeyAndModel_ModelKeyAndVersionNumber(
+          version.getStewardKey(), version.getModelKey(), version.getVersionNumber())
+        .ifPresent(v -> this.throwNotUnique(v));
   }
 
 }

@@ -1,9 +1,19 @@
 package gov.niem.tools.api.db.namespace;
 
-import java.util.ArrayList;
-import java.util.List;
+import gov.niem.tools.api.core.config.Config.AppMediaType;
+import gov.niem.tools.api.core.utils.CmfUtils;
+import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.property.Property;
+import gov.niem.tools.api.db.type.Type;
 
 import org.mitre.niem.cmf.Model;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -14,20 +24,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.niem.tools.api.core.config.Config.AppMediaType;
-import gov.niem.tools.api.core.utils.CmfUtils;
-import gov.niem.tools.api.db.ServiceHub;
-import gov.niem.tools.api.db.property.Property;
-import gov.niem.tools.api.db.type.Type;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-
+/**
+ * REST controller for namespaces.
+ */
 @Validated
 @RestController
 @RequestMapping("/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}")
-@Tag(name = "Data-4: Namespace", description = "A collection of properties and types managed by an authoritative source.")
+@Tag(
+    name = "Data-4: Namespace",
+    description = "A collection of properties and types managed by an authoritative source.")
 public class NamespaceController {
 
   @Autowired
@@ -64,7 +69,8 @@ public class NamespaceController {
       @PathVariable String modelKey,
       @PathVariable String versionNumber,
       @PathVariable String prefix,
-      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType) throws Exception {
+      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
+      throws Exception {
     Namespace namespace = hub.namespaces.findOne(stewardKey, modelKey, versionNumber, prefix);
     org.mitre.niem.cmf.Model cmfModel = new Model();
     namespace.addToCmfModel(cmfModel);
@@ -102,19 +108,24 @@ public class NamespaceController {
       @PathVariable String stewardKey,
       @PathVariable String modelKey,
       @PathVariable String versionNumber,
-      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType) throws Exception {
+      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
+      throws Exception {
 
     // Get results
-    ArrayList<Namespace> namespaces = new ArrayList<Namespace>(hub.namespaces.findByKeys(stewardKey, modelKey, versionNumber));
+    ArrayList<Namespace> namespaces = new ArrayList<Namespace>(
+        hub.namespaces.findByKeys(stewardKey, modelKey, versionNumber));
 
     // Convert results to CMF
     org.mitre.niem.cmf.Model cmfModel = new Model();
-    for(Namespace namespace : namespaces) {
+    for (Namespace namespace : namespaces) {
       namespace.addToCmfModel(cmfModel);
     }
     return CmfUtils.generateString(cmfModel, mediaType);
   }
 
+  /**
+   * Gets all types from a namespace.
+   */
   @GetMapping("/namespaces/{prefix}/types")
   @Operation(summary = "Get all types from a namespace.")
   @ResponseStatus(code = HttpStatus.OK)
@@ -127,6 +138,9 @@ public class NamespaceController {
     return hub.types.findByNamespace(stewardKey, modelKey, versionNumber, prefix);
   }
 
+  /**
+   * Gets all types from a namespace as CMF.
+   */
   @GetMapping("/namespaces.cmf/{prefix}/types")
   @Operation(summary = "Get all types from a namespace as CMF.")
   @ResponseStatus(code = HttpStatus.OK)
@@ -136,15 +150,19 @@ public class NamespaceController {
       @PathVariable String modelKey,
       @PathVariable String versionNumber,
       @PathVariable String prefix,
-      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType) throws Exception {
+      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
+      throws Exception {
     List<Type> types = hub.types.findByNamespace(stewardKey, modelKey, versionNumber, prefix);
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
-    for(Type type : types) {
+    for (Type type : types) {
       type.addToCmfModel(cmfModel);
     }
     return CmfUtils.generateString(cmfModel, mediaType);
   }
 
+  /**
+   * Gets all properties from a namespace.
+   */
   @GetMapping("/namespaces/{prefix}/properties")
   @Operation(summary = "Get all properties from a namespace")
   @ResponseStatus(code = HttpStatus.OK)
@@ -157,6 +175,9 @@ public class NamespaceController {
     return hub.properties.findByNamespace(stewardKey, modelKey, versionNumber, prefix);
   }
 
+  /**
+   * Gets all properties from a namespace as CMF.
+   */
   @GetMapping("/namespaces.cmf/{prefix}/properties")
   @Operation(summary = "Get all properties from a namespace")
   @ResponseStatus(code = HttpStatus.OK)
@@ -166,8 +187,10 @@ public class NamespaceController {
       @PathVariable String modelKey,
       @PathVariable String versionNumber,
       @PathVariable String prefix,
-      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType) throws Exception {
-    List<Property> properties = hub.properties.findByNamespace(stewardKey, modelKey, versionNumber, prefix);
+      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
+      throws Exception {
+    List<Property> properties = hub.properties.findByNamespace(stewardKey,
+        modelKey, versionNumber, prefix);
     org.mitre.niem.cmf.Model cmfModel = new Model();
     for (Property property : properties) {
       property.addToCmfModel(cmfModel);
@@ -176,7 +199,9 @@ public class NamespaceController {
   }
 
   // @PostMapping("/namespaces")
-  // public ResponseEntity<String> postNamespace(@PathVariable String stewardKey, @PathVariable String modelKey, @PathVariable String versionNumber, Namespace namespace) throws Exception {
+  // public ResponseEntity<String> postNamespace(@PathVariable String stewardKey,
+  //     @PathVariable String modelKey, @PathVariable String versionNumber, Namespace namespace)
+  //     throws Exception {
   //   String message = hub.namespaces.add(stewardKey, modelKey, versionNumber, namespace);
   //   return AppUtils.getResponseOkString(message);
   // }

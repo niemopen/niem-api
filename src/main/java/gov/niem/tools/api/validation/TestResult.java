@@ -1,12 +1,21 @@
 package gov.niem.tools.api.validation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * An individual test result.
+ *
+ * <p>Separate tests and results are useful for cases when validators are able to create
+ * a separate test for each kind of issue (e.g., a property declaration without a definition).
+ * Each occurrence of that issue would be recorded as a separate result.
+ *
+ * <p>In some cases, tests and results might not be able to be grouped and each failed test
+ * will have a single result.
+ */
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -14,6 +23,9 @@ import lombok.RequiredArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TestResult {
 
+  /**
+   * Test result status (error, warning, info, passed, unset).
+   */
   public enum Status {
     error,
     warning,
@@ -46,6 +58,9 @@ public class TestResult {
     this.entity = label;
   }
 
+  /**
+   * Creates a new TestResult object with the given values.
+   */
   public TestResult(String testId, String label, String prefix, String problemValue) {
     this.testId = testId;
     this.entity = label;

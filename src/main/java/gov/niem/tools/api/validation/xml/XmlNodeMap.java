@@ -7,12 +7,13 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
 
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * Maps XML element names to line numbers.
+ */
 @Log4j2
 public class XmlNodeMap {
 
@@ -22,6 +23,10 @@ public class XmlNodeMap {
   String regex = "<([^ >\\/]*)";
   Pattern pattern = Pattern.compile(regex);
 
+  /**
+   * Process the given XML file to add entries to the map object for line numbers
+   * and XML nodes (element names and style "element").
+   */
   public void load(File file) throws FileNotFoundException {
 
     BufferedReader bufferedReader = new BufferedReader(new FileReader(file));

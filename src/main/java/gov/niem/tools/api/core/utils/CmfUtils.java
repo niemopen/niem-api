@@ -1,22 +1,25 @@
 package gov.niem.tools.api.core.utils;
 
+import gov.niem.tools.api.core.config.Config;
+import gov.niem.tools.api.core.config.Config.AppMediaType;
+import gov.niem.tools.api.core.exceptions.BadRequestException;
+
+import org.mitre.niem.cmf.HasProperty;
+import org.mitre.niem.cmf.Model;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-
+import lombok.extern.log4j.Log4j2;
 import org.json.JSONObject;
-import org.mitre.niem.cmf.HasProperty;
-import org.mitre.niem.cmf.Model;
 import org.mitre.niem.xsd.ModelXMLReader;
 import org.mitre.niem.xsd.ModelXMLWriter;
 import org.springframework.web.multipart.MultipartFile;
 
-import gov.niem.tools.api.core.config.Config;
-import gov.niem.tools.api.core.config.Config.AppMediaType;
-import gov.niem.tools.api.core.exceptions.BadRequestException;
-import lombok.extern.log4j.Log4j2;
-
+/**
+ * CMF-related utility functions.
+ */
 @Log4j2
 public class CmfUtils {
 
@@ -24,20 +27,20 @@ public class CmfUtils {
    * Checks that the given file contains the URI for the currently-supported
    * version of CMF, and if so, loads it into a CMF Model object.
    */
-  public static Model loadCMF(MultipartFile multipartFile) throws IOException, BadRequestException {
+  public static Model loadCmf(MultipartFile multipartFile) throws IOException, BadRequestException {
 
     // Throw exception if the given file is the supported version of CMF
     CmfUtils.checkVersion(multipartFile);
 
     // Load CMF model
-    ModelXMLReader modelXMLReader = new ModelXMLReader();
-    Model cmf = modelXMLReader.readXML(multipartFile.getInputStream());
+    ModelXMLReader modelXmlReader = new ModelXMLReader();
+    Model cmf = modelXmlReader.readXML(multipartFile.getInputStream());
 
     // Throw exception with error messages if CMF did not load
     if (cmf == null) {
       log.debug("Load failed: Could not parse CMF");
-      modelXMLReader.getMessages().forEach(message -> log.debug(message));
-      String errorMessages = String.join(", ", modelXMLReader.getMessages());
+      modelXmlReader.getMessages().forEach(message -> log.debug(message));
+      String errorMessages = String.join(", ", modelXmlReader.getMessages());
       throw new BadRequestException(errorMessages);
     }
 
@@ -49,7 +52,8 @@ public class CmfUtils {
    * Checks that the given file contains the URI for the currently-supported
    * version of CMF.
    */
-  public static void checkVersion(MultipartFile multipartFile) throws IOException, BadRequestException {
+  public static void checkVersion(MultipartFile multipartFile)
+      throws IOException, BadRequestException {
     String cmfString = FileUtils.getFileText(multipartFile);
     CmfUtils.checkVersion(cmfString);
   }
@@ -69,19 +73,20 @@ public class CmfUtils {
    */
   public static void checkVersion(String cmfString) throws BadRequestException {
     if (!cmfString.contains(Config.cmfUri)) {
-      String errorMessage = String.format("Only CMF version %s is currently supported", Config.cmfVersion);
+      String errorMessage = String.format("Only CMF version %s is currently supported",
+          Config.cmfVersion);
       throw new BadRequestException(errorMessage);
     }
   }
 
   /**
-   * Generate CMF model as an CMF XML or JSON string
+   * Generate the given CMF model as a CMF XML or JSON string.
    */
   public static String generateString(Model model, AppMediaType mediaType) throws Exception {
-    ModelXMLWriter modelXMLWriter = new ModelXMLWriter();
+    ModelXMLWriter modelXmlWriter = new ModelXMLWriter();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-    modelXMLWriter.writeXML(model, outputStream);
+    modelXmlWriter.writeXML(model, outputStream);
     String xml = outputStream.toString();
 
     // TODO: Resolve CMF XML error at source in CMF tool
@@ -97,7 +102,7 @@ public class CmfUtils {
   }
 
   /**
-   * Generate CMF model as an CMF XML string
+   * Generate the given CMF model as a CMF XML string.
    */
   public static String generateString(Model model) throws Exception {
     return generateString(model, AppMediaType.xml);
@@ -110,7 +115,8 @@ public class CmfUtils {
    * @param path Directory to save the file.
    * @param filenameBase Filename without the extension.
    */
-  public static File saveCmfModel(org.mitre.niem.cmf.Model cmf, Path path, String filenameBase) throws Exception {
+  public static File saveCmfModel(org.mitre.niem.cmf.Model cmf, Path path, String filenameBase)
+      throws Exception {
 
     // Set up the new file in the given directory
     String filepathString = String.format("%s/%s.cmf.xml", path.toString(), filenameBase);
@@ -151,7 +157,7 @@ public class CmfUtils {
   }
 
   /**
-   * Get subproperty min as a string
+   * Get the subproperty min as a string.
    */
   public static String subpropertyMin(HasProperty hasProperty) {
     return String.valueOf(hasProperty.minOccurs());

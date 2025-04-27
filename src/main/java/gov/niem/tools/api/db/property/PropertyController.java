@@ -1,8 +1,16 @@
 package gov.niem.tools.api.db.property;
 
-import java.util.List;
+import gov.niem.tools.api.core.config.Config.AppMediaType;
+import gov.niem.tools.api.core.utils.CmfUtils;
+import gov.niem.tools.api.db.ServiceHub;
 
 import org.mitre.niem.cmf.Model;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,22 +20,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import gov.niem.tools.api.core.config.Config.AppMediaType;
-import gov.niem.tools.api.core.utils.CmfUtils;
-import gov.niem.tools.api.db.ServiceHub;
-
+/**
+ * REST controller for properties.
+ */
 @RestController
 @RequestMapping("stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}")
-@Tag(name = "Data-5: Properties", description = "A property represents a concept, idea, or thing. It defines specific semantics and appears in exchanges as the tag or label for a field.")
+@Tag(
+    name = "Data-5: Properties",
+    description = "A property represents a concept, idea, or thing. It defines specific semantics and appears in exchanges as the tag or label for a field.")
 public class PropertyController {
 
   @Autowired
   ServiceHub hub;
 
+  /**
+   * Gets a property with the given fields.
+   */
   @GetMapping("/properties/{qname}")
   @Operation(summary = "Get the property with the given qualified name")
   @ResponseStatus(code = HttpStatus.OK)
@@ -40,6 +48,9 @@ public class PropertyController {
     return hub.properties.findOne(stewardKey, modelKey, versionNumber, qname);
   }
 
+  /**
+   * Gets a property with the given fields converted to CMF.
+   */
   @GetMapping("/properties.cmf/{qname}")
   @Operation(summary = "Get the property with the given qualified name")
   @ResponseStatus(code = HttpStatus.OK)
@@ -49,15 +60,23 @@ public class PropertyController {
       @PathVariable String modelKey,
       @PathVariable String versionNumber,
       @PathVariable String qname,
-      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType) throws Exception {
+      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
+      throws Exception {
     Property property = hub.properties.findOne(stewardKey, modelKey, versionNumber, qname);
     org.mitre.niem.cmf.Model cmfModel = new Model();
     property.addToCmfModel(cmfModel);
     return CmfUtils.generateString(cmfModel, mediaType);
   }
 
+  /**
+   * Gets all properties from the version with the given fields.
+   * Note: Currently returns null until pagination support is added.
+   *
+   * @todo Add pagination support for version properties and return results.
+   */
   @GetMapping("/properties")
-  @Operation(summary = "Get all properties matching the given parameters.  Pending pagination implementation.")
+  @Operation(
+      summary = "Get all properties matching the given parameters. Pending pagination implementation.")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public List<Property> getAllProperties(
@@ -74,7 +93,8 @@ public class PropertyController {
   // @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   // @SecurityRequirement(name = "bearerAuthentication")
   // public Property addProperty(@PathVariable String stewardKey,
-  //   @PathVariable String modelKey, @PathVariable String versionNumber, Property property) throws Exception {
+  //  @PathVariable String modelKey, @PathVariable String versionNumber, Property property)
+  //      throws Exception {
   //     return null;
   //   // String message = hub.properties.add(stewardKey, modelKey, versionNumber, property);
   //   // return AppUtils.getResponseOkString(message);
@@ -86,7 +106,8 @@ public class PropertyController {
   // @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   // @SecurityRequirement(name = "bearerAuthentication")
   // public Property editProperty(@PathVariable String stewardKey,
-  //   @PathVariable String modelKey, @PathVariable String versionNumber, String currentQname, Property property) throws Exception {
+  //  @PathVariable String modelKey, @PathVariable String versionNumber, String currentQname,
+  //      Property property) throws Exception {
   //     return null;
   //   // String message = hub.properties.add(stewardKey, modelKey, versionNumber, property);
   //   // return AppUtils.getResponseOkString(message);

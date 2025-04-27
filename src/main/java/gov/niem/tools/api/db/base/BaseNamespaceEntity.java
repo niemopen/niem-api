@@ -1,22 +1,24 @@
 package gov.niem.tools.api.db.base;
 
-import java.util.Map;
-
-import org.hibernate.envers.Audited;
+import gov.niem.tools.api.db.namespace.Namespace;
+import gov.niem.tools.api.db.version.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import gov.niem.tools.api.db.namespace.Namespace;
-import gov.niem.tools.api.db.version.Version;
 import jakarta.persistence.MappedSuperclass;
+import java.util.Map;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.envers.Audited;
 
 /**
  * Adds reusable methods for entities that belong to a namespace:
  * Property, Type, Facet, etc.
+ *
+ * @param <T> A class for a kind of entity that belongs to a namespace, such as a
+ *     Property, Type, or Facet.
  */
 @MappedSuperclass
 @Audited
@@ -24,11 +26,15 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public abstract class BaseNamespaceEntity<T extends BaseVersionEntity<T>> extends BaseVersionEntity<T> {
+public abstract class BaseNamespaceEntity<T extends BaseVersionEntity<T>>
+    extends BaseVersionEntity<T> {
 
   @JsonIgnore
   public abstract Namespace getNamespace();
 
+  /**
+   * Gets the namespace database id.
+   */
   @JsonIgnore
   public Long getNamespaceId() {
     if (this.getNamespace() == null) {
@@ -37,6 +43,9 @@ public abstract class BaseNamespaceEntity<T extends BaseVersionEntity<T>> extend
     return this.getNamespace().getId();
   }
 
+  /**
+   * Gets key fields about a namespace.
+   */
   @JsonProperty("namespace")
   public Map<String, String> getNamespaceSummary() {
     return this.getNamespace().toSummary();
@@ -90,6 +99,9 @@ public abstract class BaseNamespaceEntity<T extends BaseVersionEntity<T>> extend
   //   return this.getNamespace().getName();
   // }
 
+  /**
+   * Gets the version in which this namespace belongs.
+   */
   @JsonIgnore
   public Version getVersion() {
     if (this.getNamespace() == null) {

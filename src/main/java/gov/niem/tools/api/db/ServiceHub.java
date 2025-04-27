@@ -1,8 +1,5 @@
 package gov.niem.tools.api.db;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import gov.niem.tools.api.db.facet.FacetService;
 import gov.niem.tools.api.db.model.ModelService;
 import gov.niem.tools.api.db.namespace.NamespaceService;
@@ -12,6 +9,12 @@ import gov.niem.tools.api.db.subproperty.SubpropertyService;
 import gov.niem.tools.api.db.type.TypeService;
 import gov.niem.tools.api.db.version.VersionService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * Provides all database services as a convenience.
+ */
 @Component
 public class ServiceHub {
 

@@ -1,35 +1,49 @@
 package gov.niem.tools.api.db.type;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
-
-import org.springframework.stereotype.Component;
-
 import gov.niem.tools.api.db.component.ComponentService;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.version.Version;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Component;
+
+/**
+ * Operations supporting types.
+ */
 @Component
 public class TypeService extends ComponentService<Type, TypeRepository> {
 
   @PersistenceContext
   private EntityManager em;
 
+  /**
+   * Create a new type in the database with the given prefix and name and add to
+   * the version with the given version fields.
+   */
   @Transactional
-  public Type add(String stewardKey, String modelKey, String versionNumber, String prefix, String name) throws Exception {
+  public Type add(String stewardKey, String modelKey, String versionNumber, String prefix,
+      String name) throws Exception {
     Type type = new Type();
     type.setPrefix(prefix);
     type.setName(name);
     return this.add(stewardKey, modelKey, versionNumber, type);
   }
 
+  /**
+   * Create a new type in the database with the given prefix and name and add to
+   * the given version.
+   */
   @Transactional
   public Type add(Version version, String prefix, String name) throws Exception {
     Type type = new Type();
     return this.add(version, prefix, name, type);
   }
 
+  /**
+   * Create a new type in the database with the given name and add to the given namespace.
+   */
   @Transactional
   public Type add(Namespace namespace, String name) throws Exception {
     Type type = new Type();

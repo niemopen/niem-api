@@ -112,12 +112,17 @@ public class NdrValidationService {
 
     String regex;
 
-    // NDR 3.0 - NDR 5.0
-    if (conformanceTargets.contains("http://reference.niem.gov/niem/specification/naming-and-design-rules/")) {
+    if (conformanceTargets == null) {
+      return null;
+    }
+    else if (conformanceTargets.contains(
+        "http://reference.niem.gov/niem/specification/naming-and-design-rules/")) {
+      // NDR 3.0 - NDR 5.0
       regex = "http://reference.niem.gov/niem/specification/naming-and-design-rules/(.*)/#(.*)SchemaDocument";
     }
-    // NDR 6.0
-    else if (conformanceTargets.contains("https://docs.oasis-open.org/niemopen/ns/specification/NDR/")) {
+    else if (conformanceTargets.contains(
+        "https://docs.oasis-open.org/niemopen/ns/specification/NDR/")) {
+      // NDR 6.0
       regex = "https://docs.oasis-open.org/niemopen/ns/specification/NDR/(.*)/#(.*)SchemaDocument";
     }
     else {

@@ -163,7 +163,9 @@ public class Namespace extends BaseVersionEntity<Namespace>
    */
   public enum NdrTarget {
     REF,
-    EXT
+    EXT,
+    MSG,
+    SUB
   }
 
   /**
@@ -305,17 +307,76 @@ public class Namespace extends BaseVersionEntity<Namespace>
   }
 
   /**
+   * Returns the name of the conformance target.  For example, for a REF target,
+   * returns "Reference".
+   */
+  @JsonIgnore
+  public String getConformanceTargetName() {
+    switch (this.target) {
+      case REF:
+        return "Reference";
+      case EXT:
+        return "Extension";
+      case MSG:
+        return "Message";
+      case SUB:
+        return "Subset";
+      default:
+        return null;
+    }
+  }
+
+  /**
+   * Returns the first digit of the NIEM version compatible with this namespace.
+   */
+  @JsonIgnore
+  public Integer getNiemVersionMajorDigit() {
+    if (this.getNdrVersion() == null) {
+      return null;
+    }
+    return Integer.parseInt(this.getNdrVersion().substring(0, 1));
+  }
+
+  /**
+   * Gets the NDR version for this namespace, based on the version of NIEM
+   * that is compatible with this namespace.
+   */
+  @JsonIgnore
+  public String getNdrVersion() {
+    return this.getNiemVersionNumber().replaceAll(".\\d$", ".0");
+  }
+
+  /**
    * Gets the conformance target URI based on the target and NIEM version number
    * of this namespace.
    */
-  public String getConformanceTarget() {
+  @JsonIgnore
+  public String getNdrConformanceTarget() {
     Set<String> unsupported = Set.of("1.0", "2.0", "2.1");
     if (this.target == null || unsupported.contains(this.getNiemVersionNumber())) {
       return null;
     }
-    String ndrVersion = this.getNiemVersionNumber().replaceAll(".\\d$", ".0");
-    String targetName = this.target == NdrTarget.REF ? "Reference" : "Extension";
-    return String.format("http://reference.niem.gov/niem/specification/naming-and-design-rules/%s/#%sSchemaDocument", ndrVersion, targetName);
+
+    Integer niemVersionMajorDigit = this.getNiemVersionMajorDigit();
+    String ndrVersion = this.getNdrVersion();
+    String targetName = this.getConformanceTargetName();
+
+    String conformanceTarget;
+
+    if (niemVersionMajorDigit == null) {
+      return null;
+    }
+    else if (niemVersionMajorDigit < 6) {
+      // NIEM
+      conformanceTarget = String.format("http://reference.niem.gov/niem/specification/naming-and-design-rules/%s/#%sSchemaDocument", ndrVersion, targetName);
+    }
+    else {
+      // NIEMOpen
+      conformanceTarget = String.format("https://docs.oasis-open.org/niemopen/ns/specification/NDR/%s/#%sSchemaDocument", ndrVersion, targetName);
+    }
+
+    return conformanceTarget;
+
   }
 
   /**
@@ -345,7 +406,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
 
     // Add SchemaDocument information
     SchemaDocument schemaDocument = new SchemaDocument();
-    schemaDocument.setConfTargets(this.getConformanceTarget());
+    schemaDocument.setConfTargets(this.getNdrConformanceTarget());
     schemaDocument.setFilePath(this.filepath + this.filename + ".xsd");
     // TODO: Support namespace language
     // schemaDocument.setLanguage(null);

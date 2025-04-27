@@ -50,4 +50,15 @@ public class PropertyService extends ComponentService<Property, PropertyReposito
     return this.add(namespace, name, property);
   }
 
+  /**
+   * Adds a property to the database with the given name and definition to the given namespace.
+   */
+  @Transactional
+  public Property add(Namespace namespace, String name, String definition) throws Exception {
+    Property property = new Property();
+    property.setName(name);
+    property.setDefinition(definition);
+    return this.add(namespace, property);
+  }
+
 }

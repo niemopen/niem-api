@@ -1,5 +1,10 @@
 
 spring:
+  datasource:
+    url: ${POSTGRES_URL_LOCAL}
+    username: ${POSTGRES_USER_LOCAL}
+    password: ${POSTGRES_PASSWORD_LOCAL}
+
   jpa:
     hibernate:
       ddl-auto: create

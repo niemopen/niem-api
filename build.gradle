@@ -87,15 +87,21 @@ configurations.all {
   }
 }
 
-javadoc {
-  options.tags = ["todo", "example"]
+processResources {
+  filesMatching(['application.yaml', 'swagger-config.yaml']) {
+    // Make application version available to the code and open-api file
+    expand(project.properties)
+  }
 }
 
-openApi {
-  apiDocsUrl.set("http://localhost:8080/api/v2/api-docs")
+test {
+	useJUnitPlatform()
 }
+
+// CHECKSTYLE SUPPORT *************************************
 
 checkstyle {
+  // https://checkstyle.sourceforge.io/version/9.3/
   println "Checkstyle version " + checkstyle.toolVersion
   toolVersion = "9.3"
 }
@@ -108,11 +114,12 @@ checkstyleTest {
   source = 'src/main/test'
 }
 
-processResources {
-  filesMatching(['application.yaml', 'swagger-config.yaml']) {
-    // Make application version available to the code and open-api file
-    expand(project.properties)
-  }
+// JAVADOC SUPPORT ****************************************
+
+javadoc {
+  options.tags = ["todo", "example"]
+  options.addStringOption('Xdoclint:missing', '-quiet')
+  // options.addStringOption('Xdoclint:none', '-quiet')
 }
 
 task copyJavadocs(type: Copy) {
@@ -125,6 +132,17 @@ task copyJavadocs(type: Copy) {
 
 javadoc.finalizedBy copyJavadocs
 
+// OpenAPI SUPPORT ****************************************
+
+openApi {
+  apiDocsUrl.set("http://localhost:8080/api/v2/api-docs")
+  customBootRun {
+    args.set([
+      '--spring.profiles.active=openapi'
+    ])
+  }
+}
+
 task copyOpenApi(type: Copy) {
   group = "documentation"
   description = "Copy the OpenAPI JSON file to /docs/"
@@ -134,7 +152,3 @@ task copyOpenApi(type: Copy) {
 }
 
 generateOpenApiDocs.finalizedBy copyOpenApi
-
-test {
-	useJUnitPlatform()
-}

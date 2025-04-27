@@ -3,7 +3,6 @@ package gov.niem.tools.api.db.steward;
 import gov.niem.tools.api.db.ServiceHub;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,30 +27,38 @@ public class StewardController {
   @Autowired
   ServiceHub hub;
 
+  /**
+   * Get a steward.
+   */
   @GetMapping("/stewards/{stewardKey}")
-  @Operation(summary = "Get a steward")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Steward getSteward(@PathVariable String stewardKey) throws EntityNotFoundException {
     return hub.stewards.findOne(stewardKey);
   }
 
+  /**
+   * Get all stewards.
+   */
   @GetMapping("/stewards")
-  @Operation(summary = "Get all stewards")
   @ResponseStatus(code = HttpStatus.OK)
   public List<Steward> getStewards() throws Exception {
     return hub.stewards.repository().findAll();
   }
 
+  // /**
+  //  * Add a steward.
+  //  */
   // @PostMapping(path = "/stewards")
-  // @Operation(summary = "Create a steward")
   // public ResponseEntity<String> postSteward(@RequestBody Steward steward) throws Exception {
   //   String message = hub.stewards.add(steward);
   //   return AppUtils.getResponseOkString(message);
   // }
 
+  // /**
+  //  * Update a steward.
+  //  */
   // @PutMapping(path = "/stewards/{stewardKey}")
-  // @Operation(summary = "Updated a steward")
   // public ResponseEntity<String> putSteward(
   //     @PathVariable String stewardKey,
   //     @RequestBody Steward updatedSteward,
@@ -61,8 +68,10 @@ public class StewardController {
   //   return AppUtils.getResponseOkString(message);
   // }
 
+  // /**
+  //  * Patch a steward.
+  //  */
   // @PatchMapping(path = "/stewards/{stewardKey}")
-  // @Operation(summary = "Updated specific fields on a steward")
   // public ResponseEntity<String> patchSteward(
   //     @PathVariable String stewardKey,
   //     Steward  updatedSteward
@@ -71,8 +80,10 @@ public class StewardController {
   //   return AppUtils.getResponseOkString(message);
   // }
 
+  // /**
+  //  * Delete a steward.
+  //  */
   // @DeleteMapping(path = "/stewards/{stewardKey}")
-  // @Operation(summary = "Delete a steward")
   // public ResponseEntity<String> deleteSteward(@PathVariable String stewardKey) throws Exception {
   //   String message = hub.stewards.delete(stewardKey);
   //   return AppUtils.getResponseOkString(message);

@@ -8,7 +8,6 @@ import gov.niem.tools.api.db.type.Type;
 
 import org.mitre.niem.cmf.Model;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,12 +38,11 @@ public class NamespaceController {
   ServiceHub hub;
 
   /**
-   * Get basic details about a namespace.
+   * Get a namespace with the given fields.
    *
    * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces/nc
    */
   @GetMapping("/namespaces/{prefix}")
-  @Operation(summary = "Get a namespace")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Namespace getNamespace(
@@ -56,12 +54,11 @@ public class NamespaceController {
   }
 
   /**
-   * Get basic details about a namespace.
+   * Get a namespace in CMF with the given fields.
    *
    * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces.cmf/nc
    */
   @GetMapping("/namespaces.cmf/{prefix}")
-  @Operation(summary = "Get a namespace as CMF")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getNamespaceCmf(
@@ -78,12 +75,11 @@ public class NamespaceController {
   }
 
   /**
-   * Get basic details about all namespaces in a version of a model.
+   * Get all namespaces from a version of a model.
    *
    * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces
    */
   @GetMapping("/namespaces")
-  @Operation(summary = "Get all namespaces from a specific model version")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public List<Namespace> getVersionNamespaces(
@@ -96,12 +92,11 @@ public class NamespaceController {
   }
 
   /**
-   * Get basic details about all namespaces in a version of a model.
+   * Get all namespaces as CMF from a version of a model.
    *
    * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces.cmf
    */
   @GetMapping("/namespaces.cmf")
-  @Operation(summary = "Get all namespaces in CMF from a specific model version")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getVersionNamespacesCmf(
@@ -127,7 +122,6 @@ public class NamespaceController {
    * Gets all types from a namespace.
    */
   @GetMapping("/namespaces/{prefix}/types")
-  @Operation(summary = "Get all types from a namespace.")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public List<Type> getNamespaceTypes(
@@ -139,10 +133,9 @@ public class NamespaceController {
   }
 
   /**
-   * Gets all types from a namespace as CMF.
+   * Gets all types in CMF from a namespace.
    */
   @GetMapping("/namespaces.cmf/{prefix}/types")
-  @Operation(summary = "Get all types from a namespace as CMF.")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getNamespaceTypesCmf(
@@ -164,7 +157,6 @@ public class NamespaceController {
    * Gets all properties from a namespace.
    */
   @GetMapping("/namespaces/{prefix}/properties")
-  @Operation(summary = "Get all properties from a namespace")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public List<Property> getNamespaceProperties(
@@ -176,10 +168,9 @@ public class NamespaceController {
   }
 
   /**
-   * Gets all properties from a namespace as CMF.
+   * Gets all properties from a namespace in CMF.
    */
   @GetMapping("/namespaces.cmf/{prefix}/properties")
-  @Operation(summary = "Get all properties from a namespace")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getNamespacePropertiesCmf(

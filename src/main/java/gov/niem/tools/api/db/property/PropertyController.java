@@ -6,7 +6,6 @@ import gov.niem.tools.api.db.ServiceHub;
 
 import org.mitre.niem.cmf.Model;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -37,7 +36,6 @@ public class PropertyController {
    * Gets a property with the given fields.
    */
   @GetMapping("/properties/{qname}")
-  @Operation(summary = "Get the property with the given qualified name")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Property getProperty(
@@ -49,10 +47,9 @@ public class PropertyController {
   }
 
   /**
-   * Gets a property with the given fields converted to CMF.
+   * Gets a property in CMF with the given fields.
    */
   @GetMapping("/properties.cmf/{qname}")
-  @Operation(summary = "Get the property with the given qualified name")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getPropertyCmf(
@@ -75,8 +72,6 @@ public class PropertyController {
    * @todo Add pagination support for version properties and return results.
    */
   @GetMapping("/properties")
-  @Operation(
-      summary = "Get all properties matching the given parameters. Pending pagination implementation.")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public List<Property> getAllProperties(
@@ -87,8 +82,10 @@ public class PropertyController {
     return null;
   }
 
+  // /**
+  //  * Add a new property.
+  //  */
   // @PostMapping("/properties")
-  // @Operation(summary = "Add a new property.")
   // @ResponseStatus(code = HttpStatus.OK)
   // @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   // @SecurityRequirement(name = "bearerAuthentication")
@@ -100,8 +97,10 @@ public class PropertyController {
   //   // return AppUtils.getResponseOkString(message);
   // }
 
+  // /**
+  //  * Update an existing property.
+  //  */
   // @PutMapping("/properties")
-  // @Operation(summary = "Update an existing property.")
   // @ResponseStatus(code = HttpStatus.OK)
   // @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   // @SecurityRequirement(name = "bearerAuthentication")
@@ -113,8 +112,10 @@ public class PropertyController {
   //   // return AppUtils.getResponseOkString(message);
   // }
 
+  // /**
+  //  * Delete a property.
+  //  */
   // @DeleteMapping("/properties")
-  // @Operation(summary = "Delete an existing property.")
   // @ResponseStatus(code = HttpStatus.OK)
   // @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   // @SecurityRequirement(name = "bearerAuthentication")

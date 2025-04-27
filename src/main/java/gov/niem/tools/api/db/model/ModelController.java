@@ -35,7 +35,6 @@ public class ModelController {
    * Gets a model with the given criteria.
    */
   @GetMapping("/stewards/{stewardKey}/models/{modelKey}")
-  @Operation(summary = "Get a model")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public gov.niem.tools.api.db.model.Model getModel(@PathVariable String stewardKey,
@@ -47,9 +46,7 @@ public class ModelController {
    * Gets all models from the steward with the given key.
    */
   @GetMapping("/stewards/{stewardKey}/models")
-  @Operation(
-      summary = "Get all models from a steward",
-      description = "Use wildcard '*' for the steward key to return all models")
+  @Operation(description = "Use wildcard '*' for the steward key to return all models")
   @ResponseStatus(code = HttpStatus.OK)
   public List<Model> getStewardModels(@PathVariable String stewardKey) throws Exception {
     if (stewardKey.equals("*")) {

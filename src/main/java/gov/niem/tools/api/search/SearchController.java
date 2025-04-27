@@ -8,7 +8,6 @@ import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.type.Type;
 
 import io.swagger.v3.oas.annotations.Hidden;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,7 +41,7 @@ public class SearchController {
   }
 
   /**
-   * Search properties in the database based on the given criteria.
+   * Search properties based on the given criteria.
    *
    * @param niemVersionNumber A base NIEM version number (e.g., "5.2") to search for
    *     NIEM and community content. Defaults to the current NIEM version if not provided.
@@ -74,7 +73,6 @@ public class SearchController {
    * @param limit A maximum number of results to return.  Defaults to and will not exceed 100.
    */
   @GetMapping("/search/properties")
-  @Operation(summary = "Search for properties")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "204", description = "No Content", content = @Content)
   @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
@@ -161,7 +159,6 @@ public class SearchController {
    * @param limit A maximum number of results to return.  Defaults to and will not exceed 100.
    */
   @GetMapping("/search.cmf/properties")
-  @Operation(summary = "Search for properties and return results as a CMF model.")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "204", description = "No Content", content = @Content)
   @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
@@ -223,7 +220,7 @@ public class SearchController {
   }
 
   /**
-   * Search types in the database based on given criteria.
+   * Search types based on given criteria.
    *
    * @param niemVersionNumber A base NIEM version number (e.g., "5.2") to search
    *     for NIEM and community content.
@@ -244,7 +241,6 @@ public class SearchController {
    * @param limit A maximum number of results to return. Defaults to and will not exceed 100.
    */
   @GetMapping("/search/types")
-  @Operation(summary = "Search for types")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "204", description = "No Content", content = @Content)
   @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
@@ -278,7 +274,7 @@ public class SearchController {
   }
 
   /**
-   * Search types in the database based on given criteria and returns results in CMF.
+   * Search types based on given criteria and returns results in CMF.
    *
    * @param niemVersionNumber A base NIEM version number (e.g., "5.2") to search
    *     for NIEM and community content.
@@ -299,7 +295,6 @@ public class SearchController {
    * @param limit A maximum number of results to return. Defaults to and will not exceed 100.
    */
   @GetMapping("/search.cmf/types")
-  @Operation(summary = "Search for types and return results as a CMF model.")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "204", description = "No Content", content = @Content)
   @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)

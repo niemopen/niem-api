@@ -214,6 +214,12 @@ Known issues:
 
   OpenAPI schema components are not picking up JavaDoc definitions for methods that are overridden, either in the parent or the child.  This is why definitions are being repeated in the `@Schema` annotations.
 
+- [ ] Project properties not expanded during `generateOpenApiDocs` gradle task.
+
+The task to build the OpenAPI JSON file, which is generated and included in the `docs/` folder, is not pulling environment variables used by the Spring profiles from the `.env` file.
+
+Create a `openapi` profile to set the database URL, username and password, or change the active profile argument in `build.gradle`'s `openApi` task custom boot run settings.
+
 - [ ] Request body parameters.
 
   OpenAPI annotation `@RequestParam` should be able to be used for request body parameters for endpoints that consume multipart form data.  These instead are being generated as query parameters in the OpenAPI documentation.

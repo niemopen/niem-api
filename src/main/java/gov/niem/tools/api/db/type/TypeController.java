@@ -4,7 +4,6 @@ import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,7 +34,6 @@ public class TypeController {
    * Gets the type with the given fields.
    */
   @GetMapping("/types/{qname}")
-  @Operation(summary = "Get the type with the given qualified name")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Type getType(
@@ -50,7 +48,6 @@ public class TypeController {
    * Gets the type with the given fields in CMF.
    */
   @GetMapping("/types.cmf/{qname}")
-  @Operation(summary = "Get the type with the given qualified name")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getTypeCmf(
@@ -73,8 +70,6 @@ public class TypeController {
    * @todo Add version types pagination and return results.
    */
   @GetMapping("/types")
-  @Operation(
-      summary = "Get all types matching the given parameters. Pending pagination implementation.")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public List<Type> getAllTypes(@PathVariable String stewardKey, @PathVariable String modelKey,
@@ -83,8 +78,10 @@ public class TypeController {
     // return hub.types.findByVersion(stewardKey, modelKey, versionNumber);
   }
 
+  // /**
+  //  * Get all CMF datatypes matching the given fields.
+  //  */
   // @GetMapping("/datatypes")
-  // @Operation(summary = "Get all types matching the given parameters that carry a value")
   // @ApiResponses(value = {
   //     @ApiResponse(responseCode = "200", description = "Success", content = {
   //       @Content(
@@ -102,8 +99,10 @@ public class TypeController {
   //   return new ArrayList<Datatype>();
   // }
 
+  // /**
+  //  * Get all CMF classes matching the given fields
+  //  */
   // @GetMapping("/classes")
-  // @Operation(summary = "Get all types matching the given parameters that contain properties")
   // @ApiResponses(value = {
   //   @ApiResponse(responseCode = "200", description = "Success", content = {
   //     @Content(
@@ -121,8 +120,10 @@ public class TypeController {
   //   return new ArrayList<ClassType>();
   // }
 
+  // /**
+  //  * Get a CMF datatype matching the given fields.
+  //  */
   // @GetMapping("/datatypes/{qname}")
-  // @Operation(summary = "Get the datatype with the given qualified name")
   // @ApiResponses(value = {
   //     @ApiResponse(responseCode = "200", description = "Success", content = {
   //       @Content(
@@ -139,8 +140,10 @@ public class TypeController {
   //   return new Datatype();
   // }
 
+  // /**
+  //  * Get the CMF class matching the given fields
+  //  */
   // @GetMapping("/classes/{qname}")
-  // @Operation(summary = "Get the class with the given qualified name")
   // @ApiResponses(value = {
   //     @ApiResponse(responseCode = "200", description = "Success", content = {
   //       @Content(

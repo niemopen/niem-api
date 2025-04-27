@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.0",
   "info": {
     "contact": {
       "name": "NIEMOpen",
@@ -7,7 +7,7 @@
     },
     "description": "Community support for common NIEM tool functionality to browse and search the model, build and migrate subsets, and check conformance",
     "title": "NIEM API 2.0",
-    "version": "2.0-alpha07:SNAPSHOT"
+    "version": "2.0-alpha06"
   },
   "servers": [
     {
@@ -15,12 +15,12 @@
       "description": "Production server"
     },
     {
-      "url": "http://localhost:8080/api/v2",
-      "description": "Local machine"
+      "url": "https://tools.niem.gov/api/mep",
+      "description": "MEP instance server"
     },
     {
-      "url": "https://yellowkiwi06.icl.gtri.org/",
-      "description": "Internal test server"
+      "url": "http://localhost:8080/api/v2",
+      "description": "Local machine"
     }
   ],
   "tags": [
@@ -80,11 +80,11 @@
   "paths": {
     "/migration/cmf": {
       "post": {
-        "description": "Migrate a version of a supported model in a CMF file to a newer version.\n\n Note: Only models stored via the NIEM API and that have migration rules are supported.",
-        "operationId": "migrateCMF",
+        "description": "Migrate a version of a supported model in a CMF file to a newer version.\n\n \u003cp\u003eNote: Only models stored via the NIEM API and that have migration rules are supported.",
+        "operationId": "migrateCmf",
         "parameters": [
           {
-            "description": "[REQUEST BODY PARAMETER]\n The version of the data model represented in the CMF file.",
+            "description": "[REQUEST BODY PARAMETER]\n     The version of the data model represented in the CMF file.",
             "example": 3.1,
             "in": "query",
             "name": "from",
@@ -94,7 +94,7 @@
             }
           },
           {
-            "description": "[REQUEST BODY PARAMETER]\n A more recent version of the data model to which the CMF file should be migrated.",
+            "description": "[REQUEST BODY PARAMETER]\n     A more recent version of the data model to which the CMF file should be migrated.",
             "example": 5.2,
             "in": "query",
             "name": "to",
@@ -104,7 +104,7 @@
             }
           },
           {
-            "description": "[REQUEST BODY PARAMETER]\n A steward identifier. Defaults to the NIEM steward identifier to migrate a NIEM subset.",
+            "description": "[REQUEST BODY PARAMETER]\n     A steward identifier. Defaults to the NIEM steward identifier to migrate a NIEM subset.",
             "example": "niem",
             "in": "query",
             "name": "stewardKey",
@@ -114,7 +114,7 @@
             }
           },
           {
-            "description": "[REQUEST BODY PARAMETER]\n A model identifier for the CMF file. Defaults to the NIEM data model to migrate a NIEM subset.",
+            "description": "[REQUEST BODY PARAMETER]\n     A model identifier for the CMF file. Defaults to the NIEM data model to migrate\n     a NIEM subset.",
             "example": "model",
             "in": "query",
             "name": "modelKey",
@@ -148,7 +148,7 @@
             "content": {
               "application/zip": {}
             },
-            "description": "Zip file with updated CMF file and a JSON file with issues encountered during the migration."
+            "description": "Zip file with updated CMF file and a JSON file with issues encountered\n     during the migration."
           },
           "415": {
             "description": "Unsupported Media Type"
@@ -157,7 +157,7 @@
             "description": "Error"
           }
         },
-        "summary": "Migrate a version of a supported model in a CMF file to a newer version.",
+        "summary": "Migrate a version of a supported model in a CMF file to a newer version",
         "tags": [
           "Migrations"
         ]
@@ -165,10 +165,11 @@
     },
     "/search.cmf/properties": {
       "get": {
+        "description": "Search properties in the database based on the given criteria and return results in CMF.",
         "operationId": "getPropertySearchCmf",
         "parameters": [
           {
-            "description": "A base NIEM version number (e.g., \"5.2\") to search for NIEM\n and community content. Defaults to the current NIEM version if not provided.",
+            "description": "A base NIEM version number (e.g., \"5.2\") to search for NIEM\n     and community content. Defaults to the current NIEM version if not provided.",
             "in": "query",
             "name": "niemVersionNumber",
             "required": false,
@@ -177,7 +178,7 @@
             }
           },
           {
-            "description": "Search for full tokens in component names and definitions with stemming.\n Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\" but does not return\n \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "description": "Search for full tokens in component names and definitions with stemming.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\" but does not\n     return \"Alarm\", \"Firearm\", \"Harm\", etc.",
             "in": "query",
             "name": "token",
             "required": false,
@@ -189,7 +190,7 @@
             }
           },
           {
-            "description": "Search for partial text in component names and definitions.\n Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n \"Firearm\", \"Harm\", etc.",
+            "description": "Search for partial text in component names and definitions.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n     \"Firearm\", \"Harm\", etc.",
             "in": "query",
             "name": "substring",
             "required": false,
@@ -213,7 +214,7 @@
             }
           },
           {
-            "description": "Filter results by substring matching on one of the given types.\n Example: [\"text\", \"boolean\"] matches properties with types that include nc:TextType\n and niem-xs:boolean.",
+            "description": "Filter results by substring matching on one of the given types.\n     Example: [\"text\", \"boolean\"] matches properties with types that include\n     nc:TextType and niem-xs:boolean.",
             "in": "query",
             "name": "type",
             "required": false,
@@ -225,7 +226,7 @@
             }
           },
           {
-            "description": "True if only abstract properties should be returned; false if only\n non-abstract (concrete) properties should be returned.  Omit parameter to return either kind.",
+            "description": "True if only abstract properties should be returned; false if only\n     non-abstract (concrete) properties should be returned.\n     Omit parameter to return either kind.",
             "in": "query",
             "name": "isAbstract",
             "required": false,
@@ -234,7 +235,7 @@
             }
           },
           {
-            "description": "True if only element properties should be returned; false if only attribute\n properties should be returned.  Omit parameter to return either kind.",
+            "description": "True if only element properties should be returned; false if only\n     attribute properties should be returned.\n     Omit parameter to return either kind.",
             "in": "query",
             "name": "isElement",
             "required": false,
@@ -294,7 +295,7 @@
             "description": "Bad Request"
           }
         },
-        "summary": "Search for properties and return results as a CMF model.",
+        "summary": "Search properties in the database based on the given criteria and return results in CMF.",
         "tags": [
           "Search"
         ]
@@ -302,10 +303,11 @@
     },
     "/search.cmf/types": {
       "get": {
+        "description": "Search types based on given criteria and returns results in CMF.",
         "operationId": "getTypeSearchCmf",
         "parameters": [
           {
-            "description": "A base NIEM version number (e.g., \"5.2\") to search\n                          for NIEM\n                          and community content. Defaults to the current NIEM\n                          version if not provided.",
+            "description": "A base NIEM version number (e.g., \"5.2\") to search\n     for NIEM and community content.\n     Defaults to the current NIEM version if not provided.",
             "in": "query",
             "name": "niemVersionNumber",
             "required": false,
@@ -314,7 +316,7 @@
             }
           },
           {
-            "description": "Search for full tokens in component names and\n                          definitions with stemming.\n                          Example: \"arm\" returns property names with \"Arm\",\n                          \"Armed\", and \"Arming\" but does not return\n                          \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "description": "Search for full tokens in component names and definitions with stemming.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\"\n     but does not return \"Alarm\", \"Firearm\", \"Harm\", etc.",
             "in": "query",
             "name": "token",
             "required": false,
@@ -326,7 +328,7 @@
             }
           },
           {
-            "description": "Search for partial text in component names and\n                          definitions.\n                          Example: \"arm\" returns property names with \"Arm\",\n                          \"Armed\", \"Arming\", \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "description": "Search for partial text in component names and definitions.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n     \"Firearm\", \"Harm\", etc.",
             "in": "query",
             "name": "substring",
             "required": false,
@@ -360,7 +362,7 @@
             }
           },
           {
-            "description": "A maximum number of results to return. Defaults to\n                          and will not exceed 100.",
+            "description": "A maximum number of results to return. Defaults to and will not exceed 100.",
             "in": "query",
             "name": "limit",
             "required": false,
@@ -401,7 +403,7 @@
             "description": "Bad Request"
           }
         },
-        "summary": "Search for types and return results as a CMF model.",
+        "summary": "Search types based on given criteria and returns results in CMF.",
         "tags": [
           "Search"
         ]
@@ -409,10 +411,11 @@
     },
     "/search/properties": {
       "get": {
+        "description": "Search properties based on the given criteria.",
         "operationId": "getPropertySearch",
         "parameters": [
           {
-            "description": "A base NIEM version number (e.g., \"5.2\") to search for NIEM\n and community content. Defaults to the current NIEM version if not provided.",
+            "description": "A base NIEM version number (e.g., \"5.2\") to search for\n     NIEM and community content. Defaults to the current NIEM version if not provided.",
             "in": "query",
             "name": "niemVersionNumber",
             "required": false,
@@ -421,7 +424,7 @@
             }
           },
           {
-            "description": "Search for full tokens in component names and definitions with stemming.\n Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\" but does not return\n \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "description": "Search for full tokens in component names and definitions with stemming.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\" but does\n     not return \"Alarm\", \"Firearm\", \"Harm\", etc.",
             "in": "query",
             "name": "token",
             "required": false,
@@ -433,7 +436,7 @@
             }
           },
           {
-            "description": "Search for partial text in component names and definitions.\n Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "description": "Search for partial text in component names and definitions.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n     \"Firearm\", \"Harm\", etc.",
             "in": "query",
             "name": "substring",
             "required": false,
@@ -457,7 +460,7 @@
             }
           },
           {
-            "description": "Filter results by substring matching on one of the given types.\n Example: [\"text\", \"boolean\"] matches properties with types that include nc:TextType and niem-xs:boolean.",
+            "description": "Filter results by substring matching on one of the given types.\n     Example: [\"text\", \"boolean\"] matches properties with types that include\n     nc:TextType and niem-xs:boolean.",
             "in": "query",
             "name": "type",
             "required": false,
@@ -469,7 +472,7 @@
             }
           },
           {
-            "description": "True if only abstract properties should be returned; false if only\n non-abstract (concrete) properties should be returned.  Omit parameter to return either kind.",
+            "description": "True if only abstract properties should be returned; false if only\n     non-abstract (concrete) properties should be returned.\n     Omit parameter to return either kind.",
             "in": "query",
             "name": "isAbstract",
             "required": false,
@@ -478,7 +481,7 @@
             }
           },
           {
-            "description": "True if only element properties should be returned; false if only attribute\n properties should be returned.  Omit parameter to return either kind.",
+            "description": "True if only element properties should be returned; false if\n     only attribute properties should be returned.\n     Omit parameter to return either kind.",
             "in": "query",
             "name": "isElement",
             "required": false,
@@ -528,7 +531,7 @@
             "description": "Bad Request"
           }
         },
-        "summary": "Search for properties",
+        "summary": "Search properties based on the given criteria.",
         "tags": [
           "Search"
         ]
@@ -536,10 +539,11 @@
     },
     "/search/types": {
       "get": {
+        "description": "Search types based on given criteria.",
         "operationId": "getTypeSearch",
         "parameters": [
           {
-            "description": "A base NIEM version number (e.g., \"5.2\") to search\n                          for NIEM\n                          and community content. Defaults to the current NIEM\n                          version if not provided.",
+            "description": "A base NIEM version number (e.g., \"5.2\") to search\n     for NIEM and community content.\n     Defaults to the current NIEM version if not provided.",
             "in": "query",
             "name": "niemVersionNumber",
             "required": false,
@@ -548,7 +552,7 @@
             }
           },
           {
-            "description": "Search for full tokens in component names and\n                          definitions with stemming.\n                          Example: \"arm\" returns property names with \"Arm\",\n                          \"Armed\", and \"Arming\" but does not return\n                          \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "description": "Search for full tokens in component names and definitions with stemming.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\"\n     but does not return \"Alarm\", \"Firearm\", \"Harm\", etc.",
             "in": "query",
             "name": "token",
             "required": false,
@@ -560,7 +564,7 @@
             }
           },
           {
-            "description": "Search for partial text in component names and\n                          definitions.\n                          Example: \"arm\" returns property names with \"Arm\",\n                          \"Armed\", \"Arming\", \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "description": "Search for partial text in component names and definitions.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n     \"Firearm\", \"Harm\", etc.",
             "in": "query",
             "name": "substring",
             "required": false,
@@ -594,7 +598,7 @@
             }
           },
           {
-            "description": "A maximum number of results to return. Defaults to\n                          and will not exceed 100.",
+            "description": "A maximum number of results to return. Defaults to and will not exceed 100.",
             "in": "query",
             "name": "limit",
             "required": false,
@@ -625,7 +629,7 @@
             "description": "Bad Request"
           }
         },
-        "summary": "Search for types",
+        "summary": "Search types based on given criteria.",
         "tags": [
           "Search"
         ]
@@ -633,6 +637,7 @@
     },
     "/stewards": {
       "get": {
+        "description": "Get all stewards.",
         "operationId": "getStewards",
         "responses": {
           "200": {
@@ -649,7 +654,7 @@
             "description": "OK"
           }
         },
-        "summary": "Get all stewards",
+        "summary": "Get all stewards.",
         "tags": [
           "Data-1: Stewards"
         ]
@@ -657,6 +662,7 @@
     },
     "/stewards/{stewardKey}": {
       "get": {
+        "description": "Get a steward.",
         "operationId": "getSteward",
         "parameters": [
           {
@@ -683,7 +689,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get a steward",
+        "summary": "Get a steward.",
         "tags": [
           "Data-1: Stewards"
         ]
@@ -718,7 +724,6 @@
             "description": "OK"
           }
         },
-        "summary": "Get all models from a steward",
         "tags": [
           "Data-2: Models"
         ]
@@ -726,6 +731,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}": {
       "get": {
+        "description": "Gets a model with the given criteria.",
         "operationId": "getModel",
         "parameters": [
           {
@@ -760,7 +766,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get a model",
+        "summary": "Gets a model with the given criteria.",
         "tags": [
           "Data-2: Models"
         ]
@@ -768,6 +774,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions": {
       "get": {
+        "description": "Gets all versions from the model with the given fields.",
         "operationId": "getVersions",
         "parameters": [
           {
@@ -802,7 +809,7 @@
             "description": "OK"
           }
         },
-        "summary": "Get all versions of a model.",
+        "summary": "Gets all versions from the model with the given fields.",
         "tags": [
           "Data-3: Versions"
         ]
@@ -810,6 +817,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions.cmf/{versionKey}": {
       "get": {
+        "description": "Gets the version with the given fields in CMF.",
         "operationId": "getVersionCmf",
         "parameters": [
           {
@@ -865,7 +873,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get a version",
+        "summary": "Gets the version with the given fields in CMF.",
         "tags": [
           "Data-3: Versions"
         ]
@@ -873,6 +881,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionKey}": {
       "get": {
+        "description": "Gets the version with the given fields.",
         "operationId": "getVersion",
         "parameters": [
           {
@@ -915,7 +924,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get a version",
+        "summary": "Gets the version with the given fields.",
         "tags": [
           "Data-3: Versions"
         ]
@@ -923,7 +932,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces": {
       "get": {
-        "description": "Get basic details about all namespaces in a version of a model.",
+        "description": "Get all namespaces from a version of a model.",
         "operationId": "getVersionNamespaces",
         "parameters": [
           {
@@ -969,7 +978,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get all namespaces from a specific model version",
+        "summary": "Get all namespaces from a version of a model.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -977,7 +986,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces.cmf": {
       "get": {
-        "description": "Get basic details about all namespaces in a version of a model.",
+        "description": "Get all namespaces as CMF from a version of a model.",
         "operationId": "getVersionNamespacesCmf",
         "parameters": [
           {
@@ -1033,7 +1042,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get all namespaces in CMF from a specific model version",
+        "summary": "Get all namespaces as CMF from a version of a model.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -1041,7 +1050,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces.cmf/{prefix}": {
       "get": {
-        "description": "Get basic details about a namespace.",
+        "description": "Get a namespace in CMF with the given fields.",
         "operationId": "getNamespaceCmf",
         "parameters": [
           {
@@ -1105,7 +1114,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get a namespace as CMF",
+        "summary": "Get a namespace in CMF with the given fields.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -1113,6 +1122,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces.cmf/{prefix}/properties": {
       "get": {
+        "description": "Gets all properties from a namespace in CMF.",
         "operationId": "getNamespacePropertiesCmf",
         "parameters": [
           {
@@ -1176,7 +1186,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get all properties from a namespace",
+        "summary": "Gets all properties from a namespace in CMF.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -1184,6 +1194,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces.cmf/{prefix}/types": {
       "get": {
+        "description": "Gets all types in CMF from a namespace.",
         "operationId": "getNamespaceTypesCmf",
         "parameters": [
           {
@@ -1247,7 +1258,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get all types from a namespace as CMF.",
+        "summary": "Gets all types in CMF from a namespace.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -1255,7 +1266,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}": {
       "get": {
-        "description": "Get basic details about a namespace.",
+        "description": "Get a namespace with the given fields.",
         "operationId": "getNamespace",
         "parameters": [
           {
@@ -1306,7 +1317,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get a namespace",
+        "summary": "Get a namespace with the given fields.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -1314,6 +1325,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/properties": {
       "get": {
+        "description": "Gets all properties from a namespace.",
         "operationId": "getNamespaceProperties",
         "parameters": [
           {
@@ -1367,7 +1379,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get all properties from a namespace",
+        "summary": "Gets all properties from a namespace.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -1375,6 +1387,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/subproperties": {
       "get": {
+        "description": "Gets all subproperties from the database in the given namespace fields.",
         "operationId": "getNamespaceSubproperties",
         "parameters": [
           {
@@ -1415,17 +1428,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "uniqueItems": true,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Subproperty"
-                  }
+                  },
+                  "uniqueItems": true
                 }
               }
             },
             "description": "OK"
           }
         },
+        "summary": "Gets all subproperties from the database in the given namespace fields.",
         "tags": [
           "Data-7: Subproperties"
         ]
@@ -1433,6 +1447,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/types": {
       "get": {
+        "description": "Gets all types from a namespace.",
         "operationId": "getNamespaceTypes",
         "parameters": [
           {
@@ -1486,7 +1501,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get all types from a namespace.",
+        "summary": "Gets all types from a namespace.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -1494,6 +1509,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties": {
       "get": {
+        "description": "Gets all properties from the version with the given fields.\n Note: Currently returns null until pagination support is added.",
         "operationId": "getAllProperties",
         "parameters": [
           {
@@ -1539,7 +1555,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get all properties matching the given parameters.  Pending pagination implementation.",
+        "summary": "Gets all properties from the version with the given fields.",
         "tags": [
           "Data-5: Properties"
         ]
@@ -1547,6 +1563,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties.cmf/{qname}": {
       "get": {
+        "description": "Gets a property in CMF with the given fields.",
         "operationId": "getPropertyCmf",
         "parameters": [
           {
@@ -1610,7 +1627,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get the property with the given qualified name",
+        "summary": "Gets a property in CMF with the given fields.",
         "tags": [
           "Data-5: Properties"
         ]
@@ -1618,6 +1635,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{propertyQname}/subproperties": {
       "get": {
+        "description": "Gets all subproperties from the database with the property with the given fields.",
         "operationId": "getPropertySubproperties",
         "parameters": [
           {
@@ -1658,17 +1676,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "uniqueItems": true,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Subproperty"
-                  }
+                  },
+                  "uniqueItems": true
                 }
               }
             },
             "description": "OK"
           }
         },
+        "summary": "Gets all subproperties from the database with the property with the given fields.",
         "tags": [
           "Data-7: Subproperties"
         ]
@@ -1676,6 +1695,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}": {
       "get": {
+        "description": "Gets a property with the given fields.",
         "operationId": "getProperty",
         "parameters": [
           {
@@ -1726,7 +1746,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get the property with the given qualified name",
+        "summary": "Gets a property with the given fields.",
         "tags": [
           "Data-5: Properties"
         ]
@@ -1734,6 +1754,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/subproperties": {
       "get": {
+        "description": "Gets all subproperties from the database in the version with the given fields.",
         "operationId": "getAllSubproperties",
         "parameters": [
           {
@@ -1766,17 +1787,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "uniqueItems": true,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Subproperty"
-                  }
+                  },
+                  "uniqueItems": true
                 }
               }
             },
             "description": "OK"
           }
         },
+        "summary": "Gets all subproperties from the database in the version with the given fields.",
         "tags": [
           "Data-7: Subproperties"
         ]
@@ -1784,6 +1806,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types": {
       "get": {
+        "description": "Gets all types in the version matching the given fields.\n Note: Currently returns null until pagination is supported.",
         "operationId": "getAllTypes",
         "parameters": [
           {
@@ -1829,7 +1852,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get all types matching the given parameters.  Pending pagination implementation.",
+        "summary": "Gets all types in the version matching the given fields.",
         "tags": [
           "Data-6: Types"
         ]
@@ -1837,6 +1860,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{qname}": {
       "get": {
+        "description": "Gets the type with the given fields in CMF.",
         "operationId": "getTypeCmf",
         "parameters": [
           {
@@ -1900,7 +1924,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get the type with the given qualified name",
+        "summary": "Gets the type with the given fields in CMF.",
         "tags": [
           "Data-6: Types"
         ]
@@ -1908,6 +1932,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{qname}/facets": {
       "get": {
+        "description": "Gets all facets in CMF from the type with the given criteria.",
         "operationId": "getFacetsCmf",
         "parameters": [
           {
@@ -1968,6 +1993,7 @@
             "description": "OK"
           }
         },
+        "summary": "Gets all facets in CMF from the type with the given criteria.",
         "tags": [
           "Data-8: Facets"
         ]
@@ -1975,6 +2001,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{qname}/facets/{category}\u003d{value}": {
       "get": {
+        "description": "Gets a facet in CMF with the given criteria.",
         "operationId": "getFacetCmf",
         "parameters": [
           {
@@ -2065,6 +2092,7 @@
             "description": "OK"
           }
         },
+        "summary": "Gets a facet in CMF with the given criteria.",
         "tags": [
           "Data-8: Facets"
         ]
@@ -2072,6 +2100,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{typeQname}/subproperties": {
       "get": {
+        "description": "Gets all subproperties from the database in the type with the given fields, in CMF.",
         "operationId": "getTypeSubpropertiesCmf",
         "parameters": [
           {
@@ -2132,6 +2161,7 @@
             "description": "OK"
           }
         },
+        "summary": "Gets all subproperties from the database in the type with the given fields, in CMF.",
         "tags": [
           "Data-7: Subproperties"
         ]
@@ -2139,6 +2169,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{typeQname}/subproperties/{propertyQname}": {
       "get": {
+        "description": "Gets a subproperty from the database with the type with the given type fields and\n the property with the given qualified name, converted to CMF.",
         "operationId": "getSubpropertyCmf",
         "parameters": [
           {
@@ -2207,6 +2238,7 @@
             "description": "OK"
           }
         },
+        "summary": "Gets a subproperty from the database with the type with the given type fields and\n the property with the given qualified name, converted to CMF.",
         "tags": [
           "Data-7: Subproperties"
         ]
@@ -2214,6 +2246,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}": {
       "get": {
+        "description": "Gets the type with the given fields.",
         "operationId": "getType",
         "parameters": [
           {
@@ -2264,7 +2297,7 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Get the type with the given qualified name",
+        "summary": "Gets the type with the given fields.",
         "tags": [
           "Data-6: Types"
         ]
@@ -2272,6 +2305,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets": {
       "get": {
+        "description": "Gets all facets from the type with the given criteria.",
         "operationId": "getFacets",
         "parameters": [
           {
@@ -2312,17 +2346,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "uniqueItems": true,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Facet"
-                  }
+                  },
+                  "uniqueItems": true
                 }
               }
             },
             "description": "OK"
           }
         },
+        "summary": "Gets all facets from the type with the given criteria.",
         "tags": [
           "Data-8: Facets"
         ]
@@ -2330,6 +2365,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/{category}\u003d{value}": {
       "get": {
+        "description": "Gets a facet with the given criteria.",
         "operationId": "getFacet",
         "parameters": [
           {
@@ -2407,6 +2443,7 @@
             "description": "OK"
           }
         },
+        "summary": "Gets a facet with the given criteria.",
         "tags": [
           "Data-8: Facets"
         ]
@@ -2414,6 +2451,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties": {
       "get": {
+        "description": "Gets all subproperties from the database in the type with the give fields.",
         "operationId": "getTypeSubproperties",
         "parameters": [
           {
@@ -2454,17 +2492,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "uniqueItems": true,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Subproperty"
-                  }
+                  },
+                  "uniqueItems": true
                 }
               }
             },
             "description": "OK"
           }
         },
+        "summary": "Gets all subproperties from the database in the type with the give fields.",
         "tags": [
           "Data-7: Subproperties"
         ]
@@ -2472,6 +2511,7 @@
     },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties/{propertyQname}": {
       "get": {
+        "description": "Gets a subproperty from the database with the type with the given type fields and\n the property with the given qualified name.",
         "operationId": "getSubproperty",
         "parameters": [
           {
@@ -2527,6 +2567,7 @@
             "description": "OK"
           }
         },
+        "summary": "Gets a subproperty from the database with the type with the given type fields and\n the property with the given qualified name.",
         "tags": [
           "Data-7: Subproperties"
         ]
@@ -2614,7 +2655,7 @@
     "/validation/cmf/xml": {
       "post": {
         "description": "Validate a CMF XML file against the NIEM CMF XML schema.",
-        "operationId": "getCmfXMLValidation",
+        "operationId": "getCmfXmlValidation",
         "parameters": [
           {
             "description": "REQUEST BODY PARAMETER. File format for the validation results.",
@@ -2658,6 +2699,9 @@
             },
             "description": "Success"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "415": {
             "description": "Unsupported Media Type"
           },
@@ -2674,7 +2718,7 @@
     "/validation/instances/xml": {
       "post": {
         "description": "Validate one or more XML instances against XML schemas.",
-        "operationId": "getXMLValidation",
+        "operationId": "getXmlValidation",
         "parameters": [
           {
             "description": "REQUEST BODY PARAMETER. File format for the validation results.",
@@ -2724,6 +2768,9 @@
             },
             "description": "Success"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "415": {
             "description": "Unsupported Media Type"
           },
@@ -2740,7 +2787,7 @@
     "/validation/message-catalog": {
       "post": {
         "description": "Validate an IEPD / message catalog instance file against the NIEM IEPD /\n message catalog schema.",
-        "operationId": "getMessageCatalogXMLValidation",
+        "operationId": "getMessageCatalogXmlValidation",
         "parameters": [
           {
             "description": "REQUEST BODY PARAMETER. File format for the validation results.",
@@ -2784,6 +2831,9 @@
             },
             "description": "Success"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "415": {
             "description": "Unsupported Media Type"
           },
@@ -2799,7 +2849,7 @@
     },
     "/validation/message-specification": {
       "post": {
-        "description": "Validate a message specification or IEPD zip file against NIEM message\n specification / IEPD conformance rules.\n\n Runs the following checks:\n\n - Validates the MPD or IEPD catalog.\n - Validates XML catalogs\n - Validates XML schemas\n - Validates XML schemas against NDR conformance rules",
+        "description": "Validate a message specification or IEPD zip file against NIEM message\n specification / IEPD conformance rules.\n\n \u003cp\u003eRuns the following checks:\n\n \u003cul\u003e\n   \u003cli\u003eValidates the MPD or IEPD catalog.\u003c/li\u003e\n   \u003cli\u003eValidates XML catalogs\u003c/li\u003e\n   \u003cli\u003eValidates XML schemas\u003c/li\u003e\n   \u003cli\u003eValidates XML schemas against NDR conformance rules\u003c/li\u003e\n \u003c/ul\u003e",
         "operationId": "getMessageSpecificationValidation",
         "parameters": [
           {
@@ -2844,6 +2894,9 @@
             },
             "description": "Success"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "415": {
             "description": "Unsupported Media Type"
           },
@@ -2851,7 +2904,7 @@
             "description": "Error"
           }
         },
-        "summary": "Validate a message specification or IEPD zip file against NIEM message\n specification / IEPD conformance rules.",
+        "summary": "Validate a message specification or IEPD zip file against NIEM message\n specification / IEPD conformance rules",
         "tags": [
           "Validation"
         ]
@@ -2860,7 +2913,7 @@
     "/validation/schemas/ndr": {
       "post": {
         "description": "Validate one or more XML Schemas against the NIEM Naming and Design Rules (NDR).",
-        "operationId": "getSchemaNDRValidation",
+        "operationId": "getSchemaNdrValidation",
         "parameters": [
           {
             "description": "REQUEST BODY PARAMETER. File format for the validation results.",
@@ -2904,6 +2957,9 @@
             },
             "description": "Success"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "415": {
             "description": "Unsupported Media Type"
           },
@@ -2946,7 +3002,7 @@
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "REQUEST BODY PARAMETER.  Single XML Schema or a zip file containing\n multiple XML Schemas."
+                    "description": "REQUEST BODY PARAMETER.  Single XML Schema or a zip file containing\n     multiple XML Schemas."
                   }
                 },
                 "required": [
@@ -2963,6 +3019,9 @@
               "text/csv": {}
             },
             "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "415": {
             "description": "Unsupported Media Type"
@@ -3023,6 +3082,9 @@
               "text/csv": {}
             },
             "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "415": {
             "description": "Unsupported Media Type"
@@ -3096,7 +3158,7 @@
     "schemas": {
       "Facet": {
         "type": "object",
-        "description": "",
+        "description": "A constraint on a datatype, such as an enumeration or a pattern.",
         "properties": {
           "@id": {
             "type": "string",
@@ -3147,13 +3209,15 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Model that defines this object."
           },
           "namespace": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Namespace that contains the type of this facet."
           },
           "route": {
             "type": "string",
@@ -3164,7 +3228,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Steward which is responsible for managing this entity."
           },
           "title": {
             "type": "string",
@@ -3178,7 +3243,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the version in which this namespace belongs."
           }
         }
       },
@@ -3199,12 +3265,12 @@
           "category": {
             "type": "string",
             "description": "A kind of data model.",
-            "example": "message",
             "enum": [
               "reference",
               "message",
               "other"
-            ]
+            ],
+            "example": "message"
           },
           "description": {
             "type": "string",
@@ -3239,13 +3305,13 @@
           "objective": {
             "type": "string",
             "description": "An intended use for a model, such as for actual implementation or for\n testing tool features or IEPD / message specification features.",
-            "example": "example",
             "enum": [
               "implementation",
               "example",
               "test",
               "other"
-            ]
+            ],
+            "example": "example"
           },
           "purpose": {
             "type": "string",
@@ -3265,7 +3331,8 @@
           "shortName": {
             "type": "string",
             "description": "A short name or acronym used to identify a model.",
-            "example": "Crash Driver"
+            "example": "Crash Driver",
+            "minLength": 1
           },
           "steward": {
             "type": "object",
@@ -3289,10 +3356,7 @@
             "description": "A website address by which a person or organization may be contacted.",
             "example": "https://niem.github.io/training/"
           }
-        },
-        "required": [
-          "shortName"
-        ]
+        }
       },
       "Namespace": {
         "type": "object",
@@ -3311,7 +3375,6 @@
           "category": {
             "type": "string",
             "description": "A kind of namespace.",
-            "example": "core",
             "enum": [
               "core",
               "domain",
@@ -3326,10 +3389,12 @@
               "exchange",
               "built_in",
               "other"
-            ]
+            ],
+            "example": "core"
           },
           "conformanceTarget": {
-            "type": "string"
+            "type": "string",
+            "description": "Gets the conformance target URI based on the target and NIEM version number\n of this namespace."
           },
           "definition": {
             "type": "string",
@@ -3353,13 +3418,13 @@
           },
           "generation": {
             "type": "string",
-            "description": "A means by which a namespace should be generated.\n \u003cul\u003e\n \u003cli\u003ebuild: Generate by assembling its properties and types\u003c/li\u003e\n \u003cli\u003estatic_file: Include it\u0027s pre-built file (e.g., externals and\n utilities)\u003c/li\u003e\n \u003cli\u003enone: Namespace may be referenced but does not need to be included (e.g.,\n XML Schema)\u003c/li\u003e\n \u003c/ul\u003e\n Defaults to \"build\".",
-            "example": "REF",
+            "description": "A means by which a namespace should be generated.\n \u003cul\u003e\n   \u003cli\u003ebuild: Generate by assembling its properties and types\u003c/li\u003e\n   \u003cli\u003estatic_file: Include it\u0027s pre-built file (e.g., externals and utilities)\u003c/li\u003e\n   \u003cli\u003enone: Namespace may be referenced but does not need to be included\n     (e.g., XML Schema)\u003c/li\u003e\n \u003c/ul\u003e\n Defaults to \"build\".",
             "enum": [
               "build",
               "static_file",
               "none"
-            ]
+            ],
+            "example": "REF"
           },
           "hasTarget": {
             "type": "boolean",
@@ -3383,7 +3448,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Model that defines this object."
           },
           "name": {
             "type": "string",
@@ -3404,16 +3470,17 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Steward which is responsible for managing this entity."
           },
           "target": {
             "type": "string",
             "description": "A code representing an NDR conformance target, or null if the namespace\n is not meant to be conformant.",
-            "example": "EXT",
             "enum": [
               "REF",
               "EXT"
-            ]
+            ],
+            "example": "EXT"
           },
           "title": {
             "type": "string",
@@ -3453,7 +3520,7 @@
           },
           "category": {
             "type": "string",
-            "description": "A kind of property",
+            "description": "A kind of property.",
             "enum": [
               "element",
               "abstract_element",
@@ -3505,7 +3572,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Model that defines this object."
           },
           "name": {
             "type": "string",
@@ -3536,14 +3604,15 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Steward which is responsible for managing this entity."
           },
           "terms": {
             "type": "array",
+            "description": "A set of terms from the name of the property or type, broken apart by camel casing.",
             "example": "[\u0027Person\u0027, \u0027Given\u0027, \u0027Name\u0027]",
             "items": {
-              "type": "string",
-              "example": "[\u0027Person\u0027, \u0027Given\u0027, \u0027Name\u0027]"
+              "type": "string"
             }
           },
           "title": {
@@ -3565,7 +3634,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the version in which this namespace belongs."
           }
         }
       },
@@ -3575,7 +3645,7 @@
         "properties": {
           "@id": {
             "type": "string",
-            "description": "A unique identifier.  For a steward, this is the the same as the stewardKey field.",
+            "description": "A unique identifier.  For a steward, this is the stewardKey field.",
             "example": "niem"
           },
           "@type": {
@@ -3914,7 +3984,7 @@
           },
           "localIdentifier": {
             "type": "string",
-            "description": "An identifier, unique within its immediate scope.  For a steward, this is the same as the stewardKey field.",
+            "description": "A scoped identifier.  For a steward, this is the stewardKey field.",
             "example": "niem"
           },
           "phone": {
@@ -3930,7 +4000,8 @@
           "shortName": {
             "type": "string",
             "description": "A short name or acronym used to identify a steward.  This could be the name of an\n organization or unit, a program name, or other kind of authoritative source.",
-            "example": "NIEM"
+            "example": "NIEM",
+            "minLength": 1
           },
           "stewardKey": {
             "type": "string",
@@ -3957,14 +4028,11 @@
             "description": "A website address by which a person or organization may be contacted.",
             "example": "https://niem.gov"
           }
-        },
-        "required": [
-          "shortName"
-        ]
+        }
       },
       "Subproperty": {
         "type": "object",
-        "description": "A subproperty is a property that is contained by a type, along with cardinality constraints.",
+        "description": "A subproperty is a property that is contained by a type, along with cardinality constraints.\n Also called a child property association.",
         "properties": {
           "@id": {
             "type": "string",
@@ -3994,32 +4062,35 @@
             "example": "nc:PersonType/nc:PersonName"
           },
           "max": {
-            "pattern": "^unbounded|([1-9]\\d+)$",
             "type": "string",
-            "description": "\u0027unbounded\u0027 or 1-9 with zero or more additional digits"
+            "description": "Max cardinality \u0027unbounded\u0027 or 1-9 with zero or more additional digits.",
+            "pattern": "^unbounded|([1-9]\\d+)$"
           },
           "min": {
-            "pattern": "^0|([1-9]\\d+)$",
             "type": "string",
-            "description": "0 or 1-9 with zero or more additional digits"
+            "description": "Min cardinality 0 or 1-9 with zero or more additional digits.",
+            "pattern": "^0|([1-9]\\d+)$"
           },
           "model": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Model that defines this object."
           },
           "namespace": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the namespace where this subproperty is defined (the type namespace)."
           },
           "property": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the property of this subproperty.\n Makes sure a potential Hibernate proxy is initialized."
           },
           "route": {
             "type": "string",
@@ -4027,15 +4098,16 @@
             "example": "https://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/types/nc:PersonType/subproperties/nc:PersonName"
           },
           "sequence": {
-            "minimum": 0,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "minimum": 0
           },
           "steward": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Steward which is responsible for managing this entity."
           },
           "title": {
             "type": "string",
@@ -4046,19 +4118,21 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the type of this subproperty.\n Makes sure a potential Hibernate proxy is initialized."
           },
           "version": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the version in which this namespace belongs."
           }
         }
       },
       "Type": {
         "type": "object",
-        "description": "",
+        "description": "A type defines a structure - an allowable set of values.\n A type might describe a simple value (e.g., a string, a number)\n or a complex object (e.g., PersonType).",
         "properties": {
           "@id": {
             "type": "string",
@@ -4074,7 +4148,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the extension (e.g., parent) or restriction base type."
           },
           "category": {
             "type": "string",
@@ -4126,7 +4201,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Model that defines this object."
           },
           "name": {
             "type": "string",
@@ -4171,14 +4247,15 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the Steward which is responsible for managing this entity."
           },
           "terms": {
             "type": "array",
+            "description": "A set of terms from the name of the property or type, broken apart by camel casing.",
             "example": "[\u0027Person\u0027, \u0027Given\u0027, \u0027Name\u0027]",
             "items": {
-              "type": "string",
-              "example": "[\u0027Person\u0027, \u0027Given\u0027, \u0027Name\u0027]"
+              "type": "string"
             }
           },
           "title": {
@@ -4190,7 +4267,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the version in which this namespace belongs."
           }
         }
       },
@@ -4211,7 +4289,6 @@
           "category": {
             "type": "string",
             "description": "A kind of version, such as major or minor.",
-            "example": "major",
             "enum": [
               "major",
               "minor",
@@ -4219,7 +4296,8 @@
               "core_supplement",
               "domain_update",
               "other"
-            ]
+            ],
+            "example": "major"
           },
           "conformanceTargets": {
             "type": "string",
@@ -4254,16 +4332,18 @@
           "localIdentifier": {
             "type": "string",
             "description": "An identifier, unique within its immediate scope.  For a version, this is the same as the versionNumber field (unique within its model).",
-            "example": "1.1"
+            "example": 1.1
           },
           "model": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the model to which the version belongs.\n Makes sure a potential Hibernate proxy is initialized."
           },
           "niemVersionNumber": {
-            "type": "string"
+            "type": "string",
+            "description": "Gets the NIEM version number compatible with this version of the model."
           },
           "revised": {
             "type": "string",
@@ -4284,7 +4364,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "string"
-            }
+            },
+            "description": "Gets the steward from the model that this version belongs to."
           },
           "title": {
             "type": "string",
@@ -4299,7 +4380,7 @@
           "versionNumber": {
             "type": "string",
             "description": "A number which identifies a version of a model, such as \"5.2\" or \"1.0.1\".",
-            "example": "1.1"
+            "example": 1.1
           }
         }
       }

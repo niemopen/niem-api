@@ -4,7 +4,6 @@ import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,10 +32,9 @@ public class VersionController {
   ServiceHub hub;
 
   /**
-   * Gets the version from the database with the given fields.
+   * Gets the version with the given fields.
    */
   @GetMapping("/versions/{versionKey}")
-  @Operation(summary = "Get a version")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Version getVersion(
@@ -47,10 +45,9 @@ public class VersionController {
   }
 
   /**
-   * Gets the version from the database with the given fields in CMF.
+   * Gets the version with the given fields in CMF.
    */
   @GetMapping("/versions.cmf/{versionKey}")
-  @Operation(summary = "Get a version")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getVersionCmf(
@@ -66,10 +63,9 @@ public class VersionController {
   }
 
   /**
-   * Gets all versions from the database from the model with the given fields.
+   * Gets all versions from the model with the given fields.
    */
   @GetMapping("/versions")
-  @Operation(summary = "Get all versions of a model.")
   @ResponseStatus(code = HttpStatus.OK)
   public List<Version> getVersions(@PathVariable String stewardKey, @PathVariable String modelKey)
       throws Exception {

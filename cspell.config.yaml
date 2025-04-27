@@ -84,5 +84,6 @@ words:
   - webmvc
   - whitespaces
   - wonka
+  - Xdoclint
 ignoreWords: []
 import: []

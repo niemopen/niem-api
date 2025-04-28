@@ -3392,10 +3392,6 @@
             ],
             "example": "core"
           },
-          "conformanceTarget": {
-            "type": "string",
-            "description": "Gets the conformance target URI based on the target and NIEM version number\n of this namespace."
-          },
           "definition": {
             "type": "string",
             "description": "A definition that describes a namespace.",
@@ -3478,7 +3474,9 @@
             "description": "A code representing an NDR conformance target, or null if the namespace\n is not meant to be conformant.",
             "enum": [
               "REF",
-              "EXT"
+              "EXT",
+              "MSG",
+              "SUB"
             ],
             "example": "EXT"
           },

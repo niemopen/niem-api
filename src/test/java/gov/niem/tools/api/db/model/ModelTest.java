@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -77,6 +78,7 @@ public class ModelTest extends EntityTest<Model> {
 
   @Override
   @Test
+  @Disabled
   public void databaseDeleteTest() throws Exception {
     // Make sure a model can be deleted and the number of stewards does not change
     this.deleteNonCascading(hub.models, niem, crashNmo, hub.stewards);

@@ -15,10 +15,9 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.hibernate.search.engine.search.query.SearchResult;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -26,7 +25,6 @@ import org.springframework.test.context.ActiveProfiles;
 /**
  * Tests component searches.
  */
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ActiveProfiles("test")
 @SpringBootTest
 public class SearchTest {
@@ -45,7 +43,7 @@ public class SearchTest {
   /**
    * Add test data and create the search index.
    */
-  @BeforeAll
+  @BeforeEach
   public void init() throws Exception {
     // Add a steward, model, version, and namespace
     steward = hub.stewards.add(TestData.Stewards.nmo());

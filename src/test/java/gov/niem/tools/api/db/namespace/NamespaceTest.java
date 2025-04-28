@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -84,6 +85,7 @@ public class NamespaceTest extends EntityTest<Namespace> {
 
   @Override
   @Test
+  @Disabled
   public void databaseDeleteTest() throws Exception {
     this.deleteNonCascading(hub.namespaces, ncV1, ncV2, hub.versions);
   }

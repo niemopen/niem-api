@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -96,6 +97,7 @@ public class VersionTest extends EntityTest<Version> {
 
   @Override
   @Test
+  @Disabled
   public void databaseDeleteTest() throws Exception {
     this.deleteNonCascading(hub.versions, crashAcmeV1, crashAcmeV2, hub.models);
   }

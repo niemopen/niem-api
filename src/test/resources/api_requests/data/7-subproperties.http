@@ -2,6 +2,7 @@
 @steward = niem
 @model = model
 @version = 5.2
+@prefix = nc
 @class_qname = nc:PersonNameType
 @child_qname = nc:PersonGivenName
 
@@ -14,3 +15,15 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Get all container types for a given property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{child_qname}}/subproperties
+
+### Count all subproperties in a version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/subproperties/count
+
+### Count all subproperties in a namespace
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/subproperties/count
+
+### Count all subproperties for a type
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/count
+
+### Count all subproperties in which a given property appears
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{child_qname}}/subproperties/count

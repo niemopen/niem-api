@@ -141,6 +141,13 @@ public abstract class BaseEntityService<T extends BaseEntity> {
   }
 
   /**
+   * Counts the total number of entries.
+   */
+  public long count() {
+    return this.repository().count();
+  }
+
+  /**
    * Checks that the object has the required fields.
    */
   public abstract void assertRequiredLocalFields(T entity) throws FieldNotFoundException;

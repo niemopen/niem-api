@@ -195,6 +195,24 @@ public abstract class ComponentService<T extends Component<T>, U extends Compone
   }
 
   /**
+   * Count all components in a version with the given fields.
+   */
+  public long countByVersion(String stewardKey, String modelKey, String versionNumber)
+      throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    return repo.countByNamespace_Version_Id(version.getId());
+  }
+
+  /**
+   * Count all components in a namespace with the given fields.
+   */
+  public long countByNamespace(String stewardKey, String modelKey, String versionNumber,
+      String prefix) throws EntityNotFoundException {
+    Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionNumber, prefix);
+    return repo.countByNamespace_Id(namespace.getId());
+  }
+
+  /**
    * Check that the given component has its required fields.
    */
   public void assertRequiredLocalFields(T component) throws FieldNotFoundException {

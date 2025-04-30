@@ -27,4 +27,14 @@ public interface SubpropertyRepository extends JpaRepository<Subproperty, Long> 
 
   Set<Subproperty> findByVersionId(Long versionId);
 
+  long countByType_Namespace_Version_Id(Long versionId);
+
+  long countByType_Namespace_Id(Long namespaceId);
+
+  long countByType_Id(Long typeId);
+
+  long countByProperty_Namespace_Id(Long namespaceId);
+
+  long countByProperty_Id(Long propertyId);
+
 }

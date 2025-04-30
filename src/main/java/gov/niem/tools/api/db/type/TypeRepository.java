@@ -7,12 +7,8 @@ import gov.niem.tools.api.db.component.ComponentRepository;
  */
 public interface TypeRepository extends ComponentRepository<Type> {
 
-  // TODO: Clean up type repository
+  long countByNamespace_IdAndCategory(long namespaceId, Type.Category category);
 
-  // Optional<Type> findOneByReleaseIdAndQname(Long releaseId, String qname);
-
-  // Set<Type> findByReleaseIdOrderByQname(Long releaseId);
-  // Set<Type> findByNamespaceIdOrderByQname(Long namespaceId);
-  // Set<Type> findByPrefixOrderByNameAsc(String prefix);
+  long countByNamespace_Version_IdAndCategory(long versionId, Type.Category category);
 
 }

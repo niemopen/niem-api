@@ -3,9 +3,16 @@
 @model = model
 @version = 5.2
 @prefix = nc
+@category = domain
 
 ### Get all namespaces from a given version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces
 
 ### Get a specific namespace from a given version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}
+
+### Count namespaces from a given version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/count
+
+### Count namespaces from a given version with a given category
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/count?category={{category}}

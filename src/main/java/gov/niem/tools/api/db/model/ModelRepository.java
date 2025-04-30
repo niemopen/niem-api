@@ -21,4 +21,6 @@ public interface ModelRepository extends JpaRepository<Model, Long> {
 
   List<Model> findStewardsByCategory(String category);
 
+  long countBySteward_Id(Long stewardId);
+
 }

@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.namespace;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.type.Type;
 
@@ -116,6 +117,19 @@ public class NamespaceController {
       namespace.addToCmfModel(cmfModel);
     }
     return CmfUtils.generateString(cmfModel, mediaType);
+  }
+
+  /**
+   * Count all namespaces in the version with the given fields.
+   */
+  @GetMapping("/namespaces/count")
+  @ResponseStatus(code = HttpStatus.OK)
+  public long countNamespaces(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @RequestParam(required = false) Namespace.Category category) throws EntityNotFoundException {
+    return hub.namespaces.count(stewardKey, modelKey, versionNumber, category);
   }
 
   /**

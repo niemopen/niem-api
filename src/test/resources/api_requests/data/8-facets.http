@@ -2,7 +2,9 @@
 @steward = niem
 @model = model
 @version = 5.2
+@prefix = nc
 @qname = nc:AddressCategoryCodeSimpleType
+@property_qname = nc:AddressCategoryCode
 @category = enumeration
 @value = residential
 
@@ -11,3 +13,15 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Get a specific facet in a given type
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{qname}}/facets/{{category}}={{value}}
+
+### Count all facets in a version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/facets/count
+
+### Count all facets in a namespace
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/facets/count
+
+### Count all facets in a type
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{qname}}/facets/count
+
+### Count all facets in a property
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{property_qname}}/facets/count

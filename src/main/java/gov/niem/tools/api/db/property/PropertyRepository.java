@@ -7,12 +7,8 @@ import gov.niem.tools.api.db.component.ComponentRepository;
  */
 public interface PropertyRepository extends ComponentRepository<Property> {
 
-  // TODO: Clean up property repository
+  long countByNamespace_IdAndCategory(long namespaceId, Property.Category category);
 
-  // Optional<Property> findOneByVersionIdAndQname(Long versionId, String qname);
-
-  // List<Property> findByVersionIdOrderByQname(Long versionId);
-  // List<Property> findByNamespaceIdOrderByQname(Long namespaceId);
-  // List<Property> findByPrefixOrderByNameAsc(String prefix);
+  long countByNamespace_Version_IdAndCategory(long versionId, Property.Category category);
 
 }

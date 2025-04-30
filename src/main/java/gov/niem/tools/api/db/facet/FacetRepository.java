@@ -18,4 +18,10 @@ public interface FacetRepository extends JpaRepository<Facet, Long> {
 
   Set<Facet> findByVersionIdAndPrefixAndType_Name(Long versionId, String prefix, String name);
 
+  long countByType_Namespace_Version_Id(Long versionId);
+
+  long countByType_Namespace_Id(Long namespaceId);
+
+  long countByType_Id(Long typeId);
+
 }

@@ -156,6 +156,21 @@ public class NamespaceService extends BaseEntityService<Namespace> {
     return this.findOne(namespace.getVersion(), namespace.getPrefix());
   }
 
+  public long count(String stewardKey, String modelKey, String versionNumber)
+      throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    return repo.countByVersion_Id(version.getId());
+  }
+
+  public long count(String stewardKey, String modelKey, String versionNumber,
+      Namespace.Category category) throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    if (category == null) {
+      return repo.countByVersion_Id(version.getId());
+    }
+    return repo.countByVersion_IdAndCategory(version.getId(), category);
+  }
+
   /**
    * Checks that all required fields are present.
    */

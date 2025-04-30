@@ -2,10 +2,12 @@
 @steward = niem
 @model = model
 @version = 5.2
+@prefix = nc
 @class_qname = nc:PersonType
 @datatype_qname = nc:AddressCategoryCodeSimpleType
 @datatype_class_qname = nc:AddressCategoryCodeType
 @extended_qname = nc:VehicleType
+@category = complex_object
 
 @types = types
 # @types = types.cmf
@@ -24,3 +26,15 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{typ
 
 ### Get a class type with a parent (CCC)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{extended_qname}}?{{mediaType}}
+
+### Count types in a version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/count
+
+### Count types in a version with the given category
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/count?category={{category}}
+
+### Count types in a namespace
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/types/count
+
+### Count types in a namespace with the given category
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/types/count?category={{category}}

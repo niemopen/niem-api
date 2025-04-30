@@ -64,8 +64,10 @@ public class SubpropertyController {
    * Gets all subproperties from the database in the version with the given fields.
    */
   @GetMapping("/subproperties")
-  public Set<Subproperty> getAllSubproperties(@PathVariable String stewardKey,
-      @PathVariable String modelKey, @PathVariable String versionNumber) throws Exception {
+  public Set<Subproperty> getAllSubproperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber) throws Exception {
     return hub.subproperties.findByVersion(stewardKey, modelKey, versionNumber);
   }
 
@@ -105,8 +107,10 @@ public class SubpropertyController {
    * Gets all subproperties from the database with the property with the given fields.
    */
   @GetMapping("/properties/{propertyQname}/subproperties")
-  public Set<Subproperty> getPropertySubproperties(@PathVariable String stewardKey,
-      @PathVariable String modelKey, @PathVariable String versionNumber,
+  public Set<Subproperty> getPropertySubproperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
       @PathVariable String propertyQname) throws Exception {
     return hub.subproperties.findByProperty(stewardKey, modelKey, versionNumber, propertyQname);
   }
@@ -115,10 +119,58 @@ public class SubpropertyController {
    * Gets all subproperties from the database in the given namespace fields.
    */
   @GetMapping("/namespaces/{prefix}/subproperties")
-  public Set<Subproperty> getNamespaceSubproperties(@PathVariable String stewardKey,
+  public Set<Subproperty> getNamespaceSubproperties(
+      @PathVariable String stewardKey,
       @PathVariable String modelKey, @PathVariable String versionNumber,
       @PathVariable String prefix) throws Exception {
     return hub.subproperties.findByTypePrefix(stewardKey, modelKey, versionNumber, prefix);
+  }
+
+  /**
+   * Count all subproperties in a version with the given fields.
+   */
+  @GetMapping("/subproperties/count")
+  public long countVersionSubproperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber) throws Exception {
+    return hub.subproperties.countByVersion(stewardKey, modelKey, versionNumber);
+  }
+
+  /**
+   * Count all subproperties in a namespace with the given fields.
+   */
+  @GetMapping("/namespaces/{prefix}/subproperties/count")
+  public long countNamespaceSubproperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix) throws Exception {
+    return hub.subproperties.countByNamespace(stewardKey, modelKey, versionNumber, prefix);
+  }
+
+  /**
+   * Count all subproperty occurrences for a property with the given fields.
+   */
+  @GetMapping("/properties/{qname}/subproperties/count")
+  public long countPropertySubproperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.subproperties.countByProperty(stewardKey, modelKey, versionNumber, qname);
+  }
+
+  /**
+   * Count all subproperties of a type with the given fields.
+   */
+  @GetMapping("/types/{qname}/subproperties/count")
+  public long countTypeSubproperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.subproperties.countByType(stewardKey, modelKey, versionNumber, qname);
   }
 
   // @PostMapping("/subproperties")

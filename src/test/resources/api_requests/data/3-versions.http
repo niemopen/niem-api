@@ -8,3 +8,6 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions
 
 ### Get a specific version from a given model
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}
+
+### Count versions from a given model
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/count

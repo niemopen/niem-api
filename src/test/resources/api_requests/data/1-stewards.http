@@ -11,3 +11,6 @@ GET {{baseUrl}}/stewards/{{steward1}}
 ### Get a steward (acme)
 GET {{baseUrl}}/stewards/{{steward2}}
 
+#### Count stewards
+
+GET {{baseUrl}}/stewards/count

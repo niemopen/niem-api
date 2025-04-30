@@ -224,6 +224,14 @@ public class ModelService extends BaseEntityService<Model> {
   //   em.persist(stewardship);
   // }
 
+  /**
+   * Get the count of all models for stewards with the given key.
+   */
+  public long count(String stewardKey) {
+    Steward steward = stewardService.findOne(stewardKey);
+    return this.repo.countBySteward_Id(steward.getId());
+  }
+
   public void assertRequiredLocalFields(Model model) throws FieldNotFoundException {
     assertFieldNotNullAndNotEmpty("shortName", model.getShortName());
   }

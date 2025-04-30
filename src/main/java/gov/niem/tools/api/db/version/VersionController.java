@@ -75,6 +75,15 @@ public class VersionController {
     return new ArrayList<Version>(hub.versions.findByKeys(stewardKey, modelKey));
   }
 
+  /**
+   * Count all versions from the model with the given fields.
+   */
+  @GetMapping("/versions/count")
+  @ResponseStatus(code = HttpStatus.OK)
+  public long countVersions(@PathVariable String stewardKey, @PathVariable String modelKey) {
+    return hub.versions.count(stewardKey, modelKey);
+  }
+
   // @GetMapping("/versions/{versionKey}/catalog")
   // public Catalog getCatalog(@PathVariable String stewardKey, @PathVariable String modelKey,
   //     @PathVariable String versionKey) throws Exception {

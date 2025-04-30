@@ -46,7 +46,7 @@ public class ModelController {
    * Gets all models from the steward with the given key.
    */
   @GetMapping("/stewards/{stewardKey}/models")
-  @Operation(description = "Use wildcard '*' for the steward key to return all models")
+  @Operation(description = "Use wildcard steward key '*' to return all models")
   @ResponseStatus(code = HttpStatus.OK)
   public List<Model> getStewardModels(@PathVariable String stewardKey) throws Exception {
     if (stewardKey.equals("*")) {
@@ -55,6 +55,19 @@ public class ModelController {
     }
     Steward steward = hub.stewards.findOne(stewardKey);
     return new ArrayList<Model>(steward.getModels());
+  }
+
+  /**
+   * Get the count of all models for the steward with the given key.
+   */
+  @GetMapping("/stewards/{stewardKey}/models/count")
+  @Operation(description = "Use wildcard steward key '*' to count all models")
+  @ResponseStatus(code = HttpStatus.OK)
+  public long countModels(@PathVariable String stewardKey) throws Exception {
+    if (stewardKey.equals("*")) {
+      return hub.models.count();
+    }
+    return hub.models.count(stewardKey);
   }
 
 }

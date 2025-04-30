@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.facet;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.facet.Facet.Category;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -89,6 +90,53 @@ public class FacetController {
       facet.addToCmfModel(cmfModel);
     }
     return CmfUtils.generateString(cmfModel, mediaType);
+  }
+
+  /**
+   * Count all facets in the version with the given fields.
+   */
+  @GetMapping("/facets/count")
+  public long countVersionFacets(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber) throws EntityNotFoundException {
+    return hub.facets.countByVersion(stewardKey, modelKey, versionNumber);
+  }
+
+  /**
+   * Count all facets in the namespace with the given fields.
+   */
+  @GetMapping("/namespaces/{prefix}/facets/count")
+  public long countNamespaceFacets(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix) throws EntityNotFoundException {
+    return hub.facets.countByNamespace(stewardKey, modelKey, versionNumber, prefix);
+  }
+
+  /**
+   * Count all facets in the type with the given fields.
+   */
+  @GetMapping("/types/{qname}/facets/count")
+  public long countTypeFacets(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws EntityNotFoundException {
+    return hub.facets.countByType(stewardKey, modelKey, versionNumber, qname);
+  }
+
+  /**
+   * Count all facets in the type of the property with the given fields.
+   */
+  @GetMapping("/properties/{qname}/facets/count")
+  public long countPropertyFacets(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws EntityNotFoundException {
+    return hub.facets.countByProperty(stewardKey, modelKey, versionNumber, qname);
   }
 
 }

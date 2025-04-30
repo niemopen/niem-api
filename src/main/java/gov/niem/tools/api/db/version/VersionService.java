@@ -173,6 +173,14 @@ public class VersionService extends BaseEntityService<Version> {
     return version.getId();
   }
 
+  /**
+   * Count the number of versions for the model with the given fields.
+   */
+  public long count(String stewardKey, String modelKey) throws EntityNotFoundException {
+    Model model = modelService.findOne(stewardKey, modelKey);
+    return repo.countByModelId(model.getId());
+  }
+
   public void assertRequiredLocalFields(Version version) throws FieldNotFoundException {
     assertFieldNotNullAndNotEmpty("versionNumber", version.getVersionNumber());
   }

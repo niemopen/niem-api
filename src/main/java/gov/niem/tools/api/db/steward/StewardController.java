@@ -46,6 +46,15 @@ public class StewardController {
     return hub.stewards.repository().findAll();
   }
 
+  /**
+   * Get the count of all stewards.
+   */
+  @GetMapping("/stewards/count")
+  @ResponseStatus(code = HttpStatus.OK)
+  public long countStewards() {
+    return hub.stewards.count();
+  }
+
   // /**
   //  * Add a steward.
   //  */

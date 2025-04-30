@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.type;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -76,6 +77,33 @@ public class TypeController {
       @PathVariable String versionNumber) throws Exception {
     return null;
     // return hub.types.findByVersion(stewardKey, modelKey, versionNumber);
+  }
+
+  /**
+   * Count all types in the version with the given fields.
+   */
+  @GetMapping("/types/count")
+  @ResponseStatus(code = HttpStatus.OK)
+  public long countVersionTypes(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @RequestParam(required = false) Type.Category category) throws EntityNotFoundException {
+    return hub.types.countByVersion(stewardKey, modelKey, versionNumber, category);
+  }
+
+  /**
+   * Count all types in the namespace with the given fields.
+   */
+  @GetMapping("/namespaces/{prefix}/types/count")
+  @ResponseStatus(code = HttpStatus.OK)
+  public long countNamespaceTypes(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @RequestParam(required = false) Type.Category category) throws EntityNotFoundException {
+    return hub.types.countByNamespace(stewardKey, modelKey, versionNumber, prefix, category);
   }
 
   // /**

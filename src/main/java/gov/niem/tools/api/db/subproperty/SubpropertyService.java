@@ -231,6 +231,42 @@ public class SubpropertyService extends BaseEntityService<Subproperty> {
       namespace.getVersion().getId(), prefix);
   }
 
+  /**
+   * Count subproperties in the version matching the given fields.
+   */
+  public long countByVersion(String stewardKey, String modelKey, String versionNumber)
+      throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    return repo.countByType_Namespace_Version_Id(version.getId());
+  }
+
+  /**
+   * Count subproperties in the namespace matching the given fields.
+   */
+  public long countByNamespace(String stewardKey, String modelKey, String versionNumber,
+      String prefix) throws EntityNotFoundException {
+    Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionNumber, prefix);
+    return repo.countByType_Namespace_Id(namespace.getId());
+  }
+
+  /**
+   * Count subproperties for the type matching the given fields.
+   */
+  public long countByType(String stewardKey, String modelKey, String versionNumber,
+      String qname) throws EntityNotFoundException {
+    Type type = typeService.findOne(stewardKey, modelKey, versionNumber, qname);
+    return repo.countByType_Id(type.getId());
+  }
+
+  /**
+   * Count subproperties occurrence for the property matching the given fields.
+   */
+  public long countByProperty(String stewardKey, String modelKey, String versionNumber,
+      String qname) throws EntityNotFoundException {
+    Property property = propertyService.findOne(stewardKey, modelKey, versionNumber, qname);
+    return repo.countByProperty_Id(property.getId());
+  }
+
   public void assertRequiredLocalFields(Subproperty subproperty) throws FieldNotFoundException {
     assertFieldNotNullAndNotEmpty("typeQname", subproperty.typeQname);
     assertFieldNotNullAndNotEmpty("propertyQname", subproperty.propertyQname);

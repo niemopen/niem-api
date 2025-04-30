@@ -1,6 +1,7 @@
 package gov.niem.tools.api.db.type;
 
 import gov.niem.tools.api.db.component.ComponentService;
+import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.version.Version;
 
@@ -48,6 +49,30 @@ public class TypeService extends ComponentService<Type, TypeRepository> {
   public Type add(Namespace namespace, String name) throws Exception {
     Type type = new Type();
     return this.add(namespace, name, type);
+  }
+
+  /**
+   * Count all types in a version with the given fields.
+   */
+  public long countByVersion(String stewardKey, String modelKey, String versionNumber,
+      Type.Category category) throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    if (category == null) {
+      return repo.countByNamespace_Version_Id(version.getId());
+    }
+    return repo.countByNamespace_Version_IdAndCategory(version.getId(), category);
+  }
+
+  /**
+   * Count all types in a namespace with the given fields.
+   */
+  public long countByNamespace(String stewardKey, String modelKey, String versionNumber,
+      String prefix, Type.Category category) throws EntityNotFoundException {
+    Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionNumber, prefix);
+    if (category == null) {
+      return repo.countByNamespace_Id(namespace.getId());
+    }
+    return repo.countByNamespace_IdAndCategory(namespace.getId(), category);
   }
 
 }

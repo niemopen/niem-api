@@ -19,4 +19,8 @@ public interface ComponentRepository<T extends Component<T>> extends JpaReposito
 
   List<T> findByNamespace_PrefixOrderByNameAsc(String prefix);
 
+  long countByNamespace_Id(long namespaceId);
+
+  long countByNamespace_Version_Id(long versionId);
+
 }

@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.property;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 
 import org.mitre.niem.cmf.Model;
 
@@ -80,6 +81,33 @@ public class PropertyController {
       @PathVariable String versionNumber) throws Exception {
     // return hub.properties.findByVersion(stewardKey, modelKey, versionNumber);
     return null;
+  }
+
+  /**
+   * Count all properties in the version with the given fields.
+   */
+  @GetMapping("/properties/count")
+  @ResponseStatus(code = HttpStatus.OK)
+  public long countVersionProperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @RequestParam(required = false) Property.Category category) throws EntityNotFoundException {
+    return hub.properties.countByVersion(stewardKey, modelKey, versionNumber, category);
+  }
+
+  /**
+   * Count all properties in the namespace with the given fields.
+   */
+  @GetMapping("/namespaces/{prefix}/properties/count")
+  @ResponseStatus(code = HttpStatus.OK)
+  public long countNamespaceProperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @RequestParam(required = false) Property.Category category) throws EntityNotFoundException {
+    return hub.properties.countByNamespace(stewardKey, modelKey, versionNumber, prefix, category);
   }
 
   // /**

@@ -1,6 +1,7 @@
 package gov.niem.tools.api.db.property;
 
 import gov.niem.tools.api.db.component.ComponentService;
+import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.version.Version;
 
@@ -59,6 +60,30 @@ public class PropertyService extends ComponentService<Property, PropertyReposito
     property.setName(name);
     property.setDefinition(definition);
     return this.add(namespace, property);
+  }
+
+  /**
+   * Count all properties in a version with the given fields.
+   */
+  public long countByVersion(String stewardKey, String modelKey, String versionNumber,
+      Property.Category category) throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    if (category == null) {
+      return repo.countByNamespace_Version_Id(version.getId());
+    }
+    return repo.countByNamespace_Version_IdAndCategory(version.getId(), category);
+  }
+
+  /**
+   * Count all properties in a namespace with the given fields.
+   */
+  public long countByNamespace(String stewardKey, String modelKey, String versionNumber,
+      String prefix, Property.Category category) throws EntityNotFoundException {
+    Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionNumber, prefix);
+    if (category == null) {
+      return repo.countByNamespace_Id(namespace.getId());
+    }
+    return repo.countByNamespace_IdAndCategory(namespace.getId(), category);
   }
 
 }

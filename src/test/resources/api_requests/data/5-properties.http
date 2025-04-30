@@ -2,10 +2,12 @@
 @steward = niem
 @model = model
 @version = 5.2
+@prefix = nc
 @abstract_qname = nc:PersonHairColorAbstract
 @substitution_qname = nc:PersonHairColorText
 @attribute_qname = nc:personNameCommentText
 @object_qname = biom:Biometric
+@category = attribute
 
 @properties = properties
 # @properties = properties.cmf
@@ -36,3 +38,15 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{pro
 
 ### Check error handling: Get a property from a namespace that does not exist
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/my:Person
+
+### Count properties in a version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/count
+
+### Count properties in a version with the given category
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/count?category={{category}}
+
+### Count properties in a namespace
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/properties/count
+
+### Count properties in a namespace with the given category
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/properties/count?category={{category}}

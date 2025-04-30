@@ -22,3 +22,9 @@ GET {{baseUrl}}/stewards/{{steward1}}/models/{{model2}}
 
 ### Get a specific model
 GET {{baseUrl}}/stewards/{{steward2}}/models/{{model2}}
+
+### Count models from a steward
+GET {{baseUrl}}/stewards/{{steward1}}/models/count
+
+### Count models from all stewards
+GET {{baseUrl}}/stewards/*/models/count

@@ -6,6 +6,10 @@ import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
 import gov.niem.tools.api.db.exceptions.FieldNotFoundException;
 import gov.niem.tools.api.db.facet.Facet.Category;
+import gov.niem.tools.api.db.namespace.Namespace;
+import gov.niem.tools.api.db.namespace.NamespaceService;
+import gov.niem.tools.api.db.property.Property;
+import gov.niem.tools.api.db.property.PropertyService;
 import gov.niem.tools.api.db.type.Type;
 import gov.niem.tools.api.db.type.TypeService;
 import gov.niem.tools.api.db.version.Version;
@@ -34,7 +38,13 @@ public class FacetService extends BaseEntityService<Facet> {
   VersionService versionService;
 
   @Autowired
+  NamespaceService namespaceService;
+
+  @Autowired
   TypeService typeService;
+
+  @Autowired
+  PropertyService propertyService;
 
   public FacetRepository repository() {
     return this.repo;
@@ -105,6 +115,46 @@ public class FacetService extends BaseEntityService<Facet> {
     Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
     return repo.findByVersionIdAndPrefixAndType_Name(version.getId(),
         Component.getPrefix(qname), Component.getName(qname));
+  }
+
+  /**
+   * Count all facets by the version with the given fields.
+   */
+  public long countByVersion(String stewardKey, String modelKey, String versionNumber)
+      throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    return repo.countByType_Namespace_Version_Id(version.getId());
+  }
+
+  /**
+   * Count all facets by the namespace with the given fields.
+   */
+  public long countByNamespace(String stewardKey, String modelKey, String versionNumber,
+      String prefix) throws EntityNotFoundException {
+    Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionNumber, prefix);
+    return repo.countByType_Namespace_Id(namespace.getId());
+  }
+
+  /**
+   * Count all facets by the type with the given fields.
+   */
+  public long countByType(String stewardKey, String modelKey, String versionNumber,
+      String qname) throws EntityNotFoundException {
+    Type type = typeService.findOne(stewardKey, modelKey, versionNumber, qname);
+    return repo.countByType_Id(type.getId());
+  }
+
+  /**
+   * Count all facets by the type of the property with the given fields.
+   */
+  public long countByProperty(String stewardKey, String modelKey, String versionNumber,
+      String qname) throws EntityNotFoundException {
+    Property property = propertyService.findOne(stewardKey, modelKey, versionNumber, qname);
+    Type type = property.getType();
+    if (type.isSimpleContent() && !type.isSimple()) {
+      type = type.getBase();
+    }
+    return repo.countByType_Id(type.getId());
   }
 
   /**

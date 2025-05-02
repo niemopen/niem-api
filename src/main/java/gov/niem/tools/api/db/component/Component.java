@@ -6,6 +6,7 @@ import gov.niem.tools.api.db.namespace.Namespace;
 import org.mitre.niem.cmf.CMFException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
@@ -47,6 +48,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordFie
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Indexed
 public abstract class Component<T extends BaseNamespaceEntity<T>> extends BaseNamespaceEntity<T> {
 

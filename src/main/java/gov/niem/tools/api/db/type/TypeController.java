@@ -8,8 +8,10 @@ import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,17 +68,56 @@ public class TypeController {
 
   /**
    * Gets all types in the version matching the given fields.
-   * Note: Currently returns null until pagination is supported.
-   *
-   * @todo Add version types pagination and return results.
    */
   @GetMapping("/types")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
-  public List<Type> getAllTypes(@PathVariable String stewardKey, @PathVariable String modelKey,
-      @PathVariable String versionNumber) throws Exception {
-    return null;
-    // return hub.types.findByVersion(stewardKey, modelKey, versionNumber);
+  public Page<Type> getVersionTypes(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PageableDefault(sort = {"namespace.prefix", "name"}) Pageable pageable)
+      throws Exception {
+    return hub.types.findByVersion(stewardKey, modelKey, versionNumber, pageable);
+  }
+
+  /**
+   * Gets all types from a namespace.
+   */
+  @GetMapping("/namespaces/{prefix}/types")
+  @ResponseStatus(code = HttpStatus.OK)
+  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
+  public Page<Type> getNamespaceTypes(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @PageableDefault(sort = {"namespace.prefix", "name"}) Pageable pageable)
+      throws Exception {
+    return hub.types.findByNamespace(stewardKey, modelKey, versionNumber, prefix, pageable);
+  }
+
+  /**
+   * Gets all types in CMF from a namespace.
+   */
+  @GetMapping("/namespaces.cmf/{prefix}/types")
+  @ResponseStatus(code = HttpStatus.OK)
+  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
+  public Object getNamespaceTypesCmf(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @PageableDefault(sort = {"namespace.categorySortOrder", "prefix", "name"}) Pageable pageable,
+      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
+      throws Exception {
+    Page<Type> types = hub.types.findByNamespace(stewardKey, modelKey, versionNumber,
+        prefix, pageable);
+    org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
+    for (Type type : types) {
+      type.addToCmfModel(cmfModel);
+    }
+    return CmfUtils.generateString(cmfModel, mediaType);
   }
 
   /**

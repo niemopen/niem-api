@@ -11,6 +11,7 @@ import org.mitre.niem.cmf.ClassType;
 import org.mitre.niem.cmf.Datatype;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -62,6 +63,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @JacksonXmlRootElement(localName = "api:Property")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Schema(name = "Property")
 @Table(
     uniqueConstraints = {

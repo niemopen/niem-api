@@ -10,11 +10,12 @@ import gov.niem.tools.api.db.version.Version;
 import gov.niem.tools.api.db.version.VersionService;
 
 import jakarta.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Operations for managing a component.
@@ -177,21 +178,21 @@ public abstract class ComponentService<T extends Component<T>, U extends Compone
   }
 
   /**
-   * Find a list of all components in the version with the given fields.
+   * Find a page of all components in the version with the given fields.
    */
-  public List<T> findByVersion(String stewardKey, String modelKey, String versionKey)
-      throws Exception {
+  public Page<T> findByVersion(String stewardKey, String modelKey, String versionKey,
+      Pageable pageable) throws Exception {
     Version version = versionService.findOne(stewardKey, modelKey, versionKey);
-    return repo.findByNamespace_Version_IdOrderByNamespace_PrefixAscNameAsc(version.getId());
+    return repo.findAllByNamespace_Version_Id(version.getId(), pageable);
   }
 
   /**
-   * Find a list of all components in the namespace with the given fields.
+   * Find a page of all components in the namespace with the given fields.
    */
-  public List<T> findByNamespace(String stewardKey, String modelKey, String versionKey,
-      String prefix) throws Exception {
+  public Page<T> findByNamespace(String stewardKey, String modelKey, String versionKey,
+      String prefix, Pageable pageable) throws Exception {
     Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionKey, prefix);
-    return repo.findByNamespace_IdOrderByNamespace_PrefixAscNameAsc(namespace.getId());
+    return repo.findAllByNamespace_Id(namespace.getId(), pageable);
   }
 
   /**

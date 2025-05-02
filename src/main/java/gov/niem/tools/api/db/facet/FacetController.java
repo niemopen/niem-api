@@ -7,8 +7,10 @@ import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.facet.Facet.Category;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,29 +64,71 @@ public class FacetController {
   }
 
   /**
-   * Gets all facets from the type with the given criteria.
+   * Gets all facets from the version with the given criteria.
    */
-  @GetMapping("/types/{qname}/facets")
-  public Set<Facet> getFacets(
+  @GetMapping("/facets")
+  public Page<Facet> getVersionFacets(
       @PathVariable String stewardKey,
       @PathVariable String modelKey,
       @PathVariable String versionNumber,
-      @PathVariable String qname) {
-    return hub.facets.find(stewardKey, modelKey, versionNumber, qname);
+      @PageableDefault(sort = {"typeName", "typePrefix", "category", "value"}, size = 100)
+          Pageable pageable) {
+    return hub.facets.findByVersion(stewardKey, modelKey, versionNumber, pageable);
+  }
+
+  /**
+   * Gets all facets from the namespace with the given criteria.
+   */
+  @GetMapping("/namespaces/{prefix}/facets")
+  public Page<Facet> getNamespaceFacets(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @PageableDefault(sort = {"typeName", "category", "value"}, size = 100) Pageable pageable) {
+    return hub.facets.findByNamespace(stewardKey, modelKey, versionNumber, prefix, pageable);
+  }
+
+  /**
+   * Gets all facets from the type with the given criteria.
+   */
+  @GetMapping("/types/{qname}/facets")
+  public Page<Facet> getTypeFacets(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @PageableDefault(sort = {"category", "value"}, size = 100) Pageable pageable) {
+    return hub.facets.findByType(stewardKey, modelKey, versionNumber, qname, pageable);
+  }
+
+  /**
+   * Gets all facets from the type of the property with the given criteria.
+   */
+  @GetMapping("/properties/{qname}/facets")
+  public Page<Facet> getPropertyFacets(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @PageableDefault(sort = {"category", "value"}, size = 100) Pageable pageable) {
+    return hub.facets.findByProperty(stewardKey, modelKey, versionNumber, qname, pageable);
   }
 
   /**
    * Gets all facets in CMF from the type with the given criteria.
    */
   @GetMapping("/types.cmf/{qname}/facets")
-  public Object getFacetsCmf(
+  public Object getTypeFacetsCmf(
       @PathVariable String stewardKey,
       @PathVariable String modelKey,
       @PathVariable String versionNumber,
       @PathVariable String qname,
+      @PageableDefault(sort = {"category", "value"}) Pageable pageable,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
       throws Exception {
-    Set<Facet> facets = hub.facets.find(stewardKey, modelKey, versionNumber, qname);
+    Page<Facet> facets = hub.facets.findByType(stewardKey, modelKey, versionNumber,
+        qname, pageable);
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
     for (Facet facet : facets) {
       facet.addToCmfModel(cmfModel);

@@ -3,7 +3,8 @@ package gov.niem.tools.api.db.facet;
 import gov.niem.tools.api.db.facet.Facet.Category;
 
 import java.util.Optional;
-import java.util.Set;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -14,9 +15,11 @@ public interface FacetRepository extends JpaRepository<Facet, Long> {
   Optional<Facet> findOneByVersionIdAndPrefixAndType_NameAndCategoryAndValue(
       Long versionId, String prefix, String name, Category category, String valueString);
 
-  Set<Facet> findByVersionIdAndPrefix(Long versionId, String prefix);
+  Page<Facet> findAllByType_Namespace_Version_Id(Long versionId, Pageable pageable);
 
-  Set<Facet> findByVersionIdAndPrefixAndType_Name(Long versionId, String prefix, String name);
+  Page<Facet> findAllByType_Namespace_Id(Long namespaceId, Pageable pageable);
+
+  Page<Facet> findAllByType_Id(Long typeId, Pageable pageable);
 
   long countByType_Namespace_Version_Id(Long versionId);
 

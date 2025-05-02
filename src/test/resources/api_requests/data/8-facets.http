@@ -8,8 +8,17 @@
 @category = enumeration
 @value = residential
 
-### Get all facets in a given type
+### Get all facets in a version (paginated)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/facets
+
+### Get all facets in a namespace (paginated)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/facets
+
+### Get all facets in a type (paginated)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{qname}}/facets
+
+### Get all facets in a property type (paginated)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{property_qname}}/facets
 
 ### Get a specific facet in a given type
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{qname}}/facets/{{category}}={{value}}

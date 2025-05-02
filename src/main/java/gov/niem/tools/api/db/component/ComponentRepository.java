@@ -1,7 +1,8 @@
 package gov.niem.tools.api.db.component;
 
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
@@ -13,11 +14,9 @@ public interface ComponentRepository<T extends Component<T>> extends JpaReposito
 
   Optional<T> findOneByNamespace_IdAndName(Long namespaceId, String name);
 
-  List<T> findByNamespace_Version_IdOrderByNamespace_PrefixAscNameAsc(Long versionId);
+  Page<T> findAllByNamespace_Version_Id(Long versionId, Pageable pageable);
 
-  List<T> findByNamespace_IdOrderByNamespace_PrefixAscNameAsc(Long namespaceId);
-
-  List<T> findByNamespace_PrefixOrderByNameAsc(String prefix);
+  Page<T> findAllByNamespace_Id(Long namespaceId, Pageable pageable);
 
   long countByNamespace_Id(long namespaceId);
 

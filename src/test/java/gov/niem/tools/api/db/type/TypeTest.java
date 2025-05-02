@@ -14,6 +14,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
 /**
@@ -119,9 +122,11 @@ public class TypeTest extends EntityTest<Type> {
   @Test
   public void databaseFindAllTest() throws Exception {
     this.loadObjects();
-    List<Type> results = service().findByVersion(ncPersonType.getStewardKey(),
-        ncPersonType.getModelKey(), ncPersonType.getVersionNumber());
-    assertEquals(5, results.size());
+    Pageable pageable = PageRequest.ofSize(20);
+    Page<Type> results = service().findByVersion(ncPersonType.getStewardKey(),
+        ncPersonType.getModelKey(), ncPersonType.getVersionNumber(), pageable);
+    List<Type> types = results.getContent();
+    assertEquals(5, types.size());
   }
 
   @Override

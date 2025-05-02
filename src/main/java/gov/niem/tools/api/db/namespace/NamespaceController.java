@@ -4,8 +4,6 @@ import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
-import gov.niem.tools.api.db.property.Property;
-import gov.niem.tools.api.db.type.Type;
 
 import org.mitre.niem.cmf.Model;
 
@@ -130,77 +128,6 @@ public class NamespaceController {
       @PathVariable String versionNumber,
       @RequestParam(required = false) Namespace.Category category) throws EntityNotFoundException {
     return hub.namespaces.count(stewardKey, modelKey, versionNumber, category);
-  }
-
-  /**
-   * Gets all types from a namespace.
-   */
-  @GetMapping("/namespaces/{prefix}/types")
-  @ResponseStatus(code = HttpStatus.OK)
-  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
-  public List<Type> getNamespaceTypes(
-      @PathVariable String stewardKey,
-      @PathVariable String modelKey,
-      @PathVariable String versionNumber,
-      @PathVariable String prefix) throws Exception {
-    return hub.types.findByNamespace(stewardKey, modelKey, versionNumber, prefix);
-  }
-
-  /**
-   * Gets all types in CMF from a namespace.
-   */
-  @GetMapping("/namespaces.cmf/{prefix}/types")
-  @ResponseStatus(code = HttpStatus.OK)
-  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
-  public Object getNamespaceTypesCmf(
-      @PathVariable String stewardKey,
-      @PathVariable String modelKey,
-      @PathVariable String versionNumber,
-      @PathVariable String prefix,
-      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
-      throws Exception {
-    List<Type> types = hub.types.findByNamespace(stewardKey, modelKey, versionNumber, prefix);
-    org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
-    for (Type type : types) {
-      type.addToCmfModel(cmfModel);
-    }
-    return CmfUtils.generateString(cmfModel, mediaType);
-  }
-
-  /**
-   * Gets all properties from a namespace.
-   */
-  @GetMapping("/namespaces/{prefix}/properties")
-  @ResponseStatus(code = HttpStatus.OK)
-  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
-  public List<Property> getNamespaceProperties(
-      @PathVariable String stewardKey,
-      @PathVariable String modelKey,
-      @PathVariable String versionNumber,
-      @PathVariable String prefix) throws Exception {
-    return hub.properties.findByNamespace(stewardKey, modelKey, versionNumber, prefix);
-  }
-
-  /**
-   * Gets all properties from a namespace in CMF.
-   */
-  @GetMapping("/namespaces.cmf/{prefix}/properties")
-  @ResponseStatus(code = HttpStatus.OK)
-  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
-  public Object getNamespacePropertiesCmf(
-      @PathVariable String stewardKey,
-      @PathVariable String modelKey,
-      @PathVariable String versionNumber,
-      @PathVariable String prefix,
-      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
-      throws Exception {
-    List<Property> properties = hub.properties.findByNamespace(stewardKey,
-        modelKey, versionNumber, prefix);
-    org.mitre.niem.cmf.Model cmfModel = new Model();
-    for (Property property : properties) {
-      property.addToCmfModel(cmfModel);
-    }
-    return CmfUtils.generateString(cmfModel, mediaType);
   }
 
   // @PostMapping("/namespaces")

@@ -14,6 +14,7 @@ import org.mitre.niem.cmf.RestrictionOf;
 import org.mitre.niem.cmf.UnionOf;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -55,6 +56,7 @@ import org.hibernate.proxy.HibernateProxy;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @JacksonXmlRootElement(localName = "api:Type")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Schema(name = "Type")
 @Table(
     uniqueConstraints = {@UniqueConstraint(

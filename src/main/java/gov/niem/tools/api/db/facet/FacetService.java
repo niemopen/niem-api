@@ -19,8 +19,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.Optional;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Operations supporting facets.
@@ -108,13 +109,43 @@ public class FacetService extends BaseEntityService<Facet> {
   }
 
   /**
+   * Finds all facets in the database from the version matching the given fields.
+   */
+  public Page<Facet> findByVersion(String stewardKey, String modelKey, String versionNumber,
+      Pageable pageable) throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    return repo.findAllByType_Namespace_Version_Id(version.getId(), pageable);
+  }
+
+  /**
+   * Finds all facets in the database from the namespace matching the given fields.
+   */
+  public Page<Facet> findByNamespace(String stewardKey, String modelKey, String versionNumber,
+      String prefix, Pageable pageable) throws EntityNotFoundException {
+    Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionNumber, prefix);
+    return repo.findAllByType_Namespace_Id(namespace.getId(), pageable);
+  }
+
+  /**
    * Finds all facets in the database from the type matching the given fields.
    */
-  public Set<Facet> find(String stewardKey, String modelKey, String versionNumber, String qname)
-      throws EntityNotFoundException {
-    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
-    return repo.findByVersionIdAndPrefixAndType_Name(version.getId(),
-        Component.getPrefix(qname), Component.getName(qname));
+  public Page<Facet> findByType(String stewardKey, String modelKey, String versionNumber,
+      String qname, Pageable pageable) throws EntityNotFoundException {
+    Type type = typeService.findOne(stewardKey, modelKey, versionNumber, qname);
+    return repo.findAllByType_Id(type.getId(), pageable);
+  }
+
+  /**
+   * Finds all facets in the database from the type of the property matching the given fields.
+   */
+  public Page<Facet> findByProperty(String stewardKey, String modelKey, String versionNumber,
+      String qname, Pageable pageable) throws EntityNotFoundException {
+    Property property = propertyService.findOne(stewardKey, modelKey, versionNumber, qname);
+    Type type = property.getType();
+    if (type.isSimpleContent() && !type.isSimple()) {
+      type = type.getBase();
+    }
+    return repo.findAllByType_Id(type.getId(), pageable);
   }
 
   /**

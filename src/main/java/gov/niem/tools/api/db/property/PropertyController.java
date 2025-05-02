@@ -10,8 +10,10 @@ import org.mitre.niem.cmf.Model;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -68,19 +70,57 @@ public class PropertyController {
 
   /**
    * Gets all properties from the version with the given fields.
-   * Note: Currently returns null until pagination support is added.
-   *
-   * @todo Add pagination support for version properties and return results.
    */
   @GetMapping("/properties")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
-  public List<Property> getAllProperties(
+  public Page<Property> getVersionProperties(
       @PathVariable String stewardKey,
       @PathVariable String modelKey,
-      @PathVariable String versionNumber) throws Exception {
-    // return hub.properties.findByVersion(stewardKey, modelKey, versionNumber);
-    return null;
+      @PathVariable String versionNumber,
+      @PageableDefault(sort = {"prefix", "name"}) Pageable pageable)
+      throws Exception {
+    return hub.properties.findByVersion(stewardKey, modelKey, versionNumber, pageable);
+  }
+
+  /**
+   * Gets all properties from the namespace with the given fields.
+   * Default sort is namespace rank (e.g., Core first), prefix, and then name.
+   */
+  @GetMapping("/namespaces/{prefix}/properties")
+  @ResponseStatus(code = HttpStatus.OK)
+  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
+  public Page<Property> getNamespaceProperties(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @PageableDefault(sort = {"prefix", "name"}) Pageable pageable)
+      throws Exception {
+    return hub.properties.findByNamespace(stewardKey, modelKey, versionNumber, prefix, pageable);
+  }
+
+  /**
+   * Gets all properties from a namespace with the given fields in CMF.
+   */
+  @GetMapping("/namespaces.cmf/{prefix}/properties")
+  @ResponseStatus(code = HttpStatus.OK)
+  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
+  public Object getNamespacePropertiesCmf(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @PageableDefault(sort = {"namespace.prefix", "name"}) Pageable pageable,
+      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
+      throws Exception {
+    Page<Property> properties = hub.properties.findByNamespace(stewardKey,
+        modelKey, versionNumber, prefix, pageable);
+    org.mitre.niem.cmf.Model cmfModel = new Model();
+    for (Property property : properties) {
+      property.addToCmfModel(cmfModel);
+    }
+    return CmfUtils.generateString(cmfModel, mediaType);
   }
 
   /**

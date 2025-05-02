@@ -38,3 +38,15 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/names
 
 ### Count types in a namespace with the given category
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/types/count?category={{category}}
+
+### Get all types in a version (default pagination)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
+
+### Get all types in a version (sort by name desc)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types?sort=prefix,desc&sort=name,desc
+
+### Get all types in a version (sort by prefix desc, name asc, page number, size)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types?size=5&page=12&sort=prefix,desc&sort=name
+
+### Get all types in a namespace (default pagination)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/types

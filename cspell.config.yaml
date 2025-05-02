@@ -60,6 +60,7 @@ words:
   - NUMKINDS
   - OBJECTPROPERTY
   - OTHERNIEM
+  - pageable
   - PARACEL
   - plpgsql
   - println

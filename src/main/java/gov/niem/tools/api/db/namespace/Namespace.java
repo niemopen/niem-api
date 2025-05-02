@@ -157,6 +157,30 @@ public class Namespace extends BaseVersionEntity<Namespace>
   private String draft;
 
   /**
+   * A ranking used to support sorting namespaces by category, with
+   * Core and Core Supplements sorting first, followed by domains, etc.
+   */
+  public int getRank() {
+    switch (this.category) {
+      case core:
+      case core_supplement:
+        return 1;
+      case domain:
+      case domain_update:
+        return 2;
+      case code:
+        return 3;
+      case adapter:
+        return 4;
+      case extension:
+      case exchange:
+        return 5;
+      default:
+        return 99;
+    }
+  }
+
+  /**
    * Kinds of NDR targets, such as REF and EXT.
    *
    * @todo Support NDR 6.0 MSG and SUB targets.

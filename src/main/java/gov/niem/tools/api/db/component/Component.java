@@ -63,6 +63,24 @@ public abstract class Component<T extends BaseNamespaceEntity<T>> extends BaseNa
   @Formula("(SELECT namespace.prefix||':'||name FROM namespace WHERE namespace.id = namespace_id)")
   public String qname;
 
+  /**
+   * A ranking used to support sorting component namespaces by category, with
+   * Core and Core Supplements sorting first, followed by domains, etc.
+   */
+  @NotAudited
+  @Formula("(SELECT CASE "
+      + "WHEN namespace.category = 'core' THEN 1 "
+      + "WHEN namespace.category = 'core_supplement' THEN 1 "
+      + "WHEN namespace.category = 'domain' THEN 2 "
+      + "WHEN namespace.category = 'domain_supplement' THEN 2 "
+      + "WHEN namespace.category = 'code' THEN 3 "
+      + "WHEN namespace.category = 'adapter' THEN 4 "
+      + "WHEN namespace.category = 'extension' THEN 5 "
+      + "WHEN namespace.category = 'exchange' THEN 5 "
+      + "ELSE 99 END "
+      + "FROM namespace WHERE namespace.id = namespace_id)")
+  public int namespaceRank;
+
   protected abstract Object getCategory();
 
   /**

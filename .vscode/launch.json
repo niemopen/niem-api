@@ -9,6 +9,16 @@
       "projectName": "api-niem-api",
       "args": "-parameters",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<niem-api>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "gov.niem.tools.api.Application",
+      "projectName": "niem-api",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }

@@ -71,13 +71,15 @@ public class ResponseUtils {
   /**
    * Returns a response entity for a CSV file.
    */
+  public static ResponseEntity<byte[]> getResponseFileCsv(byte[] bytes, String filename) {
+    return getResponseFile(bytes, filename, new MediaType("text", "csv"));
+  }
+
+  /**
+   * Returns a response entity for a CSV file.
+   */
   public static ResponseEntity<byte[]> getResponseFileCsv(String data, String filename) {
-    // TODO: Check for content type text/csv
-    // ResponseEntity<byte[]> response = getResponseFile(data.getBytes(), filename);
-    // HttpHeaders headers = response.getHeaders();
-    // headers.add("Content-Type", "text/csv");
-    // return response;
-    return ResponseUtils.getResponseFileText(data.getBytes(), filename);
+    return getResponseFile(data.getBytes(), filename, new MediaType("text", "csv"));
   }
 
 }

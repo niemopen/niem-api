@@ -18,7 +18,11 @@ import org.hibernate.search.engine.search.query.SearchResult;
 import org.hibernate.search.mapper.orm.Search;
 import org.hibernate.search.mapper.orm.massindexing.MassIndexer;
 import org.hibernate.search.mapper.orm.session.SearchSession;
+import org.hibernate.search.mapper.pojo.massindexing.MassIndexingMonitor;
+import org.hibernate.search.mapper.pojo.massindexing.impl.PojoMassIndexingLoggingMonitor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -42,8 +46,10 @@ public class SearchService {
    */
   @SneakyThrows
   @Transactional
+  @EventListener(ApplicationReadyEvent.class)
   public void runIndexer() {
     log.info("Initializing indexes...");
+    MassIndexingMonitor monitor = new PojoMassIndexingLoggingMonitor(10000);
     SearchSession searchSession = Search.session(em);
     MassIndexer indexer = searchSession.massIndexer(
         Steward.class,
@@ -54,7 +60,7 @@ public class SearchService {
         .idFetchSize(150)
         .batchSizeToLoadObjects(25)
         .threadsToLoadObjects(6)
-        ;
+        .monitor(monitor);
 
     try {
       indexer.startAndWait();

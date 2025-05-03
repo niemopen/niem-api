@@ -45,6 +45,7 @@ server:
     min-response-size: 1024
   error:
     include-message: always
+    include-stacktrace: never
   servlet:
     context-path: /api/v2
 

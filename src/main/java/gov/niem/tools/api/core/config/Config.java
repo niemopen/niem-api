@@ -5,7 +5,6 @@ import gov.niem.tools.api.core.security.SpringSecurityAuditorAware;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.hibernate6.Hibernate6Module;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -93,9 +92,7 @@ public class Config {
             .mediaType("xml", MediaType.APPLICATION_XML)
             .mediaType("json", MediaType.APPLICATION_JSON)
             .mediaType("text", MediaType.TEXT_PLAIN)
-            .strategies(List.of(
-              new EnsureApplicationJsonNegotiationStrategy()
-            ));;
+            .mediaType("csv", new MediaType("text", "csv"));
       }
     };
   }

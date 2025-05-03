@@ -2,7 +2,7 @@
 # CMF Validation Requests
 
 @mediaType = json
-# @mediaType = csv
+@mediaType = csv
 
 # Assign request variables
 @url = {{baseUrl}}/validation/cmf/xml
@@ -48,7 +48,20 @@ Content-Type: application/xml
 
 ### CMF Validation - Unsupported CMF version
 
-POST {{url}}?mediaType={{mediaType}}
+POST {{url}}?mediaType=json
+Content-Type: multipart/form-data; boundary={{boundary}}
+
+--{{boundary}}
+Content-Disposition: form-data; name="file"; filename="{{unsupported_version_filename}}"
+Content-Type: application/xml
+
+< {{unsupported_version_file}}
+--{{boundary}}--
+
+### CMF Validation - Test exception handling when expecting a CSV response
+
+POST {{url}}?mediaType=csv
+# Accept: text/csv, application/json
 Content-Type: multipart/form-data; boundary={{boundary}}
 
 --{{boundary}}

@@ -21,3 +21,18 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{pro
 
 ### Get an object property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{object_qname}}
+
+### Get an object property in XML
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{object_qname}}?mediaType=xml
+
+### Get an object property in CMF XML
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties.cmf/{{object_qname}}?mediaType=xml
+
+### Get an object property in CMF JSON
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties.cmf/{{object_qname}}
+
+### Check error handling: Get an property that does not exist
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/nc:Pineapple
+
+### Check error handling: Get a property from a namespace that does not exist
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/my:Person

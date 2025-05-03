@@ -54,6 +54,7 @@ public class CmfUtils {
    */
   public static void checkVersion(MultipartFile multipartFile)
       throws IOException, BadRequestException {
+    CmfUtils.checkFileExtension(multipartFile);
     String cmfString = FileUtils.getFileText(multipartFile);
     CmfUtils.checkVersion(cmfString);
   }
@@ -63,6 +64,7 @@ public class CmfUtils {
    * version of CMF.
    */
   public static void checkVersion(File file) throws IOException {
+    CmfUtils.checkFileExtension(file);
     String cmfString = FileUtils.getFileText(file.toPath());
     CmfUtils.checkVersion(cmfString);
   }
@@ -76,6 +78,32 @@ public class CmfUtils {
       String errorMessage = String.format("Only CMF version %s is currently supported",
           Config.cmfVersion);
       throw new BadRequestException(errorMessage);
+    }
+  }
+
+  /**
+   * Check that the file extension of the given file has a valid CMF extension.
+   */
+  public static void checkFileExtension(MultipartFile multipartFile) {
+    String fileExtension = FileUtils.getFileExtension(multipartFile);
+    checkFileExtension(fileExtension);
+  }
+
+  /**
+   * Check that the file extension of the given file has a valid CMF extension.
+   */
+  public static void checkFileExtension(File file) {
+    String fileExtension = FileUtils.getFileExtension(file.toPath());
+    checkFileExtension(fileExtension);
+  }
+
+  /**
+   * Check that the given CMF file has a valid file extension.
+   */
+  public static void checkFileExtension(String fileExtension) throws BadRequestException {
+    if (!fileExtension.equals("xml") && !fileExtension.equals("cmf.xml")) {
+      String message = String.format("[.%s] is not an accepted file extension for CMF files (.cmf or .cmf.xml)", fileExtension);
+      throw new BadRequestException(message);
     }
   }
 

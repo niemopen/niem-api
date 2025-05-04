@@ -50,7 +50,8 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordFie
 @EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Indexed
-public abstract class Component<T extends BaseNamespaceEntity<T>> extends BaseNamespaceEntity<T> {
+public abstract class Component<T extends BaseNamespaceEntity<T>>
+    extends BaseNamespaceEntity<T> implements Comparable<Component<T>> {
 
   /**
    * A namespace prefix for the property or type.
@@ -188,6 +189,21 @@ public abstract class Component<T extends BaseNamespaceEntity<T>> extends BaseNa
   public org.mitre.niem.cmf.Component toCmf() throws CMFException {
     // Override
     return null;
+  }
+
+  /**
+   * Custom sorting function for components.
+   * Returns components sorted by namespace rank, prefix, and name.
+   */
+  @Override
+  public int compareTo(Component<T> other) {
+    if (this.namespaceRank < other.namespaceRank) {
+      return -1;
+    }
+    if (this.namespaceRank > other.namespaceRank) {
+      return 1;
+    }
+    return this.qname.compareTo(other.qname);
   }
 
 }

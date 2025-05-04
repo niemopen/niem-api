@@ -8,6 +8,7 @@ import gov.niem.tools.api.db.version.Version;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
@@ -93,7 +94,9 @@ public class PropertyService extends ComponentService<Property, PropertyReposito
   public List<Property> getSubstitutions(String stewardKey, String modelKey,
       String versionNumber, String qname) throws EntityNotFoundException {
     Property property = this.findOne(stewardKey, modelKey, versionNumber, qname);
-    return repo.findAllByGroup_Id(property.getId());
+    List<Property> substitutions = repo.findAllByGroup_Id(property.getId());
+    Collections.sort(substitutions);
+    return substitutions;
   }
 
 }

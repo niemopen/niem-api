@@ -43,7 +43,7 @@ public class StewardController {
   @GetMapping("/stewards")
   @ResponseStatus(code = HttpStatus.OK)
   public List<Steward> getStewards() throws Exception {
-    return hub.stewards.repository().findAll();
+    return hub.stewards.findAll();
   }
 
   /**

@@ -63,7 +63,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
   @Index(name = "steward_short_name_idx", columnList = "shortName"),
   @Index(name = "steward_unit_idx", columnList = "unit")
 })
-public class Steward extends BaseEntity {
+public class Steward extends BaseEntity implements Comparable<Steward> {
 
   @Transient @JsonIgnore
   public static final String niemStewardKey = "niem";
@@ -362,5 +362,18 @@ public class Steward extends BaseEntity {
   //   return steward;
 
   // }
+
+  /**
+   * Custom sorting function for stewards.
+   * Return the NIEM steward first, followed by stewards sorted by steward key.
+   */
+  @Override
+  public int compareTo(Steward other) {
+    // Return the NIEM steward first.
+    if (this.stewardKey.equals(Steward.niemStewardKey)) {
+      return -1;
+    }
+    return this.stewardKey.compareTo(other.stewardKey);
+  }
 
 }

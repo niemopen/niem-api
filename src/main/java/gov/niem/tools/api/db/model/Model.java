@@ -75,7 +75,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
     }
 )
 @Indexed
-public class Model extends BaseStewardEntity {
+public class Model extends BaseStewardEntity implements Comparable<Model> {
 
   // TODO: Reserved base URIs
 
@@ -347,5 +347,34 @@ public class Model extends BaseStewardEntity {
   //   .map(stewardship -> stewardship.toDescriptorBaseWithSteward())
   //   .collect(Collectors.toList());
   // }
+
+  /**
+   * Custom sorting function for models.
+   * Return the NIEM reference model first, then other NIEM models, then
+   * remaining models sorted by model key.
+   */
+  @Override
+  public int compareTo(Model other) {
+    if (this.getStewardKey().equals(Steward.niemStewardKey)) {
+
+      // Return models from the NIEM steward first
+      if (!other.getStewardKey().equals(Steward.niemStewardKey)) {
+        return -1;
+      }
+
+      // Return the NIEM reference model before other NIEM models
+      if (this.modelKey.equals(Model.niemModelKey)) {
+        return -1;
+      }
+
+      if (other.modelKey.equals(Model.niemModelKey)) {
+        return 1;
+      }
+
+    }
+
+    // Sort remaining models by short name
+    return this.modelKey.compareTo(other.modelKey);
+  }
 
 }

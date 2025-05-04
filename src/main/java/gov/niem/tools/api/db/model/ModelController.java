@@ -1,13 +1,11 @@
 package gov.niem.tools.api.db.model;
 
 import gov.niem.tools.api.db.ServiceHub;
-import gov.niem.tools.api.db.steward.Steward;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,10 +49,9 @@ public class ModelController {
   public List<Model> getStewardModels(@PathVariable String stewardKey) throws Exception {
     if (stewardKey.equals("*")) {
       // Wildcard: Return all models
-      return modelRepo.findAll();
+      return hub.models.findAll();
     }
-    Steward steward = hub.stewards.findOne(stewardKey);
-    return new ArrayList<Model>(steward.getModels());
+    return hub.models.findBySteward(stewardKey);
   }
 
   /**

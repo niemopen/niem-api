@@ -1,6 +1,6 @@
 package gov.niem.tools.api.db.subproperty;
 
-import gov.niem.tools.api.db.base.BaseEntityService;
+import gov.niem.tools.api.db.base.BaseVersionEntityService;
 import gov.niem.tools.api.db.component.Component;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @todo Return Subproperty lists instead of sets
  */
 @org.springframework.stereotype.Component
-public class SubpropertyService extends BaseEntityService<Subproperty> {
+public class SubpropertyService extends BaseVersionEntityService<Subproperty> {
 
   @PersistenceContext
   private EntityManager em;

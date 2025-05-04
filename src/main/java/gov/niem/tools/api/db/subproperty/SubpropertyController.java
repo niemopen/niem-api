@@ -5,12 +5,15 @@ import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -171,6 +174,70 @@ public class SubpropertyController {
       @PathVariable String versionNumber,
       @PathVariable String qname) throws Exception {
     return hub.subproperties.countByType(stewardKey, modelKey, versionNumber, qname);
+  }
+
+
+  /**
+   * Get the previous version of the subproperty with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{typeQname}/subproperties/{propertyQname}/prev")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Subproperty getPrev(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String typeQname,
+      @PathVariable String propertyQname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Subproperty subproperty = hub.subproperties.findOne(stewardKey, modelKey,
+        versionNumber, typeQname, propertyQname);
+    return hub.subproperties.getPrev(subproperty, includePreRelease);
+  }
+
+  /**
+   * Get the next version of the subproperty with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{typeQname}/subproperties/{propertyQname}/next")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Subproperty getNext(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String typeQname,
+      @PathVariable String propertyQname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Subproperty subproperty = hub.subproperties.findOne(stewardKey, modelKey,
+        versionNumber, typeQname, propertyQname);
+    return hub.subproperties.getNext(subproperty, includePreRelease);
+  }
+
+  /**
+   * Get the history of the subproperty with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{typeQname}/subproperties/{propertyQname}/history")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Subproperty> getHistory(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String typeQname,
+      @PathVariable String propertyQname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Subproperty subproperty = hub.subproperties.findOne(stewardKey, modelKey,
+        versionNumber, typeQname, propertyQname);
+    return hub.subproperties.getHistory(subproperty, includePreRelease);
   }
 
   // @PostMapping("/subproperties")

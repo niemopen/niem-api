@@ -11,3 +11,15 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}
 
 ### Count versions from a given model
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/count
+
+### Get previous version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prev
+
+### Get next version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/next
+
+### Get version history
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/history
+
+### Error checking: Get unavailable previous version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/1.0/prev

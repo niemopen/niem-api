@@ -1,6 +1,6 @@
 package gov.niem.tools.api.db.namespace;
 
-import gov.niem.tools.api.db.base.BaseEntityService;
+import gov.niem.tools.api.db.base.BaseVersionEntityService;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
 import gov.niem.tools.api.db.exceptions.FieldNotFoundException;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * Operations to support namespaces.
  */
 @Service
-public class NamespaceService extends BaseEntityService<Namespace> {
+public class NamespaceService extends BaseVersionEntityService<Namespace> {
 
   @PersistenceContext
   private EntityManager em;
@@ -156,12 +156,18 @@ public class NamespaceService extends BaseEntityService<Namespace> {
     return this.findOne(namespace.getVersion(), namespace.getPrefix());
   }
 
+  /**
+   * Count the number of namespaces with the given fields.
+   */
   public long count(String stewardKey, String modelKey, String versionNumber)
       throws EntityNotFoundException {
     Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
     return repo.countByVersion_Id(version.getId());
   }
 
+  /**
+   * Count the number of namespaces with the given fields.
+   */
   public long count(String stewardKey, String modelKey, String versionNumber,
       Namespace.Category category) throws EntityNotFoundException {
     Version version = versionService.findOne(stewardKey, modelKey, versionNumber);

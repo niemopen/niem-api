@@ -1,6 +1,6 @@
 package gov.niem.tools.api.db.component;
 
-import gov.niem.tools.api.db.base.BaseEntityService;
+import gov.niem.tools.api.db.base.BaseVersionEntityService;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
 import gov.niem.tools.api.db.exceptions.FieldNotFoundException;
@@ -21,7 +21,7 @@ import org.springframework.data.domain.Pageable;
  * Operations for managing a component.
  */
 public abstract class ComponentService<T extends Component<T>, U extends ComponentRepository<T>>
-    extends BaseEntityService<T> {
+    extends BaseVersionEntityService<T> {
 
   @Autowired
   protected U repo;

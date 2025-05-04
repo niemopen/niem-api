@@ -130,6 +130,63 @@ public class NamespaceController {
     return hub.namespaces.count(stewardKey, modelKey, versionNumber, category);
   }
 
+  /**
+   * Get the previous version of the namespace with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/namespaces/{prefix}/prev")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Namespace getPrev(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Namespace namespace = hub.namespaces.findOne(stewardKey, modelKey, versionNumber, prefix);
+    return hub.namespaces.getPrev(namespace, includePreRelease);
+  }
+
+  /**
+   * Get the next version of the namespace with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/namespaces/{prefix}/next")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Namespace getNext(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Namespace namespace = hub.namespaces.findOne(stewardKey, modelKey, versionNumber, prefix);
+    return hub.namespaces.getNext(namespace, includePreRelease);
+  }
+
+  /**
+   * Get the history of the namespace with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/namespaces/{prefix}/history")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Namespace> getHistory(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Namespace namespace = hub.namespaces.findOne(stewardKey, modelKey, versionNumber, prefix);
+    return hub.namespaces.getHistory(namespace, includePreRelease);
+  }
+
   // @PostMapping("/namespaces")
   // public ResponseEntity<String> postNamespace(@PathVariable String stewardKey,
   //     @PathVariable String modelKey, @PathVariable String versionNumber, Namespace namespace)

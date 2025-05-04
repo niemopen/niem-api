@@ -10,6 +10,7 @@ import org.mitre.niem.cmf.Model;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -148,6 +149,63 @@ public class PropertyController {
       @PathVariable String prefix,
       @RequestParam(required = false) Property.Category category) throws EntityNotFoundException {
     return hub.properties.countByNamespace(stewardKey, modelKey, versionNumber, prefix, category);
+  }
+
+  /**
+   * Get the previous version of the property with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/properties/{qname}/prev")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Property getPrev(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Property property = hub.properties.findOne(stewardKey, modelKey, versionNumber, qname);
+    return hub.properties.getPrev(property, includePreRelease);
+  }
+
+  /**
+   * Get the next version of the property with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/properties/{qname}/next")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Property getNext(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Property property = hub.properties.findOne(stewardKey, modelKey, versionNumber, qname);
+    return hub.properties.getNext(property, includePreRelease);
+  }
+
+  /**
+   * Get the history of the property with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/properties/{qname}/history")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Property> getHistory(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Property property = hub.properties.findOne(stewardKey, modelKey, versionNumber, qname);
+    return hub.properties.getHistory(property, includePreRelease);
   }
 
   // /**

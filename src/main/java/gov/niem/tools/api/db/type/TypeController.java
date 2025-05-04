@@ -8,6 +8,7 @@ import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -147,6 +148,63 @@ public class TypeController {
     return hub.types.countByNamespace(stewardKey, modelKey, versionNumber, prefix, category);
   }
 
+  /**
+   * Get the previous version of the type with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{qname}/prev")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Type getPrev(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Type type = hub.types.findOne(stewardKey, modelKey, versionNumber, qname);
+    return hub.types.getPrev(type, includePreRelease);
+  }
+
+  /**
+   * Get the next version of the type with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{qname}/next")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Type getNext(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Type type = hub.types.findOne(stewardKey, modelKey, versionNumber, qname);
+    return hub.types.getNext(type, includePreRelease);
+  }
+
+  /**
+   * Get the history of the type with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{qname}/history")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Type> getHistory(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Type type = hub.types.findOne(stewardKey, modelKey, versionNumber, qname);
+    return hub.types.getHistory(type, includePreRelease);
+  }
+
   // /**
   //  * Get all CMF datatypes matching the given fields.
   //  */
@@ -163,7 +221,7 @@ public class TypeController {
   //     })
   // })
   // public List<Datatype> getAllDataTypes(@PathVariable String stewardKey,
-  //     @PathVariable String modelKey, @PathVariable String versionKey) throws Exception {
+  //     @PathVariable String modelKey, @PathVariable String versionNumber) throws Exception {
   //   // return hub.types.findByRelease(stewardKey, modelKey, versionNumber);
   //   return new ArrayList<Datatype>();
   // }
@@ -184,7 +242,7 @@ public class TypeController {
   //   })
   // })
   // public List<ClassType> getAllClassTypes(@PathVariable String stewardKey,
-  //     @PathVariable String modelKey, @PathVariable String versionKey) throws Exception {
+  //     @PathVariable String modelKey, @PathVariable String versionNumber) throws Exception {
   //   // return hub.types.findByRelease(stewardKey, modelKey, versionNumber);
   //   return new ArrayList<ClassType>();
   // }

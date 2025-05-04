@@ -3,7 +3,7 @@ package gov.niem.tools.api.db.version;
 
 import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
-import gov.niem.tools.api.db.base.BaseModelEntity;
+import gov.niem.tools.api.db.base.BaseVersionedEntity;
 import gov.niem.tools.api.db.model.Model;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.property.Property;
@@ -28,7 +28,6 @@ import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -80,7 +79,8 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
       @Index(name = "version_category_idx", columnList = "category")
     }
 )
-public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.niem.cmf.Model> {
+public class Version extends BaseVersionedEntity<Version>
+    implements BaseCmfEntity<org.mitre.niem.cmf.Model> {
 
   @JsonIgnore
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -234,50 +234,6 @@ public class Version extends BaseModelEntity implements BaseCmfEntity<org.mitre.
   @OneToMany
   @OrderBy("qname")
   private Set<Property> messageRoots = new HashSet<Property>();
-
-  /**
-   * Corresponding entity mapped from the previous version.
-   */
-  @JsonIgnore
-  @ToString.Exclude
-  @EqualsAndHashCode.Exclude
-  @OneToOne
-  @JoinColumn(name = "prev_id", referencedColumnName = "id")
-  public Version prev;
-
-  /**
-   * Corresponding entity mapped from the next version.
-   */
-  @JsonIgnore
-  @ToString.Exclude
-  @EqualsAndHashCode.Exclude
-  @OneToOne
-  @JoinColumn(name = "next_id", referencedColumnName = "id")
-  public Version next;
-
-  /**
-   * Corresponding entity from the previous version of the model.
-   * The Hibernate proxy (from lazy loading) is initialized.
-   */
-  public Version getPrev() {
-    Version prev = this.prev;
-    if (prev instanceof HibernateProxy) {
-      prev = Hibernate.unproxy(prev, Version.class);
-    }
-    return prev;
-  }
-
-  /**
-   * Corresponding entity from the next version of the model.
-   * The Hibernate proxy (from lazy loading) is initialized.
-   */
-  public Version getNext() {
-    Version next = this.next;
-    if (next instanceof HibernateProxy) {
-      next = Hibernate.unproxy(next, Version.class);
-    }
-    return next;
-  }
 
   /**
    * A NIEM version on which this version is based, or itself if this is a NIEM version.

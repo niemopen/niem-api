@@ -26,8 +26,8 @@ import org.hibernate.proxy.HibernateProxy;
 /**
  * Adds reusable methods for entities that belong to a version: Namespace, Property, etc.
  *
- * @param <T> A class for a kind of entity that that supports versioning and migration rules to
- *     create previous and next links between releases, such as Namespace, Property, Type, or Facet.
+ * @param <T> A class for a kind of entity that that belongs to a version, such as
+ *     Namespace, Property, Type, or Facet.
  */
 @MappedSuperclass
 @Audited
@@ -36,57 +36,11 @@ import org.hibernate.proxy.HibernateProxy;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends BaseModelEntity {
+public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
+    extends BaseVersionedEntity<T> {
 
   @JsonIgnore
   public abstract Version getVersion();
-
-
-  /**
-   * Corresponding entity mapped from the previous version.
-   */
-  @JsonIgnore
-  @ToString.Exclude
-  @EqualsAndHashCode.Exclude
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prev_id", referencedColumnName = "id")
-  public T prev;
-
-  /**
-   * Corresponding entity mapped from the next version.
-   */
-  @JsonIgnore
-  @ToString.Exclude
-  @EqualsAndHashCode.Exclude
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "next_id", referencedColumnName = "id")
-  public T next;
-
-  /**
-   * Corresponding entity from the previous version of the model.
-   * The Hibernate proxy (from lazy loading) is initialized.
-   */
-  @SuppressWarnings("unchecked")
-  public T getPrev() {
-    T prev = this.prev;
-    if (prev instanceof HibernateProxy) {
-      prev = (T) Hibernate.unproxy(prev);
-    }
-    return prev;
-  }
-
-  /**
-   * Corresponding entity from the next version of the model.
-   * The Hibernate proxy (from lazy loading) is initialized.
-   */
-  @SuppressWarnings("unchecked")
-  public T getNext() {
-    T next = this.next;
-    if (next instanceof HibernateProxy) {
-      next = (T) Hibernate.unproxy(next);
-    }
-    return next;
-  }
 
   /**
    * For a subset that reuses content from another model, this is the link to the
@@ -137,7 +91,8 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>> extends 
    * if an entity is being referenced and reused from another model and version
    * and is restricted in the changes that can be made (subset options).
    */
-  @JsonProperty("isOriginal")
+  @JsonIgnore
+  // @JsonProperty("isOriginal")
   @JacksonXmlProperty(localName = "api:EntityOriginalIndicator")
   @Schema(example = "false")
   public boolean isOriginal() {

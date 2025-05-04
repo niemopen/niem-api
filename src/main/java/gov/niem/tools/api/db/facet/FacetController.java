@@ -7,14 +7,17 @@ import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.facet.Facet.Category;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -181,6 +184,72 @@ public class FacetController {
       @PathVariable String versionNumber,
       @PathVariable String qname) throws EntityNotFoundException {
     return hub.facets.countByProperty(stewardKey, modelKey, versionNumber, qname);
+  }
+
+  /**
+   * Get the previous version of the facet with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{qname}/facets/{category}={value}/prev")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Facet getPrev(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @PathVariable Category category,
+      @PathVariable String value,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Facet facet = hub.facets.findOne(stewardKey, modelKey, versionNumber,
+        qname, category, value);
+    return hub.facets.getPrev(facet, includePreRelease);
+  }
+
+  /**
+   * Get the next version of the facet with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{qname}/facets/{category}={value}/next")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Facet getNext(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @PathVariable Category category,
+      @PathVariable String value,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Facet facet = hub.facets.findOne(stewardKey, modelKey, versionNumber,
+        qname, category, value);
+    return hub.facets.getNext(facet, includePreRelease);
+  }
+
+  /**
+   * Get the history of the facet with the given fields.
+   *
+   * @param includePreRelease - True to return a result from a pre-release if applicable;
+   *     false to iterate until an official version is reached.
+   */
+  @GetMapping("/types/{qname}/facets/{category}={value}/history")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Facet> getHistory(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @PathVariable Category category,
+      @PathVariable String value,
+      @RequestParam(required = false, defaultValue = "false") boolean includePreRelease)
+      throws Exception {
+    Facet facet = hub.facets.findOne(stewardKey, modelKey, versionNumber,
+        qname, category, value);
+    return hub.facets.getHistory(facet, includePreRelease);
   }
 
 }

@@ -27,3 +27,12 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Count all subproperties in which a given property appears
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{child_qname}}/subproperties/count
+
+### Get previous subproperty
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/{{child_qname}}/prev
+
+### Get next subproperty
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/{{child_qname}}/next
+
+### Get subproperty history
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/{{child_qname}}/history

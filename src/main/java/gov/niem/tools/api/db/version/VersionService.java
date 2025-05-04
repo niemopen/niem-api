@@ -1,6 +1,6 @@
 package gov.niem.tools.api.db.version;
 
-import gov.niem.tools.api.db.base.BaseEntityService;
+import gov.niem.tools.api.db.base.BaseVersionEntityService;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
 import gov.niem.tools.api.db.exceptions.FieldNotFoundException;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * Operations supporting versions.
  */
 @Service
-public class VersionService extends BaseEntityService<Version> {
+public class VersionService extends BaseVersionEntityService<Version> {
 
   @PersistenceContext
   private EntityManager em;

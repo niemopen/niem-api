@@ -1,6 +1,6 @@
 package gov.niem.tools.api.db.facet;
 
-import gov.niem.tools.api.db.base.BaseEntityService;
+import gov.niem.tools.api.db.base.BaseVersionEntityService;
 import gov.niem.tools.api.db.component.Component;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
@@ -27,7 +27,7 @@ import org.springframework.data.domain.Pageable;
  * Operations supporting facets.
  */
 @org.springframework.stereotype.Component
-public class FacetService extends BaseEntityService<Facet> {
+public class FacetService extends BaseVersionEntityService<Facet> {
 
   @PersistenceContext
   private EntityManager em;

@@ -191,6 +191,20 @@ public class Version extends BaseVersionedEntity<Version>
   private Category category;
 
   /**
+   * A description of the main content or changes in a version.
+   */
+  @Schema(example = "")
+  @Column(columnDefinition = "text")
+  protected String description;
+
+  /**
+   * A URL for a website where a version has been published.
+   */
+  @JacksonXmlProperty(localName = "VersionLinkURI")
+  @Schema(example = "https://github.com/niemopen/niem-model/tree/6.0-ps02")
+  private String link;
+
+  /**
    * A set of namespaces defined by a version of a model.
    */
   @JsonIgnore

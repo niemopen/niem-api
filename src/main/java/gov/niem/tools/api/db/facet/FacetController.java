@@ -36,7 +36,7 @@ public class FacetController {
   /**
    * Gets a facet with the given criteria.
    */
-  @GetMapping("/types/{qname}/facets/{category}={value}")
+  @GetMapping("/types/{qname}/facets/{category}/{value}")
   public Facet getFacet(
       @PathVariable String stewardKey,
       @PathVariable String modelKey,
@@ -50,7 +50,7 @@ public class FacetController {
   /**
    * Gets a facet in CMF with the given criteria.
    */
-  @GetMapping("/types.cmf/{qname}/facets/{category}={value}")
+  @GetMapping("/types.cmf/{qname}/facets/{category}/{value}")
   public Object getFacetCmf(
       @PathVariable String stewardKey,
       @PathVariable String modelKey,
@@ -192,7 +192,7 @@ public class FacetController {
    * @param includePreRelease - True to return a result from a pre-release if applicable;
    *     false to iterate until an official version is reached.
    */
-  @GetMapping("/types/{qname}/facets/{category}={value}/prev")
+  @GetMapping("/types/{qname}/facets/{category}/{value}/prev")
   @ResponseStatus(code = HttpStatus.OK)
   public Facet getPrev(
       @PathVariable String stewardKey,
@@ -214,7 +214,7 @@ public class FacetController {
    * @param includePreRelease - True to return a result from a pre-release if applicable;
    *     false to iterate until an official version is reached.
    */
-  @GetMapping("/types/{qname}/facets/{category}={value}/next")
+  @GetMapping("/types/{qname}/facets/{category}/{value}/next")
   @ResponseStatus(code = HttpStatus.OK)
   public Facet getNext(
       @PathVariable String stewardKey,
@@ -236,7 +236,7 @@ public class FacetController {
    * @param includePreRelease - True to return a result from a pre-release if applicable;
    *     false to iterate until an official version is reached.
    */
-  @GetMapping("/types/{qname}/facets/{category}={value}/history")
+  @GetMapping("/types/{qname}/facets/{category}/{value}/history")
   @ResponseStatus(code = HttpStatus.OK)
   public List<Facet> getHistory(
       @PathVariable String stewardKey,

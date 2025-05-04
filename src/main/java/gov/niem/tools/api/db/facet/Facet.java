@@ -148,14 +148,14 @@ public class Facet extends BaseNamespaceEntity<Facet>
 
   @Override
   @Schema(
-      example = Config.BASE_URL + "/stewards/niem/models/model/versions/5.2/types/nc:AddressCategoryCodeType/enumeration=residential",
+      example = Config.BASE_URL + "/stewards/niem/models/model/versions/5.2/types/nc:AddressCategoryCodeType/enumeration/residential",
       description = "An endpoint to get information about a facet.")
   public String getRoute() {
     if (this.type == null) {
       return null;
     }
     String typeRoute = this.type.getRoute();
-    return String.format("%s/%s=%s", typeRoute, this.category, this.value);
+    return String.format("%s/%s/%s", typeRoute, this.category, this.value);
   }
 
   @Override
@@ -168,21 +168,21 @@ public class Facet extends BaseNamespaceEntity<Facet>
 
   @Override
   @Schema(
-      example = "niem/model/5.2/nc:AddressCategoryCodeSimpleType/enumeration=residential",
+      example = "niem/model/5.2/nc:AddressCategoryCodeSimpleType/enumeration/residential",
       description = "A unique identifier.  For a facet, this is combines the stewardKey, modelKey, versionNumber, qualified type, facet category, and facet value fields.")
   public String getFullIdentifier() {
     if (this.type == null) {
       return null;
     }
-    return String.format("%s/%s=%s", this.type.getFullIdentifier(), this.category, this.value);
+    return String.format("%s/%s/%s", this.type.getFullIdentifier(), this.category, this.value);
   }
 
   @Override
   @Schema(
-      example = "nc:AddressCategoryCodeSimpleType/enumeration=residential",
+      example = "nc:AddressCategoryCodeSimpleType/enumeration/residential",
       description = "An identifier, unique within its immediate scope.  For a facet, this is the qname of its type followed by facet category and value (unique within its version starting with NIEM 6.0).")
   public String getLocalIdentifier() {
-    return String.format("%s/%s=%s", this.qname, this.category, this.value);
+    return String.format("%s/%s/%s", this.qname, this.category, this.value);
   }
 
   @Override

@@ -107,7 +107,8 @@ public class Property extends Component<Property>
   private Property group;
 
   /**
-   * A kind of property indicating whether is is a concrete element, abstract element, or attribute.
+   * A kind of property indicating whether is is a concrete element, abstract element,
+   * or attribute.
    */
   public enum Category {
     /**
@@ -134,6 +135,45 @@ public class Property extends Component<Property>
   @JacksonXmlProperty(localName = "api:PropertyCategoryCode")
   @GenericField
   private Category category = Category.element;
+
+  /**
+   * An alternate way to categorize a property based on its type.  Identifies
+   * whether it carries properties (an object)
+   */
+  public enum ContentStyle {
+    /**
+     * A property with a class type that can carry elements.
+     */
+    object,
+
+    /**
+     * A property with a datatype class or a datatype that carries a value
+     * and may or may not carry attributes.
+     */
+    value,
+
+    /**
+     * A property that does not carry content (for abstract properties).
+     */
+    none
+  }
+
+  /**
+   * An alternate way to categorize a property based on its type.  Identifies
+   * whether it carries properties (an object)
+   */
+  public ContentStyle getContentStyle() {
+    if (this.isAbstract() || this.type == null) {
+      return ContentStyle.none;
+    }
+    if (this.isAttribute()) {
+      return ContentStyle.value;
+    }
+    if (this.getType().isSimpleContent()) {
+      return ContentStyle.value;
+    }
+    return ContentStyle.object;
+  }
 
   private String alias;
 

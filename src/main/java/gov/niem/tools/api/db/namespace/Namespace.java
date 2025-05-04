@@ -309,15 +309,15 @@ public class Namespace extends BaseVersionEntity<Namespace>
   @Schema(
       example = "niem/crash-driver/1.1/nc",
       description = "A unique identifier.  For a namespace, this is combines the stewardKey, modelKey, versionNumber, and prefix fields.")
-  public String getFullIdentifier() {
-    return String.format("%s/%s", this.getVersion().getFullIdentifier(), this.getPrefix());
+  public String getIdLabel() {
+    return String.format("%s/%s", this.getVersion().getIdLabel(), this.getPrefix());
   }
 
   @Override
   @Schema(
       example = "nc",
       description = "An identifier, unique within its immediate scope.  For a namespace, this is the same as the prefix field (unique within its version).")
-  public String getLocalIdentifier() {
+  public String getIdLocalLabel() {
     return this.prefix;
   }
 
@@ -413,6 +413,8 @@ public class Namespace extends BaseVersionEntity<Namespace>
     map.put("name", this.name);
     map.put("uri", this.uri);
     map.put("category", this.category.toString());
+    map.put("@id", this.getIdLabel());
+    map.put("route", this.getRoute());
     return map;
   }
 

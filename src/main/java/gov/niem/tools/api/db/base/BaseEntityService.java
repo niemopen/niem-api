@@ -47,7 +47,7 @@ public abstract class BaseEntityService<T extends BaseEntity> {
    */
   private static String logOperation(String operation, BaseEntity entity) {
     String message = String.format("%s %s", operation, entity.getClassName());
-    return AppUtils.log(message, entity.getFullIdentifier());
+    return AppUtils.log(message, entity.getIdLabel());
   }
 
   /**
@@ -178,7 +178,7 @@ public abstract class BaseEntityService<T extends BaseEntity> {
    * Throws an exception for when an entity was not found in the database.
    */
   public void throwNotFound(BaseEntity entity) throws EntityNotFoundException {
-    throwNotFound(entity, entity.getFullIdentifier());
+    throwNotFound(entity, entity.getIdLabel());
   }
 
   /**
@@ -200,7 +200,7 @@ public abstract class BaseEntityService<T extends BaseEntity> {
    * in the database.
    */
   public void throwNotUnique(BaseEntity entity) throws EntityNotUniqueException {
-    throwNotUnique(entity, entity.getFullIdentifier());
+    throwNotUnique(entity, entity.getIdLabel());
   }
 
   /**

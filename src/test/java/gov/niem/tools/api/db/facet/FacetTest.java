@@ -142,7 +142,7 @@ public class FacetTest extends EntityTest<Facet> {
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Facet result = service().findOne(ncCode1);
-    assertEquals("nmo/niem/1.0/nc:CodeSimpleType/enumeration/1", result.getFullIdentifier());
+    assertEquals("nmo/niem/1.0/nc:CodeSimpleType/enumeration/1", result.getIdLabel());
   }
 
   @Override

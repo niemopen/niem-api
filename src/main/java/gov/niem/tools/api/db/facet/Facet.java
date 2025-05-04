@@ -170,18 +170,18 @@ public class Facet extends BaseNamespaceEntity<Facet>
   @Schema(
       example = "niem/model/5.2/nc:AddressCategoryCodeSimpleType/enumeration/residential",
       description = "A unique identifier.  For a facet, this is combines the stewardKey, modelKey, versionNumber, qualified type, facet category, and facet value fields.")
-  public String getFullIdentifier() {
+  public String getIdLabel() {
     if (this.type == null) {
       return null;
     }
-    return String.format("%s/%s/%s", this.type.getFullIdentifier(), this.category, this.value);
+    return String.format("%s/%s/%s", this.type.getIdLabel(), this.category, this.value);
   }
 
   @Override
   @Schema(
       example = "nc:AddressCategoryCodeSimpleType/enumeration/residential",
       description = "An identifier, unique within its immediate scope.  For a facet, this is the qname of its type followed by facet category and value (unique within its version starting with NIEM 6.0).")
-  public String getLocalIdentifier() {
+  public String getIdLocalLabel() {
     return String.format("%s/%s/%s", this.qname, this.category, this.value);
   }
 

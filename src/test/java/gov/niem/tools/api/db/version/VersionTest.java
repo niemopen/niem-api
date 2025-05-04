@@ -124,7 +124,7 @@ public class VersionTest extends EntityTest<Version> {
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Version result = hub.versions.findOne(crashAcmeV1);
-    assertEquals("acme-co/crash-driver/1.0", result.getFullIdentifier());
+    assertEquals("acme-co/crash-driver/1.0", result.getIdLabel());
   }
 
   @Override

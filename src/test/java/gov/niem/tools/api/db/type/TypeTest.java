@@ -135,7 +135,7 @@ public class TypeTest extends EntityTest<Type> {
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Type result = service().findOne(ncPersonType);
-    assertEquals("nmo/niem/1.0/nc:PersonType", result.getFullIdentifier());
+    assertEquals("nmo/niem/1.0/nc:PersonType", result.getIdLabel());
   }
 
   @Override

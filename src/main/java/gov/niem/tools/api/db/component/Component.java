@@ -156,8 +156,9 @@ public abstract class Component<T extends BaseNamespaceEntity<T>> extends BaseNa
     map.put("name", this.getName());
     map.put("qname", this.getQname());
     map.put("definition", this.getDefinition());
-    map.put("route", this.getRoute());
     map.put("category", this.getCategory().toString());
+    map.put("@id", this.getIdLabel());
+    map.put("route", this.getRoute());
     return map;
   }
 

@@ -105,11 +105,11 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
   // // TODO: Original
   // @JacksonXmlProperty(localName = "api:EntityOriginalFullID")
   // @Schema(example = "niem/model/5.2/nc")
-  // public String getOriginalFullIdentifier() {
+  // public String getOriginalIdLabel() {
   //   if (this.isOriginal()) {
   //     return null;
   //   }
-  //   return this.original.getFullIdentifier();
+  //   return this.original.getIdLabel();
   // }
 
   // @JacksonXmlProperty(localName = "api:EntityOriginalVersionFullID")
@@ -118,7 +118,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
   //   if (this.isOriginal()) {
   //     return null;
   //   }
-  //   return this.original.getVersion().getFullIdentifier();
+  //   return this.original.getVersion().getIdLabel();
   // }
 
   // @JacksonXmlProperty(localName = "api:EntityOriginalVersionTitle")

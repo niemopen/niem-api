@@ -124,7 +124,7 @@ public class PropertyTest extends EntityTest<Property> {
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Property result = service().findOne(ncPerson);
-    assertEquals("nmo/niem/1.0/nc:Person", result.getFullIdentifier());
+    assertEquals("nmo/niem/1.0/nc:Person", result.getIdLabel());
   }
 
   @Override

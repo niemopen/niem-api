@@ -350,15 +350,15 @@ public class Property extends Component<Property>
   @Schema(
       example = "niem/crash-driver/1.1/nc:PersonGivenName",
       description = "A unique identifier.  For a property, this is combines the stewardKey, modelKey, versionNumber, prefix, and name fields.")
-  public String getFullIdentifier() {
-    return this.getVersion().getFullIdentifier() + "/" + this.getQname();
+  public String getIdLabel() {
+    return this.getVersion().getIdLabel() + "/" + this.getQname();
   }
 
   @Override
   @Schema(
       example = "nc:PersonGivenName",
       description = "An identifier, unique within its immediate scope.  For a property, this is the same as the qname field (unique within its version).")
-  public String getLocalIdentifier() {
+  public String getIdLocalLabel() {
     return this.getQname();
   }
 

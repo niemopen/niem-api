@@ -105,7 +105,7 @@ public class ModelTest extends EntityTest<Model> {
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Model result = hub.models.findOne(crashAcme);
-    assertEquals("acme-co/crash-driver", result.getFullIdentifier());
+    assertEquals("acme-co/crash-driver", result.getIdLabel());
   }
 
   @Override

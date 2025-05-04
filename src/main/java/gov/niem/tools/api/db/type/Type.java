@@ -224,15 +224,15 @@ public class Type extends Component<Type> implements BaseCmfEntity<org.mitre.nie
   @Schema(
       example = "niem/crash-driver/1.1/nc:PersonType",
       description = "A unique identifier.  For a type, this is combines the stewardKey, modelKey, versionNumber, prefix, and name fields.")
-  public String getFullIdentifier() {
-    return this.getVersion().getFullIdentifier() + "/" + this.getQname();
+  public String getIdLabel() {
+    return this.getVersion().getIdLabel() + "/" + this.getQname();
   }
 
   @Override
   @Schema(
       example = "nc:PersonType",
       description = "An identifier, unique within its immediate scope.  For a type, this is the same as the qname field (unique within its version).")
-  public String getLocalIdentifier() {
+  public String getIdLocalLabel() {
     return this.getQname();
   }
 

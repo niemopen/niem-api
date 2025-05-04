@@ -118,7 +118,7 @@ public class StewardTest extends EntityTest<Steward> {
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Steward result = service().findOne(acme);
-    assertEquals("acme-co", result.getFullIdentifier());
+    assertEquals("acme-co", result.getIdLabel());
   }
 
   @Override

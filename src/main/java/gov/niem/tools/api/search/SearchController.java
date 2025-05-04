@@ -211,7 +211,7 @@ public class SearchController {
 
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
     for (Property property : result.hits()) {
-      log.info(property.getFullIdentifier());
+      log.info(property.getIdLabel());
       cmfModel.addComponent(property.toCmf());
     }
 
@@ -324,7 +324,7 @@ public class SearchController {
 
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
     for (Type type : result.hits()) {
-      log.info(type.getFullIdentifier());
+      log.info(type.getIdLabel());
       cmfModel.addComponent(type.toCmf());
     }
 

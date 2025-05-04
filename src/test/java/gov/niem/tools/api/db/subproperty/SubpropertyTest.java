@@ -150,7 +150,7 @@ public class SubpropertyTest extends EntityTest<Subproperty> {
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Subproperty result = service().findOne(ncPersonType, ncPersonFullName);
-    assertEquals("nmo/niem/1.0/nc:PersonType/nc:PersonFullName", result.getFullIdentifier());
+    assertEquals("nmo/niem/1.0/nc:PersonType/nc:PersonFullName", result.getIdLabel());
   }
 
   @Override

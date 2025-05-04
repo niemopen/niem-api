@@ -240,7 +240,7 @@ public class Steward extends BaseEntity {
   @Schema(
       example = "niem",
       description = "A unique identifier.  For a steward, this is the stewardKey field.")
-  public String getFullIdentifier() {
+  public String getIdLabel() {
     return this.getStewardKey();
   }
 
@@ -248,8 +248,8 @@ public class Steward extends BaseEntity {
   @Schema(
       example = "niem",
       description = "A scoped identifier.  For a steward, this is the stewardKey field.")
-  public String getLocalIdentifier() {
-    return this.getFullIdentifier();
+  public String getIdLocalLabel() {
+    return this.getIdLabel();
   }
 
   @Override
@@ -284,6 +284,7 @@ public class Steward extends BaseEntity {
     Map<String, String> map = new HashMap<>();
     map.put("stewardKey", this.getStewardKey());
     map.put("shortName", this.shortName);
+    map.put("@id", this.getIdLabel());
     map.put("route", this.getRoute());
     return map;
   }

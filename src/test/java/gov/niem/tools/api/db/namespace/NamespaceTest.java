@@ -112,7 +112,7 @@ public class NamespaceTest extends EntityTest<Namespace> {
   public void objectLabelTest() throws Exception {
     this.loadObjects();
     Namespace result = service().findOne(ncV1);
-    assertEquals("nmo/niem/1.0/nc", result.getFullIdentifier());
+    assertEquals("nmo/niem/1.0/nc", result.getIdLabel());
   }
 
   @Override

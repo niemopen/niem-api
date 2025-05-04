@@ -293,7 +293,7 @@ public class Model extends BaseStewardEntity {
   @Schema(
       example = "niem/crash-driver",
       description = "A unique identifier.  For a model, this is combines the stewardKey and modelKey fields.")
-  public String getFullIdentifier() {
+  public String getIdLabel() {
     return String.format("%s/%s", this.getStewardKey(), this.getModelKey());
   }
 
@@ -301,7 +301,7 @@ public class Model extends BaseStewardEntity {
   @Schema(
       example = "crash-driver",
       description = "An identifier, unique within its immediate scope.  For a model, this is the same as the modelKey field (unique within its steward).")
-  public String getLocalIdentifier() {
+  public String getIdLocalLabel() {
     return this.getModelKey();
   }
 
@@ -330,6 +330,7 @@ public class Model extends BaseStewardEntity {
     Map<String, String> map = new HashMap<>();
     map.put("modelKey", this.getModelKey());
     map.put("shortName", this.shortName);
+    map.put("@id", this.getIdLabel());
     map.put("route", this.getRoute());
     return map;
   }

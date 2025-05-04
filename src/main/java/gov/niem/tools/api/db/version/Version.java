@@ -310,15 +310,15 @@ public class Version extends BaseVersionedEntity<Version>
   @Schema(
       example = "niem/crash-driver/1.1",
       description = "A unique identifier.  For a version, this is combines the stewardKey, modelKey, and versionNumber fields.")
-  public String getFullIdentifier() {
-    return this.getModel().getFullIdentifier() + "/" + this.versionNumber;
+  public String getIdLabel() {
+    return this.getModel().getIdLabel() + "/" + this.versionNumber;
   }
 
   @Override
   @Schema(
       example = "1.1",
       description = "An identifier, unique within its immediate scope.  For a version, this is the same as the versionNumber field (unique within its model).")
-  public String getLocalIdentifier() {
+  public String getIdLocalLabel() {
     return this.versionNumber;
   }
 
@@ -346,6 +346,7 @@ public class Version extends BaseVersionedEntity<Version>
     Map<String, String> map = new HashMap<>();
     map.put("versionNumber", this.getVersionNumber());
     map.put("niemVersionNumber", this.getNiemVersion().getVersionNumber());
+    map.put("@id", this.getIdLabel());
     map.put("route", this.getRoute());
     return map;
   }

@@ -237,15 +237,15 @@ public class Subproperty extends BaseNamespaceEntity<Subproperty>
   @Schema(
       example = "niem/model/5.2/nc:PersonType/nc:PersonName",
       description = "A unique identifier.  For a subproperty, this is combines the stewardKey, modelKey, versionNumber, qualified container type, and qualified property fields.")
-  public String getFullIdentifier() {
-    return this.getType().getFullIdentifier() + "/" + this.getPropertyQname();
+  public String getIdLabel() {
+    return this.getType().getIdLabel() + "/" + this.getPropertyQname();
   }
 
   @Override
   @Schema(
       example = "nc:PersonType/nc:PersonName",
       description = "An identifier, unique within its immediate scope.  For a subproperty, this is the qname of type container type followed by the the qname of the contained property (unique within its version).")
-  public String getLocalIdentifier() {
+  public String getIdLocalLabel() {
     return this.typeQname + "/" + this.propertyQname;
   }
 

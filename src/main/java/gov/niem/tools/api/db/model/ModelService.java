@@ -243,7 +243,7 @@ public class ModelService extends BaseEntityService<Model> {
   private void assertShortNameDoesNotExist(String stewardKey, String modelShortName)
       throws EntityNotUniqueException {
     List<Model> models = repo.findByShortName(modelShortName);
-    models.forEach(model -> System.out.println(model.getFullIdentifier()));
+    models.forEach(model -> System.out.println(model.getIdLabel()));
     // TODO: Fix ModelService short name does not exist
 
     repo

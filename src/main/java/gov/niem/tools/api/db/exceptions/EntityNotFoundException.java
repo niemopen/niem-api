@@ -20,7 +20,7 @@ public class EntityNotFoundException extends RuntimeException {
   }
 
   public EntityNotFoundException(BaseEntity entity) {
-    super(String.format("%s [%s] not found", entity.getClassName(), entity.getFullIdentifier()));
+    super(String.format("%s [%s] not found", entity.getClassName(), entity.getIdLabel()));
   }
 
 }

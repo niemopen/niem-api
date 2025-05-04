@@ -33,7 +33,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@JsonPropertyOrder({ "fullIdentifier", "className" })
+@JsonPropertyOrder({ "idLabel", "className" })
 public abstract class BaseEntity implements Serializable {
 
   // TODO: enum Format
@@ -83,15 +83,16 @@ public abstract class BaseEntity implements Serializable {
    */
   @JsonProperty("@id")
   @JacksonXmlProperty(localName = "api:EntityID")
-  public abstract String getFullIdentifier();
+  public abstract String getIdLabel();
 
   /**
    * An identifier, unique within its immediate scope.
    * Examples include a prefix (uniquely identifying a namespace) or a qualified
    * name (uniquely identifying a property or a type) within a version of a model.
    */
+  @JsonProperty("localID")
   @JacksonXmlProperty(localName = "api:EntityLocalID")
-  public abstract String getLocalIdentifier();
+  public abstract String getIdLocalLabel();
 
   /**
    * A kind of NIEM entity, such as a Namespace or a Property.

@@ -665,7 +665,7 @@ public class MigrationService {
     }
 
     this.logResult(test, message, subproperty.getTypePrefix(),
-        subproperty.getLocalIdentifier(), "Subproperty", passed, comment);
+        subproperty.getIdLocalLabel(), "Subproperty", passed, comment);
 
   }
 

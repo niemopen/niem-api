@@ -13,10 +13,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.search.engine.search.query.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +42,8 @@ public class SearchController {
   public void index() {
     searchService.runIndexer();
   }
+
+  private static final int LIMIT = 100;
 
   /**
    * Search properties based on the given criteria.
@@ -68,15 +73,13 @@ public class SearchController {
    *     only attribute properties should be returned.
    *     Omit parameter to return either kind.
    *
-   * @param offset A number of results to skip.  Defaults to 0.
-   *
-   * @param limit A maximum number of results to return.  Defaults to and will not exceed 100.
+   * @param page Page number of results to return.  Defaults to 0 (first page).
    */
   @GetMapping("/search/properties")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "204", description = "No Content", content = @Content)
   @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
-  public List<Property> getPropertySearch(
+  public Page<Property> getPropertySearch(
       HttpServletRequest request,
       HttpServletResponse response,
       @RequestParam(required = false) String niemVersionNumber,
@@ -90,9 +93,7 @@ public class SearchController {
       @RequestParam(required = false) Boolean isAbstract,
       @RequestParam(required = false) Boolean isElement,
       // @RequestParam(required = false) Namespace.Category[] namespaceCategory,
-      @RequestParam(required = false) Integer offset,
-      @RequestParam(required = false) Integer limit
-  ) {
+      @RequestParam(required = false, defaultValue = "0") int page) {
 
     String[] group = null;
     String[] steward = null;
@@ -111,18 +112,20 @@ public class SearchController {
         isAbstract,
         isElement,
         namespaceCategory,
-        offset,
-        limit
+        page,
+        LIMIT
     );
 
     if (result.hits().isEmpty()) {
       throw new NoContentException();
     }
 
-    searchService.setResponseHeaders(response, result, offset, limit,
+    searchService.setResponseHeaders(response, result, page, LIMIT,
         request.getRequestURL() + "?" + request.getQueryString());
 
-    return result.hits();
+    Pageable pageable = PageRequest.of(page, LIMIT);
+    long total = result.total().hitCount();
+    return new PageImpl<Property>(result.hits(), pageable, total);
 
   }
 
@@ -154,9 +157,7 @@ public class SearchController {
    *     attribute properties should be returned.
    *     Omit parameter to return either kind.
    *
-   * @param offset A number of results to skip.  Defaults to 0.
-   *
-   * @param limit A maximum number of results to return.  Defaults to and will not exceed 100.
+   * @param page Page number of results to return.  Defaults to 0.
    */
   @GetMapping("/search.cmf/properties")
   @ResponseStatus(code = HttpStatus.OK)
@@ -176,8 +177,7 @@ public class SearchController {
       @RequestParam(required = false) Boolean isAbstract,
       @RequestParam(required = false) Boolean isElement,
       // @RequestParam(required = false) Namespace.Category[] namespaceCategory,
-      @RequestParam(required = false) Integer offset,
-      @RequestParam(required = false) Integer limit,
+      @RequestParam(required = false) Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
   ) throws Exception {
 
@@ -198,15 +198,15 @@ public class SearchController {
         isAbstract,
         isElement,
         namespaceCategory,
-        offset,
-        limit
+        page,
+        LIMIT
     );
 
     if (result.hits().isEmpty()) {
       throw new NoContentException();
     }
 
-    searchService.setResponseHeaders(response, result, offset, limit,
+    searchService.setResponseHeaders(response, result, page, LIMIT,
         request.getRequestURL() + "?" + request.getQueryString());
 
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
@@ -236,40 +236,40 @@ public class SearchController {
    *
    * @param prefix Filter results on the given prefix(es)
    *
-   * @param offset A number of results to skip. Defaults to 0.
-   *
-   * @param limit A maximum number of results to return. Defaults to and will not exceed 100.
+   * @param page Page number of results to return.  Defaults to 0.
    */
   @GetMapping("/search/types")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "204", description = "No Content", content = @Content)
   @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
-  public List<Type> getTypeSearch(
+  public Page<Type> getTypeSearch(
       HttpServletRequest request,
       HttpServletResponse response,
       @RequestParam(required = false) String niemVersionNumber,
       @RequestParam(required = false) String[] token,
       @RequestParam(required = false) String[] substring,
       @RequestParam(required = false) String[] prefix,
-      @RequestParam(required = false) Integer offset,
-      @RequestParam(required = false) Integer limit) {
+      @RequestParam(required = false, defaultValue = "0") int page) {
 
     SearchResult<Type> result = searchService.searchType(
         niemVersionNumber,
         token,
         substring,
         prefix,
-        offset,
-        limit);
+        page,
+        LIMIT);
 
     if (result.hits().isEmpty()) {
       throw new NoContentException();
     }
 
-    searchService.setResponseHeaders(response, result, offset, limit,
+    searchService.setResponseHeaders(response, result, page, LIMIT,
         request.getRequestURL() + "?" + request.getQueryString());
 
-    return result.hits();
+
+    Pageable pageable = PageRequest.of(page, LIMIT);
+    long total = result.total().hitCount();
+    return new PageImpl<Type>(result.hits(), pageable, total);
 
   }
 
@@ -290,9 +290,7 @@ public class SearchController {
    *
    * @param prefix Filter results on the given prefix(es)
    *
-   * @param offset A number of results to skip. Defaults to 0.
-   *
-   * @param limit A maximum number of results to return. Defaults to and will not exceed 100.
+   * @param page Page number of results to return.  Defaults to 0.
    */
   @GetMapping("/search.cmf/types")
   @ResponseStatus(code = HttpStatus.OK)
@@ -305,8 +303,7 @@ public class SearchController {
       @RequestParam(required = false) String[] token,
       @RequestParam(required = false) String[] substring,
       @RequestParam(required = false) String[] prefix,
-      @RequestParam(required = false) Integer offset,
-      @RequestParam(required = false) Integer limit,
+      @RequestParam(required = false) Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
   ) throws Exception {
 
@@ -315,14 +312,14 @@ public class SearchController {
         token,
         substring,
         prefix,
-        offset,
-        limit);
+        page,
+        LIMIT);
 
     if (result.hits().isEmpty()) {
       throw new NoContentException();
     }
 
-    searchService.setResponseHeaders(response, result, offset, limit,
+    searchService.setResponseHeaders(response, result, page, LIMIT,
         request.getRequestURL() + "?" + request.getQueryString());
 
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();

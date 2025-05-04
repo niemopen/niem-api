@@ -87,7 +87,7 @@ public class SearchService {
       Boolean isAbstract,
       Boolean isElement,
       Namespace.Category[] namespaceCategories,
-      Integer offset,
+      Integer page,
       Integer limit
   ) {
 
@@ -187,7 +187,7 @@ public class SearchService {
 
         }))
         .sort(f -> f.score().then().field("name_keyword").then().field("namespace.prefix"))
-        .fetch(offset, limit);
+        .fetch(page * limit, limit);
 
     log.info(String.format("Search runtime: [%s]", result.took()));
 
@@ -202,7 +202,7 @@ public class SearchService {
       String[] tokens,
       String[] substrings,
       String[] prefixes,
-      Integer offset,
+      Integer page,
       Integer limit) {
 
     String baseNiem = niemVersionNumber == null
@@ -249,7 +249,7 @@ public class SearchService {
 
         }))
         .sort(f -> f.score().then().field("name_keyword").then().field("namespace.prefix"))
-        .fetch(offset, limit);
+        .fetch(page * limit, limit);
 
     log.info(String.format("Search runtime: [%s]", result.took()));
 
@@ -261,7 +261,7 @@ public class SearchService {
    * current number of results, and pagination information.
    */
   public void setResponseHeaders(HttpServletResponse response,
-      SearchResult<? extends Object> searchResult, Integer offset, Integer limit,
+      SearchResult<? extends Object> searchResult, Integer page, Integer limit,
       String requestUrl) {
 
     Integer total = (int) searchResult.total().hitCount();
@@ -275,32 +275,22 @@ public class SearchService {
     limit = adjustLimit(limit);
 
     // Remove offset query parameter from request URL
-    String url = offset == null ? requestUrl : requestUrl.replaceAll("&offset=\\d+", "");
+    String url = page == null ? requestUrl : requestUrl.replaceAll("&page=\\d+", "");
 
-    if (offset == null) {
-      offset = 0;
+    if (page == null) {
+      page = 0;
     }
 
-    // No offset
-    if (total > limit && offset != 0) {
+    if (page > 0) {
+      // Return link to previous page and first page of search results
+      response.setHeader("X-Page-Prev", url + "&page=" + (page - 1));
       response.setHeader("X-Page-First", url);
     }
 
-    // Return 0 offset or null if
-    Integer prev = offset < limit ? null : offset - limit;
-    if (prev != null) {
-      response.setHeader("X-Page-Prev", url + "&offset=" + prev);
-    }
-
-    Integer next = offset >= total - limit ? null : offset + limit;
-    if (next != null) {
-      response.setHeader("X-Page-Next", url + "&offset=" + next);
-    }
-
-    // Return last page of results
-    Integer last = total - limit;
-    if (total > limit && offset < total - limit) {
-      response.setHeader("X-Page-Last", url + "&offset=" + last);
+    Integer lastPage = (int) Math.ceil(total / limit) + 1;
+    if (page < lastPage) {
+      response.setHeader("X-Page-Next", url + "&page=" + (page + 1));
+      response.setHeader("X-Page-Last", url + "&page=" + lastPage);
     }
 
   }

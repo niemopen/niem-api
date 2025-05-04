@@ -12,8 +12,7 @@
 @type = date
 @isAbstract = false
 @isElement = true
-@offset = 10
-@limit = 10
+@page = 10
 
 # Type search field examples
 @niemVersionNumber = 5.2
@@ -21,12 +20,12 @@
 @substring = arm
 @prefix = nc
 @isElement = true
-@offset = 10
-@limit = 10
+@page = 10
 
 
 # Search criteria
 @criteria = token=arm
+@criteria = substring=person
 # @criteria = substring=arm
 # @criteria = substring=arm&substring=service
 # @criteria = substring=arm&substring=service&prefix=mo&prefix=usmtf
@@ -36,5 +35,8 @@
 # @criteria = token=person&type=date
 # @criteria = isElement=false
 
-
+### Search
 GET {{baseUrl}}/search/{{scope}}?{{criteria}}
+
+### Search next page
+GET {{baseUrl}}/search/{{scope}}?{{criteria}}&page=1

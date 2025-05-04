@@ -8,6 +8,7 @@ import gov.niem.tools.api.db.version.Version;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
@@ -84,6 +85,15 @@ public class PropertyService extends ComponentService<Property, PropertyReposito
       return repo.countByNamespace_Id(namespace.getId());
     }
     return repo.countByNamespace_IdAndCategory(namespace.getId(), category);
+  }
+
+  /**
+   * Get a list of substitutions for the property with the given fields.
+   */
+  public List<Property> getSubstitutions(String stewardKey, String modelKey,
+      String versionNumber, String qname) throws EntityNotFoundException {
+    Property property = this.findOne(stewardKey, modelKey, versionNumber, qname);
+    return repo.findAllByGroup_Id(property.getId());
   }
 
 }

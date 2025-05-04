@@ -208,6 +208,19 @@ public class PropertyController {
     return hub.properties.getHistory(property, includePreRelease);
   }
 
+  /**
+   * Get the list of substitutions for the property with the given fields.
+   */
+  @GetMapping("/properties/{qname}/substitutions")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Property> getSubstitutions(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.properties.getSubstitutions(stewardKey, modelKey, versionNumber, qname);
+  }
+
   // /**
   //  * Add a new property.
   //  */

@@ -33,11 +33,15 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prope
 ### Get an object property in CMF JSON
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties.cmf/{{object_qname}}
 
+
+
 ### Check error handling: Get an property that does not exist
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/nc:Pineapple
 
 ### Check error handling: Get a property from a namespace that does not exist
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/my:Person
+
+
 
 ### Count properties in a version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/count
@@ -50,6 +54,8 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/names
 
 ### Count properties in a namespace with the given category
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/properties/count?category={{category}}
+
+
 
 ### Get all properties in a version (default pagination)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties
@@ -66,6 +72,8 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prope
 ### Get all properties in a namespace (default pagination)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/properties
 
+
+
 ### Get previous property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{abstract_qname}}/prev
 
@@ -74,3 +82,11 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prope
 
 ### Get property history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{abstract_qname}}/history
+
+
+
+### Get property substitutions
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{abstract_qname}}/substitutions
+
+### Error checking: Get property substitutions for property without substitutions
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{attribute_qname}}/substitutions

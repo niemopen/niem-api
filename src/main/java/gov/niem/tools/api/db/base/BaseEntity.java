@@ -82,7 +82,7 @@ public abstract class BaseEntity implements Serializable {
    * A human-readable and url-friendly unique identifier for an entity.
    */
   @JsonProperty("@id")
-  @JacksonXmlProperty(localName = "api:EntityID")
+  @JacksonXmlProperty(localName = "EntityID")
   public abstract String getIdLabel();
 
   /**
@@ -91,14 +91,14 @@ public abstract class BaseEntity implements Serializable {
    * name (uniquely identifying a property or a type) within a version of a model.
    */
   @JsonProperty("localID")
-  @JacksonXmlProperty(localName = "api:EntityLocalID")
+  @JacksonXmlProperty(localName = "EntityLocalID")
   public abstract String getIdLocalLabel();
 
   /**
    * A kind of NIEM entity, such as a Namespace or a Property.
    */
   @JsonProperty("@type")
-  @JacksonXmlProperty(localName = "api:EntityCategoryCode")
+  @JacksonXmlProperty(localName = "EntityCategoryCode")
   public String getClassName() {
     return this.getClass().getSimpleName();
   }
@@ -106,13 +106,13 @@ public abstract class BaseEntity implements Serializable {
   /**
    * An endpoint to get information about an entity.
    */
-  @JacksonXmlProperty(localName = "api:EntityRouteURI")
+  @JacksonXmlProperty(localName = "EntityRouteURI")
   public abstract String getRoute();
 
   /**
    * A descriptive label or title used to identify an entity.
    */
-  @JacksonXmlProperty(localName = "api:EntityTitleText")
+  @JacksonXmlProperty(localName = "EntityTitleText")
   public abstract String getTitle();
 
   /**

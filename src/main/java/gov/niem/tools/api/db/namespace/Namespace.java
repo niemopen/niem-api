@@ -59,7 +59,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordFie
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JacksonXmlRootElement(localName = "api:Namespace")
+@JacksonXmlRootElement(localName = "Namespace")
 @Schema(name = "Namespace")
 @Table(
     uniqueConstraints = {@UniqueConstraint(
@@ -92,7 +92,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * A short, non-normative identifier for a namespace.
    */
   @Column(nullable = false)
-  @JacksonXmlProperty(localName = "api:NamespacePrefixID")
+  @JacksonXmlProperty(localName = "NamespacePrefixID")
   @Schema(example = "nc")
   @KeywordField(sortable = Sortable.YES)
   private String prefix;
@@ -100,14 +100,14 @@ public class Namespace extends BaseVersionEntity<Namespace>
   /**
    * A name of a namespace.
    */
-  @JacksonXmlProperty(localName = "api:NamespaceName")
+  @JacksonXmlProperty(localName = "NamespaceName")
   @Schema(example = "NIEM Core")
   private String name;
 
   /**
    * A normative identifier for a namespace.
    */
-  @JacksonXmlProperty(localName = "api:NamespaceURI")
+  @JacksonXmlProperty(localName = "NamespaceURI")
   @Schema(example = "http://release.niem.gov/niem/niem-core/5.0")
   private String uri;
 
@@ -115,7 +115,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * A definition that describes a namespace.
    */
   @Column(columnDefinition = "text")
-  @JacksonXmlProperty(localName = "api:NamespaceDefinitionText")
+  @JacksonXmlProperty(localName = "NamespaceDefinitionText")
   @Schema(example = "NIEM Core.")
   private String definition;
 
@@ -141,7 +141,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
   /**
    * A kind of namespace.
    */
-  @JacksonXmlProperty(localName = "api:NamespaceCategoryCode")
+  @JacksonXmlProperty(localName = "NamespaceCategoryCode")
   @Schema(example = "core")
   @Enumerated(EnumType.STRING)
   @KeywordField
@@ -152,7 +152,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * for a namespace that has reached release candidate status or has been
    * published.
    */
-  @JacksonXmlProperty(localName = "api:NamespaceDraftID")
+  @JacksonXmlProperty(localName = "NamespaceDraftID")
   @Schema(example = "alpha2")
   private String draft;
 
@@ -196,7 +196,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * A code representing an NDR conformance target, or null if the namespace
    * is not meant to be conformant.
    */
-  @JacksonXmlProperty(localName = "api:NamespaceNDRTargetCode")
+  @JacksonXmlProperty(localName = "NamespaceNDRTargetCode")
   @Schema(example = "EXT")
   @Enumerated(EnumType.STRING)
   private NdrTarget target;
@@ -223,7 +223,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * Defaults to "build".
    */
   @Builder.Default
-  @JacksonXmlProperty(localName = "api:NamespaceGenerationCode")
+  @JacksonXmlProperty(localName = "NamespaceGenerationCode")
   @Schema(example = "REF")
   @Enumerated(EnumType.STRING)
   private Generation generation = Generation.build;
@@ -232,7 +232,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * The filename to use for representations of this namespace such as XML schemas,
    * without a file extension.
    */
-  @JacksonXmlProperty(localName = "api:NamespaceFileName")
+  @JacksonXmlProperty(localName = "NamespaceFileName")
   @Schema(example = "niem-core")
   private String filename;
 
@@ -240,7 +240,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * The filepath to use for nested representations of this namespace such as
    * for XML schemas, without the filename or extension.
    */
-  @JacksonXmlProperty(localName = "api:NamespaceFilePathID")
+  @JacksonXmlProperty(localName = "NamespaceFilePathID")
   @Schema(example = "xsd/")
   private String filepath;
 
@@ -276,7 +276,7 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * conforming; false if the namespace is a utility, external, or is otherwise
    * not meant to be conforming.
    */
-  @JacksonXmlProperty(localName = "api:NamespaceTargetIndicator")
+  @JacksonXmlProperty(localName = "NamespaceTargetIndicator")
   @Schema(example = "true")
   @JsonProperty("hasTarget")
   public boolean hasTarget() {

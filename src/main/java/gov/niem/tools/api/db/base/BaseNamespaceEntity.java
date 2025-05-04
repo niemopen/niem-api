@@ -54,7 +54,7 @@ public abstract class BaseNamespaceEntity<T extends BaseVersionEntity<T>>
   // /**
   //  * A short, non-normative identifier for a namespace.
   //  */
-  // @JacksonXmlProperty(localName = "api:NamespacePrefixID")
+  // @JacksonXmlProperty(localName = "NamespacePrefixID")
   // @Schema(example = "nc")
   // public String getPrefix() {
   //   if (this.getNamespace() == null) {
@@ -66,7 +66,7 @@ public abstract class BaseNamespaceEntity<T extends BaseVersionEntity<T>>
   // /**
   //  * A normative identifier for a namespace.
   //  */
-  // @JacksonXmlProperty(localName = "api:NamespaceURI")
+  // @JacksonXmlProperty(localName = "NamespaceURI")
   // @Schema(example = "http://release.niem.gov/niem/niem-core/5.0")
   // public String getNamespaceURI() {
   //   if (this.getNamespace() == null) {
@@ -78,7 +78,7 @@ public abstract class BaseNamespaceEntity<T extends BaseVersionEntity<T>>
   // /**
   //  * A kind of namespace.
   //  */
-  // @JacksonXmlProperty(localName = "api:NamespaceCategoryCode")
+  // @JacksonXmlProperty(localName = "NamespaceCategoryCode")
   // @Schema(example = "core")
   // public Category getNamespaceCategory() {
   //   if (this.getNamespace() == null) {
@@ -90,7 +90,7 @@ public abstract class BaseNamespaceEntity<T extends BaseVersionEntity<T>>
   // /**
   //  * A name of a namespace.
   //  */
-  // @JacksonXmlProperty(localName = "api:NamespaceName")
+  // @JacksonXmlProperty(localName = "NamespaceName")
   // @Schema(example = "NIEM Core")
   // public String getNamespaceName() {
   //   if (this.getNamespace() == null) {

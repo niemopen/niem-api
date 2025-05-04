@@ -65,7 +65,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JacksonXmlRootElement(localName = "api:Model")
+@JacksonXmlRootElement(localName = "Model")
 @Schema(name = "Model")
 @Table(
     uniqueConstraints = @UniqueConstraint(
@@ -101,7 +101,7 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
    */
   @NotAudited
   @Formula("slugify(short_name)")
-  @JacksonXmlProperty(localName = "api:ModelKeyID")
+  @JacksonXmlProperty(localName = "ModelKeyID")
   @Schema(example = "crash-driver")
   private String modelKey;
 
@@ -110,7 +110,7 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
    */
   @NotBlank
   @Column(nullable = false)
-  @JacksonXmlProperty(localName = "api:ModelShortName")
+  @JacksonXmlProperty(localName = "ModelShortName")
   @Schema(example = "Crash Driver")
   @KeywordField(sortable = Sortable.YES, projectable = Projectable.YES)
   private String shortName;
@@ -118,14 +118,14 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
   /**
    * A full name used to identify a model.
    */
-  @JacksonXmlProperty(localName = "api:ModelFullName")
+  @JacksonXmlProperty(localName = "ModelFullName")
   @Schema(example = "NIEM Training Crash Driver IEPD")
   private String fullName;
 
   /**
    * A description of a model.
    */
-  @JacksonXmlProperty(localName = "api:ModelDescriptionText")
+  @JacksonXmlProperty(localName = "ModelDescriptionText")
   @Schema(example = "A Crash Driver IEPD used in training to demonstrate NIEM concepts.")
   private String description;
 
@@ -139,7 +139,7 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
   /**
    * A code repository which hosts full IEPDs or message specifications representing the model.
    */
-  @JacksonXmlProperty(localName = "api:ModelRepositoryID")
+  @JacksonXmlProperty(localName = "ModelRepositoryID")
   @Schema(example = "https://github.com/niem/niem-training")
   private String repo;
 
@@ -162,7 +162,7 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
   /**
    * A description of the intended usage and reason for which an IEPD exists.
    */
-  @JacksonXmlProperty(localName = "api:ModelPurposeText")
+  @JacksonXmlProperty(localName = "ModelPurposeText")
   @Schema(
       example = "This IEPD was developed to demonstrate NIEM concepts such as associations, roles, augmentations, metadata, adapters, and external standards.")
   private String purpose;
@@ -170,7 +170,7 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
   /**
    * A name of an organization or person that developed a model.
    */
-  @JacksonXmlProperty(localName = "api:ModelDeveloperText")
+  @JacksonXmlProperty(localName = "ModelDeveloperText")
   @Schema(example = "NIEM staff")
   private String developer;
 
@@ -187,7 +187,7 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
    * A kind of data model.
    */
   @Enumerated(EnumType.STRING)
-  @JacksonXmlProperty(localName = "api:ModelCategoryCode")
+  @JacksonXmlProperty(localName = "ModelCategoryCode")
   @Schema(example = "message")
   private Category category;
 
@@ -206,7 +206,7 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
    * testing tool features or IEPD / message specification features.
    */
   @Enumerated(EnumType.STRING)
-  @JacksonXmlProperty(localName = "api:ModelObjectiveCode")
+  @JacksonXmlProperty(localName = "ModelObjectiveCode")
   @Schema(example = "example")
   private Objective objective;
 

@@ -48,7 +48,7 @@ import org.hibernate.proxy.HibernateProxy;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JacksonXmlRootElement(localName = "api:Subproperty")
+@JacksonXmlRootElement(localName = "Subproperty")
 @Schema(name = "Subproperty")
 @Table(
     uniqueConstraints = {@UniqueConstraint(

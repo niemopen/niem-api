@@ -59,7 +59,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JacksonXmlRootElement(localName = "api:Steward")
+@JacksonXmlRootElement(localName = "Steward")
 @Schema(name = "Steward")
 @Indexed
 @Table(indexes = {
@@ -78,7 +78,7 @@ public class Steward extends BaseEntity implements Comparable<Steward> {
    */
   @NotAudited
   @Formula("slugify(short_name)")
-  @JacksonXmlProperty(localName = "api:StewardKeyID")
+  @JacksonXmlProperty(localName = "StewardKeyID")
   @Schema(example = "niem")
   private String stewardKey;
 
@@ -88,7 +88,7 @@ public class Steward extends BaseEntity implements Comparable<Steward> {
    */
   @NotBlank(message = "shortName is required")
   @Column(unique = true, nullable = false)
-  @JacksonXmlProperty(localName = "api:StewardShortName")
+  @JacksonXmlProperty(localName = "StewardShortName")
   @Schema(example = "NIEM")
   @KeywordField(sortable = Sortable.YES, projectable = Projectable.YES)
   private String shortName;
@@ -122,7 +122,7 @@ public class Steward extends BaseEntity implements Comparable<Steward> {
   /**
    * A kind of steward.
    */
-  @JacksonXmlProperty(localName = "api:StewardCategoryCode")
+  @JacksonXmlProperty(localName = "StewardCategoryCode")
   @Enumerated(EnumType.STRING)
   private Category category;
 

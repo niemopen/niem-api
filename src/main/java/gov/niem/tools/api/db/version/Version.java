@@ -66,7 +66,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JacksonXmlRootElement(localName = "api:Version")
+@JacksonXmlRootElement(localName = "Version")
 @Schema(name = "Version")
 @Table(
     uniqueConstraints = { @UniqueConstraint(
@@ -94,7 +94,7 @@ public class Version extends BaseVersionedEntity<Version>
    */
   @NonNull
   @Column(nullable = false)
-  @JacksonXmlProperty(localName = "api:VersionNumberID")
+  @JacksonXmlProperty(localName = "VersionNumberID")
   @Schema(example = "1.1")
   @GenericField(sortable = Sortable.YES, projectable = Projectable.YES)
   private String versionNumber;
@@ -102,7 +102,7 @@ public class Version extends BaseVersionedEntity<Version>
   /**
    * A draft of a version, such as "alpha1" or "rc2".
    */
-  @JacksonXmlProperty(localName = "api:VersionDraftID")
+  @JacksonXmlProperty(localName = "VersionDraftID")
   @Schema(example = "alpha1")
   private String draft;
 
@@ -111,7 +111,7 @@ public class Version extends BaseVersionedEntity<Version>
    * finalized; false otherwise.
    */
   @JsonProperty("isPublished")
-  @JacksonXmlProperty(localName = "api:VersionPublishedIndicator")
+  @JacksonXmlProperty(localName = "VersionPublishedIndicator")
   @Schema(example = "false")
   private boolean isPublished;
 
@@ -119,7 +119,7 @@ public class Version extends BaseVersionedEntity<Version>
    * True if this version of the model is considered the current version; false otherwise.
    */
   @JsonProperty("isCurrent")
-  @JacksonXmlProperty(localName = "api:VersionCurrentIndicator")
+  @JacksonXmlProperty(localName = "VersionCurrentIndicator")
   @Schema(example = "false")
   private boolean isCurrent;
 
@@ -185,7 +185,7 @@ public class Version extends BaseVersionedEntity<Version>
   /**
    * A kind of version, such as major or minor.
    */
-  @JacksonXmlProperty(localName = "api:VersionCategoryCode")
+  @JacksonXmlProperty(localName = "VersionCategoryCode")
   @Schema(example = "major")
   @Enumerated(EnumType.STRING)
   private Category category;

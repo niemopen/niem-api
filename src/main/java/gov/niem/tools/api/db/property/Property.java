@@ -62,7 +62,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JacksonXmlRootElement(localName = "api:Property")
+@JacksonXmlRootElement(localName = "Property")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Schema(name = "Property")
 @Table(
@@ -132,7 +132,7 @@ public class Property extends Component<Property>
    */
   @Builder.Default
   @Enumerated(EnumType.STRING)
-  @JacksonXmlProperty(localName = "api:PropertyCategoryCode")
+  @JacksonXmlProperty(localName = "PropertyCategoryCode")
   @GenericField
   private Category category = Category.element;
 
@@ -257,7 +257,7 @@ public class Property extends Component<Property>
   // /**
   //  * A namespace prefix for a property's type.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyTypeNamespacePrefixID")
+  // @JacksonXmlProperty(localName = "PropertyTypeNamespacePrefixID")
   // @Schema(example = "j")
   // public String getTypePrefix() {
   //   return this.type == null ? null : this.type.getPrefix();
@@ -266,7 +266,7 @@ public class Property extends Component<Property>
   // /**
   //  * A name for a property's type.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyTypeName")
+  // @JacksonXmlProperty(localName = "PropertyTypeName")
   // @Schema(example = "PersonEyeColorCodeType")
   // public String getTypeName() {
   //   return this.type == null ? null : this.type.getName();
@@ -275,7 +275,7 @@ public class Property extends Component<Property>
   // /**
   //  * A qualified name, starting with a namespace prefix, for a property's type.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyTypeQualifiedName")
+  // @JacksonXmlProperty(localName = "PropertyTypeQualifiedName")
   // @Schema(example = "j:PersonEyeColorCodeType")
   // public String getTypeQname() {
   //   return this.type == null ? null : this.type.getQname();
@@ -284,7 +284,7 @@ public class Property extends Component<Property>
   // /**
   //  * A kind of a property's type.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyTypeName")
+  // @JacksonXmlProperty(localName = "PropertyTypeName")
   // @Schema(example = "complex_value")
   // public Type.Category getTypeCategory() {
   //   return this.type == null ? null : this.type.getCategory();
@@ -293,7 +293,7 @@ public class Property extends Component<Property>
   // /**
   //  * A definition for a property's type.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyTypeDefinitionText")
+  // @JacksonXmlProperty(localName = "PropertyTypeDefinitionText")
   // @Schema(example = "A data type for a code set identifying an eye color of a person.")
   // public String getTypeDefinition() {
   //   return this.type == null ? null : this.type.getName();
@@ -326,7 +326,7 @@ public class Property extends Component<Property>
   // /**
   //  * A namespace prefix for a property's substitution group head property.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyGroupNamespacePrefixID")
+  // @JacksonXmlProperty(localName = "PropertyGroupNamespacePrefixID")
   // @Schema(example = "nc")
   // public String getGroupPrefix() {
   //   return this.group == null ? null : this.group.getPrefix();
@@ -335,7 +335,7 @@ public class Property extends Component<Property>
   // /**
   //  * A name for a property's group head property.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyGroupName")
+  // @JacksonXmlProperty(localName = "PropertyGroupName")
   // @Schema(example = "PersonEyeColorAbstract")
   // public String getGroupName() {
   //   return this.group == null ? null : this.group.getName();
@@ -345,7 +345,7 @@ public class Property extends Component<Property>
   //  * A qualified name, starting with a namespace prefix, for a property's
   //  * substitution group property.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyGroupQualifiedName")
+  // @JacksonXmlProperty(localName = "PropertyGroupQualifiedName")
   // @Schema(example = "nc:PersonEyeColorAbstract")
   // public String getGroupQname() {
   //   return this.group == null ? null : this.group.getQname();
@@ -354,7 +354,7 @@ public class Property extends Component<Property>
   // /**
   //  * A kind of a property's substitution group property.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyGroupName")
+  // @JacksonXmlProperty(localName = "PropertyGroupName")
   // @Schema(example = "complex_value")
   // public Category getGroupCategory() {
   //   return this.type == null ? null : this.group.getCategory();
@@ -363,7 +363,7 @@ public class Property extends Component<Property>
   // /**
   //  * A definition for a property's substitution group property.
   //  */
-  // @JacksonXmlProperty(localName = "api:PropertyGroupDefinitionText")
+  // @JacksonXmlProperty(localName = "PropertyGroupDefinitionText")
   // @Schema(example = "A data concept for a color of the eyes of a person.")
   // public String getGroupDefinition() {
   //   return this.type == null ? null : this.type.getName();

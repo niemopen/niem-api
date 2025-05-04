@@ -41,7 +41,7 @@ import org.hibernate.proxy.HibernateProxy;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JacksonXmlRootElement(localName = "api:Facet")
+@JacksonXmlRootElement(localName = "Facet")
 @Schema(name = "Facet")
 @Table(
     // uniqueConstraints = {@UniqueConstraint(

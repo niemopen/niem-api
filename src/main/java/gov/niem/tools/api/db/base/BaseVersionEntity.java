@@ -93,7 +93,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
    */
   @JsonIgnore
   // @JsonProperty("isOriginal")
-  @JacksonXmlProperty(localName = "api:EntityOriginalIndicator")
+  @JacksonXmlProperty(localName = "EntityOriginalIndicator")
   @Schema(example = "false")
   public boolean isOriginal() {
     if (this.original == null) {
@@ -103,7 +103,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
   }
 
   // // TODO: Original
-  // @JacksonXmlProperty(localName = "api:EntityOriginalFullID")
+  // @JacksonXmlProperty(localName = "EntityOriginalFullID")
   // @Schema(example = "niem/model/5.2/nc")
   // public String getOriginalIdLabel() {
   //   if (this.isOriginal()) {
@@ -112,7 +112,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
   //   return this.original.getIdLabel();
   // }
 
-  // @JacksonXmlProperty(localName = "api:EntityOriginalVersionFullID")
+  // @JacksonXmlProperty(localName = "EntityOriginalVersionFullID")
   // @Schema(example = "niem/model/5.2")
   // public String getOriginalVersionIdentifier() {
   //   if (this.isOriginal()) {
@@ -121,7 +121,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
   //   return this.original.getVersion().getIdLabel();
   // }
 
-  // @JacksonXmlProperty(localName = "api:EntityOriginalVersionTitle")
+  // @JacksonXmlProperty(localName = "EntityOriginalVersionTitle")
   // @Schema(example = "NIEM Model 5.2")
   // public String getOriginalVersionTitle() {
   //   if (this.isOriginal()) {
@@ -134,7 +134,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
    * True if an entity is deprecated; false or null otherwise.
    */
   @Builder.Default
-  @JacksonXmlProperty(localName = "api:EntityDeprecatedIndicator")
+  @JacksonXmlProperty(localName = "EntityDeprecatedIndicator")
   @JsonProperty("isDeprecated")
   @Schema(example = "false")
   private boolean isDeprecated = false;
@@ -158,7 +158,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
   /**
    * A number which identifies a version within a model.
    */
-  // @JacksonXmlProperty(localName = "api:VersionNumberID")
+  // @JacksonXmlProperty(localName = "VersionNumberID")
   // @Schema(example = "1.1")
   @JsonIgnore
   public String getVersionNumber() {
@@ -182,7 +182,7 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
   /**
    * Gets the NIEM Version number (string) that is compatible with this object.
    */
-  // @JacksonXmlProperty(localName = "api:VersionBaseNIEMVersionNumberID")
+  // @JacksonXmlProperty(localName = "VersionBaseNIEMVersionNumberID")
   // @Schema(example = "5.2")
   @JsonIgnore
   public String getNiemVersionNumber() {

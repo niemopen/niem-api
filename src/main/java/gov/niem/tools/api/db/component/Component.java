@@ -57,7 +57,7 @@ public abstract class Component<T extends BaseNamespaceEntity<T>>
    * A namespace prefix for the property or type.
    */
   @NotAudited
-  @JacksonXmlProperty(localName = "api:ComponentNamespacePrefixID")
+  @JacksonXmlProperty(localName = "ComponentNamespacePrefixID")
   @Schema(example = "nc")
   @Formula("(SELECT namespace.prefix FROM namespace WHERE namespace.id = namespace_id)")
   protected String prefix;
@@ -89,7 +89,7 @@ public abstract class Component<T extends BaseNamespaceEntity<T>>
   /**
    * A name of the property or type.
    */
-  @JacksonXmlProperty(localName = "api:ComponentName")
+  @JacksonXmlProperty(localName = "ComponentName")
   @Schema(example = "PersonGivenName")
   // @FullTextField(analyzer = "camel", searchAnalyzer = "freeText")
   @FullTextField(analyzer = "camel")
@@ -100,7 +100,7 @@ public abstract class Component<T extends BaseNamespaceEntity<T>>
   /**
    * A definition describing a property or type.
    */
-  @JacksonXmlProperty(localName = "api:ComponentDefinitionText")
+  @JacksonXmlProperty(localName = "ComponentDefinitionText")
   @Schema(example = "A first name of a person.")
   @Column(columnDefinition = "text")
   @FullTextField
@@ -141,7 +141,7 @@ public abstract class Component<T extends BaseNamespaceEntity<T>>
   /**
    * A set of terms from the name of the property or type, broken apart by camel casing.
    */
-  @JacksonXmlProperty(localName = "api:ComponentNameTermText")
+  @JacksonXmlProperty(localName = "ComponentNameTermText")
   @Schema(example = "['Person', 'Given', 'Name']")
   public String[] getTerms() {
     return StringUtils.splitByCharacterTypeCamelCase(this.name);

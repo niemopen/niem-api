@@ -55,7 +55,7 @@ import org.hibernate.proxy.HibernateProxy;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JacksonXmlRootElement(localName = "api:Type")
+@JacksonXmlRootElement(localName = "Type")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Schema(name = "Type")
 @Table(

@@ -28,7 +28,7 @@ public abstract class BaseModelEntity extends BaseStewardEntity {
   /**
    * Gets the key of the model in which this entity belongs.
    */
-  // @JacksonXmlProperty(localName = "api:ModelKeyID")
+  // @JacksonXmlProperty(localName = "ModelKeyID")
   // @Schema(
   //     example = "niem",
   //    description = "A human-readable and url-friendly steward identifier generated from the steward shortName field."
@@ -46,7 +46,7 @@ public abstract class BaseModelEntity extends BaseStewardEntity {
     return this.getModel().toSummary();
   }
 
-  // @JacksonXmlProperty(localName = "api:ModelRouteID")
+  // @JacksonXmlProperty(localName = "ModelRouteID")
   // @Schema(
   //   example = "https://tools.niem.gov/api/v2/stewards/niem",
   //   description = "An endpoint to get information about a steward."
@@ -58,7 +58,7 @@ public abstract class BaseModelEntity extends BaseStewardEntity {
   //   return this.getModel().getRoute();
   // }
 
-  // @JacksonXmlProperty(localName = "api:ModelShortName")
+  // @JacksonXmlProperty(localName = "ModelShortName")
   // @Schema(
   //     example = "NIEM",
   //     description = "A short name or acronym used to identify a steward. This could be the name of an organization or unit, a program name, or other kind of authoritative source."

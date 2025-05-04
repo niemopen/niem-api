@@ -205,6 +205,32 @@ public class TypeController {
     return hub.types.getHistory(type, includePreRelease);
   }
 
+  /**
+   * Get the type inheritance or restriction chain for the type with the given fields.
+   */
+  @GetMapping("/types/{qname}/bases")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Type> getBases(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.types.getBases(stewardKey, modelKey, versionNumber, qname);
+  }
+
+  /**
+   * Get the types that extend or restrict the type with the given fields.
+   */
+  @GetMapping("/types/{qname}/children")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Type> getChildren(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.types.getChildren(stewardKey, modelKey, versionNumber, qname);
+  }
+
   // /**
   //  * Get all CMF datatypes matching the given fields.
   //  */

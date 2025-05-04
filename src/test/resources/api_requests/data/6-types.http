@@ -27,6 +27,8 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{typ
 ### Get a class type with a parent (CCC)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{extended_qname}}?{{mediaType}}
 
+
+
 ### Count types in a version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/count
 
@@ -38,6 +40,8 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/names
 
 ### Count types in a namespace with the given category
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/types/count?category={{category}}
+
+
 
 ### Get all types in a version (default pagination)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
@@ -51,6 +55,8 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 ### Get all types in a namespace (default pagination)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/types
 
+
+
 ### Get previous type
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_class_qname}}/prev
 
@@ -59,3 +65,25 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Get type history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_class_qname}}/history
+
+
+
+### Get type inheritance chain
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/j:CommercialVehicleType/bases
+
+### Get type restriction chain
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:TextType/bases
+
+### Error checking: Get type inheritance chain for type without a base
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:PersonType/bases
+
+
+
+### Get class type children
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:ItemType/children
+
+### Get datatype children
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/xs:date/children
+
+### Error checking: Get type inheritance chain for type without a base
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:ScheduleType/children

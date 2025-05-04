@@ -8,6 +8,9 @@ import gov.niem.tools.api.db.version.Version;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 /**
@@ -73,6 +76,38 @@ public class TypeService extends ComponentService<Type, TypeRepository> {
       return repo.countByNamespace_Id(namespace.getId());
     }
     return repo.countByNamespace_IdAndCategory(namespace.getId(), category);
+  }
+
+  /**
+   * Get the type inheritance or restriction chain.
+   */
+  public List<Type> getBases(String stewardKey, String modelKey, String versionNumber,
+      String qname) throws EntityNotFoundException {
+    Type type = findOne(stewardKey, modelKey, versionNumber, qname);
+    List<Type> bases = new LinkedList<Type>();
+
+    Type current = type;
+    do {
+      Type base = current.getBase();
+      if (base == null) {
+        break;
+      }
+      bases.add(0, base);
+      current = base;
+    } while (true);
+
+    return bases;
+  }
+
+  /**
+   * Get the list of types that extend or restrict the type with the given fields.
+   */
+  public List<Type> getChildren(String stewardKey, String modelKey, String versionNumber,
+      String qname) throws EntityNotFoundException {
+    Type type = findOne(stewardKey, modelKey, versionNumber, qname);
+    List<Type> children = repo.findAllByBase_Id(type.getId());
+    Collections.sort(children);
+    return children;
   }
 
 }

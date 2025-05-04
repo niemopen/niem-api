@@ -21,8 +21,11 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -33,9 +36,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.Formula;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.search.engine.backend.types.Projectable;
 import org.hibernate.search.engine.backend.types.Sortable;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.AssociationInverseSide;
@@ -362,6 +367,22 @@ public class Steward extends BaseEntity implements Comparable<Steward> {
   //   return steward;
 
   // }
+
+  /**
+   * Gets a sorted list of models that are under the authority of this steward.
+   * Makes sure potential Hibernate proxies are initialized.
+   */
+  public List<Model> getModels() {
+    List<Model> models = new LinkedList<>();
+    for (Model model : this.models) {
+      if (model instanceof HibernateProxy) {
+        model = Hibernate.unproxy(model, Model.class);
+      }
+      models.add(model);
+    }
+    Collections.sort(models);
+    return models;
+  }
 
   /**
    * Custom sorting function for stewards.

@@ -10,7 +10,6 @@ import org.mitre.niem.cmf.Model;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -85,9 +84,7 @@ public class NamespaceController {
       @PathVariable String stewardKey,
       @PathVariable String modelKey,
       @PathVariable String versionNumber) throws Exception {
-
-    return new ArrayList<Namespace>(hub.namespaces.findByKeys(stewardKey, modelKey, versionNumber));
-
+    return hub.namespaces.findByVersion(stewardKey, modelKey, versionNumber);
   }
 
   /**
@@ -106,8 +103,7 @@ public class NamespaceController {
       throws Exception {
 
     // Get results
-    ArrayList<Namespace> namespaces = new ArrayList<Namespace>(
-        hub.namespaces.findByKeys(stewardKey, modelKey, versionNumber));
+    List<Namespace> namespaces = hub.namespaces.findByVersion(stewardKey, modelKey, versionNumber);
 
     // Convert results to CMF
     org.mitre.niem.cmf.Model cmfModel = new Model();

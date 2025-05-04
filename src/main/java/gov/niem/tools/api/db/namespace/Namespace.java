@@ -74,7 +74,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordFie
 )
 @Indexed
 public class Namespace extends BaseVersionEntity<Namespace>
-    implements BaseCmfEntity<org.mitre.niem.cmf.Namespace> {
+    implements BaseCmfEntity<org.mitre.niem.cmf.Namespace>, Comparable<Namespace> {
 
   /**
    * Model version in which this entity is defined.
@@ -547,6 +547,17 @@ public class Namespace extends BaseVersionEntity<Namespace>
       default:
         return org.mitre.niem.cmf.NamespaceKind.NSK_UNKNOWN;
     }
+  }
+
+  /**
+   * Custom sorting function for namespaces.  Sorts by namespace rank, then prefix.
+   */
+  @Override
+  public int compareTo(Namespace other) {
+    if (this.getRank() != other.getRank()) {
+      return Integer.compare(this.getRank(), other.getRank());
+    }
+    return this.prefix.compareTo(other.prefix);
   }
 
 }

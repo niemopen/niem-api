@@ -73,7 +73,7 @@ public class VersionController {
     if (stewardKey.equals("*") && modelKey.equals("*")) {
       return hub.versions.findAll();
     }
-    return new ArrayList<Version>(hub.versions.findByKeys(stewardKey, modelKey));
+    return hub.versions.findByModel(stewardKey, modelKey);
   }
 
   /**

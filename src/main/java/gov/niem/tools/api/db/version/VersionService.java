@@ -11,9 +11,9 @@ import gov.niem.tools.api.db.steward.Steward;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -120,7 +120,9 @@ public class VersionService extends BaseVersionEntityService<Version> {
    * Finds all versions in the database.
    */
   public List<Version> findAll() {
-    return repo.findAll();
+    List<Version> versions = repo.findAll();
+    Collections.sort(versions);
+    return versions;
   }
 
   /**
@@ -159,7 +161,7 @@ public class VersionService extends BaseVersionEntityService<Version> {
   /**
    * Finds all versions in the model with the given fields.
    */
-  public Set<Version> findByKeys(String stewardKey, String modelKey) throws Exception {
+  public List<Version> findByModel(String stewardKey, String modelKey) throws Exception {
     Model model = modelService.findOne(stewardKey, modelKey);
     return model.getVersions();
   }

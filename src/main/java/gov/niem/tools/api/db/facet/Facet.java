@@ -54,7 +54,7 @@ import org.hibernate.proxy.HibernateProxy;
     }
 )
 public class Facet extends BaseNamespaceEntity<Facet>
-    implements BaseCmfEntity<org.mitre.niem.cmf.Facet> {
+    implements BaseCmfEntity<org.mitre.niem.cmf.Facet>, Comparable<Facet> {
 
   /**
    * Type that contains the facet.
@@ -254,6 +254,14 @@ public class Facet extends BaseNamespaceEntity<Facet>
       default:
         return null;
     }
+  }
+
+  /**
+   * Custom sort function for facets, sorting by id label.
+   */
+  @Override
+  public int compareTo(Facet other) {
+    return this.getIdLabel().compareTo(other.getIdLabel());
   }
 
 }

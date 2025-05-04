@@ -62,7 +62,7 @@ import org.hibernate.proxy.HibernateProxy;
     }
 )
 public class Subproperty extends BaseNamespaceEntity<Subproperty>
-    implements BaseCmfEntity<org.mitre.niem.cmf.HasProperty> {
+    implements BaseCmfEntity<org.mitre.niem.cmf.HasProperty>, Comparable<Subproperty> {
 
   @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
@@ -301,6 +301,17 @@ public class Subproperty extends BaseNamespaceEntity<Subproperty>
 
     return hasProperty;
 
+  }
+
+  /**
+   * Custom sort function for subproperties, sorting by type qname, then sequence.
+   */
+  @Override
+  public int compareTo(Subproperty other) {
+    if (!this.getTypeQname().equals(other.getTypeQname())) {
+      return this.getType().compareTo(other.getType());
+    }
+    return Integer.compare(this.sequence, other.sequence);
   }
 
 }

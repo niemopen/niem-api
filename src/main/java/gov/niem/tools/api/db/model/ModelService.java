@@ -11,7 +11,6 @@ import gov.niem.tools.api.db.version.Version;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -216,9 +215,7 @@ public class ModelService extends BaseEntityService<Model> {
    */
   public List<Model> findBySteward(String stewardKey) {
     Steward steward = stewardService.findOne(stewardKey);
-    List<Model> models = new ArrayList<Model>(steward.getModels());
-    Collections.sort(models);
-    return models;
+    return steward.getModels();
   }
 
   // TODO: Support model stewardships

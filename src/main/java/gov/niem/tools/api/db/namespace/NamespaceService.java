@@ -10,9 +10,10 @@ import gov.niem.tools.api.db.version.VersionService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -106,10 +107,12 @@ public class NamespaceService extends BaseVersionEntityService<Namespace> {
   /**
    * Finds all namespaces in the database in the version with the given fields.
    */
-  public Set<Namespace> findByKeys(String stewardKey, String modelKey, String versionNumber)
+  public List<Namespace> findByVersion(String stewardKey, String modelKey, String versionNumber)
       throws EntityNotFoundException {
     Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
-    return version.getNamespaces();
+    List<Namespace> namespaces = new ArrayList<Namespace>(version.getNamespaces());
+    Collections.sort(namespaces);
+    return namespaces;
   }
 
   /**

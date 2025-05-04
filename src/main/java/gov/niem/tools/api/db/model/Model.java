@@ -25,8 +25,11 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.AllArgsConstructor;
@@ -229,6 +232,22 @@ public class Model extends BaseStewardEntity implements Comparable<Model> {
       steward = Hibernate.unproxy(steward, Steward.class);
     }
     return steward;
+  }
+
+  /**
+   * Gets a sorted list of versions that belong to this model.
+   * Makes sure potential Hibernate proxies are initialized.
+   */
+  public List<Version> getVersions() {
+    List<Version> versions = new LinkedList<>();
+    for (Version version : this.versions) {
+      if (version instanceof HibernateProxy) {
+        version = Hibernate.unproxy(version, Version.class);
+      }
+      versions.add(version);
+    }
+    Collections.sort(versions);
+    return versions;
   }
 
   // TODO: set stewardships

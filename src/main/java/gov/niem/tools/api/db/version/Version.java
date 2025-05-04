@@ -80,7 +80,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
     }
 )
 public class Version extends BaseVersionedEntity<Version>
-    implements BaseCmfEntity<org.mitre.niem.cmf.Model> {
+    implements BaseCmfEntity<org.mitre.niem.cmf.Model>, Comparable<Version> {
 
   @JsonIgnore
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -453,5 +453,13 @@ public class Version extends BaseVersionedEntity<Version>
 
   //   return catalog;
   // }
+
+  /**
+   * Custom sorting function for versions.  Sort by version number.
+   */
+  @Override
+  public int compareTo(Version other) {
+    return this.versionNumber.compareTo(other.versionNumber);
+  }
 
 }

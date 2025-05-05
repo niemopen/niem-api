@@ -1,0 +1,161 @@
+
+stages:
+  - build
+  - test
+  - publish
+  - deploy
+  - admin
+
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
+    - if: '$CI_COMMIT_BRANCH == "mep"'
+    - if: '$CI_COMMIT_BRANCH == "dev"'
+    - when: never
+
+variables:
+  PROFILE: $CI_COMMIT_BRANCH
+  CONTAINER: $IMAGE-$PROFILE
+  IMAGE_FULL_NAME: $ARTIFACTORY_URL/$ARTIFACTORY_REPO/$IMAGE:$PROFILE
+
+build-jar-image:
+  stage: build
+  environment: $CI_COMMIT_BRANCH
+  tags:
+    - $SHELL
+  script:
+    - ./gradlew bootJar
+    - podman build -t $IMAGE:$PROFILE .
+  after_script:
+    - podman image ls
+    - podman image prune -f
+    - podman image ls
+
+  artifacts:
+    paths:
+      - build/libs/*.jar
+      - build/reports/problems/*
+
+unit-tests:
+  stage: test
+  environment: $CI_COMMIT_BRANCH
+  when: manual
+  tags:
+    - $SHELL
+  allow_failure: true
+  script:
+    - ./gradlew test
+  artifacts:
+    reports:
+      junit: '**/build/test-results/**/TEST-*.xml'
+
+checkstyle:
+  stage: test
+  environment: $CI_COMMIT_BRANCH
+  when: manual
+  tags:
+    - $SHELL
+  allow_failure: true
+  script:
+    - ./gradlew checkstyleMain
+  artifacts:
+    reports:
+      codequality:
+        - '**/build/reports/checkstyle/main.html'
+
+artifactory:
+  stage: publish
+  environment: $CI_COMMIT_BRANCH
+  tags:
+    - $SHELL
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
+    - if: '$CI_COMMIT_BRANCH == "mep"'
+  before_script:
+    - podman login -u $ARTIFACTORY_USER --password $ARTIFACTORY_TOKEN $ARTIFACTORY_URL
+    - echo "$IMAGE:PROFILE"
+    - echo "$IMAGE_FULL_NAME"
+  script:
+    - podman push $IMAGE:$PROFILE $IMAGE_FULL_NAME
+  after_script:
+    - podman logout $ARTIFACTORY_URL
+
+deploy:
+  stage: deploy
+  environment: $CI_COMMIT_BRANCH
+  tags:
+    - $SHELL
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
+    - if: '$CI_COMMIT_BRANCH == "mep"'
+  before_script:
+    - echo $IMAGE_FULL_NAME
+    - echo $POSTGRES_URL
+    - podman --remote -c $SERVER rm -f $CONTAINER
+    - podman --remote -c $SERVER login -u $ARTIFACTORY_USER --password $ARTIFACTORY_TOKEN
+          $ARTIFACTORY_URL
+  script:
+    - podman --remote -c $SERVER pull $IMAGE_FULL_NAME
+    - podman --remote -c $SERVER run
+          --authfile=$AUTH_FILE
+          --log-level=debug -d -p $PORT:8080
+          --name $CONTAINER
+          -e "SPRING_PROFILES_ACTIVE=${PROFILE}"
+          -e "SPRING_DATASOURCE_URL=${POSTGRES_URL}"
+          -e "SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}"
+          -e "SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}"
+          -v ${VOLUME_1}
+          -v ${VOLUME_2}
+          $IMAGE_FULL_NAME
+  after_script:
+    - podman --remote -c $SERVER logout $ARTIFACTORY_URL
+    - podman --remote -c $SERVER image ls
+    - podman --remote -c $SERVER container ls --all
+
+restart-container:
+  stage: deploy
+  environment: $CI_COMMIT_BRANCH
+  when: manual
+  tags:
+    - $SHELL
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
+    - if: '$CI_COMMIT_BRANCH == "mep"'
+  before_script:
+    - echo "$CONTAINER"
+    - podman --remote -c $SERVER image ls
+    - podman --remote -c $SERVER container ls --all --ns
+  script:
+    - podman --remote -c $SERVER restart $CONTAINER
+  after_script:
+    - podman --remote -c $SERVER container ls --all
+
+view-log:
+  stage: admin
+  environment: $CI_COMMIT_BRANCH
+  tags:
+    - $SHELL
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
+    - if: '$CI_COMMIT_BRANCH == "mep"'
+  script:
+    - podman --remote -c $SERVER logs $CONTAINER
+
+list-images-containers:
+  stage: admin
+  environment: $CI_COMMIT_BRANCH
+  when: manual
+  tags:
+    - $SHELL
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
+    - if: '$CI_COMMIT_BRANCH == "mep"'
+  script:
+    - podman --remote -c $SERVER image ls
+    - podman --remote -c $SERVER container ls --all

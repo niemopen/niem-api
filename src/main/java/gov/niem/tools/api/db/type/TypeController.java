@@ -4,6 +4,7 @@ import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
+import gov.niem.tools.api.db.property.Property;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -229,6 +230,19 @@ public class TypeController {
       @PathVariable String versionNumber,
       @PathVariable String qname) throws Exception {
     return hub.types.getChildren(stewardKey, modelKey, versionNumber, qname);
+  }
+
+  /**
+   * Get the augmentation point element for the type with the given fields.
+   */
+  @GetMapping("/types/{qname}/augmentation-point")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Property getTypeAugmentationPoint(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.types.findAugmentationPoint(stewardKey, modelKey, versionNumber, qname);
   }
 
   // /**

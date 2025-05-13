@@ -3,6 +3,9 @@ package gov.niem.tools.api.db.type;
 import gov.niem.tools.api.db.component.ComponentService;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.namespace.Namespace;
+import gov.niem.tools.api.db.property.Property;
+import gov.niem.tools.api.db.subproperty.Subproperty;
+import gov.niem.tools.api.db.subproperty.SubpropertyRepository;
 import gov.niem.tools.api.db.version.Version;
 
 import jakarta.persistence.EntityManager;
@@ -11,6 +14,7 @@ import jakarta.transaction.Transactional;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,6 +25,9 @@ public class TypeService extends ComponentService<Type, TypeRepository> {
 
   @PersistenceContext
   private EntityManager em;
+
+  @Autowired
+  SubpropertyRepository subpropertyRepo;
 
   /**
    * Create a new type in the database with the given prefix and name and add to
@@ -108,6 +115,21 @@ public class TypeService extends ComponentService<Type, TypeRepository> {
     List<Type> children = repo.findAllByBase_Id(type.getId());
     Collections.sort(children);
     return children;
+  }
+
+  /**
+   * Find the augmentation point element for the type with the given fields.
+   */
+  public Property findAugmentationPoint(String stewardKey, String modelKey,
+      String versionNumber, String typeQname) throws EntityNotFoundException {
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+    Type type = this.findOne(version, typeQname);
+    Subproperty subproperty = subpropertyRepo.findOneByTypeIdAndPropertyNameEndingWith(
+          type.getId(), "AugmentationPoint");
+    if (subproperty == null) {
+      throw new EntityNotFoundException("Augmentation point", "for " + typeQname);
+    }
+    return subproperty.getProperty();
   }
 
 }

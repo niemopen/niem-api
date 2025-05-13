@@ -87,3 +87,11 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Error checking: Get type inheritance chain for type without a base
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:ScheduleType/children
+
+
+
+### Get augmentation point
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:PersonType/augmentation-point
+
+### Get augmentation point - error checking
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:AddressCategoryCodeType/augmentation-point

@@ -232,6 +232,15 @@ public class SubpropertyService extends BaseVersionEntityService<Subproperty> {
   }
 
   /**
+   * Find the augmentation point subproperty for the type with the given fields.
+   */
+  public Subproperty findAugmentationPoint(Type type) throws EntityNotFoundException {
+    Subproperty subproperty  = repo.findOneByTypeIdAndPropertyNameEndingWith(
+        type.getId(), "AugmentationPoint");
+    return subproperty;
+  }
+
+  /**
    * Count subproperties in the version matching the given fields.
    */
   public long countByVersion(String stewardKey, String modelKey, String versionNumber)

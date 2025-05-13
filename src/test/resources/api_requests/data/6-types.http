@@ -95,3 +95,11 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Get augmentation point - error checking
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:AddressCategoryCodeType/augmentation-point
+
+
+
+### Get augmentations
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:PersonType/augmentations
+
+### Get augmentations - error checking
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:AddressCategoryCodeType/augmentations

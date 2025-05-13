@@ -245,6 +245,19 @@ public class TypeController {
     return hub.types.findAugmentationPoint(stewardKey, modelKey, versionNumber, qname);
   }
 
+  /**
+   * Get the augmentations for the type with the given fields.
+   */
+  @GetMapping("/types/{qname}/augmentations")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Property> getTypeAugmentations(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.types.findAugmentations(stewardKey, modelKey, versionNumber, qname);
+  }
+
   // /**
   //  * Get all CMF datatypes matching the given fields.
   //  */

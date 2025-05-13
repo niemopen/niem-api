@@ -4,6 +4,7 @@ import gov.niem.tools.api.db.component.ComponentService;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.property.Property;
+import gov.niem.tools.api.db.property.PropertyRepository;
 import gov.niem.tools.api.db.subproperty.Subproperty;
 import gov.niem.tools.api.db.subproperty.SubpropertyRepository;
 import gov.niem.tools.api.db.version.Version;
@@ -25,6 +26,9 @@ public class TypeService extends ComponentService<Type, TypeRepository> {
 
   @PersistenceContext
   private EntityManager em;
+
+  @Autowired
+  PropertyRepository propertyRepository;
 
   @Autowired
   SubpropertyRepository subpropertyRepo;
@@ -130,6 +134,21 @@ public class TypeService extends ComponentService<Type, TypeRepository> {
       throw new EntityNotFoundException("Augmentation point", "for " + typeQname);
     }
     return subproperty.getProperty();
+  }
+
+  /**
+   * Find augmentations for the type with the given fields.
+   */
+  public List<Property> findAugmentations(String stewardKey, String modelKey,
+      String versionNumber, String typeQname) throws EntityNotFoundException {
+    Property augmentationPoint = this.findAugmentationPoint(stewardKey, modelKey,
+        versionNumber, typeQname);
+    if (augmentationPoint == null) {
+      throw new EntityNotFoundException("Augmentation point", "for " + typeQname);
+    }
+    List<Property> augmentations = propertyRepository.findAllByGroup_Id(augmentationPoint.getId());
+    Collections.sort(augmentations);
+    return augmentations;
   }
 
 }

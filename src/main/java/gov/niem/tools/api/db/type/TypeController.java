@@ -52,7 +52,7 @@ public class TypeController {
   /**
    * Gets the type with the given fields in CMF.
    */
-  @GetMapping("/types.cmf/{qname}")
+  @GetMapping("/types/{qname}/formats/cmf")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getTypeCmf(

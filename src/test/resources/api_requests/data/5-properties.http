@@ -9,39 +9,37 @@
 @object_qname = biom:Biometric
 @category = attribute
 
-@properties = properties
-# @properties = properties.cmf
 
 ### Get an abstract property
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{abstract_qname}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{abstract_qname}}
 
 ### Get a substitution property
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{substitution_qname}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{substitution_qname}}
 
 ### Get an attribute property
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{attribute_qname}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{attribute_qname}}
 
 ### Get an object property
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{object_qname}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{object_qname}}
 
 
 
 ### Get an object property in XML
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/{{object_qname}}?mediaType=xml
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{object_qname}}?mediaType=xml
 
 ### Get an object property in CMF XML
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties.cmf/{{object_qname}}?mediaType=xml
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{object_qname}}/formats/cmf?mediaType=xml
 
 ### Get an object property in CMF JSON
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties.cmf/{{object_qname}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{object_qname}}/formats/cmf
 
 
 
 ### Check error handling: Get an property that does not exist
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/nc:Pineapple
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/nc:Pineapple
 
 ### Check error handling: Get a property from a namespace that does not exist
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{properties}}/my:Person
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/my:Person
 
 
 

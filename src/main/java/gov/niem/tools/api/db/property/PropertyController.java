@@ -53,7 +53,7 @@ public class PropertyController {
   /**
    * Gets a property in CMF with the given fields.
    */
-  @GetMapping("/properties.cmf/{qname}")
+  @GetMapping("/properties/{qname}/formats/cmf")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getPropertyCmf(

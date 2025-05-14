@@ -7,6 +7,7 @@ import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 
 import org.mitre.niem.cmf.Model;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -56,7 +57,8 @@ public class NamespaceController {
    *
    * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces.cmf/nc
    */
-  @GetMapping("/namespaces.cmf/{prefix}")
+  @Hidden
+  @GetMapping("/namespaces/{prefix}/formats/cmf")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getNamespaceCmf(
@@ -69,6 +71,7 @@ public class NamespaceController {
     Namespace namespace = hub.namespaces.findOne(stewardKey, modelKey, versionNumber, prefix);
     org.mitre.niem.cmf.Model cmfModel = new Model();
     namespace.addToCmfModel(cmfModel);
+    // TODO: Add properties, types, and dependencies to namespace CMF
     return CmfUtils.generateString(cmfModel, mediaType);
   }
 

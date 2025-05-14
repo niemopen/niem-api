@@ -9,23 +9,37 @@
 @extended_qname = nc:VehicleType
 @category = complex_object
 
-@types = types
-# @types = types.cmf
-
 @mediaType = mediaType=json
 # @mediaType = mediaType=xml
 
 ### Get a class type (CCC)
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{class_qname}}?{{mediaType}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}?{{mediaType}}
 
 ### Get a datatype (simple)
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{datatype_qname}}?{{mediaType}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_qname}}?{{mediaType}}
 
 ### Get a datatype class (CSC)
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{datatype_class_qname}}?{{mediaType}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_class_qname}}?{{mediaType}}
 
 ### Get a class type with a parent (CCC)
-GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/{{types}}/{{extended_qname}}?{{mediaType}}
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{extended_qname}}?{{mediaType}}
+
+
+
+
+
+### Get a class type (CCC) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/formats/cmf?{{mediaType}}
+
+### Get a datatype (simple) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_qname}}/formats/cmf?{{mediaType}}
+
+### Get a datatype class (CSC) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_class_qname}}/formats/cmf?{{mediaType}}
+
+### Get a class type with a parent (CCC) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{extended_qname}}/formats/cmf?{{mediaType}}
+
 
 
 

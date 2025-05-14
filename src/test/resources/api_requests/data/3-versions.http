@@ -9,8 +9,12 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions
 ### Get a specific version from a given model
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}
 
+
+
 ### Count versions from a given model
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/count
+
+
 
 ### Get previous version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prev
@@ -24,8 +28,17 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/current
 ### Get version history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/history
 
+
+
+
+### Get a a version of a model in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/formats/cmf?mediaType=xml
+
+
+
+
 ### Error checking: Get unavailable previous version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/1.0/prev
 
-### Get current version
+### Error checking: Get current version
 GET {{baseUrl}}/stewards/{{steward}}/models/bogus/versions/current

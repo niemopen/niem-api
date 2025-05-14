@@ -35,5 +35,11 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/names
 
 
 
+
+### Get a namespace in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/formats/cmf
+
+
+
 ### Error checking: Get current namespace from current namespace
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/6.0/namespaces/{{prefix}}/current

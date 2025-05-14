@@ -159,6 +159,20 @@ public class VersionService extends BaseVersionEntityService<Version> {
   }
 
   /**
+   * Finds the version with the given fields that is marked as current.
+   */
+  public Version findOneCurrent(String stewardKey, String modelKey)
+      throws EntityNotFoundException {
+    Version version = repo.findOneByModel_Steward_StewardKeyAndModel_ModelKeyAndIsCurrentIsTrue(
+        stewardKey, modelKey);
+    if (version == null) {
+      String message = String.format("current version for %s/%s", stewardKey, modelKey);
+      throw new EntityNotFoundException("version", message);
+    }
+    return version;
+  }
+
+  /**
    * Finds all versions in the model with the given fields.
    */
   public List<Version> findByModel(String stewardKey, String modelKey) throws Exception {

@@ -16,4 +16,7 @@ public interface VersionRepository extends JpaRepository<Version, Long> {
 
   long countByModelId(long modelId);
 
+  Version findOneByModel_Steward_StewardKeyAndModel_ModelKeyAndIsCurrentIsTrue(
+      String stewardKey, String modelKey);
+
 }

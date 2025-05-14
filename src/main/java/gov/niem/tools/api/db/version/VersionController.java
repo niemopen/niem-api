@@ -7,7 +7,6 @@ import gov.niem.tools.api.db.ServiceHub;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -139,6 +138,18 @@ public class VersionController {
       throws Exception {
     Version version = hub.versions.findOne(stewardKey, modelKey, versionNumber);
     return hub.versions.getHistory(version, includePreRelease);
+  }
+
+  /**
+   * Get the current instance of the version with the given fields.
+   */
+  @GetMapping("/versions/current")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Version getCurrent(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey) throws Exception {
+    Version version = hub.versions.findOneCurrent(stewardKey, modelKey);
+    return version;
   }
 
   // @GetMapping("/versions/{versionNumber}/catalog")

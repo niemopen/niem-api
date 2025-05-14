@@ -18,8 +18,14 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prev
 ### Get next version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/next
 
+### Get current version
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/current
+
 ### Get version history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/history
 
 ### Error checking: Get unavailable previous version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/1.0/prev
+
+### Get current version
+GET {{baseUrl}}/stewards/{{steward}}/models/bogus/versions/current

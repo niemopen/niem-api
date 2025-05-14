@@ -92,3 +92,14 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prope
 
 ### Error checking: Get property substitutions for property without substitutions
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{attribute_qname}}/substitutions
+
+
+
+### Get property groups - 1 result
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/nc:AddressCategoryCode/groups
+
+### Get property groups - 2 results
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/nc:MeasureIntegerValue/groups
+
+### Error checking: Get property substitutions for property without substitutions
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/nc:personNameInitialIndicator/substitutions

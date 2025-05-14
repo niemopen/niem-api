@@ -11,6 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -105,6 +106,35 @@ public class PropertyService extends ComponentService<Property, PropertyReposito
     List<Property> substitutions = repo.findAllByGroup_Id(property.getId());
     Collections.sort(substitutions);
     return substitutions;
+  }
+
+  /**
+   * Get a list of substitution group heads for the property with the given fields.
+   *
+   * <p>Note that there is usually only a single substitution group head for
+   * a substitutable property, but occasionally there can be a chain of substitutions.
+   */
+  public List<Property> getSubstitutionGroups(String stewardKey, String modelKey,
+      String versionNumber, String qname) throws EntityNotFoundException {
+    Property property = this.findOne(stewardKey, modelKey, versionNumber, qname);
+    if (property == null) {
+      throw new EntityNotFoundException("property", qname);
+    }
+
+    List<Property> groups = new LinkedList<Property>();
+    Property current = property;
+    do {
+      Property group = current.getGroup();
+      if (group == null) {
+        break;
+      }
+      else {
+        groups.add(group);
+        current = group;
+      }
+    } while (true);
+
+    return groups;
   }
 
   /**

@@ -221,6 +221,24 @@ public class PropertyController {
     return hub.properties.getSubstitutions(stewardKey, modelKey, versionNumber, qname);
   }
 
+  /**
+   * Get the list of substitution group heads for the property with the given fields.
+   *
+   * <p>Note that for substitutable properties, this is usually a single abstract property
+   * on its own.  Occasionally, this abstract property may also belong to its own substitution
+   * group. This chain of substitution groups may be needed when dealing with property
+   * dependencies.
+   */
+  @GetMapping("/properties/{qname}/groups")
+  @ResponseStatus(code = HttpStatus.OK)
+  public List<Property> getSubstitutionGroups(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.properties.getSubstitutionGroups(stewardKey, modelKey, versionNumber, qname);
+  }
+
   // /**
   //  * Add a new property.
   //  */

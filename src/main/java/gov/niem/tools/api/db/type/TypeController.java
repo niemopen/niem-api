@@ -258,6 +258,21 @@ public class TypeController {
     return hub.types.findAugmentations(stewardKey, modelKey, versionNumber, qname);
   }
 
+  /**
+   * Get a page of properties of the type with the given fields.
+   */
+  @GetMapping("/types/{qname}/usages")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Page<Property> getTypeUsages(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @PageableDefault(sort = {"namespaceRank", "namespacePrefix", "name"}) Pageable pageable)
+      throws Exception {
+    return hub.types.findUsages(stewardKey, modelKey, versionNumber, qname, pageable);
+  }
+
   // /**
   //  * Get all CMF datatypes matching the given fields.
   //  */

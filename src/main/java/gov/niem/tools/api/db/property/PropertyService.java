@@ -3,6 +3,8 @@ package gov.niem.tools.api.db.property;
 import gov.niem.tools.api.db.component.ComponentService;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.namespace.Namespace;
+import gov.niem.tools.api.db.type.Type;
+import gov.niem.tools.api.db.type.TypeRepository;
 import gov.niem.tools.api.db.version.Version;
 
 import jakarta.persistence.EntityManager;
@@ -10,6 +12,9 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,6 +25,9 @@ public class PropertyService extends ComponentService<Property, PropertyReposito
 
   @PersistenceContext
   private EntityManager em;
+
+  @Autowired
+  TypeRepository typeRepository;
 
   /**
    * Adds a property to the database with the given name to the namespace with the
@@ -97,6 +105,15 @@ public class PropertyService extends ComponentService<Property, PropertyReposito
     List<Property> substitutions = repo.findAllByGroup_Id(property.getId());
     Collections.sort(substitutions);
     return substitutions;
+  }
+
+  /**
+   * Get a page of properties of the type with the given fields.
+   */
+  public Page<Property> getPropertiesOfType(Type type, Pageable pageable)
+      throws EntityNotFoundException {
+    Page<Property> properties = repo.findAllByType_Id(type.getId(), pageable);
+    return properties;
   }
 
 }

@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -149,6 +151,19 @@ public class TypeService extends ComponentService<Type, TypeRepository> {
     List<Property> augmentations = propertyRepository.findAllByGroup_Id(augmentationPoint.getId());
     Collections.sort(augmentations);
     return augmentations;
+  }
+
+  /**
+   * Find a page of properties of the type with the given fields.
+   */
+  public Page<Property> findUsages(String stewardKey, String modelKey,
+      String versionNumber, String typeQname, Pageable pageable) throws EntityNotFoundException {
+    Type type = this.findOne(stewardKey, modelKey, versionNumber, typeQname);
+    if (type == null) {
+      throw new EntityNotFoundException("type", typeQname);
+    }
+    Page<Property> properties = propertyRepository.findAllByType_Id(type.getId(), pageable);
+    return properties;
   }
 
 }

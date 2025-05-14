@@ -103,3 +103,14 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Get augmentations - error checking
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:AddressCategoryCodeType/augmentations
+
+
+
+### Get usages
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:PersonType/usages
+
+### Get usages
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:TextType/usages
+
+### Get augmentations - error checking
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:AddressCategoryCodeSimpleType/usages

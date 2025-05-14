@@ -220,6 +220,22 @@ public class SubpropertyController {
   }
 
   /**
+   * Get the next current of the subproperty with the given fields.
+   */
+  @GetMapping("/types/{typeQname}/subproperties/{propertyQname}/current")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Subproperty getCurrent(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String typeQname,
+      @PathVariable String propertyQname) throws Exception {
+    Subproperty subproperty = hub.subproperties.findOne(stewardKey, modelKey,
+        versionNumber, typeQname, propertyQname);
+    return subproperty.getCurrent();
+  }
+
+  /**
    * Get the history of the subproperty with the given fields.
    *
    * @param includePreRelease - True to return a result from a pre-release if applicable;

@@ -23,6 +23,8 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prope
 ### Get a specific facet in a given type
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{qname}}/facets/{{category}}/{{value}}
 
+
+
 ### Count all facets in a version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/facets/count
 
@@ -35,11 +37,16 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 ### Count all facets in a property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{property_qname}}/facets/count
 
+
+
 ### Get previous facet
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{qname}}/facets/{{category}}/{{value}}/prev
 
 ### Get next facet
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{qname}}/facets/{{category}}/{{value}}/next
+
+### Get current facet
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/5.0/types/{{qname}}/facets/{{category}}/{{value}}/current
 
 ### Get facet history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{qname}}/facets/{{category}}/{{value}}/history

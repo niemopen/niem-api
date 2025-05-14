@@ -11,11 +11,15 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/names
 ### Get a specific namespace from a given version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}
 
+
+
 ### Count namespaces from a given version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/count
 
 ### Count namespaces from a given version with a given category
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/count?category={{category}}
+
+
 
 ### Get previous namespace
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/prev
@@ -23,5 +27,13 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/names
 ### Get next namespace
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/next
 
+### Get current namespace
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/4.2/namespaces/{{prefix}}/current
+
 ### Get namespace history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/namespaces/{{prefix}}/history
+
+
+
+### Error checking: Get current namespace from current namespace
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/6.0/namespaces/{{prefix}}/current

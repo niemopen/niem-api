@@ -82,6 +82,9 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prope
 ### Get next property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{abstract_qname}}/next
 
+### Get current property
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/4.0/properties/{{abstract_qname}}/current
+
 ### Get property history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{abstract_qname}}/history
 

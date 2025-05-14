@@ -231,6 +231,23 @@ public class FacetController {
   }
 
   /**
+   * Get the current version of the facet with the given fields.
+   */
+  @GetMapping("/types/{qname}/facets/{category}/{value}/current")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Facet getCurrent(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname,
+      @PathVariable Category category,
+      @PathVariable String value) throws Exception {
+    Facet facet = hub.facets.findOne(stewardKey, modelKey, versionNumber,
+        qname, category, value);
+    return facet.getCurrent();
+  }
+
+  /**
    * Get the history of the facet with the given fields.
    *
    * @param includePreRelease - True to return a result from a pre-release if applicable;

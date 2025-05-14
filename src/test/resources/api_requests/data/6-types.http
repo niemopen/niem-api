@@ -63,6 +63,9 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 ### Get next type
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_class_qname}}/next
 
+### Get current type
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/3.0/types/{{class_qname}}/current
+
 ### Get type history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_class_qname}}/history
 

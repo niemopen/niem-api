@@ -165,6 +165,20 @@ public class NamespaceController {
   }
 
   /**
+   * Get the current version of the namespace with the given fields.
+   */
+  @GetMapping("/namespaces/{prefix}/current")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Namespace getNext(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String prefix) throws Exception {
+    Namespace namespace = hub.namespaces.findOne(stewardKey, modelKey, versionNumber, prefix);
+    return namespace.getCurrent();
+  }
+
+  /**
    * Get the history of the namespace with the given fields.
    *
    * @param includePreRelease - True to return a result from a pre-release if applicable;

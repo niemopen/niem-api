@@ -16,6 +16,8 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 ### Get all container types for a given property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{child_qname}}/subproperties
 
+
+
 ### Count all subproperties in a version
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/subproperties/count
 
@@ -28,11 +30,16 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 ### Count all subproperties in which a given property appears
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{child_qname}}/subproperties/count
 
+
+
 ### Get previous subproperty
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/{{child_qname}}/prev
 
 ### Get next subproperty
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/{{child_qname}}/next
+
+### Get current subproperty
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/5.0/types/{{class_qname}}/subproperties/{{child_qname}}/current
 
 ### Get subproperty history
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/{{child_qname}}/history

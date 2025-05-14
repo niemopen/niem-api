@@ -188,6 +188,20 @@ public class TypeController {
   }
 
   /**
+   * Get the current version of the type with the given fields.
+   */
+  @GetMapping("/types/{qname}/current")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Type getCurrent(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    Type type = hub.types.findOne(stewardKey, modelKey, versionNumber, qname);
+    return type.getCurrent();
+  }
+
+  /**
    * Get the history of the type with the given fields.
    *
    * @param includePreRelease - True to return a result from a pre-release if applicable;

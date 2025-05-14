@@ -190,6 +190,20 @@ public class PropertyController {
   }
 
   /**
+   * Get the current version of the property with the given fields.
+   */
+  @GetMapping("/properties/{qname}/current")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Property getCurrent(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    Property property = hub.properties.findOne(stewardKey, modelKey, versionNumber, qname);
+    return property.getCurrent();
+  }
+
+  /**
    * Get the history of the property with the given fields.
    *
    * @param includePreRelease - True to return a result from a pre-release if applicable;

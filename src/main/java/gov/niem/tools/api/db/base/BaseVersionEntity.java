@@ -1,5 +1,6 @@
 package gov.niem.tools.api.db.base;
 
+import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.model.Model;
 import gov.niem.tools.api.db.version.Version;
 
@@ -41,6 +42,40 @@ public abstract class BaseVersionEntity<T extends BaseVersionEntity<T>>
 
   @JsonIgnore
   public abstract Version getVersion();
+
+  /**
+   * True if this entity is from the current version; false otherwise.
+   */
+  @JacksonXmlProperty(localName = "EntityCurrentIndicator")
+  @JsonProperty("isCurrent")
+  public boolean isCurrent() throws EntityNotFoundException {
+    Version version = this.getVersion();
+    if (version == null) {
+      throw new EntityNotFoundException("version", "current");
+    }
+    return version.isCurrent();
+  }
+
+
+  /**
+   * Get the corresponding entity from the current version via migration rules.
+   */
+  @JsonIgnore
+  public T getCurrent() {
+    @SuppressWarnings("unchecked")
+    T entity = (T) this;
+    do {
+      if (entity.isCurrent()) {
+        return entity;
+      }
+      else {
+        entity = entity.getNext();
+        if (entity == null) {
+          throw new EntityNotFoundException("current version", this.getIdLocalLabel());
+        }
+      }
+    } while (true);
+  }
 
   /**
    * For a subset that reuses content from another model, this is the link to the

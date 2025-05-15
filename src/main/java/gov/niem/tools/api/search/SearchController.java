@@ -87,18 +87,15 @@ public class SearchController {
       @RequestParam(required = false) String[] substring,
       @RequestParam(required = false) String[] prefix,
       @RequestParam(required = false) String[] type,
-      // @RequestParam(required = false) String[] group,
       // @RequestParam(required = false) String[] steward,
       // @RequestParam(required = false) String[] model,
       @RequestParam(required = false) Boolean isAbstract,
       @RequestParam(required = false) Boolean isElement,
-      // @RequestParam(required = false) Namespace.Category[] namespaceCategory,
+      @RequestParam(required = false) Namespace.Category[] namespaceCategory,
       @RequestParam(required = false, defaultValue = "0") int page) {
 
-    String[] group = null;
     String[] steward = null;
     String[] model = null;
-    Namespace.Category[] namespaceCategory = null;
 
     SearchResult<Property> result = searchService.searchProperty(
         niemVersionNumber,
@@ -106,7 +103,6 @@ public class SearchController {
         substring,
         prefix,
         type,
-        group,
         steward,
         model,
         isAbstract,
@@ -171,20 +167,17 @@ public class SearchController {
       @RequestParam(required = false) String[] substring,
       @RequestParam(required = false) String[] prefix,
       @RequestParam(required = false) String[] type,
-      // @RequestParam(required = false) String[] group,
       // @RequestParam(required = false) String[] steward,
       // @RequestParam(required = false) String[] model,
       @RequestParam(required = false) Boolean isAbstract,
       @RequestParam(required = false) Boolean isElement,
-      // @RequestParam(required = false) Namespace.Category[] namespaceCategory,
+      @RequestParam(required = false) Namespace.Category[] namespaceCategory,
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
   ) throws Exception {
 
-    String[] group = null;
     String[] steward = null;
     String[] model = null;
-    Namespace.Category[] namespaceCategory = null;
 
     SearchResult<Property> result = searchService.searchProperty(
         niemVersionNumber,
@@ -192,7 +185,6 @@ public class SearchController {
         substring,
         prefix,
         type,
-        group,
         steward,
         model,
         isAbstract,
@@ -249,6 +241,7 @@ public class SearchController {
       @RequestParam(required = false) String[] token,
       @RequestParam(required = false) String[] substring,
       @RequestParam(required = false) String[] prefix,
+      @RequestParam(required = false) Namespace.Category[] namespaceCategory,
       @RequestParam(required = false, defaultValue = "0") int page) {
 
     SearchResult<Type> result = searchService.searchType(
@@ -256,6 +249,7 @@ public class SearchController {
         token,
         substring,
         prefix,
+        namespaceCategory,
         page,
         LIMIT);
 
@@ -303,6 +297,7 @@ public class SearchController {
       @RequestParam(required = false) String[] token,
       @RequestParam(required = false) String[] substring,
       @RequestParam(required = false) String[] prefix,
+      @RequestParam(required = false) Namespace.Category[] namespaceCategory,
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
   ) throws Exception {
@@ -312,6 +307,7 @@ public class SearchController {
         token,
         substring,
         prefix,
+        namespaceCategory,
         page,
         LIMIT);
 

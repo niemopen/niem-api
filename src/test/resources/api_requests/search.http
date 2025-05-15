@@ -25,13 +25,22 @@
 
 # Search criteria
 @criteria = token=arm
-@criteria = substring=person
+# @criteria = substring=person
 # @criteria = substring=arm
 # @criteria = substring=arm&substring=service
 # @criteria = substring=arm&substring=service&prefix=mo&prefix=usmtf
 # @criteria = substring=arm&substring=service&prefix=em
 # @criteria = substring=arm&substring=service&prefix=em&isAbstract=false
 # @criteria = substring=arm&substring=service&prefix=em&isAbstract=false&type=date
+@criteria = type=VehicleType&type=VesselType
+@criteria = type=VehicleType&type=VesselType&namespaceCategory=core
+@criteria = type=VehicleType&type=VesselType&namespaceCategory=core&namespaceCategory=domain
+# @criteria = type=VehicleType
+# @criteria = type=PersonType
+@criteria = type=PersonType&namespaceCategory=domain
+# @criteria = token=person&namespaceCategory=core&namespaceCategory=domain
+# @criteria = token=person&namespaceCategory=code
+# @criteria = prefix=ag&prefix=lrn-dev
 # @criteria = token=person&type=date
 # @criteria = isElement=false
 
@@ -40,3 +49,6 @@ GET {{baseUrl}}/search/{{scope}}?{{criteria}}
 
 ### Search next page
 GET {{baseUrl}}/search/{{scope}}?{{criteria}}&page=1
+
+###
+GET {{baseUrl}}/search/index

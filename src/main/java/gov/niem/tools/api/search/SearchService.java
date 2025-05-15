@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.search.engine.search.query.SearchResult;
@@ -81,7 +82,6 @@ public class SearchService {
       String[] substrings,
       String[] prefixes,
       String[] types,
-      String[] groups,
       String[] stewards,
       String[] models,
       Boolean isAbstract,
@@ -104,10 +104,9 @@ public class SearchService {
     printParameter("term", substrings);
     printParameter("prefix", prefixes);
     printParameter("type", types);
-    printParameter("group", groups);
     printParameter("steward", stewards);
     printParameter("model", models);
-    printParameter("nsCategory", namespaceCategories);
+    printParameter("namespaceCategory", namespaceCategories);
     printParameter("isAbstract", isAbstract);
     printParameter("isElement", isElement);
 
@@ -136,18 +135,21 @@ public class SearchService {
 
           if (prefixes != null) {
             // Search prefixes
-            and.add(f.simpleQueryString().field("namespace.prefix")
-                .matching(String.join("|", prefixes)));
+            String criteria = String.join("|", prefixes);
+            and.add(f.simpleQueryString().field("namespace.prefix").matching(criteria));
           }
 
-          // TODO: Work on types
-          if (types != null) {
+          if (types != null && types.length > 0) {
             // Search property type names
-            // and.add(f.terms().field("type.name").matchingAny(Arrays.asList(types)));
-            and.add(f.simpleQueryString().field("type.name").matching(String.join("|", types)));
+            String criteria = String.join("|", types);
+            and.add(f.simpleQueryString().field("type.name_keyword").matching(criteria));
           }
 
-          // TODO: groups
+          if (namespaceCategories != null && namespaceCategories.length > 0) {
+            // Search property namespace categories
+            String criteria = enumsAsStrings(namespaceCategories, "|");
+            and.add(f.simpleQueryString().field("namespace.category").matching(criteria));
+          }
 
           // TODO: models
           // if (models != null) {
@@ -186,7 +188,9 @@ public class SearchService {
           }
 
         }))
-        .sort(f -> f.score().then().field("name_keyword").then().field("namespace.prefix"))
+        .sort(f -> f.score()
+            .then().field("name_keyword")
+            .then().field("namespace.prefix"))
         .fetch(page * limit, limit);
 
     log.info(String.format("Search runtime: [%s]", result.took()));
@@ -202,6 +206,7 @@ public class SearchService {
       String[] tokens,
       String[] substrings,
       String[] prefixes,
+      Namespace.Category[] namespaceCategories,
       Integer page,
       Integer limit) {
 
@@ -217,6 +222,7 @@ public class SearchService {
     printParameter("token", tokens);
     printParameter("term", substrings);
     printParameter("prefix", prefixes);
+    printParameter("namespaceCategory", namespaceCategories);
 
     SearchSession searchSession = Search.session(em);
 
@@ -247,8 +253,16 @@ public class SearchService {
                 .matching(String.join("|", prefixes)));
           }
 
+          if (namespaceCategories != null && namespaceCategories.length > 0) {
+            // Search property namespace categories
+            String criteria = enumsAsStrings(namespaceCategories, "|");
+            and.add(f.simpleQueryString().field("namespace.category").matching(criteria));
+          }
+
         }))
-        .sort(f -> f.score().then().field("name_keyword").then().field("namespace.prefix"))
+        .sort(f -> f.score()
+            .then().field("name_keyword")
+            .then().field("namespace.prefix"))
         .fetch(page * limit, limit);
 
     log.info(String.format("Search runtime: [%s]", result.took()));
@@ -322,8 +336,15 @@ public class SearchService {
 
   private void printParameter(String name, Namespace.Category[] values) {
     if (values != null) {
-      printParameter(name, values.toString());
+      printParameter(name, enumsAsStrings(values, ", "));
     }
+  }
+
+  /**
+   * Converts the given enum array to a string separated by the given delimiter.
+   */
+  private String enumsAsStrings(Namespace.Category[] enums, String delimiter) {
+    return Arrays.stream(enums).map(Enum::name).collect(Collectors.joining(delimiter));
   }
 
 }

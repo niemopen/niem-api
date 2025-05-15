@@ -87,7 +87,7 @@ public class SearchTest {
   public void testPropertySearchTokens() {
     String[] tokens = {"arm"};
     SearchResult<Property> results = searchService.searchProperty("1.0", tokens, null, null,
-        null, null, null, null, null, null, null, null, null);
+        null, null, null, null, null, null, null, null);
 
     List<Property> properties = results.hits();
     assertTrue(properties.size() > 0);
@@ -121,7 +121,7 @@ public class SearchTest {
   public void testPropertySearchSubstrings() {
     String[] substrings = {"arm"};
     SearchResult<Property> results = searchService.searchProperty("1.0", null, substrings,
-        null, null, null, null, null, null, null, null, null, null);
+        null, null, null, null, null, null, null, null, null);
 
     List<Property> properties = results.hits();
     assertTrue(properties.size() > 0);

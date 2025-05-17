@@ -230,6 +230,7 @@ public class SearchService {
       String[] tokens,
       String[] substrings,
       String[] prefixes,
+      Type.Category category,
       Namespace.Category[] namespaceCategories,
       Integer page,
       Integer limit) {
@@ -246,6 +247,7 @@ public class SearchService {
     printParameter("token", tokens);
     printParameter("term", substrings);
     printParameter("prefix", prefixes);
+    printParameter("category", category.name());
     printParameter("namespaceCategory", namespaceCategories);
 
     // Set up prefix list
@@ -286,6 +288,10 @@ public class SearchService {
             // Search prefixes
             and.add(f.simpleQueryString().field("namespace.prefix")
                 .matching(String.join("|", prefixList)));
+          }
+
+          if (category != null) {
+            and.add(f.simpleQueryString().field("category").matching(category.name()));
           }
 
           if (namespaceCategories != null && namespaceCategories.length > 0) {

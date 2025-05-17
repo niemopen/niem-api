@@ -46,6 +46,11 @@
 # @criteria = token=person&type=date
 # @criteria = isElement=false
 
+
+# Type search criteria
+@scope = types
+@criteria = category=complex_object&token=name
+
 ### Search
 GET {{baseUrl}}/search/{{scope}}?{{criteria}}
 

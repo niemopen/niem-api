@@ -241,6 +241,7 @@ public class SearchController {
       @RequestParam(required = false) String[] token,
       @RequestParam(required = false) String[] substring,
       @RequestParam(required = false) String[] prefix,
+      @RequestParam(required = false) Type.Category category,
       @RequestParam(required = false) Namespace.Category[] namespaceCategory,
       @RequestParam(required = false, defaultValue = "0") int page) {
 
@@ -249,6 +250,7 @@ public class SearchController {
         token,
         substring,
         prefix,
+        category,
         namespaceCategory,
         page,
         LIMIT);
@@ -297,6 +299,7 @@ public class SearchController {
       @RequestParam(required = false) String[] token,
       @RequestParam(required = false) String[] substring,
       @RequestParam(required = false) String[] prefix,
+      @RequestParam(required = false) Type.Category category,
       @RequestParam(required = false) Namespace.Category[] namespaceCategory,
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
@@ -307,6 +310,7 @@ public class SearchController {
         token,
         substring,
         prefix,
+        category,
         namespaceCategory,
         page,
         LIMIT);

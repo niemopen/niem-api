@@ -42,6 +42,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import org.hibernate.envers.Audited;
 import org.hibernate.proxy.HibernateProxy;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 
 /**
  * A type defines a structure - an allowable set of values.
@@ -86,6 +87,7 @@ public class Type extends Component<Type> implements BaseCmfEntity<org.mitre.nie
     simple_value
   }
 
+  @GenericField
   @Enumerated(EnumType.STRING)
   private Category category;
 

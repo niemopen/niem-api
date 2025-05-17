@@ -11,7 +11,10 @@ import gov.niem.tools.api.db.type.Type;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -110,6 +113,21 @@ public class SearchService {
     printParameter("isAbstract", isAbstract);
     printParameter("isElement", isElement);
 
+    // Set up prefix list
+    List<String> prefixList = new ArrayList<>();
+
+    if (prefixes != null) {
+      Collections.addAll(prefixList, prefixes);
+    }
+
+    // Process namespace prefixes in term arrays
+    processQnames(tokens, prefixList);
+    processQnames(substrings, prefixList);
+
+    // Process namespace prefixes in type term array
+    List<String> typePrefixList = new ArrayList<>();
+    processQnames(types, typePrefixList);
+
     SearchSession searchSession = Search.session(em);
 
     SearchResult<Property> result = searchSession
@@ -133,9 +151,9 @@ public class SearchService {
                 .boost(3f).fields("definition").matching(String.join("+", substrings)));
           }
 
-          if (prefixes != null) {
+          if (!prefixList.isEmpty()) {
             // Search prefixes
-            String criteria = String.join("|", prefixes);
+            String criteria = String.join("|", prefixList);
             and.add(f.simpleQueryString().field("namespace.prefix").matching(criteria));
           }
 
@@ -144,6 +162,12 @@ public class SearchService {
             String criteria = String.join("|", types);
             and.add(f.simpleQueryString().field("type.name_keyword").matching(criteria));
           }
+
+          // if (!typePrefixList.isEmpty()) {
+          //   // Search property type prefixes
+          //   String criteria = String.join("|", typePrefixList);
+          //   and.add(f.simpleQueryString().field("type.prefix").matching(criteria));
+          // }
 
           if (namespaceCategories != null && namespaceCategories.length > 0) {
             // Search property namespace categories
@@ -224,6 +248,17 @@ public class SearchService {
     printParameter("prefix", prefixes);
     printParameter("namespaceCategory", namespaceCategories);
 
+    // Set up prefix list
+    List<String> prefixList = new ArrayList<>();
+
+    if (prefixes != null) {
+      Collections.addAll(prefixList, prefixes);
+    }
+
+    // Process namespace prefixes in term arrays
+    processQnames(tokens, prefixList);
+    processQnames(substrings, prefixList);
+
     SearchSession searchSession = Search.session(em);
 
     SearchResult<Type> result = searchSession
@@ -247,10 +282,10 @@ public class SearchService {
                 .matching(String.join("+", substrings)));
           }
 
-          if (prefixes != null) {
+          if (!prefixList.isEmpty()) {
             // Search prefixes
             and.add(f.simpleQueryString().field("namespace.prefix")
-                .matching(String.join("|", prefixes)));
+                .matching(String.join("|", prefixList)));
           }
 
           if (namespaceCategories != null && namespaceCategories.length > 0) {
@@ -345,6 +380,31 @@ public class SearchService {
    */
   private String enumsAsStrings(Namespace.Category[] enums, String delimiter) {
     return Arrays.stream(enums).map(Enum::name).collect(Collectors.joining(delimiter));
+  }
+
+  /**
+   * Updates the given arrays.  For each term in the terms array, checks to see
+   * if it is a qualified name.  If so, removes the prefix and adds it to the
+   * prefixes array if not already present.
+   */
+  private void processQnames(String[] terms, List<String> prefixes) {
+    if (terms == null) {
+      return;
+    }
+
+    for (int i = 0; i < terms.length; i++) {
+      String term = terms[i];
+      if (term.contains(":")) {
+        // Add prefix if unique
+        String prefix = term.split(":")[0];
+        if (!prefixes.contains(prefix)) {
+          prefixes.add(prefix);
+        }
+
+        // Remove the prefix from the term entry
+        terms[i] = term.split(":")[1];
+      }
+    }
   }
 
 }

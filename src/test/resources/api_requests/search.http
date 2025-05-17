@@ -26,18 +26,20 @@
 # Search criteria
 @criteria = token=arm
 # @criteria = substring=person
+# @criteria = substring=j:person&substring=hair
 # @criteria = substring=arm
 # @criteria = substring=arm&substring=service
-# @criteria = substring=arm&substring=service&prefix=mo&prefix=usmtf
+@criteria = substring=arm&substring=service&prefix=mo&prefix=usmtf
 # @criteria = substring=arm&substring=service&prefix=em
 # @criteria = substring=arm&substring=service&prefix=em&isAbstract=false
 # @criteria = substring=arm&substring=service&prefix=em&isAbstract=false&type=date
-@criteria = type=VehicleType&type=VesselType
-@criteria = type=VehicleType&type=VesselType&namespaceCategory=core
-@criteria = type=VehicleType&type=VesselType&namespaceCategory=core&namespaceCategory=domain
+# @criteria = type=VehicleType&type=VesselType
+# @criteria = type=VehicleType&type=VesselType&namespaceCategory=core
+# @criteria = type=VehicleType&type=VesselType&namespaceCategory=core&namespaceCategory=domain
 # @criteria = type=VehicleType
 # @criteria = type=PersonType
-@criteria = type=PersonType&namespaceCategory=domain
+# @criteria = type=PersonType&namespaceCategory=domain
+# @criteria = type=nc:PersonType&namespaceCategory=domain
 # @criteria = token=person&namespaceCategory=core&namespaceCategory=domain
 # @criteria = token=person&namespaceCategory=code
 # @criteria = prefix=ag&prefix=lrn-dev

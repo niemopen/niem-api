@@ -10,7 +10,7 @@ plugins {
 
 group = 'gov.niem.tools'
 version = '2.0'
-project.ext.draft = '2.0-alpha07:SNAPSHOT'
+project.ext.draft = '2.0-alpha08:SNAPSHOT'
 
 java {
   sourceCompatibility = JavaVersion.VERSION_17

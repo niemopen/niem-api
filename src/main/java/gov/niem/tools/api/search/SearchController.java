@@ -92,6 +92,7 @@ public class SearchController {
       @RequestParam(required = false) Boolean isAbstract,
       @RequestParam(required = false) Boolean isElement,
       @RequestParam(required = false) Namespace.Category[] namespaceCategory,
+      @RequestParam(required = false) SearchService.SortOrder sortOrder,
       @RequestParam(required = false, defaultValue = "0") int page) {
 
     String[] steward = null;
@@ -108,6 +109,7 @@ public class SearchController {
         isAbstract,
         isElement,
         namespaceCategory,
+        sortOrder,
         page,
         LIMIT
     );
@@ -172,6 +174,7 @@ public class SearchController {
       @RequestParam(required = false) Boolean isAbstract,
       @RequestParam(required = false) Boolean isElement,
       @RequestParam(required = false) Namespace.Category[] namespaceCategory,
+      @RequestParam(required = false) SearchService.SortOrder sortOrder,
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
   ) throws Exception {
@@ -190,6 +193,7 @@ public class SearchController {
         isAbstract,
         isElement,
         namespaceCategory,
+        sortOrder,
         page,
         LIMIT
     );
@@ -243,6 +247,7 @@ public class SearchController {
       @RequestParam(required = false) String[] prefix,
       @RequestParam(required = false) Type.Category category,
       @RequestParam(required = false) Namespace.Category[] namespaceCategory,
+      @RequestParam(required = false) SearchService.SortOrder sortOrder,
       @RequestParam(required = false, defaultValue = "0") int page) {
 
     SearchResult<Type> result = searchService.searchType(
@@ -252,6 +257,7 @@ public class SearchController {
         prefix,
         category,
         namespaceCategory,
+        sortOrder,
         page,
         LIMIT);
 
@@ -301,6 +307,7 @@ public class SearchController {
       @RequestParam(required = false) String[] prefix,
       @RequestParam(required = false) Type.Category category,
       @RequestParam(required = false) Namespace.Category[] namespaceCategory,
+      @RequestParam(required = false) SearchService.SortOrder sortOrder,
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
   ) throws Exception {
@@ -312,6 +319,7 @@ public class SearchController {
         prefix,
         category,
         namespaceCategory,
+        sortOrder,
         page,
         LIMIT);
 

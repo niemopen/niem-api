@@ -25,11 +25,11 @@
 
 # Search criteria
 @criteria = token=arm
-# @criteria = substring=person
+@criteria = substring=person
 # @criteria = substring=j:person&substring=hair
 # @criteria = substring=arm
 # @criteria = substring=arm&substring=service
-@criteria = substring=arm&substring=service&prefix=mo&prefix=usmtf
+# @criteria = substring=arm&substring=service&prefix=mo&prefix=usmtf
 # @criteria = substring=arm&substring=service&prefix=em
 # @criteria = substring=arm&substring=service&prefix=em&isAbstract=false
 # @criteria = substring=arm&substring=service&prefix=em&isAbstract=false&type=date
@@ -48,14 +48,23 @@
 
 
 # Type search criteria
-@scope = types
-@criteria = category=complex_object&token=name
+# @scope = types
+# @criteria = category=complex_object&token=name
 
 ### Search
-GET {{baseUrl}}/search/{{scope}}?{{criteria}}
+GET {{baseUrl}}/search/{{scope}}?{{criteria}}&sortOrder=qname
 
 ### Search next page
 GET {{baseUrl}}/search/{{scope}}?{{criteria}}&page=1
+
+### Set search order
+@sortOrder = name
+# @sortOrder = qname
+# @sortOrder = rank_name
+# @sortOrder = rank_qname
+# @sortOrder = score_qname
+# @sortOrder = score_name
+GET {{baseUrl}}/search/{{scope}}?{{criteria}}&sortOrder={{sortOrder}}
 
 ###
 GET {{baseUrl}}/search/index

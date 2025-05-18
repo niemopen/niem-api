@@ -19,8 +19,10 @@ import java.util.stream.Collectors;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.search.engine.search.query.SearchResult;
+import org.hibernate.search.engine.search.sort.SearchSort;
 import org.hibernate.search.mapper.orm.Search;
 import org.hibernate.search.mapper.orm.massindexing.MassIndexer;
+import org.hibernate.search.mapper.orm.scope.SearchScope;
 import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.hibernate.search.mapper.pojo.massindexing.MassIndexingMonitor;
 import org.hibernate.search.mapper.pojo.massindexing.impl.PojoMassIndexingLoggingMonitor;
@@ -76,6 +78,39 @@ public class SearchService {
     log.info("Indexer completed");
   }
 
+  public enum SortOrder {
+
+    /**
+     * Sort by weighted score, then name, then prefix.
+     */
+    score_name,
+
+    /**
+     * Sort by weighted score, then qname.
+     */
+    score_qname,
+
+    /**
+     * Sort by namespace rank (Core first, then domains, etc.), then qname.
+     */
+    rank_qname,
+
+    /**
+     * Sort by namespace rank (Core first, then domains, etc.), then name, then prefix.
+     */
+    rank_name,
+
+    /**
+     * Sort by name, then prefix.
+     */
+    name,
+
+    /**
+     * Sort by qname.
+     */
+    qname
+  }
+
   /**
    * Search properties in the database.
    */
@@ -90,6 +125,7 @@ public class SearchService {
       Boolean isAbstract,
       Boolean isElement,
       Namespace.Category[] namespaceCategories,
+      SortOrder sortOrder,
       Integer page,
       Integer limit
   ) {
@@ -212,9 +248,7 @@ public class SearchService {
           }
 
         }))
-        .sort(f -> f.score()
-            .then().field("name_keyword")
-            .then().field("namespace.prefix"))
+        .sort(this.getPropertySort(searchSession.scope(Property.class), sortOrder))
         .fetch(page * limit, limit);
 
     log.info(String.format("Search runtime: [%s]", result.took()));
@@ -232,6 +266,7 @@ public class SearchService {
       String[] prefixes,
       Type.Category category,
       Namespace.Category[] namespaceCategories,
+      SortOrder sortOrder,
       Integer page,
       Integer limit) {
 
@@ -301,14 +336,109 @@ public class SearchService {
           }
 
         }))
-        .sort(f -> f.score()
-            .then().field("name_keyword")
-            .then().field("namespace.prefix"))
+        .sort(this.getTypeSort(searchSession.scope(Type.class), sortOrder))
         .fetch(page * limit, limit);
 
     log.info(String.format("Search runtime: [%s]", result.took()));
 
     return result;
+  }
+
+  /**
+   * Set the sort order based on the given criteria.
+   */
+  private SearchSort getPropertySort(SearchScope<Property> scope, SortOrder order) {
+
+    if (order == null) {
+      // Default sort
+      return scope.sort()
+          .field("namespace.prefix").then()
+          .field("name_keyword").toSort();
+    }
+
+    switch (order) {
+      case name:
+        return scope.sort()
+            .field("name_keyword").then()
+            .field("namespace.prefix").toSort();
+      case qname:
+        return scope.sort()
+            .field("namespace.prefix").then()
+            .field("name_keyword").toSort();
+      case rank_name:
+        return scope.sort()
+            .field("namespace.rank").then()
+            .field("name_keyword").then()
+            .field("namespace.prefix").toSort();
+      case rank_qname:
+        return scope.sort()
+            .field("namespace.rank").then()
+            .field("namespace.prefix").then()
+            .field("name_keyword").toSort();
+      case score_name:
+        return scope.sort()
+            .score().then()
+            .field("name_keyword").then()
+            .field("namespace.prefix").toSort();
+      case score_qname:
+        return scope.sort()
+            .score().then()
+            .field("namespace.prefix").then()
+            .field("name_keyword").toSort();
+    }
+
+    // Default sort
+    return scope.sort().field("namespace.prefix").then().field("name_keyword").toSort();
+  }
+
+  /**
+   * Set the sort order based on the given criteria.
+   *
+   * @todo Refactor property and type sort methods into a single method. Was throwing
+   * an error using SearchScope<Component> so temporarily created custom methods for each.
+   */
+  private SearchSort getTypeSort(SearchScope<Type> scope, SortOrder order) {
+
+    if (order == null) {
+      // Default sort
+      return scope.sort()
+          .field("namespace.prefix").then()
+          .field("name_keyword").toSort();
+    }
+
+    switch (order) {
+      case name:
+        return scope.sort()
+            .field("name_keyword").then()
+            .field("namespace.prefix").toSort();
+      case qname:
+        return scope.sort()
+            .field("namespace.prefix").then()
+            .field("name_keyword").toSort();
+      case rank_name:
+        return scope.sort()
+            .field("namespace.rank").then()
+            .field("name_keyword").then()
+            .field("namespace.prefix").toSort();
+      case rank_qname:
+        return scope.sort()
+            .field("namespace.rank").then()
+            .field("namespace.prefix").then()
+            .field("name_keyword").toSort();
+      case score_name:
+        return scope.sort()
+            .score().then()
+            .field("name_keyword").then()
+            .field("namespace.prefix").toSort();
+      case score_qname:
+        return scope.sort()
+            .score().then()
+            .field("namespace.prefix").then()
+            .field("name_keyword").toSort();
+    }
+
+    // Default sort
+    return scope.sort().field("namespace.prefix").then().field("name_keyword").toSort();
   }
 
   /**

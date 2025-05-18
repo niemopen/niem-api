@@ -44,10 +44,13 @@ import org.hibernate.envers.Audited;
 import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.search.engine.backend.types.Sortable;
 import org.hibernate.search.mapper.pojo.automaticindexing.ReindexOnUpdate;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexingDependency;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.ObjectPath;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyValue;
 
 /**
  * A collection of properties and types managed by an authoritative source.
@@ -160,6 +163,10 @@ public class Namespace extends BaseVersionEntity<Namespace>
    * A ranking used to support sorting namespaces by category, with
    * Core and Core Supplements sorting first, followed by domains, etc.
    */
+  @IndexingDependency(derivedFrom = {
+    @ObjectPath(@PropertyValue(propertyName = "category"))
+  })
+  @GenericField(sortable = Sortable.YES)
   public int getRank() {
     switch (this.category) {
       case core:

@@ -1,5 +1,6 @@
 package gov.niem.tools.api.db.component;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,10 @@ public interface ComponentRepository<T extends Component<T>> extends JpaReposito
   Page<T> findAllByNamespace_Version_Id(Long versionId, Pageable pageable);
 
   Page<T> findAllByNamespace_Id(Long namespaceId, Pageable pageable);
+
+  List<T> findTop10ByNamespace_IdAndNameLikeIgnoreCase(Long namespaceId, String name);
+
+  List<T> findTop10ByNamespace_Version_IdAndNameLikeIgnoreCase(Long versionId, String name);
 
   long countByNamespace_Id(long namespaceId);
 

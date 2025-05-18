@@ -104,3 +104,14 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prope
 
 ### Error checking: Get property substitutions for property without substitutions
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/nc:personNameInitialIndicator/substitutions
+
+
+
+### Get top properties with keyword (not qualified)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/keyword/hair
+
+### Get top properties with keyword (qualified with prefix)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/keyword/j:personHair
+
+### Get top properties with keyword (qualified with empty string)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/keyword/:PersonHairLength

@@ -10,6 +10,8 @@ import gov.niem.tools.api.db.version.Version;
 import gov.niem.tools.api.db.version.VersionService;
 
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.hibernate.Hibernate;
 import org.hibernate.proxy.HibernateProxy;
@@ -193,6 +195,52 @@ public abstract class ComponentService<T extends Component<T>, U extends Compone
       String prefix, Pageable pageable) throws Exception {
     Namespace namespace = namespaceService.findOne(stewardKey, modelKey, versionKey, prefix);
     return repo.findAllByNamespace_Id(namespace.getId(), pageable);
+  }
+
+  /**
+   * Find a list of the top components matching the keyword in the version with the given fields.
+   *
+   * <p>Note that the keyword may be qualified with a namespace prefix.
+   *
+   * <p>Additional, a qualified keyword or a keyword with a leading ':' (but no prefix)
+   * will be treated as name-starts-wth vs leading and trailing wildcards.
+   */
+  public List<T> findByKeyword(String stewardKey, String modelKey, String versionKey,
+      String keyword) throws Exception {
+
+    if (keyword.contains(" ")) {
+      // Spaces in a keyword are not supported
+      return new ArrayList<>();
+    }
+
+    Version version = versionService.findOne(stewardKey, modelKey, versionKey);
+
+    String prefix = "";
+    String nameKeyword = "";
+
+    if (keyword.contains(":")) {
+      // Split the keyword into prefix and name
+      prefix = keyword.split(":")[0];
+      nameKeyword = keyword.split(":")[1] + "%";
+    }
+    else {
+      nameKeyword = "%" + keyword + "%";
+    }
+
+    if (prefix.length() > 0) {
+      // Component keyword search within the given namespace
+      Namespace namespace = namespaceService.findOne(version, prefix);
+      if (namespace == null) {
+        throw new EntityNotFoundException("namespace", prefix);
+      }
+      return repo.findTop10ByNamespace_IdAndNameLikeIgnoreCase(namespace.getId(), nameKeyword);
+    }
+    else {
+      // Component keyword search within the given version
+      return repo.findTop10ByNamespace_Version_IdAndNameLikeIgnoreCase(version.getId(),
+        nameKeyword);
+    }
+
   }
 
   /**

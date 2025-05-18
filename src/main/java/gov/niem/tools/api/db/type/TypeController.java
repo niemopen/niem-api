@@ -100,6 +100,24 @@ public class TypeController {
   }
 
   /**
+   * Gets a list of the top 10 types with the keyword from the version with the given fields.
+   *
+   * @param keyword - A keyword in a type name.  May be qualified with a namespace prefix
+   *      or with an empty string to treat the keyword as a starts-with search vs leading and
+   *      trailing wildcards.  Note that spaces in the keyword are not supported.
+   */
+  @GetMapping("/types/keyword/{keyword}")
+  @ResponseStatus(code = HttpStatus.OK)
+  @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
+  public List<Type> getKeywordTypes(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String keyword) throws Exception {
+    return hub.types.findByKeyword(stewardKey, modelKey, versionNumber, keyword);
+  }
+
+  /**
    * Gets all types in CMF from a namespace.
    */
   @GetMapping("/namespaces.cmf/{prefix}/types")

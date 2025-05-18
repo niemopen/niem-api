@@ -122,7 +122,7 @@ public class PropertyController {
   /**
    * Gets all properties from a namespace with the given fields in CMF.
    */
-  @GetMapping("/namespaces.cmf/{prefix}/properties")
+  @GetMapping("/namespaces/{prefix}/properties/formats/cmf")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getNamespacePropertiesCmf(

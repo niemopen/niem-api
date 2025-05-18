@@ -157,7 +157,7 @@ public class SearchController {
    *
    * @param page Page number of results to return.  Defaults to 0.
    */
-  @GetMapping("/search.cmf/properties")
+  @GetMapping("/search/properties/formats/cmf")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "204", description = "No Content", content = @Content)
   @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
@@ -294,7 +294,7 @@ public class SearchController {
    *
    * @param page Page number of results to return.  Defaults to 0.
    */
-  @GetMapping("/search.cmf/types")
+  @GetMapping("/search/types/formats/cmf")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "204", description = "No Content", content = @Content)
   @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)

@@ -48,25 +48,6 @@ public class FacetController {
   }
 
   /**
-   * Gets a facet in CMF with the given criteria.
-   */
-  @GetMapping("/types.cmf/{qname}/facets/{category}/{value}")
-  public Object getFacetCmf(
-      @PathVariable String stewardKey,
-      @PathVariable String modelKey,
-      @PathVariable String versionNumber,
-      @PathVariable String qname,
-      @PathVariable Category category,
-      @PathVariable String value,
-      @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
-      throws Exception {
-    Facet facet = hub.facets.findOne(stewardKey, modelKey, versionNumber, qname, category, value);
-    org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
-    facet.addToCmfModel(cmfModel);
-    return CmfUtils.generateString(cmfModel, mediaType);
-  }
-
-  /**
    * Gets all facets from the version with the given criteria.
    */
   @GetMapping("/facets")
@@ -121,7 +102,7 @@ public class FacetController {
   /**
    * Gets all facets in CMF from the type with the given criteria.
    */
-  @GetMapping("/types.cmf/{qname}/facets")
+  @GetMapping("/types/{qname}/facets/formats/cmf")
   public Object getTypeFacetsCmf(
       @PathVariable String stewardKey,
       @PathVariable String modelKey,

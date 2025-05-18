@@ -120,7 +120,7 @@ public class TypeController {
   /**
    * Gets all types in CMF from a namespace.
    */
-  @GetMapping("/namespaces.cmf/{prefix}/types")
+  @GetMapping("/namespaces/{prefix}/types/formats/cmf")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getNamespaceTypesCmf(

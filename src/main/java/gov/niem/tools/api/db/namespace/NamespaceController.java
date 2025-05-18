@@ -54,8 +54,6 @@ public class NamespaceController {
 
   /**
    * Get a namespace in CMF with the given fields.
-   *
-   * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces.cmf/nc
    */
   @Hidden
   @GetMapping("/namespaces/{prefix}/formats/cmf")
@@ -92,10 +90,8 @@ public class NamespaceController {
 
   /**
    * Get all namespaces as CMF from a version of a model.
-   *
-   * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces.cmf
    */
-  @GetMapping("/namespaces.cmf")
+  @GetMapping("/namespaces/formats/cmf")
   @ResponseStatus(code = HttpStatus.OK)
   @ApiResponse(responseCode = "422", description = "Unprocessable Entity", content = @Content)
   public Object getVersionNamespacesCmf(

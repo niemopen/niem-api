@@ -47,7 +47,7 @@ public class SubpropertyController {
    * Gets a subproperty from the database with the type with the given type fields and
    * the property with the given qualified name, converted to CMF.
    */
-  @GetMapping("/types.cmf/{typeQname}/subproperties/{propertyQname}")
+  @GetMapping("/types/{typeQname}/subproperties/{propertyQname}/formats/cmf")
   public Object getSubpropertyCmf(
       @PathVariable String stewardKey,
       @PathVariable String modelKey,
@@ -89,7 +89,7 @@ public class SubpropertyController {
   /**
    * Gets all subproperties from the database in the type with the given fields, in CMF.
    */
-  @GetMapping("/types.cmf/{typeQname}/subproperties")
+  @GetMapping("/types/{typeQname}/subproperties/formats/cmf")
   public Object getTypeSubpropertiesCmf(
       @PathVariable String stewardKey,
       @PathVariable String modelKey,

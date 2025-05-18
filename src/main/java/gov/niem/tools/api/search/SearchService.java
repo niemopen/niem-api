@@ -78,6 +78,9 @@ public class SearchService {
     log.info("Indexer completed");
   }
 
+  /**
+   * Defines options for sorting search results.
+   */
   public enum SortOrder {
 
     /**
@@ -282,8 +285,11 @@ public class SearchService {
     printParameter("token", tokens);
     printParameter("term", substrings);
     printParameter("prefix", prefixes);
-    printParameter("category", category.name());
     printParameter("namespaceCategory", namespaceCategories);
+
+    if (category != null) {
+      printParameter("category", category.name());
+    }
 
     // Set up prefix list
     List<String> prefixList = new ArrayList<>();
@@ -385,17 +391,19 @@ public class SearchService {
             .score().then()
             .field("namespace.prefix").then()
             .field("name_keyword").toSort();
+      default:
+        return scope.sort()
+            .field("namespace.prefix").then()
+            .field("name_keyword").toSort();
     }
-
-    // Default sort
-    return scope.sort().field("namespace.prefix").then().field("name_keyword").toSort();
   }
 
   /**
    * Set the sort order based on the given criteria.
    *
    * @todo Refactor property and type sort methods into a single method. Was throwing
-   * an error using SearchScope<Component> so temporarily created custom methods for each.
+   *      an error using SearchScope for a Component so temporarily created custom methods
+   *      for each.
    */
   private SearchSort getTypeSort(SearchScope<Type> scope, SortOrder order) {
 
@@ -435,10 +443,12 @@ public class SearchService {
             .score().then()
             .field("namespace.prefix").then()
             .field("name_keyword").toSort();
+      default:
+        return scope.sort()
+            .field("namespace.prefix").then()
+            .field("name_keyword").toSort();
     }
 
-    // Default sort
-    return scope.sort().field("namespace.prefix").then().field("name_keyword").toSort();
   }
 
   /**

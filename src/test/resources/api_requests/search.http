@@ -50,6 +50,7 @@
 # Type search criteria
 # @scope = types
 # @criteria = category=complex_object&token=name
+# @criteria = substring=person&substring=arm
 
 ### Search
 GET {{baseUrl}}/search/{{scope}}?{{criteria}}&sortOrder=qname

@@ -91,10 +91,11 @@ public abstract class Component<T extends BaseNamespaceEntity<T>>
    */
   @JacksonXmlProperty(localName = "ComponentName")
   @Schema(example = "PersonGivenName")
-  // @FullTextField(analyzer = "camel", searchAnalyzer = "freeText")
-  @FullTextField(analyzer = "camel")
-  @FullTextField(name = "name_substring", analyzer = "substring")
-  @KeywordField(name = "name_keyword", sortable = Sortable.YES, projectable = Projectable.YES)
+  @FullTextField(name = "name_tokens", analyzer = "camel")
+  @FullTextField(name = "name_substring",  analyzer = "nGram")
+  // @KeywordField(name = "name_substring", normalizer = "case")
+  @KeywordField(name = "name_sort", normalizer = "case",
+      sortable = Sortable.YES, projectable = Projectable.YES)
   protected String name;
 
   /**

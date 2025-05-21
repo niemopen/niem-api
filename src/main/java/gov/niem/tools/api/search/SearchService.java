@@ -171,7 +171,7 @@ public class SearchService {
 
     SearchResult<Property> result = searchSession
         .search(Property.class)
-        // .select(f -> f.field("name_keyword", String.class))
+        // .select(f -> f.field("name_string", String.class))
         .where(f -> f.and().with(and -> {
 
           // Base NIEM version number
@@ -180,26 +180,30 @@ public class SearchService {
 
           if (tokens != null) {
             // Search tokens across name, definition, and keywords fields
-            and.add(f.terms().fields("name", "keywords")
-                .boost(3f).fields("definition").matchingAll(Arrays.asList(tokens)));
+            List<String> criteria = processTokens(tokens);
+            and.add(f.terms().fields("name_tokens", "keywords")
+                .boost(3f).fields("definition").matchingAll(criteria));
           }
 
           if (substrings != null) {
             // Search terms across name, definition, and keywords fields
+            String criteria = String.join("+", substrings).toLowerCase();
             and.add(f.simpleQueryString().fields("name_substring", "keywords")
-                .boost(3f).fields("definition").matching(String.join("+", substrings)));
+                .boost(3f).fields("definition").matching(criteria));
           }
 
           if (!prefixList.isEmpty()) {
             // Search prefixes
-            String criteria = String.join("|", prefixList);
+            String criteria = String.join("|", prefixList).toLowerCase();
             and.add(f.simpleQueryString().field("namespace.prefix").matching(criteria));
           }
 
           if (types != null && types.length > 0) {
             // Search property type names
-            String criteria = String.join("|", types);
-            and.add(f.simpleQueryString().field("type.name_keyword").matching(criteria));
+            List<String> criteria = processTokens(types);
+            and.add(f.terms().field("type.name_substring").matchingAll(criteria));
+            // String criteria = String.join("+", types).toLowerCase();
+            // and.add(f.simpleQueryString().field("type.name_substring").matching(criteria));
           }
 
           // if (!typePrefixList.isEmpty()) {
@@ -306,7 +310,6 @@ public class SearchService {
 
     SearchResult<Type> result = searchSession
         .search(Type.class)
-        // .select(f -> f.field("name_keyword", String.class))
         .where(f -> f.and().with(and -> {
 
           // Base NIEM version number
@@ -315,14 +318,16 @@ public class SearchService {
 
           if (tokens != null) {
             // Search tokens across name, definition, and keywords fields
-            and.add(f.terms().fields("name")
-                .boost(3f).fields("definition").matchingAll(Arrays.asList(tokens)));
+            List<String> criteria = processTokens(tokens);
+            and.add(f.terms().fields("name_tokens")
+                .boost(3f).fields("definition").matchingAll(criteria));
           }
 
           if (substrings != null) {
             // Search terms across name, definition, and keywords fields
-            and.add(f.simpleQueryString().fields("name_substring").boost(3f).fields("definition")
-                .matching(String.join("+", substrings)));
+            String criteria = String.join("+", substrings).toLowerCase();
+            and.add(f.simpleQueryString().field("name_substring").boost(3f).fields("definition")
+                .matching(criteria));
           }
 
           if (!prefixList.isEmpty()) {
@@ -359,42 +364,42 @@ public class SearchService {
       // Default sort
       return scope.sort()
           .field("namespace.prefix").then()
-          .field("name_keyword").toSort();
+          .field("name_sort").toSort();
     }
 
     switch (order) {
       case name:
         return scope.sort()
-            .field("name_keyword").then()
+            .field("name_sort").then()
             .field("namespace.prefix").toSort();
       case qname:
         return scope.sort()
             .field("namespace.prefix").then()
-            .field("name_keyword").toSort();
+            .field("name_sort").toSort();
       case rank_name:
         return scope.sort()
             .field("namespace.rank").then()
-            .field("name_keyword").then()
+            .field("name_sort").then()
             .field("namespace.prefix").toSort();
       case rank_qname:
         return scope.sort()
             .field("namespace.rank").then()
             .field("namespace.prefix").then()
-            .field("name_keyword").toSort();
+            .field("name_sort").toSort();
       case score_name:
         return scope.sort()
             .score().then()
-            .field("name_keyword").then()
+            .field("name_sort").then()
             .field("namespace.prefix").toSort();
       case score_qname:
         return scope.sort()
             .score().then()
             .field("namespace.prefix").then()
-            .field("name_keyword").toSort();
+            .field("name_sort").toSort();
       default:
         return scope.sort()
             .field("namespace.prefix").then()
-            .field("name_keyword").toSort();
+            .field("name_sort").toSort();
     }
   }
 
@@ -411,42 +416,42 @@ public class SearchService {
       // Default sort
       return scope.sort()
           .field("namespace.prefix").then()
-          .field("name_keyword").toSort();
+          .field("name_sort").toSort();
     }
 
     switch (order) {
       case name:
         return scope.sort()
-            .field("name_keyword").then()
+            .field("name_sort").then()
             .field("namespace.prefix").toSort();
       case qname:
         return scope.sort()
             .field("namespace.prefix").then()
-            .field("name_keyword").toSort();
+            .field("name_sort").toSort();
       case rank_name:
         return scope.sort()
             .field("namespace.rank").then()
-            .field("name_keyword").then()
+            .field("name_sort").then()
             .field("namespace.prefix").toSort();
       case rank_qname:
         return scope.sort()
             .field("namespace.rank").then()
             .field("namespace.prefix").then()
-            .field("name_keyword").toSort();
+            .field("name_sort").toSort();
       case score_name:
         return scope.sort()
             .score().then()
-            .field("name_keyword").then()
+            .field("name_sort").then()
             .field("namespace.prefix").toSort();
       case score_qname:
         return scope.sort()
             .score().then()
             .field("namespace.prefix").then()
-            .field("name_keyword").toSort();
+            .field("name_sort").toSort();
       default:
         return scope.sort()
             .field("namespace.prefix").then()
-            .field("name_keyword").toSort();
+            .field("name_sort").toSort();
     }
 
   }
@@ -551,6 +556,16 @@ public class SearchService {
         terms[i] = term.split(":")[1];
       }
     }
+  }
+
+  /**
+   * Splits a token array on camel casing.
+   */
+  private List<String> processTokens(String[] tokens) {
+    String text = String.join(" ", tokens);
+    text = text.replaceAll("(?<=[a-z])(?=[A-Z])", " ");
+    System.out.println("SPLIT TOKENS " + text);
+    return Arrays.asList(text.toLowerCase().split(" "));
   }
 
 }

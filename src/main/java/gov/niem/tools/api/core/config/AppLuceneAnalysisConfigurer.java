@@ -26,7 +26,7 @@ public class AppLuceneAnalysisConfigurer implements LuceneAnalysisConfigurer {
         .tokenFilter(SnowballPorterFilterFactory.class)
         .tokenFilter(ASCIIFoldingFilterFactory.class);
 
-    context.analyzer("substring").custom()
+    context.analyzer("nGram").custom()
         .tokenizer(StandardTokenizerFactory.class)
         .charFilter(HTMLStripCharFilterFactory.class)
         .tokenFilter(LowerCaseFilterFactory.class)
@@ -37,6 +37,11 @@ public class AppLuceneAnalysisConfigurer implements LuceneAnalysisConfigurer {
         .tokenFilter(NGramFilterFactory.class)
           .param("minGramSize", "3")
           .param("maxGramSize", "10");
+
+    context.normalizer("case").custom()
+        .charFilter(HTMLStripCharFilterFactory.class)
+        .tokenFilter(LowerCaseFilterFactory.class)
+        .tokenFilter(ASCIIFoldingFilterFactory.class);
 
   }
 

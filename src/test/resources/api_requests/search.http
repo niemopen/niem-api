@@ -25,15 +25,29 @@
 
 # Search criteria
 @criteria = token=arm
-@criteria = substring=person
+@criteria = token=arm,code
+@criteria = token=PersonGivenName
+# @criteria = token=quantity
+# @criteria = substring=arm
+# @criteria = substring=arm,code
+# @criteria = substring=arm,indicator
 # @criteria = substring=j:person&substring=hair
+# @criteria = token=j:person,hair
+# @criteria = type=hair&type=color
 # @criteria = substring=arm
 # @criteria = substring=arm&substring=service
 # @criteria = substring=arm&substring=service&prefix=mo&prefix=usmtf
 # @criteria = substring=arm&substring=service&prefix=em
 # @criteria = substring=arm&substring=service&prefix=em&isAbstract=false
 # @criteria = substring=arm&substring=service&prefix=em&isAbstract=false&type=date
-# @criteria = type=VehicleType&type=VesselType
+# @criteria = type=vehicle
+# @criteria = type=eye,color
+# @criteria = type=bail,bond,type
+# @criteria = type=name
+# @criteria = type=location,type
+# @criteria = type=LocationType
+# @criteria = niemVersionNumber=6.0&type=VehicleType,VesselType
+# @criteria = niemVersionNumber=6.0&type=person
 # @criteria = type=VehicleType&type=VesselType&namespaceCategory=core
 # @criteria = type=VehicleType&type=VesselType&namespaceCategory=core&namespaceCategory=domain
 # @criteria = type=VehicleType

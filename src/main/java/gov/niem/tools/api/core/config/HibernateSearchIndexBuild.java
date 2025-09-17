@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.NonNull;
 
 /**
  * Builds a database index for Hibernate searches on an application event.
@@ -24,7 +23,7 @@ public class HibernateSearchIndexBuild implements ApplicationListener<Applicatio
    */
   @Override
   @Transactional
-  public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {
+  public void onApplicationEvent(ApplicationReadyEvent event) {
     // searchService.runIndexer();
   }
 

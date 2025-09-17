@@ -3,18 +3,16 @@ package gov.niem.tools.api.core.config;
 import gov.niem.tools.api.core.security.SpringSecurityAuditorAware;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.datatype.hibernate6.Hibernate6Module;
+import com.fasterxml.jackson.datatype.hibernate7.Hibernate7Module;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
-import org.springframework.lang.NonNull;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -124,44 +122,37 @@ public class Config {
   @Bean
   public ObjectMapper objectMapper() {
     ObjectMapper mapper = new ObjectMapper();
-    mapper.registerModule(new Hibernate6Module());
+    mapper.registerModule(new Hibernate7Module());
     return mapper;
   }
 
-  /**
-   * Handles the conversion of HTTP request and response bodies to and from JSON.
-   */
-  @Bean
-  public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-    return new MappingJackson2HttpMessageConverter(new Jackson2ObjectMapperBuilder()
-        // .modulesToInstall(new JaxbAnnotationModule())
-        .build());
-  }
-
-  /**
-   * Handles the conversion of HTTP request and response bodies to and from XML.
-   */
-  @Bean
-  public MappingJackson2XmlHttpMessageConverter mappingJackson2XmlHttpMessageConverter() {
-    return new MappingJackson2XmlHttpMessageConverter(new Jackson2ObjectMapperBuilder()
-        .indentOutput(true)
-        .defaultUseWrapper(false)
-        // .serializationInclusion(JsonInclude.Include.NON_EMPTY)
-        // .modulesToInstall(new JaxbAnnotationModule())
-        .createXmlMapper(true)
-        .build());
-  }
+  // /**
+  //  * Handles the conversion of HTTP request and response bodies to and from XML.
+  //  */
+  // @Bean
+  // public MappingJackson2XmlHttpMessageConverter mappingJackson2XmlHttpMessageConverter() {
+  //   return new MappingJackson2XmlHttpMessageConverter(new Jackson2ObjectMapperBuilder()
+  //       .indentOutput(true)
+  //       .defaultUseWrapper(false)
+  //       // .serializationInclusion(JsonInclude.Include.NON_EMPTY)
+  //       // .modulesToInstall(new JaxbAnnotationModule())
+  //       .createXmlMapper(true)
+  //       .build());
+  // }
 
   /**
    * Maps XML to and from objects.
    */
   @Bean(name = "customXmlMapper")
   public XmlMapper customXmlMapper() {
-    return new Jackson2ObjectMapperBuilder()
-        .indentOutput(true)
-        .createXmlMapper(true)
-        // .propertyNamingStrategy(PropertyNamingStrategy.UPPER_CAMEL_CASE)
-        .build();
+    XmlMapper xmlMapper = new XmlMapper();
+    xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+    return xmlMapper;
+    // return new Jackson2ObjectMapperBuilder()
+    //     .indentOutput(true)
+    //     .createXmlMapper(true)
+    //     // .propertyNamingStrategy(PropertyNamingStrategy.UPPER_CAMEL_CASE)
+    //     .build();
   }
 
 }

@@ -70,7 +70,7 @@
 GET {{baseUrl}}/search/{{scope}}?{{criteria}}&sortOrder=qname
 
 ### Search next page
-GET {{baseUrl}}/search/{{scope}}?{{criteria}}&page=1
+GET {{baseUrl}}/search/{{scope}}?{{criteria}}&sortOrder=qname&page=1
 
 ### Set search order
 @sortOrder = name

@@ -68,11 +68,13 @@ public class SearchService {
         .threadsToLoadObjects(6)
         .monitor(monitor);
 
+    indexer.purgeAllOnStart(true);
+
     try {
       indexer.startAndWait();
     }
     catch (InterruptedException exception) {
-      log.warn("Failed to load data from database");
+      log.warn("Failed to create indexes to support search operations");
       Thread.currentThread().interrupt();
     }
     log.info("Indexer completed");

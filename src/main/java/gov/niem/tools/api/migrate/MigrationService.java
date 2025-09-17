@@ -32,7 +32,7 @@ import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -323,7 +323,7 @@ public class MigrationService {
     // Convert the type to an augmentation type if applicable from the CMF
     if (!oldHasProperty.augmentingNS().isEmpty()) {
       oldPrefix = oldHasProperty.augmentingNS().iterator().next().getNamespacePrefix();
-      oldTypeQname = oldPrefix + ":" + StringUtils.removeEnd(oldType.getName(), "Type")
+      oldTypeQname = oldPrefix + ":" + Strings.CS.removeEnd(oldType.getName(), "Type")
           + "AugmentationType";
     }
 

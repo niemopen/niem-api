@@ -35,11 +35,13 @@ out/
 ### Custom ###
 /db/
 /db/indexes/
+/libs/cmftool/
 /scripts/
 /logs/
 src/main/resources/secrets*.yaml
 src/main/resources/application-openapi.yaml
-src/test/resources/transform/CrashDriver/
+src/test/resources/transform/CrashDriver-5.0/
+src/test/resources/transform/CrashDriver-6.0/
 src/test/resources/validation/ndr/CrashDriver-6.0/
 src/test/resources/validation/xml/multi/Crash Driver IEPD/
 niem-api.xpr

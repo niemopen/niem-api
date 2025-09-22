@@ -7,6 +7,7 @@ import gov.niem.tools.api.core.utils.FileUtils;
 import gov.niem.tools.api.core.utils.JsonUtils;
 import gov.niem.tools.api.core.utils.ZipUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.component.Component;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.facet.Facet;
@@ -21,18 +22,21 @@ import gov.niem.tools.api.validation.TestReport;
 import gov.niem.tools.api.validation.TestResult;
 import gov.niem.tools.api.validation.TestResult.Status;
 
+import org.mitre.niem.cmf.AugmentRecord;
 import org.mitre.niem.cmf.ClassType;
+import org.mitre.niem.cmf.DataProperty;
 import org.mitre.niem.cmf.Datatype;
-import org.mitre.niem.cmf.HasProperty;
-import org.mitre.niem.cmf.RestrictionOf;
+import org.mitre.niem.cmf.PropertyAssociation;
+import org.mitre.niem.cmf.Restriction;
 
 import jakarta.persistence.EntityManager;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -80,9 +84,6 @@ public class MigrationService {
     // Read a given CMF file and load into a new CMF model.
     org.mitre.niem.cmf.Model oldCmf = CmfUtils.loadCmf(multipartFile);
 
-    // Count the number of original properties and types for general metrics for the report
-    int oldTotalComponentCount = oldCmf.getComponentList().size();
-
     org.mitre.niem.cmf.Model newCmf = new org.mitre.niem.cmf.Model();
 
     // Loop through each version in the migration chain
@@ -102,8 +103,10 @@ public class MigrationService {
     }
 
     // Log a summary of the migration results
+    int oldTotalComponentCount = this.getCmfModelComponentCount(oldCmf);
+    int newComponentCount = this.getCmfModelComponentCount(newCmf);
     results.comment = this.getMigrationComment(oldTotalComponentCount,
-        newCmf.getComponentList().size());
+        newComponentCount);
 
     byte[] bytes = this.saveOutput(newCmf, results, multipartFile, from, to);
     return bytes;
@@ -124,43 +127,49 @@ public class MigrationService {
     // start the migration timer
     Test test = this.initTest(results, oldVersion);
 
-    // Count the beginning number of properties and types for this iteration for the report
-    int oldComponentCount = oldCmf.getComponentList().size();
-
     // Set up a new CMF model for the results of the migration
     org.mitre.niem.cmf.Model newCmf = new org.mitre.niem.cmf.Model();
 
-    // Iterate through and migrate each property and type in the CMF model
-    for (org.mitre.niem.cmf.Component cmfComponent : oldCmf.getComponentList()) {
+    // Migrate each object property in the CMF model
+    for (org.mitre.niem.cmf.Property cmfProperty : oldCmf.propertyL()) {
       log.debug(String.format("Migrating %s %s",
-          oldVersion.getVersionNumber(), cmfComponent.getQName()));
+          oldVersion.getVersionNumber(), cmfProperty.qname()));
+      this.migrateProperty(oldVersion, cmfProperty.qname(), newCmf, test);
+    }
 
-      switch (cmfComponent.getType()) {
+    // Migrate each data property in the CMF model
+    for (DataProperty cmfDataProperty : oldCmf.dataPropertyL()) {
+      log.debug(String.format("Migrating %s %s",
+          oldVersion.getVersionNumber(), cmfDataProperty.qname()));
+      this.migrateProperty(oldVersion, cmfDataProperty.qname(), newCmf, test);
+    }
 
-        case org.mitre.niem.cmf.Component.C_DATAPROPERTY:
-        case org.mitre.niem.cmf.Component.C_OBJECTPROPERTY:
-          // Migrate the property component
-          this.migrateProperty(oldVersion, cmfComponent.getQName(), newCmf, test);
-          break;
+    // Migrate each class type in the CMF model
+    for (ClassType cmfClassType : oldCmf.classTypeL()) {
+      log.debug(String.format("Migrating %s %s",
+          oldVersion.getVersionNumber(), cmfClassType.qname()));
+      this.migrateCmfType(oldVersion, cmfClassType.qname(), newCmf, test, cmfClassType);
+    }
 
-        case org.mitre.niem.cmf.Component.C_CLASSTYPE:
-          // Migrate the class type
-          this.migrateCmfType(oldVersion, cmfComponent.getQName(), newCmf, test,
-              (ClassType) cmfComponent);
-          break;
+    // Migrate each datatype in the CMF model
+    for (Datatype cmfDatatype : oldCmf.datatypeL()) {
+      log.debug(String.format("Migrating %s %s",
+          oldVersion.getVersionNumber(), cmfDatatype.qname()));
+      this.migrateCmfType(oldVersion, cmfDatatype.qname(), newCmf, test, null);
+    }
 
-        case org.mitre.niem.cmf.Component.C_DATATYPE:
-          // Migrate the data type
-          this.migrateCmfType(oldVersion, cmfComponent.getQName(), newCmf, test, null);
-          break;
-
-        default:
-          break;
-      }
+    // Migrate each namespace's augmentation record list in the CMF model
+    for (org.mitre.niem.cmf.Namespace cmfNamespace : oldCmf.namespaceList()) {
+      log.debug(String.format("Migrating %s %s augmentation records",
+          oldVersion.getVersionNumber(), cmfNamespace.prefix()));
+      this.migrateCmfNamespaceAugmentationRecordList(oldVersion, cmfNamespace.augL(), newCmf, test,
+          cmfNamespace.prefix());
     }
 
     // Log summary of results and stop the migration timer
-    test.comments = this.getMigrationComment(oldComponentCount, newCmf.getComponentList().size());
+    int oldComponentCount = this.getCmfModelComponentCount(oldCmf);
+    int newComponentCount = this.getCmfModelComponentCount(newCmf);
+    test.comments = this.getMigrationComment(oldComponentCount, newComponentCount);
     test.endTest();
 
     return newCmf;
@@ -273,23 +282,20 @@ public class MigrationService {
 
     // Add any facets that exist on the type
     if (newType.isSimple()) {
-      Datatype cmfDatatype = newCmf.getDatatype(newType.getQname());
+      Datatype cmfDatatype = newCmf.qnToDatatype(newType.getQname());
+      Restriction restriction = cmfDatatype.asRestriction();
 
-      RestrictionOf restrictionOf = cmfDatatype.getRestrictionOf();
       for (Facet facet : newType.getFacets()) {
         org.mitre.niem.cmf.Facet cmfFacet = facet.toCmf();
-        cmfFacet.addToModel(newCmf);
-        restrictionOf.addFacet(facet.toCmf());
-        // String s = "s";
-        // TODO: drop
+        restriction.addFacet(cmfFacet);
       }
     }
 
     // Migrate subproperties
     if (oldCmfClassType != null) {
-      ClassType newCmfClassType = newCmf.getClassType(newType.getQname());
-      for (HasProperty oldHasProperty : oldCmfClassType.hasPropertyList()) {
-        this.migrateSubproperty(oldVersion, oldType, oldHasProperty, newCmfClassType, test);
+      ClassType newCmfClassType = newCmf.qnToClassType(newType.getQname());
+      for (PropertyAssociation oldPropertyAssociation : oldCmfClassType.propL()) {
+        this.migrateSubproperty(oldVersion, oldType, oldPropertyAssociation, newCmfClassType, test);
       }
     }
 
@@ -301,9 +307,8 @@ public class MigrationService {
    * Migrate a type-contains-property relationship.
    *
    * @param oldVersion Current version to be migrated.
-   * @param typeQname Qualified name of the old type being migrated.
-   * @param propertyQname Qualified name of the old property contained in the
-   *     given type being migrated.
+   * @param oldType The old type being migrated.
+   * @param oldPropertyAssociation CMF property association being migrated.
    * @param newCmfClassType CMF type that has been migrated.  Migrated subproperty
    *     will be attached here.
    * @param oldMin Old min cardinality of the property in the type.
@@ -311,21 +316,15 @@ public class MigrationService {
    * @param test Test from the migration report to be updated with results of this migration.
    */
   private boolean migrateSubproperty(Version oldVersion, Type oldType,
-      HasProperty oldHasProperty, ClassType newCmfClassType, Test test) throws Exception {
+      PropertyAssociation oldPropertyAssociation,
+      ClassType newCmfClassType, Test test) throws Exception {
 
     Subproperty oldSubproperty = null;
 
     // Set fields for old subproperty components
     String oldPrefix = oldType.getPrefix();
     String oldTypeQname = oldType.getQname();
-    String oldPropertyQname = oldHasProperty.getProperty().getQName();
-
-    // Convert the type to an augmentation type if applicable from the CMF
-    if (!oldHasProperty.augmentingNS().isEmpty()) {
-      oldPrefix = oldHasProperty.augmentingNS().iterator().next().getNamespacePrefix();
-      oldTypeQname = oldPrefix + ":" + Strings.CS.removeEnd(oldType.getName(), "Type")
-          + "AugmentationType";
-    }
+    String oldPropertyQname = oldPropertyAssociation.property().qname();
 
     // Prepare fields for migration report
     String oldLabel = String.format("%s/%s", oldTypeQname, oldPropertyQname);
@@ -349,22 +348,145 @@ public class MigrationService {
     Subproperty newSubproperty = oldSubproperty.getNext();
 
     // Dependencies: Make sure the type and property from the migrated subproperty exist in the CMF
-    org.mitre.niem.cmf.Model newCmf = newCmfClassType.getModel();
+    org.mitre.niem.cmf.Model newCmf = newCmfClassType.model();
     this.addComponentToCmf(newSubproperty.getType(), newCmf, test, null, false);
     this.addComponentToCmf(newSubproperty.getProperty(), newCmf, test, null, false);
 
     // Set fields for old subproperty cardinality
-    String oldMin = CmfUtils.subpropertyMin(oldHasProperty);
-    String oldMax = CmfUtils.subpropertyMax(oldHasProperty);
+    String oldMin = CmfUtils.subpropertyMin(oldPropertyAssociation);
+    String oldMax = CmfUtils.subpropertyMax(oldPropertyAssociation);
 
     // Adjust min/max if the old cardinality is no longer valid in the new model
     newSubproperty.setMin(this.getMigratedSubpropertyMin(oldMin, newSubproperty.getMin()));
     newSubproperty.setMax(this.getMigratedSubpropertyMax(oldMax, newSubproperty.getMax()));
 
     // Add the migrated subproperty to migrated type
-    newCmfClassType.addHasProperty(newSubproperty.toCmf());
+    newCmfClassType.addPropertyAssociation(newSubproperty.toCmf());
     this.logResult(test, PASSED, newSubproperty, true, oldSubproperty);
     log.debug(String.format("--Adding subproperty %s to type", newSubproperty.getPropertyQname()));
+
+    return true;
+
+  }
+
+  /**
+   * Migrate all augmentation records for the given namespace.
+   *
+   * @param oldVersion Current version to be migrated.
+   * @param oldAugmentRecordList Old augmentation records for the given namespace being migrated.
+   * @param newCmf Current components that have already been migrated.
+   * @param test Test from the migration report to be updated with results of this migration.
+   * @param oldPrefix Prefix of the namespace with the augmentation records being migrated.
+   */
+  private boolean migrateCmfNamespaceAugmentationRecordList(Version oldVersion,
+      List<AugmentRecord> oldAugmentRecordList, org.mitre.niem.cmf.Model newCmf, Test test,
+      String oldPrefix) throws Exception {
+
+    // Unique set of classes from the augmentation records being augmented (e.g., nc:PersonType).
+    Set<ClassType> oldAugmentedClasses = oldAugmentRecordList
+        .stream()
+        .map(AugmentRecord::classType)
+        .collect(Collectors.toSet());
+
+    // Migrate the augmentation records by class
+    for (ClassType oldAugmentedClass : oldAugmentedClasses) {
+
+      // Get the old augmentation type
+      String oldAugmentationTypeQname = CmfUtils.getAugmentationClassQname(oldPrefix,
+          oldAugmentedClass.name());
+      Type oldAugmentationType = hub.types.findOne(oldVersion, oldAugmentationTypeQname);
+
+      // Confirm the old type exists
+      if (oldAugmentationType == null) {
+        this.logResult(test, NOT_FOUND, oldPrefix, oldAugmentedClass.qname(),
+            "Augmentation record", false, null);
+        return false;
+      }
+
+      String oldAugmentedClassQname = oldAugmentedClass.qname();
+
+      // Filter namespace's augmentation record list for the current class
+      List<AugmentRecord> oldClassAugmentationRecords = oldAugmentRecordList
+          .stream()
+          .filter(augmentRecord -> augmentRecord.classType().qname().equals(oldAugmentedClassQname))
+          .collect(Collectors.toList());
+
+      // Migrate all augmentation records for the given class
+      for (AugmentRecord oldAugmentRecord : oldClassAugmentationRecords) {
+        this.migrateCmfAugmentationRecord(oldVersion, oldAugmentRecord, newCmf, test,
+            oldAugmentationType);
+      }
+
+    }
+
+    return true;
+
+  }
+
+  /**
+   * Migrate all augmentation records for the given namespace.
+   *
+   * @param oldVersion Current version to be migrated.
+   * @param oldAugmentRecordList Old augmentation records for the given namespace being migrated.
+   * @param newCmf Current components that have already been migrated.
+   * @param test Test from the migration report to be updated with results of this migration.
+   * @param oldAugmentationType Augmentation type being migrated.
+   */
+  private boolean migrateCmfAugmentationRecord(Version oldVersion,
+      AugmentRecord oldAugmentRecord, org.mitre.niem.cmf.Model newCmf, Test test,
+      Type oldAugmentationType) throws Exception {
+
+    Subproperty oldSubproperty = null;
+
+    // Get the old augmentation subproperty
+    try {
+      oldSubproperty = hub.subproperties.findOne(oldVersion,
+          oldAugmentationType.qname, oldAugmentRecord.property().qname());
+    }
+    catch (EntityNotFoundException exception) {
+      // Exception handled below
+    }
+
+    // Prepare fields for migration report
+    String oldLabel = String.format("%s/%s", oldAugmentationType.qname, oldAugmentRecord.property().qname());
+
+    // Make sure subproperty exists and has a migration
+    if (oldSubproperty == null || oldSubproperty.getNext() == null) {
+      String message = oldSubproperty == null ? NOT_FOUND : NO_MIGRATION;
+      this.logResult(test, message, oldAugmentationType.getPrefix(), oldLabel,
+          "Subproperty", false, null);
+      return false;
+    }
+
+    Subproperty newSubproperty = oldSubproperty.getNext();
+
+    // Make sure the migrated type and property are in CMF
+    this.addComponentToCmf(newSubproperty.getType(), newCmf, test, null, false);
+    this.addComponentToCmf(newSubproperty.getProperty(), newCmf, test, null, false);
+
+    // Set old cardinality fields
+    String oldMin = CmfUtils.subpropertyMin(oldAugmentRecord);
+    String oldMax = CmfUtils.subpropertyMax(oldAugmentRecord);
+
+    // Adjust min/max if the old cardinality is no longer valid in the new model
+    newSubproperty.setMin(this.getMigratedSubpropertyMin(oldMin, newSubproperty.getMin()));
+    newSubproperty.setMax(this.getMigratedSubpropertyMax(oldMax, newSubproperty.getMax()));
+
+    if (newSubproperty.getTypeQname().endsWith("AugmentationType")) {
+      // Add subproperty to CMF as an augmentation record
+      ClassType newClassType = newSubproperty.getType().toCmfClassType();
+      newClassType.addPropertyAssociation(newSubproperty.toCmf());
+      this.logResult(test, PASSED, newSubproperty, true, oldSubproperty);
+      log.debug(oldAugmentationType.qname);
+    }
+    else {
+      // Add subproperty to CMF as a property association
+      String newPrefix = newSubproperty.getTypePrefix();
+      org.mitre.niem.cmf.Namespace cmfNamespace = newCmf.namespaceObj(newPrefix);
+
+      AugmentRecord newAugmentRecord = new AugmentRecord(newSubproperty.toCmf());
+      cmfNamespace.addAugmentRecord(newAugmentRecord);
+    }
 
     return true;
 
@@ -427,26 +549,27 @@ public class MigrationService {
   private void addComponentToCmf(Component newComponent, org.mitre.niem.cmf.Model cmf,
       Test test, Component originalComponent, Boolean isMigration) throws Exception {
 
-    // TODO:
+    // TODO: Support CSV code lists
     if (newComponent.getName().equals("CountryCodeSimpleType")) {
       // String s = "s";
     }
 
     // Try to find the component in the current CMF model
-    org.mitre.niem.cmf.Component cmfComponent = cmf.getComponent(newComponent.getQname());
+    org.mitre.niem.cmf.Component cmfComponent = cmf.qnToComponent(newComponent.getQname());
 
     // Convert the API component to CMF and add to the CMF model if not already there
     if (cmfComponent == null) {
       log.debug(String.format("--Adding component %s to CMF", newComponent.getQname()));
 
       // Add namespace dependency
-      this.addNamespaceToCmf(newComponent.getNamespace(), cmf);
-      org.mitre.niem.cmf.Namespace namespace = cmf.getNamespaceByPrefix(newComponent.getPrefix());
+      this.addNamespaceToCmf(newComponent.getNamespace(), cmf, test);
+      org.mitre.niem.cmf.Namespace namespace = cmf.namespaceObj(newComponent.getPrefix());
 
       // Make sure component has namespace linked to the model
       cmfComponent = newComponent.toCmf();
       cmfComponent.setNamespace(namespace);
-      cmf.addComponent(cmfComponent);
+      // TODO: Test cmfComponent.addToModel
+      cmfComponent.addToModel("element name", "location", cmf);
 
       // Add entry to the migration report
       if (originalComponent != null) {
@@ -479,13 +602,13 @@ public class MigrationService {
    * @param namespace Namespace to be converted to CMF and added to the CMF model
    * @param cmf New model to which the converted component should be added
    */
-  private void addNamespaceToCmf(Namespace namespace, org.mitre.niem.cmf.Model cmf)
+  private void addNamespaceToCmf(Namespace namespace, org.mitre.niem.cmf.Model cmf, Test test)
       throws Exception {
 
     // Add namespace if it does not already exist
-    if (cmf.getNamespaceByPrefix(namespace.getPrefix()) == null) {
+    if (cmf.namespaceObj(namespace.getPrefix()) == null) {
       log.debug(String.format("--Adding namespace %s to CMF", namespace.getPrefix()));
-      namespace.addToCmfModel(cmf);
+      namespace.addToCmfModel(cmf, false, AddModelReason.MIGRATION, test);
     }
     else {
       log.debug(String.format("--Skipped duplicate namespace %s", namespace.getPrefix()));
@@ -694,6 +817,16 @@ public class MigrationService {
 
     return true;
 
+  }
+
+  /**
+   * Get the number of components in a CMF model.
+   */
+  private int getCmfModelComponentCount(org.mitre.niem.cmf.Model cmfModel) {
+    return cmfModel.classTypeL().size()
+        + cmfModel.datatypeL().size()
+        + cmfModel.propertyL().size()
+        + cmfModel.dataPropertyL().size();
   }
 
 }

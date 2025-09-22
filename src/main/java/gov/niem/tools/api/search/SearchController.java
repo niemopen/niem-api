@@ -3,6 +3,7 @@ package gov.niem.tools.api.search;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.exceptions.NoContentException;
 import gov.niem.tools.api.core.utils.CmfUtils;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.type.Type;
@@ -175,7 +176,7 @@ public class SearchController {
       @RequestParam(required = false) Boolean isElement,
       @RequestParam(required = false) Namespace.Category[] namespaceCategory,
       @RequestParam(required = false) SearchService.SortOrder sortOrder,
-      @RequestParam(required = false) Integer page,
+      @RequestParam(required = false, defaultValue = "0") Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
   ) throws Exception {
 
@@ -208,7 +209,7 @@ public class SearchController {
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
     for (Property property : result.hits()) {
       log.info(property.getIdLabel());
-      cmfModel.addComponent(property.toCmf());
+      property.addToCmfModel(cmfModel, false, AddModelReason.SEARCH, null);
     }
 
     return CmfUtils.generateString(cmfModel, mediaType);
@@ -308,7 +309,7 @@ public class SearchController {
       @RequestParam(required = false) Type.Category category,
       @RequestParam(required = false) Namespace.Category[] namespaceCategory,
       @RequestParam(required = false) SearchService.SortOrder sortOrder,
-      @RequestParam(required = false) Integer page,
+      @RequestParam(required = false, defaultValue = "0") Integer page,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType
   ) throws Exception {
 
@@ -333,7 +334,7 @@ public class SearchController {
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
     for (Type type : result.hits()) {
       log.info(type.getIdLabel());
-      cmfModel.addComponent(type.toCmf());
+      type.addToCmfModel(cmfModel, false, AddModelReason.SEARCH, null);
     }
 
     return CmfUtils.generateString(cmfModel, mediaType);

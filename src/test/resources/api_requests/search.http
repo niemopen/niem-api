@@ -2,7 +2,9 @@
 ### Search properties or types
 
 @scope = properties
+@scope = properties/formats/cmf
 # @scope = types
+@scope = types/formats/cmf
 
 # Property search field examples
 @niemVersionNumber = 5.2
@@ -25,8 +27,8 @@
 
 # Search criteria
 @criteria = token=arm
-@criteria = token=arm,code
-@criteria = token=PersonGivenName
+# @criteria = token=arm,code
+# @criteria = token=PersonGivenName
 # @criteria = token=quantity
 # @criteria = substring=arm
 # @criteria = substring=arm,code

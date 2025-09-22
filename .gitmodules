@@ -1,0 +1,4 @@
+[submodule "libs/cmftool"]
+	path = libs/cmftool
+	url = https://github.com/niemopen/cmftool.git
+	branch = develop

@@ -29,6 +29,7 @@ words:
   - datasource
   - datatypes
   - delombok
+  - Dfile
   - DHEKELIA
   - dists
   - Doclet
@@ -51,6 +52,7 @@ words:
   - Jaxb
   - jc3iedm
   - jdbc
+  - jvmargs
   - KINGMAN
   - KITTS
   - LESTE
@@ -64,6 +66,7 @@ words:
   - mmucc
   - NAVASSA
   - ndex
+  - NOTNIEM
   - NUMKINDS
   - OBJECTPROPERTY
   - OTHERNIEM
@@ -75,11 +78,13 @@ words:
   - rawtypes
   - reindex
   - RICA
+  - scheval
   - smallrye
   - SPRATLY
   - springdoc
   - springframework
   - stewardships
+  - subprojects
   - subproperties
   - Subproperty
   - svrl

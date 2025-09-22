@@ -4,17 +4,19 @@ import gov.niem.tools.api.core.config.Config;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.exceptions.BadRequestException;
 
-import org.mitre.niem.cmf.HasProperty;
 import org.mitre.niem.cmf.Model;
+import org.mitre.niem.cmf.ModelXMLReader;
+import org.mitre.niem.cmf.ModelXMLWriter;
+import org.mitre.niem.cmf.PropertyAssociation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import lombok.extern.log4j.Log4j2;
 import org.json.JSONObject;
-import org.mitre.niem.xsd.ModelXMLReader;
-import org.mitre.niem.xsd.ModelXMLWriter;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -27,21 +29,34 @@ public class CmfUtils {
    * Checks that the given file contains the URI for the currently-supported
    * version of CMF, and if so, loads it into a CMF Model object.
    */
-  public static Model loadCmf(MultipartFile multipartFile) throws IOException, BadRequestException {
+  public static Model loadCmf(MultipartFile multipartFile) throws Exception {
 
     // Throw exception if the given file is the supported version of CMF
     CmfUtils.checkVersion(multipartFile);
 
     // Load CMF model
     ModelXMLReader modelXmlReader = new ModelXMLReader();
-    Model cmf = modelXmlReader.readXML(multipartFile.getInputStream());
+    Path tmpCmfPath = FileUtils.saveFile(multipartFile);
+    final Model[] cmfArray = {null};  // Wrapped so it can be assigned from captureLog below
+    String logString = AppUtils.captureLog(() -> {
+      cmfArray[0] = modelXmlReader.readFiles(tmpCmfPath.toFile());
+    });
+
+    Model cmf = cmfArray[0];
 
     // Throw exception with error messages if CMF did not load
     if (cmf == null) {
       log.debug("Load failed: Could not parse CMF");
-      modelXmlReader.getMessages().forEach(message -> log.debug(message));
-      String errorMessages = String.join(", ", modelXmlReader.getMessages());
-      throw new BadRequestException(errorMessages);
+      log.debug(logString);
+
+      String[] errorMessages = logString.split("\n");
+      String finalErrorMessage = "";
+
+      for (String errorMessage : errorMessages) {
+        finalErrorMessage += "Line " + errorMessage.split(".cmf.xml:")[1].trim() + ". ";
+      }
+
+      throw new BadRequestException(finalErrorMessage);
     }
 
     return cmf;
@@ -113,12 +128,16 @@ public class CmfUtils {
   public static String generateString(Model model, AppMediaType mediaType) throws Exception {
     ModelXMLWriter modelXmlWriter = new ModelXMLWriter();
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream,
+        StandardCharsets.UTF_8);
 
-    modelXmlWriter.writeXML(model, outputStream);
+    modelXmlWriter.writeXML(model, outputStreamWriter);
+    outputStreamWriter.flush();
+    outputStreamWriter.close();
     String xml = outputStream.toString();
 
     // TODO: Resolve CMF XML error at source in CMF tool
-    xml = xml.replace("cmf/0.8/\">", "cmf/0.8/\"");
+    xml = xml.replace("cmf/1.0/\">", "cmf/1.0/\"");
 
     if (mediaType == AppMediaType.json) {
       JSONObject json = JsonUtils.xmlToJson(xml);
@@ -139,11 +158,11 @@ public class CmfUtils {
   /**
    * Write a CMF model to an XML file.
    *
-   * @param cmf CMF model
+   * @param cmfModel CMF model
    * @param path Directory to save the file.
    * @param filenameBase Filename without the extension.
    */
-  public static File saveCmfModel(org.mitre.niem.cmf.Model cmf, Path path, String filenameBase)
+  public static File saveCmfModel(org.mitre.niem.cmf.Model cmfModel, Path path, String filenameBase)
       throws Exception {
 
     // Set up the new file in the given directory
@@ -152,13 +171,7 @@ public class CmfUtils {
     // file.createNewFile();
 
     // Write the CMF model to a string
-    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-    ModelXMLWriter cmfWriter = new ModelXMLWriter();
-    cmfWriter.writeXML(cmf, byteArrayOutputStream);
-    String cmfString = byteArrayOutputStream.toString();
-
-    // TODO: Resolve CMF XML error at source in CMF tool
-    cmfString = cmfString.replace("cmf/0.8/\">", "cmf/0.8/\"");
+    String cmfString = CmfUtils.generateString(cmfModel);
 
     // Write the CMF string to a file
     FileUtils.saveFile(file.toPath(), cmfString.getBytes());
@@ -187,18 +200,39 @@ public class CmfUtils {
   /**
    * Get the subproperty min as a string.
    */
-  public static String subpropertyMin(HasProperty hasProperty) {
-    return String.valueOf(hasProperty.minOccurs());
+  public static String subpropertyMin(PropertyAssociation propertyAssociation) {
+    return String.valueOf(propertyAssociation.minOccurs());
   }
 
   /**
    * Get subproperty max as a string with either a numeric value or "unbounded".
    */
-  public static String subpropertyMax(HasProperty hasProperty) {
-    if (hasProperty.maxUnbounded()) {
+  public static String subpropertyMax(PropertyAssociation propertyAssociation) {
+    if (propertyAssociation.isMaxUnbounded()) {
       return "unbounded";
     }
-    return String.valueOf(hasProperty.maxOccurs());
+    return String.valueOf(propertyAssociation.maxOccurs());
+  }
+
+  /**
+   * Returns the augmentation type name for the given type name being augmented.
+   *
+   * <p>For example, returns "PersonAugmentationType" when given "PersonType".
+   */
+  public static String getAugmentationClassName(String augmentedTypeName) {
+    return augmentedTypeName.replace("Type", "AugmentationType");
+  }
+
+  /**
+   * Returns the qualified augmentation type name with the given namespace prefix as is, and
+   * the given augmentedTypeName converted to an augmentation type name.
+   *
+   * <p>For example, given prefix "j" and type name "PersonType", returns
+   * "j:PersonAugmentationType".
+   */
+  public static String getAugmentationClassQname(String augmentationPrefix,
+      String augmentedTypeName) {
+    return augmentationPrefix + ":" + CmfUtils.getAugmentationClassName(augmentedTypeName);
   }
 
 }

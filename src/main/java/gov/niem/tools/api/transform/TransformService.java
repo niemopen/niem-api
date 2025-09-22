@@ -10,29 +10,25 @@ import org.mitre.niem.cmf.Datatype;
 import org.mitre.niem.cmf.Model;
 import org.mitre.niem.cmf.Namespace;
 import org.mitre.niem.cmf.Property;
-import org.mitre.niem.cmf.SchemaDocument;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j2;
 import org.mitre.niem.json.ModelToJSON;
-import org.mitre.niem.rdf.ModelToOWL;
+import org.mitre.niem.rdf.ModelToRDF;
 import org.mitre.niem.xsd.ModelFromXSD;
-import org.mitre.niem.xsd.ModelToN5XSD;
-import org.mitre.niem.xsd.ModelToSrcXSD;
-import org.mitre.niem.xsd.ModelToXSD;
+import org.mitre.niem.xsd.ModelToXSDModel;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -196,8 +192,10 @@ public class TransformService {
    */
   public byte[] generateOutput(Model model, TransformTo to, String filenameBase) throws Exception {
 
-    StringWriter stringWriter = new StringWriter();
-    PrintWriter printWriter = new PrintWriter(stringWriter);
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(byteArrayOutputStream,
+        StandardCharsets.UTF_8);
+
     String results = null;
 
     switch (to) {
@@ -206,34 +204,30 @@ public class TransformService {
         results = fixCmfOutput(results);
         break;
 
-      case owl:
-        ModelToOWL m2o = new ModelToOWL(model);
-        m2o.writeRDF(printWriter);
-        results = stringWriter.toString();
-        results = fixOwlOutput(results);
+      case rdf:
+        ModelToRDF m2r = new ModelToRDF(model);
+        m2r.writeRDF(outputStreamWriter);
+        outputStreamWriter.flush();
+        results = byteArrayOutputStream.toString();
         break;
 
       case xsd:
         // Return a zip file
-        printWriter.close();
-        stringWriter.close();
+        outputStreamWriter.close();
         return generateXsdOutput(model, filenameBase);
 
       case json_schema:
         ModelToJSON modelToJson = new ModelToJSON(model);
-        modelToJson.writeJSON(printWriter);
-        results = stringWriter.toString();
+        modelToJson.writeJSON(outputStreamWriter);
+        outputStreamWriter.flush();
+        results = byteArrayOutputStream.toString();
         break;
 
       default:
         break;
     }
 
-    printWriter.flush();
-    printWriter.close();
-
-    stringWriter.flush();
-    stringWriter.close();
+    outputStreamWriter.close();
 
     if (results == null) {
       throw new Exception("Transform results are null");
@@ -258,15 +252,18 @@ public class TransformService {
     // Set up a NIEM 3.0 - 5.2 model writer or a NIEM 6.0+ model writer
     String niem6UriBase = "https://docs.oasis-open.org/niemopen/ns/model";
 
-    Boolean isNiem6 = model.getNamespaceList().stream()
-        .filter(namespace -> namespace.getNamespaceURI().contains(niem6UriBase))
+    // TODO: Confirm that NIEM 6 model is handled the same as earlier models
+    Boolean isNiem6 = model.namespaceList().stream()
+        .filter(namespace -> namespace.uri().contains(niem6UriBase))
         .findAny()
         .isPresent();
 
-    ModelToXSD modelToXsd = isNiem6 ? new ModelToSrcXSD(model) : new ModelToN5XSD(model);
+    // ModelToXSDModel modelToXsdModel = isNiem6 ? new ModelToXSDModel(model)
+    //     : new ModelToN5XSD(model);
+    ModelToXSDModel modelToXsdModel = new ModelToXSDModel(model);
 
     // Transform the CMF file to XSDs and write to the new directory above
-    modelToXsd.writeXSD(xsdDir.toFile());
+    modelToXsdModel.writeModelXSD(xsdDir.toFile());
 
     // Fix the transform output
     fixXsdOutput(model, xsdDir);
@@ -294,11 +291,7 @@ public class TransformService {
     // Get paths to all of the XSDs
     List<Path> xsdPaths = FileUtils.getFilePathsFromDirWithExtension(xsdDir, "xsd");
 
-    List<Property> properties = model.getComponentList()
-        .stream()
-        .filter(component -> component.asProperty() != null)
-        .map(component -> component.asProperty())
-        .collect(Collectors.toList());
+    List<Property> properties = model.propertyL();
 
     for (Path xsdPath : xsdPaths) {
       String xsd = FileUtils.getFileText(xsdPath);
@@ -350,7 +343,7 @@ public class TransformService {
     Pattern pattern = Pattern.compile(oldImportText);
     Matcher matcher = pattern.matcher(xsd);
 
-    Map<String, SchemaDocument> schemaDocuments = model.schemadoc();
+    List<Namespace> namespaces = model.namespaceList();
 
     while (matcher.find()) {
       // Get the filename from the import
@@ -360,10 +353,10 @@ public class TransformService {
 
       // Get the uri from the model based on the file name
       String uri = null;
-      for (SchemaDocument schemaDocument : schemaDocuments.values()) {
-        if (schemaDocument.filePath().contains(filename)) {
+      for (Namespace namespace : namespaces) {
+        if (namespace.documentFilePath().contains(filename)) {
           // Update the XSD
-          uri = schemaDocument.targetNS();
+          uri = namespace.uri();
           String newImportText = String.format("   <xs:import namespace=\"%s\" schemaLocation=\"%s\"/>", uri, relativePath);
           xsd = xsd.replaceFirst(oldImportText, newImportText);
           matcher = pattern.matcher(xsd);
@@ -399,7 +392,7 @@ public class TransformService {
 
     for (Namespace namespace : namespaces) {
       // Fix any missing namespace prefix declarations
-      xsd = fixXsdAddPrefix(xsd, namespace.getNamespacePrefix(), namespace.getNamespaceURI());
+      xsd = fixXsdAddPrefix(xsd, namespace.prefix(), namespace.uri());
     }
 
     return xsd;
@@ -418,7 +411,7 @@ public class TransformService {
 
     if (property != null) {
       String newText = oldText.replace("<xs:element",
-          String.format("<xs:element name=\"%s\"", property.getName()));
+          String.format("<xs:element name=\"%s\"", property.name()));
       addDependencyNamespaces(property, namespaces);
       return newText;
     }
@@ -427,14 +420,14 @@ public class TransformService {
   }
 
   private void addDependencyNamespaces(Property property, Set<Namespace> namespaces) {
-    addDependencyNamespace(property.getClassType(), namespaces);
-    addDependencyNamespace(property.getDatatype(), namespaces);
-    addDependencyNamespace(property.getSubPropertyOf(), namespaces);
+    addDependencyNamespace(property.classType(), namespaces);
+    addDependencyNamespace(property.datatype(), namespaces);
+    addDependencyNamespace(property.subPropertyOf(), namespaces);
   }
 
   private void addDependencyNamespace(Component component, Set<Namespace> namespaces) {
     if (component != null) {
-      namespaces.add(component.getNamespace());
+      namespaces.add(component.namespace());
     }
   }
 
@@ -444,27 +437,27 @@ public class TransformService {
     return properties.stream()
         .filter(property -> {
           // Check if definition matches (both same value or both null)
-          if (!equalOrNull(property.getDefinition(), definition)) {
+          if (!equalOrNull(property.definition(), definition)) {
             return false;
           }
 
           // Check if substitution group matches (both same qname or both null)
-          String actualSubstitutionGroupQname = property.getSubPropertyOf() == null
+          String actualSubstitutionGroupQname = property.subPropertyOf() == null
               ? null
-              : property.getSubPropertyOf().getQName();
+              : property.subPropertyOf().qname();
 
           if (!equalOrNull(actualSubstitutionGroupQname, substitutionGroupQname)) {
             return false;
           }
 
-          String actualTypeQname = property.getClassType() == null
+          String actualTypeQname = property.classType() == null
               ? null
-              : property.getClassType().getQName();
+              : property.classType().qname();
 
           boolean hasDatatype = false;
 
-          if (actualTypeQname == null && property.getDatatype() != null) {
-            actualTypeQname = property.getDatatype().getQName();
+          if (actualTypeQname == null && property.datatype() != null) {
+            actualTypeQname = property.datatype().qname();
             hasDatatype = true;
           }
 
@@ -474,10 +467,10 @@ public class TransformService {
 
           // Check in case the CMF tool converted a proxy xs type to a simple xs type
           if (hasDatatype == true) {
-            Datatype datatype = property.getDatatype();
+            Datatype datatype = property.datatype();
             String typeName = typeQname.substring(typeQname.indexOf(":") + 1);
-            if (datatype.getName().equals(typeName)
-                && datatype.getQName().contains("xs") && typeQname.contains("xs")) {
+            if (datatype.name().equals(typeName)
+                && datatype.qname().contains("xs") && typeQname.contains("xs")) {
               return true;
             }
           }
@@ -523,9 +516,9 @@ public class TransformService {
   private String fixCmfOutput(String cmfString) {
 
     // 1. Replace errant closing tag in CMF output after default xmlns declaration
-    final String badText = "xmlns=\"https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/\">\n";
+    final String badText = "xmlns=\"https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/\">\n";
 
-    final String goodText = "xmlns=\"https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/\"\n";
+    final String goodText = "xmlns=\"https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/\"\n";
 
     cmfString = cmfString.replace(badText, goodText);
 
@@ -540,23 +533,6 @@ public class TransformService {
   }
 
   /**
-   * Fix errors and irregular formatting in the OWL output transform.
-   *
-   * @todo Get fix for CMF tool RDF output
-   */
-  private String fixOwlOutput(String owlString) {
-
-    // 1. Standardize irregular lines in OWL export
-    owlString = owlString.replaceAll("\r\n", "\n").replaceAll("\n\n\n", "\n\n");
-
-    // 2. Replace double ## in URIs with single #
-    owlString = owlString.replaceAll("##", "#");
-
-    return owlString;
-
-  }
-
-  /**
    * Get the output filename with extension based on the kind of transformation
    * and the original filename.
    */
@@ -564,8 +540,8 @@ public class TransformService {
     switch (to) {
       case cmf:
         return filenameBase + ".cmf.xml";
-      case owl:
-        return filenameBase + ".owl.ttl";
+      case rdf:
+        return filenameBase + ".ttl";
       case xsd:
         return filenameBase + ".zip";
       case json_schema:
@@ -584,7 +560,7 @@ public class TransformService {
         return MediaType.APPLICATION_XML;
       case json_schema:
         return MediaType.APPLICATION_JSON;
-      case owl:
+      case rdf:
         return MediaType.TEXT_PLAIN;
       case xsd:
         return MediaType.valueOf("application/zip");

@@ -2,6 +2,7 @@
 package gov.niem.tools.api.db.version;
 
 import gov.niem.tools.api.core.config.Config;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.base.BaseVersionedEntity;
 import gov.niem.tools.api.db.model.Model;
@@ -9,6 +10,7 @@ import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.steward.Steward;
 import gov.niem.tools.api.db.type.Type;
+import gov.niem.tools.api.validation.Test;
 
 import org.mitre.niem.cmf.CMFException;
 
@@ -33,6 +35,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import lombok.AllArgsConstructor;
@@ -377,33 +381,56 @@ public class Version extends BaseVersionedEntity<Version>
   // }
 
   @Override
-  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
+  public org.mitre.niem.cmf.Model addToCmfModel(org.mitre.niem.cmf.Model cmfModel, boolean
+      addDependencies, AddModelReason addModelReason, Test test) throws CMFException {
+
+    // List of augmentation properties to support adding augmentation records
+    List<Property> augmentationProperties = new LinkedList<>();
+
+    // TODO: Add version / CMF model basics
+
+    if (!addDependencies) {
+      return this.toCmf();
+    }
+
     for (Namespace namespace : this.namespaces) {
       // Add properties
       for (Property property : namespace.getProperties()) {
-        property.addToCmfModel(cmfModel);
+        property.addToCmfModel(cmfModel, addDependencies, addModelReason, test);
+
+        if (property.getName().endsWith("Augmentation")) {
+          augmentationProperties.add(property);
+        }
       }
 
       // Add types
       for (Type type : namespace.getTypes()) {
-        type.addToCmfModel(cmfModel);
+        type.addToCmfModel(cmfModel, addDependencies, addModelReason, test);
+      }
+
+      // Add augmentation records if applicable
+      for (Property augmentationProperty : augmentationProperties) {
+        // TODO: Add augmentation records to the CMF model
       }
     }
+
+    return this.toCmf();
+
   }
 
   /**
    * Adds the namespaces, properties, and types in this model to the given CMF model.
    */
-  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel, Boolean includeContent)
-      throws CMFException {
-    if (includeContent == true) {
-      addToCmfModel(cmfModel);
-    }
-    else {
-      // TODO: Load version properties once supported by CMF
-      return;
-    }
-  }
+  // public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel, Boolean addDependencies)
+  //     throws CMFException {
+  //   if (addDependencies == true) {
+  //     addToCmfModel(cmfModel, addDependencies, );
+  //   }
+  //   else {
+  //     // TODO: Load version properties once supported by CMF
+  //     return;
+  //   }
+  // }
 
   @Override
   public org.mitre.niem.cmf.Model toCmf() {

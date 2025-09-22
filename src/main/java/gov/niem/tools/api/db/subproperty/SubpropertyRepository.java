@@ -9,9 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface SubpropertyRepository extends JpaRepository<Subproperty, Long> {
 
-  Optional<Subproperty> findOneByVersionIdAndType_Namespace_PrefixAndType_NameAndProperty_Namespace_PrefixAndProperty_Name(
-      Long versionId, String typePrefix, String typeName, String propertyPrefix,
-          String propertyName);
+  Optional<Subproperty> findOneByVersionIdAndTypeIdAndPropertyId(Long versionId,
+      Long typeId, Long propertyId);
 
   Set<Subproperty> findByVersionIdAndType_Namespace_PrefixAndType_NameOrderBySequenceAsc(
       Long versionId, String prefix, String name);

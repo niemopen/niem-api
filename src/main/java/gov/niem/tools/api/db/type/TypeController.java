@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.type;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.property.Property;
 
@@ -64,7 +65,7 @@ public class TypeController {
       throws Exception {
     Type type = hub.types.findOne(stewardKey, modelKey, versionNumber, qname);
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
-    cmfModel.addComponent(type.toCmf());
+    type.addToCmfModel(cmfModel, true, AddModelReason.REPRESENTATION, null);
     return CmfUtils.generateString(cmfModel, mediaType);
   }
 
@@ -135,7 +136,7 @@ public class TypeController {
         prefix, pageable);
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
     for (Type type : types) {
-      type.addToCmfModel(cmfModel);
+      type.addToCmfModel(cmfModel, false, AddModelReason.REPRESENTATION, null);
     }
     return CmfUtils.generateString(cmfModel, mediaType);
   }
@@ -288,6 +289,20 @@ public class TypeController {
       @PathVariable String versionNumber,
       @PathVariable String qname) throws Exception {
     return hub.types.findAugmentations(stewardKey, modelKey, versionNumber, qname);
+  }
+
+  /**
+   * Get the base type being augmented by the type with the given fields.
+   * For example, returns nc:PersonType given the fields for type j:PersonAugmentationType.
+   */
+  @GetMapping("/types/{qname}/augmented-type")
+  @ResponseStatus(code = HttpStatus.OK)
+  public Type getAugmentedType(
+      @PathVariable String stewardKey,
+      @PathVariable String modelKey,
+      @PathVariable String versionNumber,
+      @PathVariable String qname) throws Exception {
+    return hub.types.findAugmentedType(stewardKey, modelKey, versionNumber, qname);
   }
 
   /**

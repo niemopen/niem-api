@@ -1,14 +1,16 @@
 package gov.niem.tools.api.db.namespace;
 
 import gov.niem.tools.api.core.config.Config;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.base.BaseVersionEntity;
+import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.type.Type;
 import gov.niem.tools.api.db.version.Version;
+import gov.niem.tools.api.validation.Test;
 
 import org.mitre.niem.cmf.CMFException;
-import org.mitre.niem.cmf.SchemaDocument;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,6 +29,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,6 +42,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.Hibernate;
 import org.hibernate.envers.Audited;
 import org.hibernate.proxy.HibernateProxy;
@@ -51,6 +55,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexingDe
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.ObjectPath;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyValue;
+import org.mitre.niem.xsd.NamespaceKind;
 
 /**
  * A collection of properties and types managed by an authoritative source.
@@ -63,6 +68,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @JacksonXmlRootElement(localName = "Namespace")
+@Log4j2
 @Schema(name = "Namespace")
 @Table(
     uniqueConstraints = {@UniqueConstraint(
@@ -267,6 +273,11 @@ public class Namespace extends BaseVersionEntity<Namespace>
   @OrderBy("qname")
   private Set<Property> properties = new HashSet<Property>();
 
+  @JsonIgnore
+  @Transient
+  @ToString.Exclude
+  private org.mitre.niem.cmf.Namespace cmfNamespace;
+
   /**
    * Gets the version to which this namespace belongs.
    */
@@ -426,42 +437,67 @@ public class Namespace extends BaseVersionEntity<Namespace>
   }
 
   /**
-   * Adds this namespace to the given CMF model.
+   * Adds this namespace to the given CMF model if it does not already exist.
+   *
+   * @param addDependencies True to also add namespace dependencies (local terminology);
+   *     false to just add this namespace.
    */
-  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
+  public org.mitre.niem.cmf.Namespace addToCmfModel(org.mitre.niem.cmf.Model cmfModel, boolean
+      addDependencies, AddModelReason addModelReason, Test test)
+      throws CMFException, EntityNotUniqueException {
+
     // Skip namespaces already supported by CMF
-    if (this.prefix.equals("xml")) {
-      return;
+    if (this.prefix.equals("xs")) {
+      return cmfModel.namespaceObj("xs");
     }
 
-    // Add this namespace to the given CMF model
-    cmfModel.addNamespace(this.toCmf());
+    org.mitre.niem.cmf.Namespace cmfNamespace = cmfModel.namespaceObj(this.prefix);
 
-    // Add SchemaDocument information
-    SchemaDocument schemaDocument = new SchemaDocument();
-    schemaDocument.setConfTargets(this.getNdrConformanceTarget());
-    schemaDocument.setFilePath(this.filepath + this.filename + ".xsd");
-    // TODO: Support namespace language
-    // schemaDocument.setLanguage(null);
-    schemaDocument.setNIEMversion(this.getNiemVersionNumber());
-    schemaDocument.setSchemaVersion(this.draft);
-    // TODO: Support sequenceID?
-    // schemaDocument.setSequenceID(null);
-    schemaDocument.setTargetNS(this.uri);
-    cmfModel.addSchemaDoc(this.uri, schemaDocument);
+    // Add this namespace to the given CMF model if it does not already exist
+    if (cmfNamespace == null) {
+      log.debug(String.format("--Adding namespace %s to CMF", this.prefix));
+      cmfModel.addNamespace(this.toCmf());
+    }
+
+    // TODO: Add local terminology to CMF model
+
+    return cmfModel.namespaceObj(this.prefix);
+
   }
 
   /**
    * Converts this namespace to a CMF namespace object.
    */
   public org.mitre.niem.cmf.Namespace toCmf() throws CMFException {
-    org.mitre.niem.cmf.Namespace cmfNamespace = new org.mitre.niem.cmf.Namespace();
-    cmfNamespace.setDefinition(this.definition);
-    cmfNamespace.setNamespacePrefix(this.prefix);
-    cmfNamespace.setNamespaceURI(this.uri);
-    cmfNamespace.setKind(this.categoryToCmf(this.category));
-    // TODO: Namespace CMF properties, classes, datatypes
-    return cmfNamespace;
+
+    if (this.cmfNamespace != null) {
+      return this.cmfNamespace;
+    }
+
+    this.cmfNamespace = new org.mitre.niem.cmf.Namespace();
+
+    // TODO: Support documentation in other languages
+    this.cmfNamespace.addDocumentation(this.definition, "en-US");
+
+    // TODO: Support namespace language
+    this.cmfNamespace.setLanguage("en-US");
+
+    this.cmfNamespace.setPrefix(this.prefix);
+    this.cmfNamespace.setURI(this.uri);
+    this.cmfNamespace.setVersion(this.draft);
+    this.cmfNamespace.setDocumentFilePath(this.filepath + this.filename + ".xsd");
+
+    String cmfCategoryCode = this.categoryToCmfString(category);
+    this.cmfNamespace.setKindCode(cmfCategoryCode);
+
+    if (this.getNdrConformanceTarget() != null) {
+      this.cmfNamespace.setArchVersion("NIEM" + this.getNdrVersion());
+      this.cmfNamespace.setConformanceTargets(this.getNdrConformanceTarget());
+    }
+
+    // TODO: Add CMF properties, classes, datatypes to CMF namespace
+
+    return this.cmfNamespace;
   }
 
   /**
@@ -469,21 +505,21 @@ public class Namespace extends BaseVersionEntity<Namespace>
    */
   public Category categoryFromCmf(int kind) {
     switch (kind) {
-      case org.mitre.niem.cmf.NamespaceKind.NSK_CORE:
+      case NamespaceKind.NSK_CORE:
         return Category.core;
-      case org.mitre.niem.cmf.NamespaceKind.NSK_DOMAIN:
+      case NamespaceKind.NSK_DOMAIN:
         return Category.domain;
-      case org.mitre.niem.cmf.NamespaceKind.NSK_EXTENSION:
+      case NamespaceKind.NSK_EXTENSION:
         return Category.extension;
-      case org.mitre.niem.cmf.NamespaceKind.NSK_EXTERNAL:
+      case NamespaceKind.NSK_EXTERNAL:
         return Category.external;
-      case org.mitre.niem.cmf.NamespaceKind.NSK_OTHERNIEM:
+      case NamespaceKind.NSK_OTHERNIEM:
         return Category.other;
-      case org.mitre.niem.cmf.NamespaceKind.NSK_UNKNOWN:
+      case NamespaceKind.NSK_UNKNOWN:
         return Category.other;
-      case org.mitre.niem.cmf.NamespaceKind.NSK_XML:
+      case NamespaceKind.NSK_XML:
         return Category.built_in;
-      case org.mitre.niem.cmf.NamespaceKind.NSK_XSD:
+      case NamespaceKind.NSK_XSD:
         return Category.built_in;
       default:
         return Category.other;
@@ -491,69 +527,82 @@ public class Namespace extends BaseVersionEntity<Namespace>
   }
 
   /**
-   * Converts API namespace categories to CMF namespace categories.
+   * Converts API namespace categories to CMF namespace kinds (int).
    *
    * <p>From CMF: cmf/NamespaceKind.java
-   * NSK_EXTENSION = 0; has conformance assertion, not in NIEM model
-   * NSK_DOMAIN    = 1; domain schema
-   * NSK_CORE      = 2; niem core schema
-   * NSK_OTHERNIEM = 3; other niem model; starts with release or publication prefix
-   * NSK_BUILTIN   = 4; appinfo, code-lists, conformance, proxy, structures
-   * NSK_XSD       = 5; namespace for XSD datatypes
-   * NSK_XML       = 6; namespace for xml: attributes
-   * NSK_EXTERNAL  = 7; imported with appinfo:externalImportIndicator
-   * NSK_UNKNOWN   = 8; no conformance assertion; not any of the above
-   * NSK_NUMKINDS  = 9; this many kinds of namespaces
+   * NSK_EXTENSION  = 0; has conformance assertion, not in NIEM model
+   * NSK_DOMAIN     = 1; domain schema
+   * NSK_CORE       = 2; niem core schema
+   * NSK_OTHERNIEM  = 3; other niem model; starts with release or publication prefix
+   * NSK_APPINFO    = 4; appinfo
+   * NSK_CLSA       = 5; code lists schema appinfo
+   * NSK_CLI        = 6; code lists instance
+   * NSK_NIEM_XS    = 7; proxy
+   * NSK_STRUCTURES = 8; structures
+   * NSK_XSD        = 9; namespace for XSD
+   * NSK_XML        = 10; namespace for xml: attributes
+   * NSK_EXTERNAL   = 11; was imported with appinfo:externalImportIndicator
+   * NSK_NOTNIEM    = 12; none of the above; no conformance assertion or external appinfo
+   * NSK_UNKNOWN    = 13; can't figure it out; probably an error
+   * NSK_NUMKINDS   = 14; this many kinds of namespaces
    */
-  public int categoryToCmf(Category category) {
+  public int categoryToCmfInt(Category category) {
     if (prefix.equals("xs")) {
-      return org.mitre.niem.cmf.NamespaceKind.NSK_XSD;
+      return NamespaceKind.NSK_XSD;
     }
 
     if (prefix.equals("xml")) {
-      return org.mitre.niem.cmf.NamespaceKind.NSK_XML;
+      return NamespaceKind.NSK_XML;
     }
 
     if (prefix.equals("structures")) {
-      return org.mitre.niem.cmf.NamespaceKind.NIEM_STRUCTURES;
+      return NamespaceKind.NSK_STRUCTURES;
     }
 
     if (prefix.equals("appinfo")) {
-      return org.mitre.niem.cmf.NamespaceKind.NIEM_APPINFO;
+      return NamespaceKind.NSK_APPINFO;
     }
 
     if (prefix.equals("cli")) {
-      return org.mitre.niem.cmf.NamespaceKind.NIEM_CLI;
+      return NamespaceKind.NSK_CLI;
     }
 
     if (prefix.equals("clsa")) {
-      return org.mitre.niem.cmf.NamespaceKind.NIEM_CLSA;
+      return NamespaceKind.NSK_CLSA;
     }
 
     switch (category) {
       case core:
-        return org.mitre.niem.cmf.NamespaceKind.NSK_CORE;
+        return NamespaceKind.NSK_CORE;
       case domain:
-        return org.mitre.niem.cmf.NamespaceKind.NSK_DOMAIN;
+        return NamespaceKind.NSK_DOMAIN;
       case exchange:
       case extension:
-        return org.mitre.niem.cmf.NamespaceKind.NSK_EXTENSION;
+        return NamespaceKind.NSK_EXTENSION;
       case external:
-        return org.mitre.niem.cmf.NamespaceKind.NSK_EXTERNAL;
+        return NamespaceKind.NSK_EXTERNAL;
       case other:
-        return org.mitre.niem.cmf.NamespaceKind.NSK_UNKNOWN;
+        return NamespaceKind.NSK_UNKNOWN;
       case utility:
       case adapter:
       case auxiliary:
       case code:
       case core_supplement:
       case domain_update:
-        return org.mitre.niem.cmf.NamespaceKind.NSK_OTHERNIEM;
+        return NamespaceKind.NSK_OTHERNIEM;
       case built_in:
-        return org.mitre.niem.cmf.NamespaceKind.NSK_UNKNOWN;
+        return NamespaceKind.NSK_UNKNOWN;
       default:
-        return org.mitre.niem.cmf.NamespaceKind.NSK_UNKNOWN;
+        return NamespaceKind.NSK_UNKNOWN;
     }
+  }
+
+  /**
+   * Converts API namespace categories to CMF namespace kinds (string).
+   */
+  public String categoryToCmfString(Category category) {
+    int cmfCategoryInt = this.categoryToCmfInt(category);
+    return NamespaceKind.kindToCode(cmfCategoryInt);
   }
 
   /**

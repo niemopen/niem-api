@@ -8,10 +8,10 @@
 @url = {{baseUrl}}/validation/cmf/xml
 @dir = validation/xml/cmf
 
-@pass_filename = CrashDriver.cmf.xml
+@pass_filename = CrashDriver-5.0.cmf.xml
 @pass_file = ../../{{dir}}/{{pass_filename}}
 
-@fail_filename = CrashDriver-invalid.cmf.xml
+@fail_filename = CrashDriver-5.0-invalid.cmf.xml
 @fail_file = ../../{{dir}}/{{fail_filename}}
 
 @unsupported_version_filename = CrashDriver-0.6.cmf.xml
@@ -72,7 +72,7 @@ Content-Type: application/xml
 --{{boundary}}--
 
 
-### CMF Validation - Invalid input format
+### CMF Validation - Invalid file format
 
 POST {{url}}?mediaType={{mediaType}}
 Content-Type: multipart/form-data; boundary={{boundary}}

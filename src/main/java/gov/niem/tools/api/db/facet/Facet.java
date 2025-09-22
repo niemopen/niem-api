@@ -1,12 +1,16 @@
 package gov.niem.tools.api.db.facet;
 
 import gov.niem.tools.api.core.config.Config;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.base.BaseNamespaceEntity;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.type.Type;
+import gov.niem.tools.api.validation.Test;
 
 import org.mitre.niem.cmf.CMFException;
+import org.mitre.niem.cmf.Component;
+import org.mitre.niem.cmf.Datatype;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -199,16 +203,26 @@ public class Facet extends BaseNamespaceEntity<Facet>
   /**
    * Adds this facet to the given CMF model.
    */
-  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
-    if (this.type == null) {
-      return;
+  public org.mitre.niem.cmf.Facet addToCmfModel(org.mitre.niem.cmf.Model cmfModel,
+      boolean addDependencies, AddModelReason addModelReason, Test test) throws CMFException {
+
+    if (this.type == null || this.getNamespace() == null) {
+      return null;
     }
-    org.mitre.niem.cmf.Datatype datatype = cmfModel.getDatatype(this.qname);
+
+    Datatype datatype = cmfModel.qnToDatatype(this.qname);
+
     if (datatype == null) {
-      datatype = this.type.toCmfDatatype();
-      cmfModel.addComponent(datatype);
+      Component cmfComponent = this.type.addToCmfModel(cmfModel, addDependencies, addModelReason,
+          test);
+      System.out.println("Added CMF component " + cmfComponent.qname());
+      datatype = cmfModel.qnToDatatype(qname);
     }
-    datatype.getRestrictionOf().addFacet(this.toCmf());
+
+    org.mitre.niem.cmf.Facet cmfFacet = this.toCmf();
+    datatype.asRestriction().addFacet(cmfFacet);
+
+    return cmfFacet;
   }
 
   /**
@@ -216,9 +230,10 @@ public class Facet extends BaseNamespaceEntity<Facet>
    */
   public org.mitre.niem.cmf.Facet toCmf() throws CMFException {
     org.mitre.niem.cmf.Facet cmfFacet = new org.mitre.niem.cmf.Facet();
-    cmfFacet.setDefinition(this.definition);
-    cmfFacet.setFacetKind(this.getCmfFacetKind(this.category));
-    cmfFacet.setStringVal(this.value);
+    // TODO: Support Facet documentation in other languages
+    cmfFacet.addDocumentation(this.definition, "en-US");
+    cmfFacet.setCategory(this.getCmfFacetKind(this.category));
+    cmfFacet.setValue(this.value);
     return cmfFacet;
   }
 

@@ -1,5 +1,7 @@
 package gov.niem.tools.api.core.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import lombok.extern.java.Log;
@@ -46,7 +48,7 @@ public class AppUtils {
    * Returns an Unprocessable Entity plain text response.
    */
   public static ResponseEntity<String> getResponseUnprocessableString(String message) {
-    return ResponseEntity.unprocessableEntity().contentType(MediaType.TEXT_PLAIN).body(message);
+    return ResponseEntity.unprocessableContent().contentType(MediaType.TEXT_PLAIN).body(message);
   }
 
   /**
@@ -54,6 +56,28 @@ public class AppUtils {
    */
   public static String getTimestamp() {
     return new SimpleDateFormat("yyyy-MM-dd-HHmm").format(new Date());
+  }
+
+  /**
+   * Capture console output for the given runnable and return as a string.
+   */
+  public static String captureLog(Runnable runnable) {
+    ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
+    PrintStream originalOut = System.out;
+    PrintStream originalErr = System.err;
+
+    System.setOut(new PrintStream(capturedOut));
+    System.setErr(new PrintStream(capturedOut));
+
+    try {
+      runnable.run();
+    }
+    finally {
+      System.setOut(originalOut);
+      System.setErr(originalErr);
+    }
+
+    return capturedOut.toString();
   }
 
 }

@@ -1,0 +1,497 @@
+@prefix aamva_d20:      <http://release.niem.gov/niem/codes/aamva_d20/5.0/#> .
+@prefix exch:           <http://training.niem.gov/CrashDriver/1.0/#> .
+@prefix ext:            <http://training.niem.gov/CrashDriver/1.0/extension#> .
+@prefix j:              <http://release.niem.gov/niem/domains/jxdm/7.0/#> .
+@prefix nc:             <http://release.niem.gov/niem/niem-core/5.0/#> .
+@prefix xs:             <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix owl:            <http://www.w3.org/2002/07/owl##> .
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema##> .
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns##> .
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#> .
+
+nc:ContactMeansAbstract
+    a owl:DataProperty ;
+    rdfs:comment "A data concept for a means of contacting someone." .
+
+nc:Person
+    a owl:ObjectProperty ;
+    rdfs:range nc:PersonType ;
+    rdfs:comment "A human being." .
+
+nc:PersonGivenName
+    a owl:DataProperty ;
+    rdfs:range nc:PersonNameTextType ;
+    rdfs:comment "A first name of a person." .
+
+j:Charge
+    a owl:ObjectProperty ;
+    rdfs:range j:ChargeType ;
+    rdfs:comment "A formal allegation that a specific person has committed a specific offense." .
+
+nc:DateRepresentation
+    a owl:DataProperty ;
+    rdfs:comment "A data concept for a representation of a date." .
+
+nc:ContactEmailID
+    a owl:DataProperty ;
+    rdfs:range xsd:string ;
+    rdfs:comment "An electronic mailing address by which a person or organization may be contacted." .
+
+nc:ContactInformation
+    a owl:ObjectProperty ;
+    rdfs:range nc:ContactInformationType ;
+    rdfs:comment "A set of details about how to contact a person or an organization." .
+
+j:CriminalInformationIndicator
+    a owl:DataProperty ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "True if the information specified is classified as criminal information; false if it is not classified as criminal information." .
+
+nc:LongitudeSecondValue
+    a owl:DataProperty ;
+    rdfs:range nc:AngularSecondType ;
+    rdfs:comment "A longitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive)." .
+
+j:PersonChargeAssociation
+    a owl:ObjectProperty ;
+    rdfs:range j:PersonChargeAssociationType ;
+    rdfs:comment "An association between a person and a charge issued to that person." .
+
+nc:InjurySeverityAbstract
+    a owl:DataProperty ;
+    rdfs:comment "A data concept for a severity of an injury received by a person involved into a Traffic Accident." .
+
+nc:PersonBirthDate
+    a owl:ObjectProperty ;
+    rdfs:range nc:DateType ;
+    rdfs:comment "A date a person was born." .
+
+ext:PrivacyCode
+    a owl:DataProperty ;
+    rdfs:range ext:PrivacyCodeType ;
+    rdfs:comment "A code representing a kind of property." .
+
+j:DriverLicense
+    a owl:ObjectProperty ;
+    rdfs:range j:DriverLicenseType ;
+    rdfs:comment "A license issued to a person granting driving privileges." .
+
+nc:LocationGeospatialCoordinateAbstract
+    a owl:ObjectProperty ;
+    rdfs:comment "A data concept for a geospatial location." .
+
+j:CrashVehicle
+    a owl:ObjectProperty ;
+    rdfs:range j:CrashVehicleType ;
+    rdfs:comment "A motor vehicle involved in a traffic accident." .
+
+j:CrashPassenger
+    a owl:ObjectProperty ;
+    rdfs:range j:CrashPassengerType ;
+    rdfs:comment "A motor vehicle passenger involved in a traffic accident." .
+
+j:JuvenileAsAdultIndicator
+    a owl:DataProperty ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "True if a juvenile is to be processed as an adult; false otherwise." .
+
+nc:IdentificationID
+    a owl:DataProperty ;
+    rdfs:range xsd:string ;
+    rdfs:comment "An identifier." .
+
+nc:personNameCommentText
+    a owl:DataProperty ;
+    rdfs:range xsd:string ;
+    rdfs:comment "A comment about a kind of name for a person." .
+
+nc:Location2DGeospatialCoordinate
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf nc:LocationGeospatialCoordinateAbstract ;
+    rdfs:range nc:Location2DGeospatialCoordinateType ;
+    rdfs:comment "A location identified by a latitude and longitude." .
+
+nc:PersonMiddleName
+    a owl:DataProperty ;
+    rdfs:range nc:PersonNameTextType ;
+    rdfs:comment "A middle name of a person." .
+
+j:InjurySeverityCode
+    a owl:DataProperty ;
+    rdfs:range aamva_d20:AccidentSeverityCodeType ;
+    rdfs:comment "A severity of an injury received by a person, such as in a traffic accident or crash." .
+
+j:Metadata
+    a owl:ObjectProperty ;
+    rdfs:range j:MetadataType ;
+    rdfs:comment "Information that further qualifies the kind of data represented." .
+
+j:CrashPersonInjury
+    a owl:ObjectProperty ;
+    rdfs:range nc:InjuryType ;
+    rdfs:comment "An injury received by a person involved in a traffic accident." .
+
+nc:GeographicCoordinateLongitude
+    a owl:ObjectProperty ;
+    rdfs:range nc:LongitudeCoordinateType ;
+    rdfs:comment "A measurement of the angular distance between a point on the Earth and the Prime Meridian." .
+
+nc:RoleOfPerson
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf nc:RoleOfAbstract ;
+    rdfs:range nc:PersonType ;
+    rdfs:comment "A person of whom the role object is a function." .
+
+ext:PersonDefenestrationIndicator
+    a owl:DataProperty ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "True if this person was thrown through a window; false otherwise." .
+
+nc:PersonName
+    a owl:ObjectProperty ;
+    rdfs:range nc:PersonNameType ;
+    rdfs:comment "A combination of names and/or titles by which a person is known." .
+
+j:ChargeDescriptionText
+    a owl:DataProperty ;
+    rdfs:range nc:TextType ;
+    rdfs:comment "A plain language description of a charge." .
+
+nc:LongitudeMinuteValue
+    a owl:DataProperty ;
+    rdfs:range nc:AngularMinuteType ;
+    rdfs:comment "A longitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive)." .
+
+j:DriverLicenseCardIdentification
+    a owl:ObjectProperty ;
+    rdfs:range nc:IdentificationType ;
+    rdfs:comment "An identification that is affixed to the raw materials (card stock, laminate, etc.) used in producing driver licenses and ID cards. The numbers are issued by the material's manufacturer and provide a unique reference to a card within a jurisdiction." .
+
+nc:Location
+    a owl:ObjectProperty ;
+    rdfs:range nc:LocationType ;
+    rdfs:comment "A geospatial location." .
+
+j:Crash
+    a owl:ObjectProperty ;
+    rdfs:range j:CrashType ;
+    rdfs:comment "A traffic accident." .
+
+nc:LatitudeDegreeValue
+    a owl:DataProperty ;
+    rdfs:range nc:LatitudeDegreeType ;
+    rdfs:comment "A value that specifies the degree of a latitude. The value comes from a restricted range between -90 (inclusive) and +90 (inclusive)." .
+
+nc:InjuryDescriptionText
+    a owl:DataProperty ;
+    rdfs:range nc:TextType ;
+    rdfs:comment "A description of an injury." .
+
+exch:CrashDriverInfo
+    a owl:ObjectProperty ;
+    rdfs:range exch:CrashDriverInfoType ;
+    rdfs:comment "A collection of information about the driver of a vehicle in a crash." .
+
+j:IntelligenceInformationIndicator
+    a owl:DataProperty ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "True if the information specified is intelligence information; false otherwise." .
+
+nc:Date
+    a owl:DataProperty ;
+    rdfs:range xsd:date ;
+    rdfs:comment "A full date." .
+
+nc:LongitudeDegreeValue
+    a owl:DataProperty ;
+    rdfs:range nc:LongitudeDegreeType ;
+    rdfs:comment "A value that specifies the degree of a longitude. The value comes from a restricted range between -180 (inclusive) and +180 (inclusive)." .
+
+nc:GeographicCoordinateLatitude
+    a owl:ObjectProperty ;
+    rdfs:range nc:LatitudeCoordinateType ;
+    rdfs:comment "A measurement of the angular distance between a point on the Earth and the Equator." .
+
+j:CrashDriver
+    a owl:ObjectProperty ;
+    rdfs:range j:CrashDriverType ;
+    rdfs:comment "A motor vehicle driver involved into a traffic accident." .
+
+nc:InjurySeverityText
+    a owl:DataProperty ;
+    rdfs:range nc:TextType ;
+    rdfs:comment "A severity of an injury received by a person, such as in a traffic accident or crash." .
+
+ext:PrivacyMetadata
+    a owl:ObjectProperty ;
+    rdfs:range ext:PrivacyMetadataType ;
+    rdfs:comment "Metadata about Privacy." .
+
+nc:LatitudeSecondValue
+    a owl:DataProperty ;
+    rdfs:range nc:AngularSecondType ;
+    rdfs:comment "A latitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive)." .
+
+j:CrashPerson
+    a owl:ObjectProperty ;
+    rdfs:range j:CrashPersonType ;
+    rdfs:comment "A person involved in a traffic accident." .
+
+nc:RoleOfAbstract
+    a owl:ObjectProperty ;
+    rdfs:comment "A data concept for a property of a role object. This specifies the base object, of which the role object is a function." .
+
+j:ChargeFelonyIndicator
+    a owl:DataProperty ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "True if a charge refers to a felony offense; false otherwise." .
+
+nc:ActivityDate
+    a owl:ObjectProperty ;
+    rdfs:range nc:DateType ;
+    rdfs:comment "A date of an activity." .
+
+nc:LatitudeMinuteValue
+    a owl:DataProperty ;
+    rdfs:range nc:AngularMinuteType ;
+    rdfs:comment "A latitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive)." .
+
+nc:PersonSurName
+    a owl:DataProperty ;
+    rdfs:range nc:PersonNameTextType ;
+    rdfs:comment "A last name or family name of a person." .
+
+j:CrashDriverType
+    a owl:Class ;
+    rdfs:comment "A data type for a motor vehicle driver involved in a traffic accident." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:RoleOfPerson
+    ] .
+
+ext:PrivacyMetadataType
+    a owl:Class ;
+    rdfs:comment "A data type for metadata about Privacy." .
+
+j:CrashVehicleType
+    a owl:Class ;
+    rdfs:comment "A data type for a motor vehicle involved in a traffic accident." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty j:CrashDriver
+    ] .
+
+j:CrashType
+    a owl:Class ;
+    rdfs:subClass j:DrivingIncidentType ;
+    rdfs:comment "A data type for a traffic accident." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty j:CrashVehicle
+    ] ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:Location
+    ] .
+
+nc:ActivityType
+    a owl:Class ;
+    rdfs:comment "A data type for a single or set of related actions, events, or process steps." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:ActivityDate
+    ] .
+
+nc:AssociationType
+    a owl:Class ;
+    rdfs:comment "A data type for an association, connection, relationship, or involvement somehow linking people, things, and/or activities together." .
+
+j:DriverLicenseType
+    a owl:Class ;
+    rdfs:subClass j:DriverLicenseBaseType ;
+    rdfs:comment "A data type for a license issued to a person granting driving privileges." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty j:DriverLicenseCardIdentification
+    ] .
+
+nc:LatitudeCoordinateType
+    a owl:Class ;
+    rdfs:comment "A data type for a measurement of the angular distance between a point on the Earth and the Equator." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:LatitudeDegreeValue
+    ] .
+
+nc:InjuryType
+    a owl:Class ;
+    rdfs:comment "A data type for a form of harm or damage sustained by a person." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:InjuryDescriptionText
+    ] ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:InjurySeverityAbstract
+    ] .
+
+nc:PersonType
+    a owl:Class ;
+    rdfs:comment "A data type for a human being." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:PersonName
+    ] .
+
+nc:IncidentType
+    a owl:Class ;
+    rdfs:subClass nc:ActivityType ;
+    rdfs:comment "A data type for an occurrence or an event that may require a response." .
+
+j:CrashPersonType
+    a owl:Class ;
+    rdfs:comment "A data type for any person involved in a traffic accident." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:RoleOfPerson
+    ] .
+
+nc:LongitudeCoordinateType
+    a owl:Class ;
+    rdfs:comment "A data type for a measurement of the angular distance between a point on the Earth and the Prime Meridian." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:LongitudeDegreeValue
+    ] .
+
+nc:LocationType
+    a owl:Class ;
+    rdfs:comment "A data type for geospatial location." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:LocationGeospatialCoordinateAbstract
+    ] .
+
+j:MetadataType
+    a owl:Class ;
+    rdfs:comment "A data type for information that further qualifies the kind of data represented." .
+
+j:DrivingIncidentType
+    a owl:Class ;
+    rdfs:subClass nc:IncidentType ;
+    rdfs:comment "A data type for details of an incident involving a vehicle." .
+
+j:PersonChargeAssociationType
+    a owl:Class ;
+    rdfs:subClass nc:AssociationType ;
+    rdfs:comment "A data type for an association between a person and a charge." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:Person
+    ] ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty j:Charge
+    ] .
+
+nc:IdentificationType
+    a owl:Class ;
+    rdfs:comment "A data type for a representation of an identity." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:IdentificationID
+    ] .
+
+nc:Location2DGeospatialCoordinateType
+    a owl:Class ;
+    rdfs:comment "A data type for a location identified by latitude and longitude." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:GeographicCoordinateLatitude
+    ] ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:GeographicCoordinateLongitude
+    ] .
+
+nc:ContactInformationType
+    a owl:Class ;
+    rdfs:comment "A data type for how to contact a person or an organization." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:ContactMeansAbstract
+    ] .
+
+exch:CrashDriverInfoType
+    a owl:Class ;
+    rdfs:comment "A data type for a collection of information about the driver of a vehicle in a crash." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:Person
+    ] ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty j:Crash
+    ] .
+
+j:CrashPassengerType
+    a owl:Class ;
+    rdfs:comment "A data type for a motor vehicle passenger involved into a Traffic Accident." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:RoleOfPerson
+    ] .
+
+j:ChargeType
+    a owl:Class ;
+    rdfs:comment "A data type for a formal allegation that a specific person has committed a specific offense." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty j:ChargeDescriptionText
+    ] .
+
+nc:DateType
+    a owl:Class ;
+    rdfs:comment "A data type for a calendar date." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:DateRepresentation
+    ] .
+
+j:DriverLicenseBaseType
+    a owl:Class ;
+    rdfs:comment "A data type for an authorization issued to a driver granting driving privileges." .
+
+nc:PersonNameType
+    a owl:Class ;
+    rdfs:comment "A data type for a combination of names and/or titles by which a person is known." ;
+    owl:subclassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty nc:PersonSurName
+    ] .

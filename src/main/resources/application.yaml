@@ -2,10 +2,10 @@
 app:
   baseUrl: http://localhost:8080/api/v2
   cmf:
-    version: 0.8
-    uri: https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/
+    version: 1.0
+    uri: https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/
   cmftool:
-    version: 0.7-alpha.6
+    version: 1.0
   draft: ${project.ext.draft?:PENDING_BUILD}
 
 logging:

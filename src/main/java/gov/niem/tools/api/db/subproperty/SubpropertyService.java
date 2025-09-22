@@ -1,5 +1,6 @@
 package gov.niem.tools.api.db.subproperty;
 
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.base.BaseVersionEntityService;
 import gov.niem.tools.api.db.component.Component;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
@@ -13,6 +14,7 @@ import gov.niem.tools.api.db.type.Type;
 import gov.niem.tools.api.db.type.TypeService;
 import gov.niem.tools.api.db.version.Version;
 import gov.niem.tools.api.db.version.VersionService;
+import gov.niem.tools.api.validation.Test;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -145,9 +147,15 @@ public class SubpropertyService extends BaseVersionEntityService<Subproperty> {
    */
   public Optional<Subproperty> findOneOptional(Version version, String typeQname,
       String propertyQname) {
-    Optional<Subproperty> result = repo.findOneByVersionIdAndType_Namespace_PrefixAndType_NameAndProperty_Namespace_PrefixAndProperty_Name(
-        version.getId(), Component.getPrefix(typeQname), Component.getName(typeQname),
-        Component.getPrefix(propertyQname), Component.getName(propertyQname));
+    Type type = typeService.findOne(version, typeQname);
+    Property property = propertyService.findOne(version, propertyQname);
+
+    if (type == null || property == null) {
+      return Optional.empty();
+    }
+
+    Optional<Subproperty> result = repo.findOneByVersionIdAndTypeIdAndPropertyId(
+        version.getId(), type.getId(), property.getId());
 
     // Initialize the result if Hibernate returns a proxy due to lazy loading
     if (result.isPresent()) {
@@ -290,6 +298,27 @@ public class SubpropertyService extends BaseVersionEntityService<Subproperty> {
         .findOneOptional(subproperty.getVersion(), subproperty.getTypeQname(),
             subproperty.getPropertyQname())
         .ifPresent(result -> this.throwNotUnique(subproperty));
+  }
+
+  /**
+   * Adds the given subproperty to the given CMF model as either a CMF property association
+   * or a CMF augmentation record.
+   */
+  public void addToCmfModel(Subproperty subproperty, org.mitre.niem.cmf.Model cmfModel,
+      Boolean addDependencies, AddModelReason addModelReason, Test test) throws Exception {
+
+    Type type = subproperty.getType();
+
+    if (type.getPattern() == Type.Pattern.augmentation) {
+      // Add subproperty to CMF model as CMF augmentation record
+      Type augmentedType = typeService.findAugmentedType(type);
+      subproperty.addToCmfModelAsAugmentationRecord(cmfModel, augmentedType);
+    }
+    else {
+      // Add subproperty to CMF model as property association
+      subproperty.addToCmfModel(cmfModel, addDependencies, addModelReason, test);
+    }
+
   }
 
 }

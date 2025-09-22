@@ -6,4 +6,5 @@
     files="GeneratedObject.java"
     lines="50-9999" />
   <suppress checks=".*" files="[\\/]build[\\/]" />
+  <suppress checks=".*" files="[\\/]libs[\\/]" />
 </suppressions>

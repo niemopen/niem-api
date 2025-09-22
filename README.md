@@ -87,7 +87,7 @@ The application leverages the CMF tool to transform supported representations of
 
 Inputs:
 
-- [x] CMF 0.8
+- [x] CMF 1.0-beta.1
 - [x] NIEM XML Schemas (XSD), beginning with NDR version 3.0
 - [ ] SSGT wantlist (to support users migrating from the SSGT, especially for NIEM 1.0 - 2.1)
 
@@ -122,7 +122,7 @@ Migration issues will need to be resolved manually.
 
 - [x] **XSD** - Validate a set of XML Schemas.
 
-- [x] **CMF** - Validate a CMF XML file (v0.8) against the CMF schemas.
+- [x] **CMF** - Validate a CMF XML file (v1.0-beta.1) against the CMF schemas.
 
 - [x] **XML catalog** - Validate a XML catalog against the OASIS eXML catalog schema.
 
@@ -299,15 +299,21 @@ A separate database schema (`test`) is used for testing purposes.
 
 ### CMF Tool
 
-- Build the jar for the CMF tool and place it under `libs/cmftool`
+- Run `git submodule update --remote --recursive`.
 - Update `app.cmftool` properties in `application.yaml`.
 
 If the version of CMF has changed during an upgrade to the CMF Tool:
 
 - Update CMF schemas for the CMF validation endpoint under `src/main/resources/validation/cmf`.
 - Update the path to the CMF schemas in `NiemValidationService` method `validateCmf()`.
-- Update `app.cmf` properties in `application.yaml`.
+- Update `app.cmf` and `app.cmftool` properties in `application.yaml`.
 - Update CMF files used in `src/test/resources`.
+
+**Adjustments**
+
+Comment out the following dependency in `lib-cmf/build.gradle` and `lib-util/build.gradle`:
+
+`testImplementation libs.junit.jupiter`
 
 ### Dependencies and plugins
 

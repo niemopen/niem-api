@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model
+  xmlns="https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/"
+  xmlns:cmf="https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xml:lang="en-US">
+  <Namespace structures:id="aamva_d20">
+    <NamespaceURI>http://release.niem.gov/niem/codes/aamva_d20/5.0/</NamespaceURI>
+    <NamespacePrefixText>aamva_d20</NamespacePrefixText>
+    <DocumentationText>Motor vehicle administration codes from the Data Dictionary for Traffic Record
+      Systems, maintained by AAMVA, the American Association of Motor Vehicle Administrators.</DocumentationText>
+    <ConformanceTargetURI>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURI>
+    <DocumentFilePathText>niem/codes/aamva_d20.xsd</DocumentFilePathText>
+    <NamespaceCategoryCode>OTHERNIEM</NamespaceCategoryCode>
+    <NamespaceVersionText>1</NamespaceVersionText>
+    <ArchitectureVersionName>NIEM5.0</ArchitectureVersionName>
+    <NamespaceLanguageName>en-US</NamespaceLanguageName>
+  </Namespace>
+  <Namespace structures:id="exch">
+    <NamespaceURI>http://training.niem.gov/CrashDriver/1.0/</NamespaceURI>
+    <NamespacePrefixText>exch</NamespacePrefixText>
+    <DocumentationText>Exchange schema for an example IEPD used to illustrate NIEM's technical
+      features.</DocumentationText>
+    <ConformanceTargetURI>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURI>
+    <DocumentFilePathText>extension/CrashDriver.xsd</DocumentFilePathText>
+    <NamespaceCategoryCode>EXTENSION</NamespaceCategoryCode>
+    <NamespaceVersionText>1</NamespaceVersionText>
+    <ArchitectureVersionName>NIEM5.0</ArchitectureVersionName>
+    <NamespaceLanguageName>en-US</NamespaceLanguageName>
+  </Namespace>
+  <Namespace structures:id="ext">
+    <NamespaceURI>http://training.niem.gov/CrashDriver/1.0/extension</NamespaceURI>
+    <NamespacePrefixText>ext</NamespacePrefixText>
+    <DocumentationText>Extension schema for an example IEPD used to illustrate NIEM's technical
+      features.</DocumentationText>
+    <ConformanceTargetURI>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURI>
+    <DocumentFilePathText>extension/extension.xsd</DocumentFilePathText>
+    <NamespaceCategoryCode>EXTENSION</NamespaceCategoryCode>
+    <NamespaceVersionText>1</NamespaceVersionText>
+    <ArchitectureVersionName>NIEM5.0</ArchitectureVersionName>
+    <NamespaceLanguageName>en-US</NamespaceLanguageName>
+    <AugmentationRecord>
+      <Class structures:ref="j.CrashPersonType" xsi:nil="true"/>
+      <DataProperty structures:ref="ext.PersonDefenestrationIndicator" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </AugmentationRecord>
+    <AugmentationRecord>
+      <Class structures:ref="j.DriverLicenseType" xsi:nil="true"/>
+      <ObjectProperty structures:ref="nc.ContactInformation" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+      <AugmentationIndex>0</AugmentationIndex>
+    </AugmentationRecord>
+  </Namespace>
+  <Namespace structures:id="j">
+    <NamespaceURI>http://release.niem.gov/niem/domains/jxdm/7.0/</NamespaceURI>
+    <NamespacePrefixText>j</NamespacePrefixText>
+    <DocumentationText>Justice</DocumentationText>
+    <ConformanceTargetURI>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURI>
+    <DocumentFilePathText>niem/domains/jxdm.xsd</DocumentFilePathText>
+    <NamespaceCategoryCode>DOMAIN</NamespaceCategoryCode>
+    <NamespaceVersionText>1</NamespaceVersionText>
+    <ArchitectureVersionName>NIEM5.0</ArchitectureVersionName>
+    <NamespaceLanguageName>en-US</NamespaceLanguageName>
+  </Namespace>
+  <Namespace structures:id="nc">
+    <NamespaceURI>http://release.niem.gov/niem/niem-core/5.0/</NamespaceURI>
+    <NamespacePrefixText>nc</NamespacePrefixText>
+    <DocumentationText>NIEM Core.</DocumentationText>
+    <ConformanceTargetURI>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURI>
+    <DocumentFilePathText>niem/niem-core.xsd</DocumentFilePathText>
+    <NamespaceCategoryCode>CORE</NamespaceCategoryCode>
+    <NamespaceVersionText>1</NamespaceVersionText>
+    <ArchitectureVersionName>NIEM5.0</ArchitectureVersionName>
+    <NamespaceLanguageName>en-US</NamespaceLanguageName>
+  </Namespace>
+  <Namespace structures:id="xs">
+    <NamespaceURI>http://www.w3.org/2001/XMLSchema</NamespaceURI>
+    <NamespacePrefixText>xs</NamespacePrefixText>
+    <NamespaceCategoryCode>XSD</NamespaceCategoryCode>
+  </Namespace>
+  <ObjectProperty structures:id="exch.CrashDriverInfo">
+    <Name>CrashDriverInfo</Name>
+    <Namespace structures:ref="exch" xsi:nil="true"/>
+    <DocumentationText>A collection of information about the driver of a vehicle in a crash.</DocumentationText>
+    <Class structures:ref="exch.CrashDriverInfoType" xsi:nil="true"/>
+  </ObjectProperty>
+  <DataProperty structures:id="ext.PersonDefenestrationIndicator">
+    <Name>PersonDefenestrationIndicator</Name>
+    <Namespace structures:ref="ext" xsi:nil="true"/>
+    <DocumentationText>True if this person was thrown through a window; false otherwise.</DocumentationText>
+    <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="ext.PrivacyCode">
+    <Name>PrivacyCode</Name>
+    <Namespace structures:ref="ext" xsi:nil="true"/>
+    <DocumentationText>A code representing a kind of property.</DocumentationText>
+    <Datatype structures:ref="ext.PrivacyCodeType" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="ext.PrivacyMetadata">
+    <Name>PrivacyMetadata</Name>
+    <Namespace structures:ref="ext" xsi:nil="true"/>
+    <DocumentationText>Metadata about Privacy.</DocumentationText>
+    <Class structures:ref="ext.PrivacyMetadataType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="j.Charge">
+    <Name>Charge</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A formal allegation that a specific person has committed a specific offense.</DocumentationText>
+    <Class structures:ref="j.ChargeType" xsi:nil="true"/>
+  </ObjectProperty>
+  <DataProperty structures:id="j.ChargeDescriptionText">
+    <Name>ChargeDescriptionText</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A plain language description of a charge.</DocumentationText>
+    <Datatype structures:ref="nc.TextType" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="j.ChargeFelonyIndicator">
+    <Name>ChargeFelonyIndicator</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>True if a charge refers to a felony offense; false otherwise.</DocumentationText>
+    <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="j.Crash">
+    <Name>Crash</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A traffic accident.</DocumentationText>
+    <Class structures:ref="j.CrashType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="j.CrashDriver">
+    <Name>CrashDriver</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A motor vehicle driver involved into a traffic accident.</DocumentationText>
+    <Class structures:ref="j.CrashDriverType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="j.CrashPassenger">
+    <Name>CrashPassenger</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A motor vehicle passenger involved in a traffic accident.</DocumentationText>
+    <Class structures:ref="j.CrashPassengerType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="j.CrashPerson">
+    <Name>CrashPerson</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A person involved in a traffic accident.</DocumentationText>
+    <Class structures:ref="j.CrashPersonType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="j.CrashPersonInjury">
+    <Name>CrashPersonInjury</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>An injury received by a person involved in a traffic accident.</DocumentationText>
+    <Class structures:ref="nc.InjuryType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="j.CrashVehicle">
+    <Name>CrashVehicle</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A motor vehicle involved in a traffic accident.</DocumentationText>
+    <Class structures:ref="j.CrashVehicleType" xsi:nil="true"/>
+  </ObjectProperty>
+  <DataProperty structures:id="j.CriminalInformationIndicator">
+    <Name>CriminalInformationIndicator</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>True if the information specified is classified as criminal information; false if it is not classified as criminal information.</DocumentationText>
+    <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="j.DriverLicense">
+    <Name>DriverLicense</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A license issued to a person granting driving privileges.</DocumentationText>
+    <Class structures:ref="j.DriverLicenseType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="j.DriverLicenseCardIdentification">
+    <Name>DriverLicenseCardIdentification</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>An identification that is affixed to the raw materials (card stock, laminate, etc.) used in producing driver licenses and ID cards. The numbers are issued by the material's manufacturer and provide a unique reference to a card within a jurisdiction.</DocumentationText>
+    <Class structures:ref="nc.IdentificationType" xsi:nil="true"/>
+  </ObjectProperty>
+  <DataProperty structures:id="j.InjurySeverityCode">
+    <Name>InjurySeverityCode</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A severity of an injury received by a person, such as in a traffic accident or crash.</DocumentationText>
+    <SubPropertyOf structures:ref="nc.InjurySeverityAbstract" xsi:nil="true"/>
+    <Datatype structures:ref="aamva_d20.AccidentSeverityCodeType" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="j.IntelligenceInformationIndicator">
+    <Name>IntelligenceInformationIndicator</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>True if the information specified is intelligence information; false otherwise.</DocumentationText>
+    <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="j.JuvenileAsAdultIndicator">
+    <Name>JuvenileAsAdultIndicator</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>True if a juvenile is to be processed as an adult; false otherwise.</DocumentationText>
+    <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="j.Metadata">
+    <Name>Metadata</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>Information that further qualifies the kind of data represented.</DocumentationText>
+    <Class structures:ref="j.MetadataType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="j.PersonChargeAssociation">
+    <Name>PersonChargeAssociation</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>An association between a person and a charge issued to that person.</DocumentationText>
+    <Class structures:ref="j.PersonChargeAssociationType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="nc.ActivityDate">
+    <Name>ActivityDate</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A date of an activity.</DocumentationText>
+    <Class structures:ref="nc.DateType" xsi:nil="true"/>
+  </ObjectProperty>
+  <DataProperty structures:id="nc.ContactEmailID">
+    <Name>ContactEmailID</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>An electronic mailing address by which a person or organization may be contacted.</DocumentationText>
+    <SubPropertyOf structures:ref="nc.ContactMeansAbstract" xsi:nil="true"/>
+    <Datatype structures:ref="xs.string" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="nc.ContactInformation">
+    <Name>ContactInformation</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A set of details about how to contact a person or an organization.</DocumentationText>
+    <Class structures:ref="nc.ContactInformationType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="nc.ContactMeansAbstract">
+    <Name>ContactMeansAbstract</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data concept for a means of contacting someone.</DocumentationText>
+    <AbstractIndicator>true</AbstractIndicator>
+  </ObjectProperty>
+  <DataProperty structures:id="nc.Date">
+    <Name>Date</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A full date.</DocumentationText>
+    <SubPropertyOf structures:ref="nc.DateRepresentation" xsi:nil="true"/>
+    <Datatype structures:ref="xs.date" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="nc.DateRepresentation">
+    <Name>DateRepresentation</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data concept for a representation of a date.</DocumentationText>
+    <AbstractIndicator>true</AbstractIndicator>
+  </ObjectProperty>
+  <ObjectProperty structures:id="nc.GeographicCoordinateLatitude">
+    <Name>GeographicCoordinateLatitude</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A measurement of the angular distance between a point on the Earth and the Equator.</DocumentationText>
+    <Class structures:ref="nc.LatitudeCoordinateType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="nc.GeographicCoordinateLongitude">
+    <Name>GeographicCoordinateLongitude</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A measurement of the angular distance between a point on the Earth and the Prime Meridian.</DocumentationText>
+    <Class structures:ref="nc.LongitudeCoordinateType" xsi:nil="true"/>
+  </ObjectProperty>
+  <DataProperty structures:id="nc.IdentificationID">
+    <Name>IdentificationID</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>An identifier.</DocumentationText>
+    <Datatype structures:ref="xs.string" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="nc.InjuryDescriptionText">
+    <Name>InjuryDescriptionText</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A description of an injury.</DocumentationText>
+    <Datatype structures:ref="nc.TextType" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="nc.InjurySeverityAbstract">
+    <Name>InjurySeverityAbstract</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data concept for a severity of an injury received by a person involved into a Traffic Accident.</DocumentationText>
+    <AbstractIndicator>true</AbstractIndicator>
+  </ObjectProperty>
+  <DataProperty structures:id="nc.InjurySeverityText">
+    <Name>InjurySeverityText</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A severity of an injury received by a person, such as in a traffic accident or crash.</DocumentationText>
+    <SubPropertyOf structures:ref="nc.InjurySeverityAbstract" xsi:nil="true"/>
+    <Datatype structures:ref="nc.TextType" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="nc.LatitudeDegreeValue">
+    <Name>LatitudeDegreeValue</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A value that specifies the degree of a latitude. The value comes from a restricted range between -90 (inclusive) and +90 (inclusive).</DocumentationText>
+    <Datatype structures:ref="nc.LatitudeDegreeType" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="nc.LatitudeMinuteValue">
+    <Name>LatitudeMinuteValue</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A latitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).</DocumentationText>
+    <Datatype structures:ref="nc.AngularMinuteType" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="nc.LatitudeSecondValue">
+    <Name>LatitudeSecondValue</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A latitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).</DocumentationText>
+    <Datatype structures:ref="nc.AngularSecondType" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="nc.Location">
+    <Name>Location</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A geospatial location.</DocumentationText>
+    <Class structures:ref="nc.LocationType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="nc.Location2DGeospatialCoordinate">
+    <Name>Location2DGeospatialCoordinate</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A location identified by a latitude and longitude.</DocumentationText>
+    <SubPropertyOf structures:ref="nc.LocationGeospatialCoordinateAbstract" xsi:nil="true"/>
+    <Class structures:ref="nc.Location2DGeospatialCoordinateType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="nc.LocationGeospatialCoordinateAbstract">
+    <Name>LocationGeospatialCoordinateAbstract</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data concept for a geospatial location.</DocumentationText>
+    <AbstractIndicator>true</AbstractIndicator>
+  </ObjectProperty>
+  <DataProperty structures:id="nc.LongitudeDegreeValue">
+    <Name>LongitudeDegreeValue</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A value that specifies the degree of a longitude. The value comes from a restricted range between -180 (inclusive) and +180 (inclusive).</DocumentationText>
+    <Datatype structures:ref="nc.LongitudeDegreeType" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="nc.LongitudeMinuteValue">
+    <Name>LongitudeMinuteValue</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A longitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).</DocumentationText>
+    <Datatype structures:ref="nc.AngularMinuteType" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="nc.LongitudeSecondValue">
+    <Name>LongitudeSecondValue</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A longitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).</DocumentationText>
+    <Datatype structures:ref="nc.AngularSecondType" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="nc.Person">
+    <Name>Person</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A human being.</DocumentationText>
+    <Class structures:ref="nc.PersonType" xsi:nil="true"/>
+  </ObjectProperty>
+  <ObjectProperty structures:id="nc.PersonBirthDate">
+    <Name>PersonBirthDate</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A date a person was born.</DocumentationText>
+    <Class structures:ref="nc.DateType" xsi:nil="true"/>
+  </ObjectProperty>
+  <DataProperty structures:id="nc.PersonGivenName">
+    <Name>PersonGivenName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A first name of a person.</DocumentationText>
+    <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true"/>
+  </DataProperty>
+  <DataProperty structures:id="nc.PersonMiddleName">
+    <Name>PersonMiddleName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A middle name of a person.</DocumentationText>
+    <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="nc.PersonName">
+    <Name>PersonName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A combination of names and/or titles by which a person is known.</DocumentationText>
+    <Class structures:ref="nc.PersonNameType" xsi:nil="true"/>
+  </ObjectProperty>
+  <DataProperty structures:id="nc.personNameCommentText">
+    <Name>personNameCommentText</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A comment about a kind of name for a person.</DocumentationText>
+    <Datatype structures:ref="xs.string" xsi:nil="true"/>
+    <AttributeIndicator>true</AttributeIndicator>
+  </DataProperty>
+  <DataProperty structures:id="nc.PersonSurName">
+    <Name>PersonSurName</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A last name or family name of a person.</DocumentationText>
+    <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true"/>
+  </DataProperty>
+  <ObjectProperty structures:id="nc.RoleOfAbstract">
+    <Name>RoleOfAbstract</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data concept for a property of a role object. This specifies the base object, of which the role object is a function.</DocumentationText>
+    <AbstractIndicator>true</AbstractIndicator>
+  </ObjectProperty>
+  <ObjectProperty structures:id="nc.RoleOfPerson">
+    <Name>RoleOfPerson</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A person of whom the role object is a function.</DocumentationText>
+    <SubPropertyOf structures:ref="nc.RoleOfAbstract" xsi:nil="true"/>
+    <Class structures:ref="nc.PersonType" xsi:nil="true"/>
+  </ObjectProperty>
+  <Class structures:id="exch.CrashDriverInfoType">
+    <Name>CrashDriverInfoType</Name>
+    <Namespace structures:ref="exch" xsi:nil="true"/>
+    <DocumentationText>A data type for a collection of information about the driver of a vehicle in a crash.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.Person" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.Crash" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.PersonChargeAssociation" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.Charge" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.Metadata" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="ext.PrivacyMetadata" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="ext.PrivacyMetadataType">
+    <Name>PrivacyMetadataType</Name>
+    <Namespace structures:ref="ext" xsi:nil="true"/>
+    <DocumentationText>A data type for metadata about Privacy.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="ext.PrivacyCode" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>2</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.ChargeType">
+    <Name>ChargeType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for a formal allegation that a specific person has committed a specific offense.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="j.ChargeDescriptionText" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="j.ChargeFelonyIndicator" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.CrashDriverType">
+    <Name>CrashDriverType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for a motor vehicle driver involved in a traffic accident.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.RoleOfPerson" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.DriverLicense" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.CrashPassengerType">
+    <Name>CrashPassengerType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for a motor vehicle passenger involved into a Traffic Accident.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.RoleOfPerson" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.CrashPersonType">
+    <Name>CrashPersonType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for any person involved in a traffic accident.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.RoleOfPerson" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.CrashPersonInjury" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.CrashType">
+    <Name>CrashType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for a traffic accident.</DocumentationText>
+    <SubClassOf structures:ref="j.DrivingIncidentType" xsi:nil="true"/>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.CrashVehicle" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.CrashPerson" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.Location" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.CrashVehicleType">
+    <Name>CrashVehicleType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for a motor vehicle involved in a traffic accident.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.CrashDriver" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.CrashPassenger" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.DriverLicenseBaseType">
+    <Name>DriverLicenseBaseType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for an authorization issued to a driver granting driving privileges.</DocumentationText>
+  </Class>
+  <Class structures:id="j.DriverLicenseType">
+    <Name>DriverLicenseType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for a license issued to a person granting driving privileges.</DocumentationText>
+    <SubClassOf structures:ref="j.DriverLicenseBaseType" xsi:nil="true"/>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.DriverLicenseCardIdentification" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.DrivingIncidentType">
+    <Name>DrivingIncidentType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for details of an incident involving a vehicle.</DocumentationText>
+    <SubClassOf structures:ref="nc.IncidentType" xsi:nil="true"/>
+  </Class>
+  <Class structures:id="j.MetadataType">
+    <Name>MetadataType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for information that further qualifies the kind of data represented.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="j.CriminalInformationIndicator" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="j.IntelligenceInformationIndicator" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="j.PersonChargeAssociationType">
+    <Name>PersonChargeAssociationType</Name>
+    <Namespace structures:ref="j" xsi:nil="true"/>
+    <DocumentationText>A data type for an association between a person and a charge.</DocumentationText>
+    <SubClassOf structures:ref="nc.AssociationType" xsi:nil="true"/>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.Person" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="j.Charge" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="j.JuvenileAsAdultIndicator" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.ActivityType">
+    <Name>ActivityType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a single or set of related actions, events, or process steps.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.ActivityDate" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.AssociationType">
+    <Name>AssociationType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for an association, connection, relationship, or involvement somehow linking people, things, and/or activities together.</DocumentationText>
+  </Class>
+  <Class structures:id="nc.ContactInformationType">
+    <Name>ContactInformationType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for how to contact a person or an organization.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.ContactMeansAbstract" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.DateType">
+    <Name>DateType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a calendar date.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.DateRepresentation" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.IdentificationType">
+    <Name>IdentificationType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a representation of an identity.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.IdentificationID" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.IncidentType">
+    <Name>IncidentType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for an occurrence or an event that may require a response.</DocumentationText>
+    <SubClassOf structures:ref="nc.ActivityType" xsi:nil="true"/>
+  </Class>
+  <Class structures:id="nc.InjuryType">
+    <Name>InjuryType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a form of harm or damage sustained by a person.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.InjuryDescriptionText" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.InjurySeverityAbstract" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.LatitudeCoordinateType">
+    <Name>LatitudeCoordinateType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a measurement of the angular distance between a point on the Earth and the Equator.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.LatitudeDegreeValue" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.LatitudeMinuteValue" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.LatitudeSecondValue" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.Location2DGeospatialCoordinateType">
+    <Name>Location2DGeospatialCoordinateType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a location identified by latitude and longitude.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.GeographicCoordinateLatitude" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.GeographicCoordinateLongitude" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.LocationType">
+    <Name>LocationType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for geospatial location.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.LocationGeospatialCoordinateAbstract" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.LongitudeCoordinateType">
+    <Name>LongitudeCoordinateType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a measurement of the angular distance between a point on the Earth and the Prime Meridian.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.LongitudeDegreeValue" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.LongitudeMinuteValue" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.LongitudeSecondValue" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.PersonNameType">
+    <Name>PersonNameType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a combination of names and/or titles by which a person is known.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.PersonGivenName" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.PersonMiddleName" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.PersonSurName" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="nc.personNameCommentText" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Class structures:id="nc.PersonType">
+    <Name>PersonType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a human being.</DocumentationText>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.PersonBirthDate" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="nc.PersonName" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
+  <Restriction structures:id="aamva_d20.AccidentSeverityCodeType">
+    <Name>AccidentSeverityCodeType</Name>
+    <Namespace structures:ref="aamva_d20" xsi:nil="true"/>
+    <DocumentationText>A data type for severity levels of an accident.</DocumentationText>
+    <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>1</FacetValue>
+      <DocumentationText>Fatal Accident</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>2</FacetValue>
+      <DocumentationText>Incapacitating Injury Accident</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>3</FacetValue>
+      <DocumentationText>Non-incapacitating Evident Injury</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>4</FacetValue>
+      <DocumentationText>Possible Injury Accident</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>5</FacetValue>
+      <DocumentationText>Non-injury Accident</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>9</FacetValue>
+      <DocumentationText>Unknown</DocumentationText>
+    </Facet>
+  </Restriction>
+  <Restriction structures:id="ext.PrivacyCodeType">
+    <Name>PrivacyCodeType</Name>
+    <Namespace structures:ref="ext" xsi:nil="true"/>
+    <DocumentationText>A data type for a code representing a kind of property.</DocumentationText>
+    <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>MEDICAL</FacetValue>
+      <DocumentationText>Medical Information</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>PII</FacetValue>
+      <DocumentationText>Personally Identifiable Information</DocumentationText>
+    </Facet>
+  </Restriction>
+  <Restriction structures:id="nc.AngularMinuteType">
+    <Name>AngularMinuteType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a minute of a degree, with a restricted range of 0 (inclusive) to 60 (exclusive).</DocumentationText>
+    <RestrictionBase structures:ref="xs.decimal" xsi:nil="true"/>
+    <Facet>
+      <FacetCategoryCode>maxExclusive</FacetCategoryCode>
+      <FacetValue>60.0</FacetValue>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>minInclusive</FacetCategoryCode>
+      <FacetValue>0.0</FacetValue>
+    </Facet>
+  </Restriction>
+  <Restriction structures:id="nc.AngularSecondType">
+    <Name>AngularSecondType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a second of a minute, with a restricted range of 0 (inclusive) to 60 (exclusive).</DocumentationText>
+    <RestrictionBase structures:ref="xs.decimal" xsi:nil="true"/>
+    <Facet>
+      <FacetCategoryCode>maxExclusive</FacetCategoryCode>
+      <FacetValue>60.0</FacetValue>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>minInclusive</FacetCategoryCode>
+      <FacetValue>0.0</FacetValue>
+    </Facet>
+  </Restriction>
+  <Restriction structures:id="nc.LatitudeDegreeType">
+    <Name>LatitudeDegreeType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a degree of latitude.</DocumentationText>
+    <RestrictionBase structures:ref="xs.decimal" xsi:nil="true"/>
+    <Facet>
+      <FacetCategoryCode>maxInclusive</FacetCategoryCode>
+      <FacetValue>90.0</FacetValue>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>minInclusive</FacetCategoryCode>
+      <FacetValue>-90.0</FacetValue>
+    </Facet>
+  </Restriction>
+  <Restriction structures:id="nc.LongitudeDegreeType">
+    <Name>LongitudeDegreeType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a degree of longitude.</DocumentationText>
+    <RestrictionBase structures:ref="xs.decimal" xsi:nil="true"/>
+    <Facet>
+      <FacetCategoryCode>maxInclusive</FacetCategoryCode>
+      <FacetValue>180.0</FacetValue>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>minInclusive</FacetCategoryCode>
+      <FacetValue>-180.0</FacetValue>
+    </Facet>
+  </Restriction>
+  <Restriction structures:id="nc.PersonNameTextType">
+    <Name>PersonNameTextType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a name by which a person is known, referred, or addressed.</DocumentationText>
+    <RestrictionBase structures:ref="nc.ProperNameTextType" xsi:nil="true"/>
+  </Restriction>
+  <Restriction structures:id="nc.ProperNameTextType">
+    <Name>ProperNameTextType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a word or phrase by which a person or thing is known, referred, or addressed.</DocumentationText>
+    <RestrictionBase structures:ref="nc.TextType" xsi:nil="true"/>
+  </Restriction>
+  <Restriction structures:id="nc.TextType">
+    <Name>TextType</Name>
+    <Namespace structures:ref="nc" xsi:nil="true"/>
+    <DocumentationText>A data type for a character string.</DocumentationText>
+    <RestrictionBase structures:ref="xs.string" xsi:nil="true"/>
+  </Restriction>
+  <Datatype structures:id="xs.boolean">
+    <Name>boolean</Name>
+    <Namespace structures:ref="xs" xsi:nil="true"/>
+  </Datatype>
+  <Datatype structures:id="xs.date">
+    <Name>date</Name>
+    <Namespace structures:ref="xs" xsi:nil="true"/>
+  </Datatype>
+  <Datatype structures:id="xs.decimal">
+    <Name>decimal</Name>
+    <Namespace structures:ref="xs" xsi:nil="true"/>
+  </Datatype>
+  <Datatype structures:id="xs.string">
+    <Name>string</Name>
+    <Namespace structures:ref="xs" xsi:nil="true"/>
+  </Datatype>
+  <Datatype structures:id="xs.token">
+    <Name>token</Name>
+    <Namespace structures:ref="xs" xsi:nil="true"/>
+  </Datatype>
+</Model>

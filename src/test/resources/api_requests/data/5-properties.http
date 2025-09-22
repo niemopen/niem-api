@@ -13,7 +13,7 @@
 ### Get an abstract property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{abstract_qname}}
 
-### Get a substitution property
+### Get a substitutable property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{substitution_qname}}
 
 ### Get an attribute property
@@ -21,6 +21,19 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/prope
 
 ### Get an object property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{object_qname}}
+
+
+### Get an abstract property in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{abstract_qname}}/formats/cmf
+
+### Get a substitutable property in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{substitution_qname}}/formats/cmf
+
+### Get an attribute property in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{attribute_qname}}/formats/cmf
+
+### Get an object property in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{object_qname}}/formats/cmf
 
 
 

@@ -1,11 +1,11 @@
 
-### Transform Request - XSD to OWL
+### Transform Request - XSD zip file to OWL
 
 @url = {{baseUrl}}/transforms/models
 
 @from = {{format_xsd}}
-@to = {{format_owl}}
-@filename = niem-core.xsd
+@to = {{format_rdf}}
+@filename = CrashDriver-5.0.zip
 @file = ../../../transform/{{filename}}
 
 POST {{url}}

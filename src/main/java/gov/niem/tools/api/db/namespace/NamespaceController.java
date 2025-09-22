@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.namespace;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 
 import org.mitre.niem.cmf.Model;
@@ -68,7 +69,7 @@ public class NamespaceController {
       throws Exception {
     Namespace namespace = hub.namespaces.findOne(stewardKey, modelKey, versionNumber, prefix);
     org.mitre.niem.cmf.Model cmfModel = new Model();
-    namespace.addToCmfModel(cmfModel);
+    namespace.addToCmfModel(cmfModel, false, AddModelReason.REPRESENTATION, null);
     // TODO: Add properties, types, and dependencies to namespace CMF
     return CmfUtils.generateString(cmfModel, mediaType);
   }
@@ -107,7 +108,7 @@ public class NamespaceController {
     // Convert results to CMF
     org.mitre.niem.cmf.Model cmfModel = new Model();
     for (Namespace namespace : namespaces) {
-      namespace.addToCmfModel(cmfModel);
+      namespace.addToCmfModel(cmfModel, false, AddModelReason.REPRESENTATION, null);
     }
     return CmfUtils.generateString(cmfModel, mediaType);
   }

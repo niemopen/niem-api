@@ -11,9 +11,9 @@
 # @to = {{format_owl}}
 # @to = {{format_json}}
 
-# @filename = CrashDriver.cmf.xml
-@filename = niem-core.xsd
-# @filename = CrashDriver.zip
+# @filename = CrashDriver-5.0.cmf.xml
+@filename = niem-core-5.0.xsd
+# @filename = CrashDriver-5.0.zip
 
 @file = ../../../transform/{{filename}}
 

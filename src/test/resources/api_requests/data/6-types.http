@@ -6,6 +6,7 @@
 @class_qname = nc:PersonType
 @datatype_qname = nc:AddressCategoryCodeSimpleType
 @datatype_class_qname = nc:AddressCategoryCodeType
+@datatype_list_qname = nc:BooleanListSimpleType
 @extended_qname = nc:VehicleType
 @category = complex_object
 
@@ -18,11 +19,31 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 ### Get a datatype (simple)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_qname}}?{{mediaType}}
 
+### Get a datatype (list)
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_list_qname}}?{{mediaType}}
+
 ### Get a datatype class (CSC)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_class_qname}}?{{mediaType}}
 
 ### Get a class type with a parent (CCC)
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{extended_qname}}?{{mediaType}}
+
+
+
+### Get a class type (CCC) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/formats/cmf?{{mediaType}}
+
+### Get a class type with a parent (CCC) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{extended_qname}}/formats/cmf?{{mediaType}}
+
+### Get a datatype (simple) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_qname}}/formats/cmf?{{mediaType}}
+
+### Get a datatype (list) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_list_qname}}/formats/cmf?{{mediaType}}
+
+### Get a datatype class (CSC) in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{datatype_class_qname}}/formats/cmf?{{mediaType}}
 
 
 
@@ -120,6 +141,13 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Get augmentations - error checking
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:AddressCategoryCodeType/augmentations
+
+
+### Get augmented type
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/j:PersonAugmentationType/augmented-type
+
+### Get augmented type - error checking
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/nc:AddressCategoryCodeType/augmented-type
 
 
 

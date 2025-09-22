@@ -138,7 +138,7 @@ public class NiemValidationService {
    */
   public Test validateCmf(File cmfFile) throws IOException, SAXException, BadRequestException {
     CmfUtils.checkVersion(cmfFile);
-    Source[] xsdSources = ValidationUtils.getClasspathXsdSources("validation/cmf/v0.8");
+    Source[] xsdSources = ValidationUtils.getClasspathXsdSources("validation/cmf/v1.0/model.xsd");
     String description = "Validate a CMF against the NIEM Common Model Format Specification";
     Test test = xmlValidationService.validateXmlOnly(cmfFile, xsdSources,
         "validate-cmf", description);

@@ -1,12 +1,14 @@
 package gov.niem.tools.api.db.type;
 
 import gov.niem.tools.api.db.component.ComponentService;
+import gov.niem.tools.api.db.exceptions.ArgumentNotValidException;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.property.PropertyRepository;
 import gov.niem.tools.api.db.subproperty.Subproperty;
 import gov.niem.tools.api.db.subproperty.SubpropertyRepository;
+import gov.niem.tools.api.db.type.Type.Pattern;
 import gov.niem.tools.api.db.version.Version;
 
 import jakarta.persistence.EntityManager;
@@ -15,8 +17,10 @@ import jakarta.transaction.Transactional;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
@@ -151,6 +155,68 @@ public class TypeService extends ComponentService<Type, TypeRepository> {
     List<Property> augmentations = propertyRepository.findAllByGroup_Id(augmentationPoint.getId());
     Collections.sort(augmentations);
     return augmentations;
+  }
+
+  /**
+   * Find the type being augmented by the type with the given fields.
+   * For example, given fields for type j:PersonAugmentationType, return type nc:PersonType.
+   */
+  public Type findAugmentedType(String stewardKey, String modelKey, String versionNumber,
+      String typeQname) throws EntityNotFoundException {
+
+    Version version = versionService.findOne(stewardKey, modelKey, versionNumber);
+
+    // Get the augmentation type (e.g., j:PersonAugmentationType)
+    Type augmentationType = this.findOne(version, typeQname);
+
+    return this.findAugmentedType(augmentationType);
+
+  }
+
+  /**
+   * Find the type being augmented by the type with the given fields.
+   * For example, given fields for type j:PersonAugmentationType, return type nc:PersonType.
+   */
+  public Type findAugmentedType(Type augmentationType) throws EntityNotFoundException {
+
+    if (augmentationType.getPattern() != Pattern.augmentation) {
+      String message = "Type must be an augmentation type.";
+      throw new ArgumentNotValidException(augmentationType.qname, message);
+    }
+
+    // Get the augmentation property (e.g., j:PersonAugmentation)
+    Pageable pageable = PageRequest.ofSize(1);
+    Page<Property> augmentationPropertyPage = propertyRepository.findAllByType_Id(
+        augmentationType.getId(), pageable);
+
+    if (augmentationPropertyPage.getNumberOfElements() == 0) {
+      return null;
+    }
+
+    List<Property> augmentationProperties = augmentationPropertyPage.toList();
+    Property augmentationProperty = augmentationProperties.get(0);
+
+    // Get the substitution group head (e.g., nc:PersonAugmentationPoint)
+    Property augmentationPoint = augmentationProperty.getGroup();
+
+    if (augmentationPoint == null) {
+      return null;
+    }
+
+    // Get the types that contain the augmentation point (e.g., set containing nc:PersonType)
+    Set<Subproperty> subproperties = subpropertyRepo
+        .findByVersionIdAndProperty_Namespace_PrefixAndProperty_NameOrderByType_NameAsc(
+            augmentationPoint.getVersionId(), augmentationPoint.getPrefix(),
+            augmentationPoint.getName());
+
+    if (subproperties.isEmpty()) {
+      return null;
+    }
+
+    // Return the next item from the set (should only be one result) (e.g., nc:PersonType)
+    Subproperty subproperty = subproperties.iterator().next();
+    return subproperty.getType();
+
   }
 
   /**

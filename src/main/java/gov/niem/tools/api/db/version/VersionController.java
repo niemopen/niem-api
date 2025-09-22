@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.version;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.base.AddModelReason;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -59,7 +60,7 @@ public class VersionController {
       throws Exception {
     Version version = hub.versions.findOne(stewardKey, modelKey, versionNumber);
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
-    version.addToCmfModel(cmfModel, false);
+    version.addToCmfModel(cmfModel, false, AddModelReason.REPRESENTATION, null);
     // TODO: Add namespaces, property and types to CMF model
     return CmfUtils.generateString(cmfModel, mediaType);
   }

@@ -10,6 +10,181 @@
     "xs": "http://www.w3.org/2001/XMLSchema"
   },
   "properties": {
+    "nc:Person": {
+      "description": "A human being.",
+      "$ref": "#/definitions/nc:PersonType",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/nc:PersonType"
+      }
+    },
+    "nc:PersonGivenName": {
+      "description": "A first name of a person.",
+      "$ref": "#/definitions/nc:PersonNameTextType"
+    },
+    "j:Charge": {
+      "description": "A formal allegation that a specific person has committed a specific offense.",
+      "$ref": "#/definitions/j:ChargeType",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/j:ChargeType"
+      }
+    },
+    "nc:ContactEmailID": {
+      "description": "An electronic mailing address by which a person or organization may be contacted.",
+      "type": "string"
+    },
+    "nc:ContactInformation": {
+      "description": "A set of details about how to contact a person or an organization.",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/nc:ContactInformationType"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/nc:ContactInformationType"
+          }
+        }
+      ]
+    },
+    "j:CriminalInformationIndicator": {
+      "description": "True if the information specified is classified as criminal information; false if it is not classified as criminal information.",
+      "type": "boolean"
+    },
+    "nc:LongitudeSecondValue": {
+      "description": "A longitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
+      "$ref": "#/definitions/nc:AngularSecondType"
+    },
+    "j:PersonChargeAssociation": {
+      "description": "An association between a person and a charge issued to that person.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/j:PersonChargeAssociationType"
+      }
+    },
+    "nc:PersonBirthDate": {
+      "description": "A date a person was born.",
+      "$ref": "#/definitions/nc:DateType"
+    },
+    "ext:PrivacyCode": {
+      "description": "A code representing a kind of property.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ext:PrivacyCodeType"
+      },
+      "maxItems": 2
+    },
+    "j:DriverLicense": {
+      "description": "A license issued to a person granting driving privileges.",
+      "$ref": "#/definitions/j:DriverLicenseType"
+    },
+    "j:CrashVehicle": {
+      "description": "A motor vehicle involved in a traffic accident.",
+      "$ref": "#/definitions/j:CrashVehicleType"
+    },
+    "j:CrashPassenger": {
+      "description": "A motor vehicle passenger involved in a traffic accident.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/j:CrashPassengerType"
+      }
+    },
+    "j:JuvenileAsAdultIndicator": {
+      "description": "True if a juvenile is to be processed as an adult; false otherwise.",
+      "type": "boolean"
+    },
+    "nc:IdentificationID": {
+      "description": "An identifier.",
+      "type": "string"
+    },
+    "nc:personNameCommentText": {
+      "description": "A comment about a kind of name for a person.",
+      "type": "string"
+    },
+    "nc:Location2DGeospatialCoordinate": {
+      "description": "A location identified by a latitude and longitude.",
+      "$ref": "#/definitions/nc:Location2DGeospatialCoordinateType"
+    },
+    "nc:PersonMiddleName": {
+      "description": "A middle name of a person.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/nc:PersonNameTextType"
+      }
+    },
+    "j:InjurySeverityCode": {
+      "description": "A severity of an injury received by a person, such as in a traffic accident or crash.",
+      "$ref": "#/definitions/aamva_d20:AccidentSeverityCodeType"
+    },
+    "j:Metadata": {
+      "description": "Information that further qualifies the kind of data represented.",
+      "$ref": "#/definitions/j:MetadataType"
+    },
+    "j:CrashPersonInjury": {
+      "description": "An injury received by a person involved in a traffic accident.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/nc:InjuryType"
+      }
+    },
+    "nc:GeographicCoordinateLongitude": {
+      "description": "A measurement of the angular distance between a point on the Earth and the Prime Meridian.",
+      "$ref": "#/definitions/nc:LongitudeCoordinateType"
+    },
+    "nc:RoleOfPerson": {
+      "description": "A person of whom the role object is a function.",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/nc:PersonType"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/nc:PersonType"
+          }
+        }
+      ]
+    },
+    "ext:PersonDefenestrationIndicator": {
+      "description": "True if this person was thrown through a window; false otherwise.",
+      "type": "boolean"
+    },
+    "nc:PersonName": {
+      "description": "A combination of names and/or titles by which a person is known.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/nc:PersonNameType"
+      }
+    },
+    "j:ChargeDescriptionText": {
+      "description": "A plain language description of a charge.",
+      "$ref": "#/definitions/nc:TextType"
+    },
+    "nc:LongitudeMinuteValue": {
+      "description": "A longitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
+      "$ref": "#/definitions/nc:AngularMinuteType"
+    },
+    "j:DriverLicenseCardIdentification": {
+      "description": "An identification that is affixed to the raw materials (card stock, laminate, etc.) used in producing driver licenses and ID cards. The numbers are issued by the material\u0027s manufacturer and provide a unique reference to a card within a jurisdiction.",
+      "$ref": "#/definitions/nc:IdentificationType"
+    },
+    "nc:Location": {
+      "description": "A geospatial location.",
+      "$ref": "#/definitions/nc:LocationType"
+    },
+    "j:Crash": {
+      "description": "A traffic accident.",
+      "$ref": "#/definitions/j:CrashType"
+    },
+    "nc:LatitudeDegreeValue": {
+      "description": "A value that specifies the degree of a latitude. The value comes from a restricted range between -90 (inclusive) and +90 (inclusive).",
+      "$ref": "#/definitions/nc:LatitudeDegreeType"
+    },
+    "nc:InjuryDescriptionText": {
+      "description": "A description of an injury.",
+      "$ref": "#/definitions/nc:TextType"
+    },
     "exch:CrashDriverInfo": {
       "description": "A collection of information about the driver of a vehicle in a crash.",
       "anyOf": [
@@ -24,20 +199,30 @@
         }
       ]
     },
-    "ext:PersonDefenestrationIndicator": {
-      "description": "True if this person was thrown through a window; false otherwise.",
-      "type": "array",
-      "items": {
-        "type": "boolean"
-      }
+    "j:IntelligenceInformationIndicator": {
+      "description": "True if the information specified is intelligence information; false otherwise.",
+      "type": "boolean"
     },
-    "ext:PrivacyCode": {
-      "description": "A code representing a kind of property.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ext:PrivacyCodeType"
-      },
-      "maxItems": 2
+    "nc:Date": {
+      "description": "A full date.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "nc:LongitudeDegreeValue": {
+      "description": "A value that specifies the degree of a longitude. The value comes from a restricted range between -180 (inclusive) and +180 (inclusive).",
+      "$ref": "#/definitions/nc:LongitudeDegreeType"
+    },
+    "nc:GeographicCoordinateLatitude": {
+      "description": "A measurement of the angular distance between a point on the Earth and the Equator.",
+      "$ref": "#/definitions/nc:LatitudeCoordinateType"
+    },
+    "j:CrashDriver": {
+      "description": "A motor vehicle driver involved into a traffic accident.",
+      "$ref": "#/definitions/j:CrashDriverType"
+    },
+    "nc:InjurySeverityText": {
+      "description": "A severity of an injury received by a person, such as in a traffic accident or crash.",
+      "$ref": "#/definitions/nc:TextType"
     },
     "ext:PrivacyMetadata": {
       "description": "Metadata about Privacy.",
@@ -46,50 +231,9 @@
         "$ref": "#/definitions/ext:PrivacyMetadataType"
       }
     },
-    "j:Charge": {
-      "description": "A formal allegation that a specific person has committed a specific offense.",
-      "anyOf": [
-        {
-          "type": "object",
-          "properties": {
-            "@id": {
-              "type": "string"
-            }
-          }
-        },
-        {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/j:ChargeType"
-          }
-        },
-        {
-          "$ref": "#/definitions/j:ChargeType"
-        }
-      ]
-    },
-    "j:ChargeDescriptionText": {
-      "description": "A plain language description of a charge.",
-      "$ref": "#/definitions/nc:TextType"
-    },
-    "j:ChargeFelonyIndicator": {
-      "description": "True if a charge refers to a felony offense; false otherwise.",
-      "type": "boolean"
-    },
-    "j:Crash": {
-      "description": "A traffic accident.",
-      "$ref": "#/definitions/j:CrashType"
-    },
-    "j:CrashDriver": {
-      "description": "A motor vehicle driver involved into a traffic accident.",
-      "$ref": "#/definitions/j:CrashDriverType"
-    },
-    "j:CrashPassenger": {
-      "description": "A motor vehicle passenger involved in a traffic accident.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/j:CrashPassengerType"
-      }
+    "nc:LatitudeSecondValue": {
+      "description": "A latitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
+      "$ref": "#/definitions/nc:AngularSecondType"
     },
     "j:CrashPerson": {
       "description": "A person involved in a traffic accident.",
@@ -98,201 +242,26 @@
         "$ref": "#/definitions/j:CrashPersonType"
       }
     },
-    "j:CrashPersonInjury": {
-      "description": "An injury received by a person involved in a traffic accident.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/nc:InjuryType"
-      }
-    },
-    "j:CrashVehicle": {
-      "description": "A motor vehicle involved in a traffic accident.",
-      "$ref": "#/definitions/j:CrashVehicleType"
-    },
-    "j:CriminalInformationIndicator": {
-      "description": "True if the information specified is classified as criminal information; false if it is not classified as criminal information.",
+    "j:ChargeFelonyIndicator": {
+      "description": "True if a charge refers to a felony offense; false otherwise.",
       "type": "boolean"
-    },
-    "j:DriverLicense": {
-      "description": "A license issued to a person granting driving privileges.",
-      "$ref": "#/definitions/j:DriverLicenseType"
-    },
-    "j:DriverLicenseCardIdentification": {
-      "description": "An identification that is affixed to the raw materials (card stock, laminate, etc.) used in producing driver licenses and ID cards. The numbers are issued by the material\u0027s manufacturer and provide a unique reference to a card within a jurisdiction.",
-      "$ref": "#/definitions/nc:IdentificationType"
-    },
-    "j:InjurySeverityCode": {
-      "description": "A severity of an injury received by a person, such as in a traffic accident or crash.",
-      "$ref": "#/definitions/aamva_d20:AccidentSeverityCodeType"
-    },
-    "j:IntelligenceInformationIndicator": {
-      "description": "True if the information specified is intelligence information; false otherwise.",
-      "type": "boolean"
-    },
-    "j:JuvenileAsAdultIndicator": {
-      "description": "True if a juvenile is to be processed as an adult; false otherwise.",
-      "type": "boolean"
-    },
-    "j:Metadata": {
-      "description": "Information that further qualifies the kind of data represented.",
-      "$ref": "#/definitions/j:MetadataType"
-    },
-    "j:PersonChargeAssociation": {
-      "description": "An association between a person and a charge issued to that person.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/j:PersonChargeAssociationType"
-      }
     },
     "nc:ActivityDate": {
       "description": "A date of an activity.",
       "$ref": "#/definitions/nc:DateType"
     },
-    "nc:ContactEmailID": {
-      "description": "An electronic mailing address by which a person or organization may be contacted.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "nc:ContactInformation": {
-      "description": "A set of details about how to contact a person or an organization.",
-      "$ref": "#/definitions/nc:ContactInformationType"
-    },
-    "nc:Date": {
-      "description": "A full date.",
-      "type": "string",
-      "format": "date"
-    },
-    "nc:GeographicCoordinateLatitude": {
-      "description": "A measurement of the angular distance between a point on the Earth and the Equator.",
-      "$ref": "#/definitions/nc:LatitudeCoordinateType"
-    },
-    "nc:GeographicCoordinateLongitude": {
-      "description": "A measurement of the angular distance between a point on the Earth and the Prime Meridian.",
-      "$ref": "#/definitions/nc:LongitudeCoordinateType"
-    },
-    "nc:IdentificationID": {
-      "description": "An identifier.",
-      "type": "string"
-    },
-    "nc:InjuryDescriptionText": {
-      "description": "A description of an injury.",
-      "$ref": "#/definitions/nc:TextType"
-    },
-    "nc:InjurySeverityText": {
-      "description": "A severity of an injury received by a person, such as in a traffic accident or crash.",
-      "$ref": "#/definitions/nc:TextType"
-    },
-    "nc:LatitudeDegreeValue": {
-      "description": "A value that specifies the degree of a latitude. The value comes from a restricted range between -90 (inclusive) and +90 (inclusive).",
-      "$ref": "#/definitions/nc:LatitudeDegreeType"
-    },
     "nc:LatitudeMinuteValue": {
       "description": "A latitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
       "$ref": "#/definitions/nc:AngularMinuteType"
     },
-    "nc:LatitudeSecondValue": {
-      "description": "A latitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
-      "$ref": "#/definitions/nc:AngularSecondType"
-    },
-    "nc:Location": {
-      "description": "A geospatial location.",
-      "$ref": "#/definitions/nc:LocationType"
-    },
-    "nc:Location2DGeospatialCoordinate": {
-      "description": "A location identified by a latitude and longitude.",
-      "$ref": "#/definitions/nc:Location2DGeospatialCoordinateType"
-    },
-    "nc:LongitudeDegreeValue": {
-      "description": "A value that specifies the degree of a longitude. The value comes from a restricted range between -180 (inclusive) and +180 (inclusive).",
-      "$ref": "#/definitions/nc:LongitudeDegreeType"
-    },
-    "nc:LongitudeMinuteValue": {
-      "description": "A longitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
-      "$ref": "#/definitions/nc:AngularMinuteType"
-    },
-    "nc:LongitudeSecondValue": {
-      "description": "A longitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
-      "$ref": "#/definitions/nc:AngularSecondType"
-    },
-    "nc:Person": {
-      "description": "A human being.",
-      "anyOf": [
-        {
-          "type": "object",
-          "properties": {
-            "@id": {
-              "type": "string"
-            }
-          }
-        },
-        {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/nc:PersonType"
-          }
-        },
-        {
-          "$ref": "#/definitions/nc:PersonType"
-        }
-      ]
-    },
-    "nc:PersonBirthDate": {
-      "description": "A date a person was born.",
-      "$ref": "#/definitions/nc:DateType"
-    },
-    "nc:PersonGivenName": {
-      "description": "A first name of a person.",
-      "$ref": "#/definitions/nc:PersonNameTextType"
-    },
-    "nc:PersonMiddleName": {
-      "description": "A middle name of a person.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/nc:PersonNameTextType"
-      }
-    },
-    "nc:PersonName": {
-      "description": "A combination of names and/or titles by which a person is known.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/nc:PersonNameType"
-      }
-    },
-    "nc:personNameCommentText": {
-      "description": "A comment about a kind of name for a person.",
-      "type": "string"
-    },
     "nc:PersonSurName": {
       "description": "A last name or family name of a person.",
       "$ref": "#/definitions/nc:PersonNameTextType"
-    },
-    "nc:RoleOfPerson": {
-      "description": "A person of whom the role object is a function.",
-      "anyOf": [
-        {
-          "type": "object",
-          "properties": {
-            "@id": {
-              "type": "string"
-            }
-          }
-        },
-        {
-          "$ref": "#/definitions/nc:PersonType"
-        },
-        {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/nc:PersonType"
-          }
-        }
-      ]
     }
   },
   "definitions": {
     "aamva_d20:AccidentSeverityCodeType": {
+      "pattern": "^\\S*$",
       "description": "A data type for severity levels of an accident.",
       "type": "string",
       "oneOf": [
@@ -351,6 +320,7 @@
       ]
     },
     "ext:PrivacyCodeType": {
+      "pattern": "^\\S*$",
       "description": "A data type for a code representing a kind of property.",
       "type": "string",
       "oneOf": [
@@ -424,9 +394,6 @@
         },
         "j:CrashPersonInjury": {
           "$ref": "#/properties/j:CrashPersonInjury"
-        },
-        "ext:PersonDefenestrationIndicator": {
-          "$ref": "#/properties/ext:PersonDefenestrationIndicator"
         }
       },
       "required": [
@@ -488,9 +455,6 @@
           "properties": {
             "j:DriverLicenseCardIdentification": {
               "$ref": "#/properties/j:DriverLicenseCardIdentification"
-            },
-            "nc:ContactInformation": {
-              "$ref": "#/properties/nc:ContactInformation"
             }
           },
           "required": [
@@ -555,15 +519,11 @@
     },
     "nc:AngularMinuteType": {
       "description": "A data type for a minute of a degree, with a restricted range of 0 (inclusive) to 60 (exclusive).",
-      "type": "number",
-      "minimum": 0.0,
-      "maximum": 60.0
+      "type": "number"
     },
     "nc:AngularSecondType": {
       "description": "A data type for a second of a minute, with a restricted range of 0 (inclusive) to 60 (exclusive).",
-      "type": "number",
-      "minimum": 0.0,
-      "maximum": 60.0
+      "type": "number"
     },
     "nc:AssociationType": {
       "description": "A data type for an association, connection, relationship, or involvement somehow linking people, things, and/or activities together."
@@ -662,9 +622,7 @@
     },
     "nc:LatitudeDegreeType": {
       "description": "A data type for a degree of latitude.",
-      "type": "number",
-      "minimum": -90.0,
-      "maximum": 90.0
+      "type": "number"
     },
     "nc:Location2DGeospatialCoordinateType": {
       "description": "A data type for a location identified by latitude and longitude.",
@@ -714,9 +672,7 @@
     },
     "nc:LongitudeDegreeType": {
       "description": "A data type for a degree of longitude.",
-      "type": "number",
-      "minimum": -180.0,
-      "maximum": 180.0
+      "type": "number"
     },
     "nc:PersonNameTextType": {
       "description": "A data type for a name by which a person is known, referred, or addressed.",

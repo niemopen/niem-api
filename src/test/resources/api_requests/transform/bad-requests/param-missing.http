@@ -4,8 +4,8 @@
 @url = {{baseUrl}}/transforms/models
 
 @from = {{format_cmf}}
-@to = {{format_owl}}
-@filename = CrashDriver.cmf.xml
+@to = {{format_rdf}}
+@filename = CrashDriver-5.0.cmf.xml
 @file = ../../../transform/{{filename}}
 
 POST {{url}}

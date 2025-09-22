@@ -1,12 +1,12 @@
 
-### Transform Request - CMF to OWL
+### Migration Request Template
 
-@url = {{baseUrl}}/transforms/models
+@url = {{baseUrl}}/migration/cmf
 
-@from = {{format_cmf}}
-@to = {{format_owl}}
-@filename = CrashDriver.cmf.xml
-@file = ../../../transform/{{filename}}
+@from = 4.0
+@to = 5.0
+@filename = niem-4.0-subset.cmf.xml
+@file = ../../migration/{{filename}}
 
 POST {{url}}
 Content-Type: multipart/form-data; boundary={{boundary}}

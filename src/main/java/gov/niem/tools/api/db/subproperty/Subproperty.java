@@ -1,14 +1,18 @@
 package gov.niem.tools.api.db.subproperty;
 
 import gov.niem.tools.api.core.config.Config;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.base.BaseNamespaceEntity;
 import gov.niem.tools.api.db.namespace.Namespace;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.type.Type;
+import gov.niem.tools.api.validation.Test;
 
+import org.mitre.niem.cmf.AugmentRecord;
 import org.mitre.niem.cmf.CMFException;
-import org.mitre.niem.cmf.HasProperty;
+import org.mitre.niem.cmf.ClassType;
+import org.mitre.niem.cmf.PropertyAssociation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,7 +66,7 @@ import org.hibernate.proxy.HibernateProxy;
     }
 )
 public class Subproperty extends BaseNamespaceEntity<Subproperty>
-    implements BaseCmfEntity<org.mitre.niem.cmf.HasProperty>, Comparable<Subproperty> {
+    implements BaseCmfEntity<PropertyAssociation>, Comparable<Subproperty> {
 
   @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
@@ -258,48 +262,94 @@ public class Subproperty extends BaseNamespaceEntity<Subproperty>
   }
 
   @Override
-  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
-    if (this.type == null) {
-      return;
+  public PropertyAssociation addToCmfModel(org.mitre.niem.cmf.Model cmfModel,
+      boolean addDependencies, AddModelReason addModelReason, Test test) throws CMFException {
+
+    // CMF treats augmentation subproperties as augmentation records on namespaces
+    if (this.property == null || this.type == null
+        || this.type.getPattern() == Type.Pattern.augmentation) {
+      return null;
     }
-    // Add the class to the model if it is not already there
-    org.mitre.niem.cmf.ClassType classType = cmfModel.getClassType(this.type.getQname());
+
+    // Add the class namespace to the CMF model if not already there
+    org.mitre.niem.cmf.Namespace cmfNamespace = cmfModel.namespaceObj(this.getTypePrefix());
+
+    if (cmfNamespace == null) {
+      Namespace classNamespace = this.getNamespace();
+      cmfNamespace = classNamespace.addToCmfModel(cmfModel, addDependencies, addModelReason, test);
+    }
+
+    // Add the class to the CMF model if not already there
+    ClassType classType = cmfModel.qnToClassType(this.type.getQname());
+
     if (classType == null) {
       classType = this.type.toCmfClassType();
-      cmfModel.addComponent(classType);
+      classType.setNamespace(cmfNamespace);
     }
 
-    // Flag the CMF type as augmentable if applicable
-    if (this.typeQname.endsWith("AugmentationType")) {
-      classType.setIsAugmentable(true);
+    // Add to the CMF model as a Property Association
+    PropertyAssociation propertyAssociation = this.toCmf();
+    classType.addPropertyAssociation(propertyAssociation);
+
+    cmfModel.addClassType(classType);
+
+    return propertyAssociation;
+
+  }
+
+  /**
+   * Add subproperty to the CMF model as an augmentation record.
+   *
+   * @param augmentedType The original type being augmented.
+   */
+  public AugmentRecord addToCmfModelAsAugmentationRecord(org.mitre.niem.cmf.Model cmfModel,
+      Type augmentedType) throws CMFException {
+
+    if (this.property == null
+        || this.type == null
+        || this.type.getPattern() != Type.Pattern.augmentation) {
+      return null;
     }
 
-    // Add the subproperty to the class
-    classType.addHasProperty(this.toCmf());
+    // Add the namespace to the CMF model if it doesn't already exist
+    org.mitre.niem.cmf.Namespace cmfNamespace = cmfModel.namespaceObj(this.getTypePrefix());
+
+    if (cmfNamespace == null) {
+      Namespace augmentationNamespace = this.type.getNamespace();
+      cmfNamespace = augmentationNamespace.toCmf();
+      cmfModel.addNamespace(cmfNamespace);
+    }
+
+    AugmentRecord augmentRecord = (AugmentRecord) this.toCmf();
+
+    // Set the original type being augmented
+    ClassType augmentedClassType = augmentedType.toCmfClassType();
+    augmentRecord.setClassType(augmentedClassType);
+
+    cmfNamespace.addAugmentRecord(augmentRecord);
+    return augmentRecord;
+
   }
 
   @Override
-  public HasProperty toCmf() throws CMFException {
+  public PropertyAssociation toCmf() throws CMFException {
 
-    HasProperty hasProperty = new HasProperty();
-    hasProperty.setProperty(this.property.toCmf());
-    hasProperty.setMinOccurs(Integer.parseInt(this.min));
+    PropertyAssociation propertyAssociation = new PropertyAssociation();
 
-    // Set max as integer or "unbounded"
-    if (this.max.equals("unbounded")) {
-      hasProperty.setMaxUnbounded(true);
-    }
-    else {
-      hasProperty.setMaxOccurs(Integer.parseInt(this.max));
-    }
+    Type type = this.getType();
 
-    // Set augmentation info
-    if (this.getTypeQname().endsWith("AugmentationType")) {
-      org.mitre.niem.cmf.Namespace cmfNamespace = this.getType().getNamespace().toCmf();
-      hasProperty.augmentingNS().add(cmfNamespace);
+    if (type.getPattern() == Type.Pattern.augmentation) {
+      AugmentRecord augmentRecord = new AugmentRecord();
+      augmentRecord.setClassType(type.toCmfClassType());
+      augmentRecord.setIndex(this.sequence + "");
+      propertyAssociation = augmentRecord;
     }
 
-    return hasProperty;
+    propertyAssociation.setProperty(this.property.toCmf());
+    propertyAssociation.setMinOccurs(this.min);
+    propertyAssociation.setMaxOccurs(this.max);
+
+    return propertyAssociation;
 
   }
 

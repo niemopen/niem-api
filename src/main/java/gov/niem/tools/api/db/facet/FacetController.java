@@ -3,8 +3,11 @@ package gov.niem.tools.api.db.facet;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.facet.Facet.Category;
+import gov.niem.tools.api.db.property.Property;
+import gov.niem.tools.api.db.type.Type;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -111,13 +114,20 @@ public class FacetController {
       @PageableDefault(sort = {"category", "value"}) Pageable pageable,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
       throws Exception {
+
+    // Find facets
     Page<Facet> facets = hub.facets.findByType(stewardKey, modelKey, versionNumber,
         qname, pageable);
+
+    // Add facets to the CMF model
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
     for (Facet facet : facets) {
-      facet.addToCmfModel(cmfModel);
+      facet.addToCmfModel(cmfModel, true, AddModelReason.REPRESENTATION, null);
     }
+
+    // Return CMF model as XML string
     return CmfUtils.generateString(cmfModel, mediaType);
+
   }
 
   /**

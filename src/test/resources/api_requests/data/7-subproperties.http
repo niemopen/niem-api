@@ -5,6 +5,8 @@
 @prefix = nc
 @class_qname = nc:PersonNameType
 @child_qname = nc:PersonGivenName
+@augmentation_type = j:PersonAugmentationType
+@augmentation_property = j:PersonAdultIndicator
 
 
 ### Get all child properties of a given class
@@ -15,6 +17,20 @@ GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types
 
 ### Get all container types for a given property
 GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/properties/{{child_qname}}/subproperties
+
+
+
+### Get all child properties of a given class in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/formats/cmf
+
+### Get a specific child property of a given class in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{class_qname}}/subproperties/{{child_qname}}/formats/cmf
+
+### Get all augmentation records of a given class in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{augmentation_type}}/subproperties/formats/cmf
+
+### Get a specific child augmentation record in CMF
+GET {{baseUrl}}/stewards/{{steward}}/models/{{model}}/versions/{{version}}/types/{{augmentation_type}}/subproperties/{{augmentation_property}}/formats/cmf
 
 
 

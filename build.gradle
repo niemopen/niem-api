@@ -1,10 +1,12 @@
 plugins {
+  id 'application'
 	id 'java'
+  id 'groovy'
   id "com.github.ben-manes.versions" version "0.52.0"
   id "io.freefair.lombok" version "8.14"
 	id 'io.spring.dependency-management' version '1.1.7'
   id 'org.springdoc.openapi-gradle-plugin' version '1.9.0'
-	id 'org.springframework.boot' version '4.0.0-M2'
+	id 'org.springframework.boot' version '4.0.0-M3'
   id 'checkstyle'
 }
 
@@ -12,8 +14,35 @@ group = 'gov.niem.tools'
 version = '2.0'
 project.ext.draft = '2.0-alpha08:SNAPSHOT-2'
 
+application {
+  mainClass = 'gov.niem.tools.api.Application'
+}
+
 java {
-  sourceCompatibility = JavaVersion.VERSION_21
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+subprojects {
+  apply plugin: 'java'
+  java {
+    toolchain {
+      languageVersion = JavaLanguageVersion.of(21)
+    }
+  }
+  test {
+    // enabled = false
+  	useJUnitPlatform()
+  }
+  dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.0-RC3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.0-RC3'
+  }
+}
+
+springBoot {
+  mainClass = 'gov.niem.tools.api.Application'
 }
 
 repositories {
@@ -21,9 +50,13 @@ repositories {
 }
 
 dependencies {
-  implementation platform('org.hibernate.search:hibernate-search-platform-bom:8.1.2.Final')
 
-  implementation fileTree(dir: 'libs/cmftool', include: '*.jar')
+  implementation project(':app-cmftool')
+  implementation project(':app-scheval')
+  implementation project(':lib-cmf')
+  implementation project(':lib-util')
+
+  implementation platform('org.hibernate.search:hibernate-search-platform-bom:8.1.2.Final')
 
   implementation 'com.fasterxml.jackson.core:jackson-core'
   implementation 'com.fasterxml.jackson.core:jackson-databind'
@@ -72,7 +105,11 @@ dependencies {
 }
 
 compileJava {
-  options.compilerArgs += ['-parameters', '-Xlint:deprecation']
+  // options.compilerArgs += ['-parameters', '-Xlint:deprecation']
+  options.compilerArgs.add('-parameters')
+  options.compilerArgs.add('-Xlint:deprecation')
+  options.compilerArgs.add('-Xlint:path')
+  options.encoding = 'UTF-8'
 }
 
 configurations {

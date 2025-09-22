@@ -1,1 +1,11 @@
 rootProject.name = 'api'
+
+include 'app-cmftool'
+include 'app-scheval'
+include 'lib-cmf'
+include 'lib-util'
+
+project(':app-cmftool').projectDir = new File(settingsDir, 'libs/cmftool/app-cmftool')
+project(':app-scheval').projectDir = new File(settingsDir, 'libs/cmftool/app-scheval')
+project(':lib-cmf').projectDir = new File(settingsDir, 'libs/cmftool/lib-cmf')
+project(':lib-util').projectDir = new File(settingsDir, 'libs/cmftool/lib-util')

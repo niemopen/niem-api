@@ -7,8 +7,8 @@
 # CMF validation test files
 @cmf_url = {{baseUrl}}/validation/cmf/xml
 @cmf_dir = validation/xml/cmf
-@cmf_pass = CrashDriver.cmf.xml
-@cmf_fail = CrashDriver-invalid.cmf.xml
+@cmf_pass = CrashDriver-5.0.cmf.xml
+@cmf_fail = CrashDriver-5.0-invalid.cmf.xml
 
 # XML instance files to test against single XSD files
 @xml_url = {{baseUrl}}/validation/instances/xml

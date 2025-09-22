@@ -2,12 +2,12 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Spring Boot-Application<api-niem-api>",
+      "name": "Spring Boot NIEM API",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "mainClass": "gov.niem.tools.api.Application",
       "projectName": "api-niem-api",
-      "args": "-parameters",
+      "vmArgs": "-Dparameters",
       "envFile": "${workspaceFolder}/.env"
     },
     {
@@ -17,7 +17,7 @@
       "cwd": "${workspaceFolder}",
       "mainClass": "gov.niem.tools.api.Application",
       "projectName": "niem-api",
-      "args": "",
+      "vmArgs": "-Dparameters",
       "envFile": "${workspaceFolder}/.env"
     }
   ]

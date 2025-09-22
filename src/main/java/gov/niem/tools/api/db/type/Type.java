@@ -1,17 +1,20 @@
 package gov.niem.tools.api.db.type;
 
 import gov.niem.tools.api.core.config.Config;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.component.Component;
 import gov.niem.tools.api.db.facet.Facet;
 import gov.niem.tools.api.db.property.Property;
 import gov.niem.tools.api.db.subproperty.Subproperty;
+import gov.niem.tools.api.validation.Test;
 
 import org.mitre.niem.cmf.CMFException;
 import org.mitre.niem.cmf.ClassType;
 import org.mitre.niem.cmf.Datatype;
-import org.mitre.niem.cmf.RestrictionOf;
-import org.mitre.niem.cmf.UnionOf;
+import org.mitre.niem.cmf.ListType;
+import org.mitre.niem.cmf.Restriction;
+import org.mitre.niem.cmf.Union;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -246,35 +249,65 @@ public class Type extends Component<Type> implements BaseCmfEntity<org.mitre.nie
     return super.getTitle();
   }
 
-  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
-    cmfModel.addComponent(this.toCmf());
+  /**
+   * True if this type should be considered a CMF class type; false
+   * if it should be considered a CMF datatype.
+   */
+  @JsonIgnore
+  public boolean isCmfDatatype() {
+    return this.isSimple();
+  }
+
+  @Override
+  public org.mitre.niem.cmf.Component addToCmfModel(org.mitre.niem.cmf.Model cmfModel, boolean
+      addDependencies, AddModelReason addModelReason, Test test) throws CMFException {
+
+    // Add CMF namespace to model if not already there
+    if (this.getNamespace() != null) {
+      this.getNamespace().addToCmfModel(cmfModel, addDependencies, addModelReason, test);
+    }
+
+    org.mitre.niem.cmf.Component cmfComponent = cmfModel.qnToComponent(this.qname);
+
+    if (cmfComponent == null) {
+      if (this.isCmfDatatype()) {
+        cmfModel.addDatatype(this.toCmfDatatype());
+      }
+      else {
+        cmfModel.addClassType(this.toCmfClassType());
+      }
+    }
+
+    if (addDependencies) {
+      // TODO: Add base type to CMF model
+    }
+
+    return cmfModel.qnToComponent(this.qname);
   }
 
   @Override
   public org.mitre.niem.cmf.Component toCmf() throws CMFException {
-    if (this.isComplexContent()) {
-      return this.toCmfClassType();
+    if (this.isCmfDatatype()) {
+      return this.toCmfDatatype();
     }
-    return this.toCmfDatatype();
+    return this.toCmfClassType();
   }
 
   /**
    * Converts this type to a CMF class object if this is a complex type.
    */
   public ClassType toCmfClassType() throws CMFException {
-    if (this.isSimpleContent()) {
+    if (this.isCmfDatatype()) {
       return null;
     }
 
     ClassType classType = new ClassType(this.getNamespace().toCmf(), this.name);
-    classType.setDefinition(definition);
+    // TODO: Support class type definition languages
+    classType.addDocumentation(this.definition, "en-US");
 
     if (this.base != null) {
-      classType.setExtensionOfClass(this.base.toCmfClassType());
+      classType.setSubclass(this.base.toCmfClassType());
     }
-
-    // TODO: Set CMF class type is augmentable
-    // classType.setIsAugmentable();
 
     // TODO: Set CMF class type is external
     // classType.setIsExternal();
@@ -289,52 +322,56 @@ public class Type extends Component<Type> implements BaseCmfEntity<org.mitre.nie
    * Converts this type to a CMF data type if this is a simple type.
    */
   public Datatype toCmfDatatype() throws CMFException {
-    if (this.isComplexContent()) {
+
+    if (!this.isCmfDatatype()) {
       return null;
     }
 
-    Datatype datatype = new Datatype(this.getNamespace().toCmf(), this.name);
-    datatype.setDefinition(definition);
+    org.mitre.niem.cmf.Namespace cmfNamespace = this.getNamespace().toCmf();
 
     switch (this.pattern) {
+
       case simple_list:
-        datatype.setListOf(this.base.toCmfDatatype());
-        break;
+        ListType listType = new ListType(cmfNamespace, this.name);
+        // TODO: Support list datatype definition languages
+        listType.addDocumentation(this.definition, "en-US");
+        listType.setItemType(this.base.toCmfDatatype());
+        return listType;
 
       case simple_union:
-        UnionOf unionOf = new UnionOf();
+        Union union = new Union(cmfNamespace, this.name);
+        // TODO: Support union datatype definition languages
+        union.addDocumentation(this.definition, "en-US");
         // TODO: Add CMF data type union types
-        // unionOf.addDatatype();
-        datatype.setUnionOf(unionOf);
-        break;
+        return union;
 
       case simple_value:
-        RestrictionOf restrictionOf = new RestrictionOf();
+        Restriction restriction = new Restriction(cmfNamespace, this.name);
+        // TODO: Support restriction datatype definition languages
+        restriction.addDocumentation(this.definition, "en-US");
 
         // TODO: Add CMF data type facets
 
         // XML Schema datatypes (e.g., xs:string) should not have a RestrictionOf property
-        if (this.base == null || this.prefix.equals("xs")) {
-          break;
+        if (this.base != null || !this.prefix.equals("xs")) {
+          restriction.setBase(this.getBase().toCmfDatatype());
         }
-
-        datatype.setRestrictionOf(restrictionOf);
-
-        // Set the restriction base
-        Datatype baseDatatype = this.base.toCmfDatatype();
-        restrictionOf.setDatatype(baseDatatype);
 
         // Add facets
         Set<Facet> facets = this.getFacets();
         for (Facet facet : facets) {
-          restrictionOf.addFacet(facet.toCmf());
+          restriction.addFacet(facet.toCmf());
         }
-        break;
+
+        return restriction;
 
       default:
         break;
+
     }
-    return datatype;
+
+    return null;
+
   }
 
 }

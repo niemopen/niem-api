@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.property;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 
 import org.mitre.niem.cmf.Model;
@@ -65,7 +66,7 @@ public class PropertyController {
       throws Exception {
     Property property = hub.properties.findOne(stewardKey, modelKey, versionNumber, qname);
     org.mitre.niem.cmf.Model cmfModel = new Model();
-    property.addToCmfModel(cmfModel);
+    property.addToCmfModel(cmfModel, false, AddModelReason.REPRESENTATION, null);
     return CmfUtils.generateString(cmfModel, mediaType);
   }
 
@@ -137,7 +138,7 @@ public class PropertyController {
         modelKey, versionNumber, prefix, pageable);
     org.mitre.niem.cmf.Model cmfModel = new Model();
     for (Property property : properties) {
-      property.addToCmfModel(cmfModel);
+      property.addToCmfModel(cmfModel, false, AddModelReason.REPRESENTATION, null);
     }
     return CmfUtils.generateString(cmfModel, mediaType);
   }

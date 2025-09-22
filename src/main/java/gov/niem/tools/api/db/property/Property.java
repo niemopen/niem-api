@@ -1,14 +1,19 @@
 package gov.niem.tools.api.db.property;
 
 import gov.niem.tools.api.core.config.Config;
+import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.base.BaseCmfEntity;
 import gov.niem.tools.api.db.component.Component;
+import gov.niem.tools.api.db.exceptions.EntityNotUniqueException;
 import gov.niem.tools.api.db.subproperty.Subproperty;
 import gov.niem.tools.api.db.type.Type;
+import gov.niem.tools.api.validation.Test;
 
 import org.mitre.niem.cmf.CMFException;
 import org.mitre.niem.cmf.ClassType;
+import org.mitre.niem.cmf.DataProperty;
 import org.mitre.niem.cmf.Datatype;
+import org.mitre.niem.cmf.ObjectProperty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +44,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import lombok.extern.log4j.Log4j2;
 import org.hibernate.Hibernate;
 import org.hibernate.envers.Audited;
 import org.hibernate.proxy.HibernateProxy;
@@ -64,6 +70,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyVa
 @EqualsAndHashCode(callSuper = false)
 @JacksonXmlRootElement(localName = "Property")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Log4j2
 @Schema(name = "Property")
 @Table(
     uniqueConstraints = {
@@ -204,11 +211,10 @@ public class Property extends Component<Property>
    * Makes sure a potential Hibernate proxy is initialized.
    */
   public Property getGroup() {
-    Property group = this.group;
-    if (group instanceof HibernateProxy) {
-      group = Hibernate.unproxy(group, Property.class);
+    if (this.group instanceof HibernateProxy) {
+      this.group = Hibernate.unproxy(this.group, Property.class);
     }
-    return group;
+    return this.group;
   }
 
   /**
@@ -410,40 +416,178 @@ public class Property extends Component<Property>
     return super.getTitle();
   }
 
+  /**
+   * True if this property can be considered a CMF data property; false if it
+   * is a CMF object property.
+   */
+  @JsonIgnore
+  public boolean isCmfDataProperty() {
+    if (this.isAbstract() || this.type == null) {
+      return false;
+    }
+    if (this.isAttribute()) {
+      return true;
+    }
+
+    Type type = this.getType();
+    if (type.isSimple()) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Adds this property as a data property to the given CMF model if not already present.
+   *
+   * @param cmfModel The CMF model
+   * @param addDependencies True to also add property dependencies if not already in the CMF model
+   *     (namespace, type, group); false to just add this property.
+   */
   @Override
-  public void addToCmfModel(org.mitre.niem.cmf.Model cmfModel) throws CMFException {
-    cmfModel.addComponent(this.toCmf());
+  public org.mitre.niem.cmf.Component addToCmfModel(org.mitre.niem.cmf.Model cmfModel,
+      boolean addDependencies, AddModelReason addModelReason, Test test)
+      throws CMFException, EntityNotUniqueException {
+
+    if (this.getNamespace() != null) {
+      // Add namespace dependency to the CMF model
+      this.getNamespace().addToCmfModel(cmfModel, addDependencies, AddModelReason.DEPENDENCY, test);
+    }
+
+    if (this.isCmfDataProperty()) {
+      this.addToCmfModelAsDataProperty(cmfModel);
+    }
+    else {
+      this.addToCmfModelAsObjectProperty(cmfModel);
+    }
+
+    // Log result to test object if given
+    if (test != null) {
+      if (addModelReason == AddModelReason.MIGRATION) {
+        // TODO: Log migration result to test object
+      }
+      else if (addModelReason == AddModelReason.DEPENDENCY) {
+        // TODO: Log dependency result to test object
+      }
+    }
+
+    // Return if not adding dependencies
+    if (!addDependencies) {
+      return this.toCmf();
+    }
+
+    // Add type dependency to CMF model
+    if (this.type != null) {
+      this.type.addToCmfModel(cmfModel, addDependencies, addModelReason, test);
+    }
+
+    // Add substitution group dependency to the CMF model
+    if (this.group != null) {
+      this.group.addToCmfModel(cmfModel, addDependencies, AddModelReason.DEPENDENCY, test);
+    }
+
+    return this.toCmf();
+
+  }
+
+  private void addToCmfModelAsDataProperty(org.mitre.niem.cmf.Model cmfModel) throws
+      CMFException, EntityNotUniqueException {
+
+    if (!this.isCmfDataProperty()) {
+      return;
+    }
+
+    // Skip if property is already in the model
+    DataProperty dataProperty = cmfModel.qnToDataProperty(this.qname);
+    if (dataProperty != null) {
+      throw new EntityNotUniqueException("property", this.qname);
+    }
+
+    // Add property to the model
+    log.debug(String.format("--Adding data property %s to CMF", this.qname));
+    dataProperty = this.toCmfDataProperty();
+    cmfModel.addDataProperty(dataProperty);
+
+  }
+
+  private void addToCmfModelAsObjectProperty(org.mitre.niem.cmf.Model cmfModel) throws
+      CMFException, EntityNotUniqueException {
+
+    if (this.isCmfDataProperty()) {
+      return;
+    }
+
+    // Skip if property is already in the model
+    ObjectProperty objectProperty = cmfModel.qnToObjectProperty(this.qname);
+    if (objectProperty != null) {
+      throw new EntityNotUniqueException("property", this.qname);
+    }
+
+    // Add property to the model
+    log.debug(String.format("--Adding object property %s to CMF", this.qname));
+    objectProperty = this.toCmfObject();
+    cmfModel.addObjectProperty(objectProperty);
+
   }
 
   @Override
   public org.mitre.niem.cmf.Property toCmf() throws CMFException {
-    org.mitre.niem.cmf.Property cmfProperty = new org.mitre.niem.cmf.Property();
+    if (this.isCmfDataProperty()) {
+      return this.toCmfDataProperty();
+    }
+    return this.toCmfObject();
+  }
+
+  /**
+   * Converts a property to a CMF object property.
+   */
+  public ObjectProperty toCmfObject() throws CMFException {
+    ObjectProperty cmfProperty = new ObjectProperty();
 
     cmfProperty.setNamespace(this.getNamespace().toCmf());
     cmfProperty.setName(this.name);
-    cmfProperty.setDefinition(this.definition);
+    // TODO: Support languages on property documentation
+    cmfProperty.addDocumentation(this.definition, "en-US");
+    cmfProperty.setIsAbstract(this.isAbstract());
+
+    // Set type info
+    if (this.type != null) {
+      org.mitre.niem.cmf.Namespace typeNamespace = this.type.getNamespace().toCmf();
+      ClassType classType = new ClassType(typeNamespace, this.type.getName());
+      cmfProperty.setClassType(classType);
+    }
+
+    // Set substitution group info
+    if (this.getGroup() != null) {
+      org.mitre.niem.cmf.Property cmfGroup = new org.mitre.niem.cmf.Property();
+      cmfGroup.setNamespace(this.getGroup().getNamespace().toCmf());
+      cmfGroup.setName(this.getGroup().name);
+      cmfProperty.setSubproperty(cmfGroup);
+    }
+
+    return cmfProperty;
+  }
+
+  /**
+   * Converts a property to a CMF data property.
+   */
+  public DataProperty toCmfDataProperty() throws CMFException {
+    DataProperty cmfProperty = new DataProperty();
+
+    cmfProperty.setNamespace(this.getNamespace().toCmf());
+    cmfProperty.setName(this.name);
+    // TODO: Support languages on property documentation
+    cmfProperty.addDocumentation(this.definition, "en-US");
     cmfProperty.setIsAbstract(this.isAbstract());
     cmfProperty.setIsAttribute(this.isAttribute());
 
     // Set type info
     if (this.type != null) {
       org.mitre.niem.cmf.Namespace typeNamespace = this.type.getNamespace().toCmf();
-      if (this.type.isComplexContent()) {
-        ClassType classType = new ClassType(typeNamespace, this.type.getName());
-        cmfProperty.setClassType(classType);
-      }
-      else {
+      if (this.type.isSimple()) {
         Datatype datatype = new Datatype(typeNamespace, this.type.getName());
         cmfProperty.setDatatype(datatype);
       }
-    }
-
-    // Set substitution group info
-    if (this.group != null) {
-      org.mitre.niem.cmf.Property group = new org.mitre.niem.cmf.Property();
-      group.setNamespace(this.group.getNamespace().toCmf());
-      group.setName(this.group.name);
-      cmfProperty.setSubPropertyOf(group);
     }
 
     return cmfProperty;

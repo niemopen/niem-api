@@ -3,6 +3,7 @@ package gov.niem.tools.api.db.subproperty;
 import gov.niem.tools.api.core.config.Config.AppMediaType;
 import gov.niem.tools.api.core.utils.CmfUtils;
 import gov.niem.tools.api.db.ServiceHub;
+import gov.niem.tools.api.db.base.AddModelReason;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -56,11 +57,28 @@ public class SubpropertyController {
       @PathVariable String propertyQname,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
       throws Exception {
+
     Subproperty subproperty = hub.subproperties.findOne(stewardKey, modelKey,
         versionNumber, typeQname, propertyQname);
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
-    subproperty.addToCmfModel(cmfModel);
+
+    // Type type = subproperty.getType();
+
+    // if (type.getPattern() == Type.Pattern.augmentation) {
+    //   // Add subproperty as CMF augmentation record
+    //   Type augmentedType = hub.types.findAugmentedType(type);
+    //   subproperty.addToCmfModelAsAugmentationRecord(cmfModel, augmentedType);
+    // }
+    // else {
+    //   // Add subproperty as CMF property association
+    //   subproperty.addToCmfModel(cmfModel, false, AddModelReason.REPRESENTATION, null);
+    // }
+
+    hub.subproperties.addToCmfModel(subproperty, cmfModel, true, AddModelReason.REPRESENTATION,
+        null);
+
     return CmfUtils.generateString(cmfModel, mediaType);
+
   }
 
   /**
@@ -97,13 +115,19 @@ public class SubpropertyController {
       @PathVariable String typeQname,
       @RequestParam(required = false, defaultValue = "json") AppMediaType mediaType)
       throws Exception {
+
     Set<Subproperty> subproperties = hub.subproperties.findByType(stewardKey,
         modelKey, versionNumber, typeQname);
+
     org.mitre.niem.cmf.Model cmfModel = new org.mitre.niem.cmf.Model();
+
     for (Subproperty subproperty : subproperties) {
-      subproperty.addToCmfModel(cmfModel);
+      hub.subproperties.addToCmfModel(subproperty, cmfModel, false, AddModelReason.REPRESENTATION,
+          null);
     }
+
     return CmfUtils.generateString(cmfModel, mediaType);
+
   }
 
   /**

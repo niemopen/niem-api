@@ -24,6 +24,9 @@ build-jar-image:
   environment: $CI_COMMIT_BRANCH
   tags:
     - $SHELL
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
   script:
     - ./gradlew bootJar
     - podman build -t $IMAGE:$PROFILE .
@@ -73,6 +76,8 @@ artifactory:
     - if: '$CI_COMMIT_BRANCH == "staging"'
     - if: '$CI_COMMIT_BRANCH == "prod"'
     - if: '$CI_COMMIT_BRANCH == "mep"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
   before_script:
     - podman login -u $ARTIFACTORY_USER --password $ARTIFACTORY_TOKEN $ARTIFACTORY_URL
     - echo "$IMAGE:PROFILE"
@@ -91,6 +96,8 @@ deploy:
     - if: '$CI_COMMIT_BRANCH == "staging"'
     - if: '$CI_COMMIT_BRANCH == "prod"'
     - if: '$CI_COMMIT_BRANCH == "mep"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
   before_script:
     - echo $IMAGE_FULL_NAME
     - echo $POSTGRES_URL
@@ -115,10 +122,9 @@ deploy:
     - podman --remote -c $SERVER image ls
     - podman --remote -c $SERVER container ls --all
 
-restart-container:
+.restart-template:
   stage: deploy
   environment: $CI_COMMIT_BRANCH
-  when: manual
   tags:
     - $SHELL
   rules:
@@ -134,6 +140,17 @@ restart-container:
   after_script:
     - podman --remote -c $SERVER container ls --all
 
+restart-manual:
+  extends: .restart-template
+  when: manual
+
+restart-scheduled:
+  extends: .restart-template
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: always
+    - when: never
+
 view-log:
   stage: admin
   environment: $CI_COMMIT_BRANCH
@@ -143,6 +160,8 @@ view-log:
     - if: '$CI_COMMIT_BRANCH == "staging"'
     - if: '$CI_COMMIT_BRANCH == "prod"'
     - if: '$CI_COMMIT_BRANCH == "mep"'
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
   script:
     - podman --remote -c $SERVER logs $CONTAINER
 

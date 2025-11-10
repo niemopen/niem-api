@@ -17,7 +17,7 @@
 @unsupported_version_filename = CrashDriver-0.6.cmf.xml
 @unsupported_version_file = ../../transform/{{unsupported_version_filename}}
 
-@invalid_format_filename = CrashDriver.owl.ttl
+@invalid_format_filename = CrashDriver.ttl
 @invalid_format_file = ../../transform/{{invalid_format_filename}}
 
 ### CMF Validation - Pass test case

@@ -1,5 +1,5 @@
 
-### Transform Request - XSD zip file to OWL
+### Transform Request - XSD zip file to RDF
 
 @url = {{baseUrl}}/transforms/models
 

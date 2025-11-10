@@ -34,14 +34,14 @@ public class TransformTest {
   TransformService transformService;
 
   // Full model files
-  private static final String PATH_CRASH_DRIVER_CMF = "transform/CrashDriver.cmf.xml";
-  private static final String PATH_CRASH_DRIVER_JSON = "transform/CrashDriver.schema.json";
-  private static final String PATH_CRASH_DRIVER_OWL = "transform/CrashDriver.owl.ttl";
-  private static final String PATH_CRASH_DRIVER_XSD_ZIP = "transform/CrashDriver.zip";
+  private static final String PATH_CRASH_DRIVER_CMF = "transform/CrashDriver-5.0.cmf.xml";
+  private static final String PATH_CRASH_DRIVER_JSON = "transform/CrashDriver-5.0.schema.json";
+  private static final String PATH_CRASH_DRIVER_RDF = "transform/CrashDriver-5.0.ttl";
+  private static final String PATH_CRASH_DRIVER_XSD_ZIP = "transform/CrashDriver-5.0.zip";
 
   // Single namespace files
-  private static final String PATH_CORE_CMF = "transform/niem-core.cmf.xml";
-  private static final String PATH_CORE_XSD = "transform/niem-core.xsd";
+  private static final String PATH_CORE_CMF = "transform/niem-core-5.0.cmf.xml";
+  private static final String PATH_CORE_XSD = "transform/niem-core-5.0.xsd";
 
   // Invalid CMF file
   private static final String PATH_CRASH_DRIVER_CMF_INVALID = "transform/CrashDriver-0.6.cmf.xml";
@@ -153,12 +153,12 @@ public class TransformTest {
   }
 
   /**
-   * Check that a CMF file can be converted to the expected OWL file.
+   * Check that a CMF file can be converted to the expected RDF file.
    */
   @Test
-  public void checkCmfToOwl() throws Exception {
-    String expected = TestUtils.getResourcesFileText(PATH_CRASH_DRIVER_OWL);
-    String actual = getTransformAsString(TransformFrom.cmf, TransformTo.owl, PATH_CRASH_DRIVER_CMF);
+  public void checkCmfToRdf() throws Exception {
+    String expected = TestUtils.getResourcesFileText(PATH_CRASH_DRIVER_RDF);
+    String actual = getTransformAsString(TransformFrom.cmf, TransformTo.rdf, PATH_CRASH_DRIVER_CMF);
     assertEquals(expected, actual);
   }
 
@@ -185,7 +185,7 @@ public class TransformTest {
     fileExtensionShouldPass("xsd", "zip");
 
     fileExtensionShouldFail("xsd", "json");
-    fileExtensionShouldFail("xsd", "owl");
+    fileExtensionShouldFail("xsd", "rdf");
     fileExtensionShouldFail("xsd", "cmf");
 
     // from "cmf" tests

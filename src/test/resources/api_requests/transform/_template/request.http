@@ -8,7 +8,7 @@
 
 @to = {{format_cmf}}
 # @to = {{format_xsd}}
-# @to = {{format_owl}}
+# @to = {{format_rdf}}
 # @to = {{format_json}}
 
 # @filename = CrashDriver-5.0.cmf.xml

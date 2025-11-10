@@ -49,12 +49,16 @@ public class TransformController {
       @RequestPart MultipartFile file
   ) throws BadRequestException, Exception {
 
+    // Get the file extension
+    String inputExtension = FileUtils.getFileExtension(file);
+
     // Get filename
     String filenameBase = FileUtils.getFilenameBase(file);
-    String filename = transformService.getOutputFilename(to, filenameBase);
+    String filename = transformService.getOutputFilename(to, filenameBase, inputExtension);
 
     // Get response media type
-    org.springframework.http.MediaType mediaType = transformService.getOutputMediaType(to);
+    org.springframework.http.MediaType mediaType = transformService.getOutputMediaType(to,
+        inputExtension);
 
     // Run transformation and get output file data
     byte[] bytes = transformService.transform(from, to, file);

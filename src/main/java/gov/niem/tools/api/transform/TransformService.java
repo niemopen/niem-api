@@ -69,7 +69,7 @@ public class TransformService {
 
     // Convert CMF to the user-selected format
     // TODO: Model should store model name
-    byte[] bytes = this.generateOutput(cmf, to, inputFilenameBase);
+    byte[] bytes = this.generateOutput(cmf, to, inputFilenameBase, inputExtension);
     return bytes;
 
   }
@@ -190,7 +190,8 @@ public class TransformService {
    * Second pass of transformation. Convert the input file from the given
    * `from` format to the given `to` format.
    */
-  public byte[] generateOutput(Model model, TransformTo to, String filenameBase) throws Exception {
+  public byte[] generateOutput(Model model, TransformTo to, String filenameBase,
+      String inputExtension) throws Exception {
 
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(byteArrayOutputStream,
@@ -212,9 +213,9 @@ public class TransformService {
         break;
 
       case xsd:
-        // Return a zip file
         outputStreamWriter.close();
-        return generateXsdOutput(model, filenameBase);
+        Boolean returnSingleFile = inputExtension.equals("xsd");
+        return generateXsdOutput(model, filenameBase, returnSingleFile);
 
       case json_schema:
         ModelToJSON modelToJson = new ModelToJSON(model);
@@ -240,8 +241,12 @@ public class TransformService {
   /**
    * Second pass of transformation for XSD output. Generate XML Schema files
    * from a CMF model and zip the results.
+   *
+   * @param returnSingleXsd - True to return a single XSD file with the
+   *      given name (filenameBase) instead of the full zip.
    */
-  public byte[] generateXsdOutput(Model model, String filenameBase) throws Exception {
+  public byte[] generateXsdOutput(Model model, String filenameBase,
+      Boolean returnSingleXsd) throws Exception {
 
     // Create a temp directory for the results. Dir name includes a unique ID num.
     Path tempDir = FileUtils.createTempDir("transform-output");
@@ -268,13 +273,23 @@ public class TransformService {
     // Fix the transform output
     fixXsdOutput(model, xsdDir);
 
-    // Zip the XSD directory to a new zip file under the temp directory
-    String zipFilePathString = String.format("%s/%s.zip", tempDir.toString(), filenameBase);
-    File zipFile = FileUtils.file(zipFilePathString);
-    ZipUtils.zip(xsdDir.toFile(), zipFilePathString);
+    byte[] bytes;
 
-    // Convert the zip file to bytes and delete the temp directory
-    byte[] bytes = Files.readAllBytes(zipFile.toPath());
+    if (returnSingleXsd == true) {
+      // Get an individual XSD file
+      Path path = FileUtils.path(xsdDir + "/" + filenameBase + ".xsd");
+      String xsd = FileUtils.getFileText(path);
+      bytes = xsd.getBytes(StandardCharsets.UTF_8);
+    }
+    else {
+      // Zip the XSD directory to a new zip file under the temp directory
+      String zipFilePathString = String.format("%s/%s.zip", tempDir.toString(), filenameBase);
+      File zipFile = FileUtils.file(zipFilePathString);
+      ZipUtils.zip(xsdDir.toFile(), zipFilePathString);
+      bytes = Files.readAllBytes(zipFile.toPath());
+    }
+
+
     FileUtils.deleteTempDir(tempDir);
 
     return bytes;
@@ -536,25 +551,30 @@ public class TransformService {
    * Get the output filename with extension based on the kind of transformation
    * and the original filename.
    */
-  public String getOutputFilename(TransformTo to, String filenameBase) throws Exception {
+  public String getOutputFilename(TransformTo to, String filenameBase, String inputExtension)
+      throws Exception {
+
     switch (to) {
       case cmf:
         return filenameBase + ".cmf.xml";
       case rdf:
         return filenameBase + ".ttl";
       case xsd:
-        return filenameBase + ".zip";
+        return filenameBase + (inputExtension.equals("xsd") ? ".xsd" : ".zip");
       case json_schema:
         return filenameBase + ".schema.json";
       default:
         throw new Exception("Unknown transformation format");
     }
+
   }
 
   /**
    * Get the content media type for the response based on the kind of transformation.
    */
-  public MediaType getOutputMediaType(TransformTo to) throws Exception {
+  public MediaType getOutputMediaType(TransformTo to, String inputExtension)
+      throws Exception {
+
     switch (to) {
       case cmf:
         return MediaType.APPLICATION_XML;
@@ -563,10 +583,13 @@ public class TransformService {
       case rdf:
         return MediaType.TEXT_PLAIN;
       case xsd:
-        return MediaType.valueOf("application/zip");
+        return inputExtension.equals("xsd")
+          ? MediaType.APPLICATION_XML
+          : MediaType.valueOf("application/zip");
       default:
         throw new Exception("Unknown transformation format");
     }
+
   }
 
 }

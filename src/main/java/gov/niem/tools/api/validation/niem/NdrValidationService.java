@@ -19,10 +19,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.transform.stream.StreamSource;
@@ -302,6 +307,11 @@ public class NdrValidationService {
 
       // Rule ID
       line = reader.readLine();
+
+      if (line.contains("line=")) {
+        line = reader.readLine();
+      }
+
       String ruleId = line.split("=")[1].replaceAll("\"", "");
 
       // Rule title
@@ -319,9 +329,28 @@ public class NdrValidationService {
       }
 
       Test test = new Test("validate-ndr-" + ruleId);
+
+      // Fix inconsistent rule number formatting
+      test.id = test.id.replace("rule1", "rule_1");
+      test.id = test.id.replace("rule7", "rule_7");
+      test.id = test.id.replace("rule8", "rule_8");
+      test.id = test.id.replace("rule9", "rule_9");
+
+      // Add leading zero to fix rule sort
+      String ruleNumber = ruleId.replace("rule", "").replace("_", "");
+      int majorDigit = Integer.parseInt(ruleNumber.split("-")[0]);
+      int minorDigit = Integer.parseInt(ruleNumber.split("-")[1]);
+
+      // Pad major and minor digit with a leading zero if needed for sorting
+      test.id = "validate-ndr-rule_"
+          + String.format("%02d", majorDigit) + "-"
+          + String.format("%02d", minorDigit);
+
       test.ruleNumber = ruleId;
       test.ruleUrl = this.getRuleUrl(ndrKey, ruleId);
       test.results = new LinkedList<>();
+      test.ran = true;
+      test.description = ruleTitle;
       test.notes = String.format("Validated %s with NDR %s rules", filename, ndrKey);
 
       // Results
@@ -330,7 +359,6 @@ public class NdrValidationService {
       while (line != null && !line.startsWith("   <svrl:active-pattern ")) {
 
         TestResult result = new TestResult(test.id);
-        result.message = ruleTitle;
         result.location = filename;
         result.entity = "";
         result.entityCategory = "";
@@ -346,10 +374,10 @@ public class NdrValidationService {
           expression = line;
 
           line = reader.readLine();
-          String comment = line;
+          String message = line;
 
-          result.comment = comment.replace("      <svrl:text>", "").replace("</svrl:text>", "");
-          test.ran = true;
+          result.message = message.replace("      <svrl:text>", "").replace("</svrl:text>", "");
+          result.comment = "";
           test.results.add(result);
           this.getLocation(result, expression, document, xpath);
         }
@@ -369,7 +397,6 @@ public class NdrValidationService {
           result.status = Status.warning;
           test.severity = Severity.warning;
           result.comment = comment.replace("      <svrl:text>", "").replace("</svrl:text>", "");
-          test.ran = true;
           test.results.add(result);
           this.getLocation(result, expression, document, xpath);
         }
@@ -395,14 +422,56 @@ public class NdrValidationService {
         line = reader.readLine();
       }
 
-      if (test.countErrors() > 0 || test.countWarnings() > 0) {
-        tests.add(test);
-      }
+      // if (test.countErrors() > 0 || test.countWarnings() > 0) {
+      tests.add(test);
+      // }
 
     }
 
     reader.close();
+
+    if (ndrKey.startsWith("6.0")) {
+      tests = processNdr6Results(tests);
+    }
+
+    Collections.sort(tests, Comparator.comparing(Test::getId));
+
     return tests;
+  }
+
+  /**
+   * TODO: Still using NDR 5.0 Schematron rules with updated NDR 6.0 rule numbers.
+   * Some rules map 1 or many to many.  Need to combined results for those cases
+   * where multiple rules map to one NDR 6.0 rule.
+   */
+  private List<Test> processNdr6Results(List<Test> tests) {
+
+    List<String> testIdList = tests.stream().map(Test::getId).toList();
+    Set<String> testIdSet = new HashSet<>(testIdList);
+    List<Test> mergedTests = new LinkedList<>();
+
+    for(String testId : testIdSet) {
+
+      List<Test> filteredTests = tests.stream()
+          .filter(test -> test.id.equals(testId))
+          .toList();
+
+      Optional<Test> ranTest = filteredTests.stream()
+          .filter(test -> test.ran == true)
+          .findAny();
+
+      if (ranTest.isPresent()) {
+        List<TestResult> testResults = new LinkedList<>();
+        for(Test currentTest : filteredTests) {
+          testResults.addAll(currentTest.getResults());
+        }
+        mergedTests.add(ranTest.get());
+      }
+
+    }
+
+    return mergedTests;
+
   }
 
   private String getRuleUrl(String ndrKey, String ruleId) {
@@ -430,9 +499,16 @@ public class NdrValidationService {
 
     // TODO: Fix URI awareness
     expression = expression
-        .replaceAll(" and namespace-uri\\(\\)='http:\\/\\/www.w3.org\\/2001\\/XMLSchema'", "");
-    log.debug(result.location);
-    log.debug(expression);
+        // NDR-5.0-Schematron-style expression fix
+        .replaceAll(" and namespace-uri\\(\\)='http:\\/\\/www.w3.org\\/2001\\/XMLSchema'", "")
+
+        // NDR-6.0-Schematron-style expression fix
+        .replaceAll("\\[namespace-uri\\(\\)='http:\\/\\/www.w3.org\\/2001\\/XMLSchema", "")
+        .replaceAll("\\*:", "*[local-name()='");
+
+    log.debug("Input file: " + result.location);
+    log.debug("Schematron location: " + location.trim());
+    log.debug("Modified xpath expression: " + expression);
 
     Node node = null;
 
@@ -452,17 +528,45 @@ public class NdrValidationService {
         result.entityCategory = node.getNodeName();
       }
 
-      NamedNodeMap nodeMap = node.getAttributes();
-      if (nodeMap != null) {
-        Node nameNode = nodeMap.getNamedItem("name");
-        if (nameNode != null) {
-          result.entity = nameNode.getNodeValue();
-        }
-      }
+      result.entity = this.getNodeLabel(node);
 
       log.info(result.entityCategory + " - " + result.entity);
 
     }
+  }
+
+  /**
+   * Gets the value of the attribute with the given attribute name from the given node,
+   * or walks up the node parent hierarchy until it reaches such a node.  Returns
+   * null if not found.
+   */
+  private String getNodeLabel(Node node) {
+
+    if (node == null) {
+      return null;
+    }
+
+    NamedNodeMap nodeMap = node.getAttributes();
+
+    if (nodeMap == null) {
+      return null;
+    }
+
+    // Look for attribute "name"
+    Node attributeNode = nodeMap.getNamedItem("name");
+
+    if (attributeNode == null) {
+      // Look for attribute "value", e.g., `<xs:enumeration value="ABC">
+      attributeNode = nodeMap.getNamedItem("value");
+    }
+
+    if (attributeNode == null) {
+      // Recurse on parent node
+      return this.getNodeLabel(node.getParentNode());
+    }
+
+    return attributeNode.getNodeValue();
+
   }
 
 }

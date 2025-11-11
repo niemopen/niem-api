@@ -22,9 +22,9 @@ public class ValidationService {
   /**
    * Return validation results as a CSV file.
    */
-  public ResponseEntity<byte[]> returnResultsAsCsv(TestReport results, MultipartFile file)
+  public ResponseEntity<byte[]> returnResultsAsCsv(TestReport testReport, MultipartFile file)
       throws Exception {
-    Object[] testResults = results.getTestResults().toArray();
+    Object[] testResults = testReport.getTestResults().toArray();
 
     // Support CSV file with header only when test results are empty
     String[] headerColumns = {"testId", "status", "entity", "entityCategory",

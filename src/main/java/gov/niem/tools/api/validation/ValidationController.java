@@ -11,7 +11,12 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -183,10 +188,10 @@ public class ValidationController {
       @RequestParam(required = false, defaultValue = "json") ResultsFormat mediaType
   ) throws Exception {
 
-    TestReport results = new TestReport();
+    TestReport testReport = new TestReport();
     List<Test> tests = niemValidationService.validateXsdWithNdr(file);
-    results.tests.addAll(tests);
-    return this.handleResults(results, mediaType, file);
+    testReport.tests.addAll(tests);
+    return this.handleResults(testReport, mediaType, file);
   }
 
   /**
@@ -281,17 +286,29 @@ public class ValidationController {
   /**
    * Return validation results as JSON or a CSV.
    */
-  private Object handleResults(TestReport results, ResultsFormat mediaType, MultipartFile file)
-      throws Exception {
+  private Object handleResults(TestReport testReport, ResultsFormat mediaType,
+      MultipartFile file) throws Exception {
 
-    results.setDefaultComment();
+    testReport.setDefaultComment();
 
     if (mediaType.equals(ResultsFormat.csv)) {
-      return validationService.returnResultsAsCsv(results, file);
+      return validationService.returnResultsAsCsv(testReport, file);
+    }
+
+    // TODO: Fix duplicate tests in NDR validation test report
+    Set<Test> testSet = new HashSet<>(testReport.tests);
+    List<Test> testList = new LinkedList<>(testSet);
+    Collections.sort(testList, Comparator.comparing(Test::getId));
+    testReport.tests = testList;
+
+    // TODO: Fix duplicate results in NDR validation test report
+    for (Test test : testReport.tests) {
+      Set<TestResult> testResultSet = new HashSet<>(test.results);
+      test.results = new LinkedList<>(testResultSet);
     }
 
     // Default results as JSON
-    return results;
+    return testReport;
 
   }
 

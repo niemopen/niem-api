@@ -63,9 +63,17 @@ public class TestReport {
     return this.getCount(Status.info);
   }
 
+  /**
+   * Returns the number of tests with a passed result plus the number of
+   * tests that ran with zero results.
+   */
   @JsonProperty("passed")
   public long getPassed() {
-    return this.getCount(Status.passed);
+    long count = this.getCount(Status.passed);
+    count += this.tests.stream()
+        .filter(test -> test.ran == true && test.results.size() == 0)
+        .count();
+    return count;
   }
 
   private long getCount(TestResult.Status status) {

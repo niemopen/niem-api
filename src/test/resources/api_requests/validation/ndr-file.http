@@ -2,12 +2,12 @@
 # NDR Validation XSD File Requests
 
 @mediaType = json
-# @mediaType = csv
+@mediaType = csv
 
 # Assign request variables
 # @version = 3.0
 # @version = 4.0
-# @version = 5.0
+@version = 5.0
 @version = 6.0
 
 @url = {{baseUrl}}/validation/schemas/ndr

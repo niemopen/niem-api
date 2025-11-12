@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Custom exception handler for entity not unique exceptions.
  */
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_CONTENT)
 public class EntityNotUniqueException extends RuntimeException {
 
   public EntityNotUniqueException(String entityKind, String label) {

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Custom exception handler for entity not found exceptions.
  */
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_CONTENT)
 public class EntityNotFoundException extends RuntimeException {
 
   public EntityNotFoundException(String entityKind, String label) {

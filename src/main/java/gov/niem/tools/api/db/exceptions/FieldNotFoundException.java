@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Custom exception handler for missing required fields.
  */
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_CONTENT)
 public class FieldNotFoundException extends RuntimeException {
 
   public FieldNotFoundException(String fieldName) {

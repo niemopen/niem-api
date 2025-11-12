@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Custom exception handler for entity not found exceptions.
  */
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_CONTENT)
 public class ArgumentNotValidException extends RuntimeException {
 
   public ArgumentNotValidException(String fieldName, String message) {

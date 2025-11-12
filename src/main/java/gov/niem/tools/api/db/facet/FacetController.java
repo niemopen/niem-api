@@ -6,8 +6,6 @@ import gov.niem.tools.api.db.ServiceHub;
 import gov.niem.tools.api.db.base.AddModelReason;
 import gov.niem.tools.api.db.exceptions.EntityNotFoundException;
 import gov.niem.tools.api.db.facet.Facet.Category;
-import gov.niem.tools.api.db.property.Property;
-import gov.niem.tools.api.db.type.Type;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;

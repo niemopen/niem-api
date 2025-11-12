@@ -44,7 +44,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     // Set http status code for custom application exceptions
     if (exceptionClassName.contains("gov.niem.tools.api.db.exceptions")) {
-      status = HttpStatus.UNPROCESSABLE_ENTITY;
+      status = HttpStatus.UNPROCESSABLE_CONTENT;
     }
     else if (exceptionClassName.contains("BadRequestException")) {
       status = HttpStatus.BAD_REQUEST;

@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-alpine-jdk as build
+FROM amazoncorretto:21-alpine-jdk as build
 ADD . /home/app/niem-api
 COPY ./build/libs/api-2.0.jar /home/app/niem-api/target/niem-api-2.0.jar
 RUN mkdir -p /opt/niem-api/db-backups

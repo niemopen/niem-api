@@ -25,15 +25,16 @@ build-jar-image:
   tags:
     - $SHELL
   rules:
+    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
+    - if: '$CI_COMMIT_BRANCH == "mep"'
+    - if: '$CI_COMMIT_BRANCH == "dev"'
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
+  before_script:
+    - git submodule update --init --remote --recursive
   script:
     - ./gradlew bootJar
-    - podman build -t $IMAGE:$PROFILE .
-  after_script:
-    - podman image ls
-    - podman image prune -f
-    - podman image ls
 
   artifacts:
     paths:
@@ -79,12 +80,19 @@ artifactory:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
   before_script:
+    - podman login -u $ARTIFACTORY_USER --password $ARTIFACTORY_TOKEN_GTRI $ARTIFACTORY_URL_GTRI
+    - podman pull $ARTIFACTORY_URL_GTRI/$JDK_21_REPO_IMAGE
+    - podman logout $ARTIFACTORY_URL_GTRI
+
     - podman login -u $ARTIFACTORY_USER --password $ARTIFACTORY_TOKEN $ARTIFACTORY_URL
     - echo "$IMAGE:PROFILE"
     - echo "$IMAGE_FULL_NAME"
   script:
+    - podman build -t $IMAGE:$PROFILE .
     - podman push $IMAGE:$PROFILE $IMAGE_FULL_NAME
   after_script:
+    - podman image prune -f
+    - podman image ls
     - podman logout $ARTIFACTORY_URL
 
 deploy:

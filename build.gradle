@@ -19,27 +19,22 @@ application {
 }
 
 java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
-  }
+  sourceCompatibility = JavaVersion.VERSION_21
 }
 
-subprojects {
-  apply plugin: 'java'
-  java {
-    toolchain {
-      languageVersion = JavaLanguageVersion.of(21)
-    }
-  }
-  test {
-    // enabled = false
-  	useJUnitPlatform()
-  }
-  dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.0-RC3'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.0-RC3'
-  }
-}
+// subprojects {
+//   apply plugin: 'java'
+//   java {
+//     sourceCompatibility = JavaVersion.VERSION_17
+//   }
+//   test {
+//     // enabled = false
+//   	useJUnitPlatform()
+//   }
+//   dependencies {
+//     testImplementation 'org.junit.jupiter:junit-jupiter'
+//   }
+// }
 
 springBoot {
   mainClass = 'gov.niem.tools.api.Application'
@@ -158,25 +153,30 @@ checkstyleTest {
 // JAVADOC SUPPORT ****************************************
 
 javadoc {
+  source = sourceSets.main.allJava
   options.tags = ["todo", "example"]
   options.addStringOption('Xdoclint:missing', '-quiet')
   // options.addStringOption('Xdoclint:none', '-quiet')
+  options.destinationDirectory = file("/docs/javadoc")
+  // include("gov/niem/tools/api/**")
+  exclude "org/mitre/**", "**libs/**"
+  println "IN JAVADOC TASK"
 }
 
-task copyJavadocs(type: Copy) {
-  group = "documentation"
-  description = "Copy generated Javadoc to /docs/javadoc/"
-  println "Copying generated Javadoc to /docs/javadoc/"
-  from "build/docs/javadoc"
-  into "/docs/javadoc"
-}
+// task copyJavadocs(type: Copy) {
+//   group = "documentation"
+//   description = "Copy generated Javadoc to /docs/javadoc/"
+//   println "Copying generated Javadoc to /docs/javadoc/"
+//   from "build/docs/javadoc"
+//   into "/docs/javadoc"
+// }
 
-javadoc.finalizedBy copyJavadocs
+// javadoc.finalizedBy copyJavadocs
 
 // OpenAPI SUPPORT ****************************************
 
 openApi {
-  apiDocsUrl.set("http://localhost:8080/api/v2/api-docs")
+  apiDocsUrl.set("http://localhost:8080/v2/api-docs")
   customBootRun {
     args.set([
       '--spring.profiles.active=openapi'

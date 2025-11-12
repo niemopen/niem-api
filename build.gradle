@@ -6,13 +6,13 @@ plugins {
   id "io.freefair.lombok" version "8.14"
 	id 'io.spring.dependency-management' version '1.1.7'
   id 'org.springdoc.openapi-gradle-plugin' version '1.9.0'
-	id 'org.springframework.boot' version '4.0.0-M3'
+	id 'org.springframework.boot' version '4.0.0-RC2'
   id 'checkstyle'
 }
 
 group = 'gov.niem.tools'
 version = '2.0'
-project.ext.draft = '2.0-alpha08:SNAPSHOT-2'
+project.ext.draft = '2.0-alpha08.1'
 
 application {
   mainClass = 'gov.niem.tools.api.Application'

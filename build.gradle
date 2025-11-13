@@ -90,6 +90,9 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-validation'
   implementation 'org.springframework.boot:spring-boot-starter-web'
 
+  // Saxon dependency is missing at runtime and needs to be included explicitly
+  implementation 'org.xmlresolver:xmlresolver:6.0.14'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -119,6 +122,11 @@ configurations {
 configurations.all {
   resolutionStrategy {
     resolutionStrategy.force 'io.smallrye:jandex:3.1.2'
+
+    // CMF Tool is on version 12.5
+    resolutionStrategy.force 'net.sf.saxon:Saxon-HE:12.8'
+
+    resolutionStrategy.force 'org.xmlresolver:xmlresolver:6.0.14'
     // failOnVersionConflict()
   }
 }

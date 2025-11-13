@@ -4,6 +4,7 @@ dictionaryDefinitions: []
 dictionaries: []
 words:
   - AKROTIRI
+  - amazoncorretto
   - ASHMORE
   - BARTHELEMY
   - BASSAS
@@ -17,6 +18,7 @@ words:
   - CLIPPERTON
   - clsa
   - cmftool
+  - codequality
   - Configurer
   - CÔTE
   - CUNHA
@@ -99,5 +101,6 @@ words:
   - wonka
   - Xdoclint
   - Xlint
+  - xmlresolver
 ignoreWords: []
 import: []

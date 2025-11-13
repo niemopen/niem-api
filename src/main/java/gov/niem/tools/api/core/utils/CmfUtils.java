@@ -16,6 +16,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import lombok.extern.log4j.Log4j2;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -180,7 +181,7 @@ public class CmfUtils {
 
   }
 
-  private static void refactorContext(JSONObject json) {
+  private static void refactorContext(JSONObject json) throws JSONException {
     JSONObject model = json.getJSONObject("Model");
     JSONObject context = new JSONObject();
 

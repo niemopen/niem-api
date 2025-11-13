@@ -1,18 +1,14 @@
-@prefix aamva_d20:      <http://release.niem.gov/niem/codes/aamva_d20/5.0/#> .
-@prefix exch:           <http://training.niem.gov/CrashDriver/1.0/#> .
-@prefix ext:            <http://training.niem.gov/CrashDriver/1.0/extension#> .
-@prefix j:              <http://release.niem.gov/niem/domains/jxdm/7.0/#> .
-@prefix nc:             <http://release.niem.gov/niem/niem-core/5.0/#> .
-@prefix xs:             <http://www.w3.org/2001/XMLSchema#> .
+@prefix aamva_d20:      <http://release.niem.gov/niem/codes/aamva_d20/5.0/> .
+@prefix exch:           <http://training.niem.gov/CrashDriver/1.0/> .
+@prefix ext:            <http://training.niem.gov/CrashDriver/1.0/extension> .
+@prefix j:              <http://release.niem.gov/niem/domains/jxdm/7.0/> .
+@prefix nc:             <http://release.niem.gov/niem/niem-core/5.0/> .
+@prefix xs:             <http://www.w3.org/2001/XMLSchema> .
 
-@prefix owl:            <http://www.w3.org/2002/07/owl##> .
-@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema##> .
-@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns##> .
-@prefix xsd:            <http://www.w3.org/2001/XMLSchema#> .
-
-nc:ContactMeansAbstract
-    a owl:DataProperty ;
-    rdfs:comment "A data concept for a means of contacting someone." .
+@prefix owl:            <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema> .
 
 nc:Person
     a owl:ObjectProperty ;
@@ -28,10 +24,6 @@ j:Charge
     a owl:ObjectProperty ;
     rdfs:range j:ChargeType ;
     rdfs:comment "A formal allegation that a specific person has committed a specific offense." .
-
-nc:DateRepresentation
-    a owl:DataProperty ;
-    rdfs:comment "A data concept for a representation of a date." .
 
 nc:ContactEmailID
     a owl:DataProperty ;
@@ -58,10 +50,6 @@ j:PersonChargeAssociation
     rdfs:range j:PersonChargeAssociationType ;
     rdfs:comment "An association between a person and a charge issued to that person." .
 
-nc:InjurySeverityAbstract
-    a owl:DataProperty ;
-    rdfs:comment "A data concept for a severity of an injury received by a person involved into a Traffic Accident." .
-
 nc:PersonBirthDate
     a owl:ObjectProperty ;
     rdfs:range nc:DateType ;
@@ -76,10 +64,6 @@ j:DriverLicense
     a owl:ObjectProperty ;
     rdfs:range j:DriverLicenseType ;
     rdfs:comment "A license issued to a person granting driving privileges." .
-
-nc:LocationGeospatialCoordinateAbstract
-    a owl:ObjectProperty ;
-    rdfs:comment "A data concept for a geospatial location." .
 
 j:CrashVehicle
     a owl:ObjectProperty ;
@@ -237,10 +221,6 @@ j:CrashPerson
     a owl:ObjectProperty ;
     rdfs:range j:CrashPersonType ;
     rdfs:comment "A person involved in a traffic accident." .
-
-nc:RoleOfAbstract
-    a owl:ObjectProperty ;
-    rdfs:comment "A data concept for a property of a role object. This specifies the base object, of which the role object is a function." .
 
 j:ChargeFelonyIndicator
     a owl:DataProperty ;

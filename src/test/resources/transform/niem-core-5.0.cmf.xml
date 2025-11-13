@@ -10,7 +10,7 @@
     <NamespacePrefixText>nc</NamespacePrefixText>
     <DocumentationText>NIEM Core.</DocumentationText>
     <ConformanceTargetURI>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURI>
-    <DocumentFilePathText>niem-core.xsd</DocumentFilePathText>
+    <DocumentFilePathText>niem-core-5.0.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>CORE</NamespaceCategoryCode>
     <NamespaceVersionText>1</NamespaceVersionText>
     <ArchitectureVersionName>NIEM5.0</ArchitectureVersionName>

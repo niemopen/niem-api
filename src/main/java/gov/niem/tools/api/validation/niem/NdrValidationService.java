@@ -316,7 +316,7 @@ public class NdrValidationService {
 
       // Rule title
       line = reader.readLine();
-      String ruleTitle = line.split("\"")[1];
+      final String ruleTitle = line.split("\"")[1];
 
       // Handle 6.0 rule number mapping (first entry)
       String[] updatedRuleNumbers = null;
@@ -450,7 +450,7 @@ public class NdrValidationService {
     Set<String> testIdSet = new HashSet<>(testIdList);
     List<Test> mergedTests = new LinkedList<>();
 
-    for(String testId : testIdSet) {
+    for (String testId : testIdSet) {
 
       List<Test> filteredTests = tests.stream()
           .filter(test -> test.id.equals(testId))
@@ -462,7 +462,7 @@ public class NdrValidationService {
 
       if (ranTest.isPresent()) {
         List<TestResult> testResults = new LinkedList<>();
-        for(Test currentTest : filteredTests) {
+        for (Test currentTest : filteredTests) {
           testResults.addAll(currentTest.getResults());
         }
         mergedTests.add(ranTest.get());

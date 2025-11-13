@@ -44,7 +44,8 @@ public class TransformTest {
   private static final String PATH_CORE_XSD = "transform/niem-core-5.0.xsd";
 
   // Invalid CMF file
-  private static final String PATH_CRASH_DRIVER_CMF_INVALID = "transform/CrashDriver-0.6.cmf.xml";
+  private static final String PATH_CRASH_DRIVER_CMF_INVALID =
+      "transform/CrashDriver-5.0-0.6.cmf.xml";
 
   /**
    * Check that a CMF file for a single namespace can be read in and regenerated

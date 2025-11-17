@@ -37,8 +37,8 @@ loadScripts(document, 'script');</script>
 <li>
 <p>Summary:</p>
 <ul>
-<li><a href="#nested-class-summary">Nested</a></li>
-<li><a href="#field-summary">Field</a></li>
+<li>Nested</li>
+<li>Field</li>
 <li><a href="#constructor-summary">Constr</a></li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
@@ -46,7 +46,7 @@ loadScripts(document, 'script');</script>
 <li>
 <p>Detail:</p>
 <ul>
-<li><a href="#field-detail">Field</a></li>
+<li>Field</li>
 <li><a href="#constructor-detail">Constr</a></li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -57,14 +57,14 @@ loadScripts(document, 'script');</script>
 <div id="navbar-sub-list">
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
-<li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
-<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -88,7 +88,9 @@ loadScripts(document, 'script');</script>
 <div class="inheritance"><a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseEntity</a>
 <div class="inheritance"><a href="BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseStewardEntity</a>
 <div class="inheritance"><a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseModelEntity</a>
+<div class="inheritance"><a href="BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionedEntity</a>&lt;T&gt;
 <div class="inheritance">gov.niem.tools.api.db.base.BaseVersionEntity&lt;T&gt;</div>
+</div>
 </div>
 </div>
 </div>
@@ -96,8 +98,8 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>T</code> - A class for a kind of entity that that supports versioning and migration rules to
-     create previous and next links between releases, such as Namespace, Property, Type, or Facet.</dd>
+<dd><code>T</code> - A class for a kind of entity that that belongs to a version, such as
+     Namespace, Property, Type, or Facet.</dd>
 </dl>
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
@@ -110,7 +112,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="annotations">@MappedSuperclass
 </span><span class="modifiers">public abstract class </span><span class="element-name type-name-label">BaseVersionEntity&lt;T extends BaseVersionEntity&lt;T&gt;&gt;</span>
-<span class="extends-implements">extends <a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></span></div>
+<span class="extends-implements">extends <a href="BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a>&lt;T&gt;</span></div>
 <div class="block">Adds reusable methods for entities that belong to a version: Namespace, Property, etc.</div>
 <dl class="notes">
 <dt>See Also:</dt>
@@ -123,75 +125,16 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- ======== NESTED CLASS SUMMARY ======== -->
-<li>
-<section class="nested-class-summary" id="nested-class-summary">
-<h2>Nested Class Summary</h2>
-<div class="caption"><span>Nested Classes</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Class</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="BaseVersionEntity.BaseVersionEntityBuilder.html" class="type-name-link" title="class in gov.niem.tools.api.db.base">BaseVersionEntity.BaseVersionEntityBuilder</a>&lt;<a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">T</a> extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">T</a>&gt;,<wbr><a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">C</a> extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">T</a>&gt;,<wbr><a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">B</a> extends <a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity.BaseVersionEntityBuilder</a>&lt;<a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">T</a>,<wbr><a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">C</a>,<wbr><a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">B</a>&gt;&gt;</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-</div>
-<div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-gov.niem.tools.api.db.base.BaseModelEntity">Nested classes/interfaces inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></h2>
-<code><a href="BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;<a href="BaseModelEntity.BaseModelEntityBuilder.html" title="type parameter in BaseModelEntity.BaseModelEntityBuilder">C</a> extends <a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a>,<wbr><a href="BaseModelEntity.BaseModelEntityBuilder.html" title="type parameter in BaseModelEntity.BaseModelEntityBuilder">B</a> extends <a href="BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;<a href="BaseModelEntity.BaseModelEntityBuilder.html" title="type parameter in BaseModelEntity.BaseModelEntityBuilder">C</a>,<wbr><a href="BaseModelEntity.BaseModelEntityBuilder.html" title="type parameter in BaseModelEntity.BaseModelEntityBuilder">B</a>&gt;&gt;</code></div>
-<div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-gov.niem.tools.api.db.base.BaseStewardEntity">Nested classes/interfaces inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity</a></h2>
-<code><a href="BaseStewardEntity.BaseStewardEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity.BaseStewardEntityBuilder</a>&lt;<a href="BaseStewardEntity.BaseStewardEntityBuilder.html" title="type parameter in BaseStewardEntity.BaseStewardEntityBuilder">C</a> extends <a href="BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity</a>,<wbr><a href="BaseStewardEntity.BaseStewardEntityBuilder.html" title="type parameter in BaseStewardEntity.BaseStewardEntityBuilder">B</a> extends <a href="BaseStewardEntity.BaseStewardEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity.BaseStewardEntityBuilder</a>&lt;<a href="BaseStewardEntity.BaseStewardEntityBuilder.html" title="type parameter in BaseStewardEntity.BaseStewardEntityBuilder">C</a>,<wbr><a href="BaseStewardEntity.BaseStewardEntityBuilder.html" title="type parameter in BaseStewardEntity.BaseStewardEntityBuilder">B</a>&gt;&gt;</code></div>
-<div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-gov.niem.tools.api.db.base.BaseEntity">Nested classes/interfaces inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></h2>
-<code><a href="BaseEntity.BaseEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseEntity.BaseEntityBuilder</a>&lt;<a href="BaseEntity.BaseEntityBuilder.html" title="type parameter in BaseEntity.BaseEntityBuilder">C</a> extends <a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>,<wbr><a href="BaseEntity.BaseEntityBuilder.html" title="type parameter in BaseEntity.BaseEntityBuilder">B</a> extends <a href="BaseEntity.BaseEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseEntity.BaseEntityBuilder</a>&lt;<a href="BaseEntity.BaseEntityBuilder.html" title="type parameter in BaseEntity.BaseEntityBuilder">C</a>,<wbr><a href="BaseEntity.BaseEntityBuilder.html" title="type parameter in BaseEntity.BaseEntityBuilder">B</a>&gt;&gt;</code></div>
-</section>
-</li>
-<!-- =========== FIELD SUMMARY =========== -->
-<li>
-<section class="field-summary" id="field-summary">
-<h2>Field Summary</h2>
-<div class="caption"><span>Fields</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Field</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a></code></div>
-<div class="col-second even-row-color"><code><a href="#next" class="member-name-link">next</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Corresponding entity mapped from the next version.</div>
-</div>
-<div class="col-first odd-row-color"><code><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#prev" class="member-name-link">prev</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Corresponding entity mapped from the previous version.</div>
-</div>
-</div>
-</section>
-</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier</div>
-<div class="table-header col-second">Constructor</div>
+<div class="summary-table two-column-summary">
+<div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>&nbsp;</code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">BaseVersionEntity</a>()</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected </code></div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(gov.niem.tools.api.db.base.BaseVersionEntity.BaseVersionEntityBuilder)" class="member-name-link">BaseVersionEntity</a><wbr>(<a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity.BaseVersionEntityBuilder</a>&lt;<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>,<wbr>?,<wbr>?&gt;&nbsp;b)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>&nbsp;</code></div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(T,T,T,boolean)" class="member-name-link">BaseVersionEntity</a><wbr>(<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;prev,
- <a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;next,
- <a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;original,
- boolean&nbsp;isDeprecated)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Creates a new <code>BaseVersionEntity</code> instance.</div>
-</div>
 </div>
 </section>
 </li>
@@ -206,21 +149,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#canEqual(java.lang.Object)" class="member-name-link">canEqual</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;other)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/Model.html" title="class in gov.niem.tools.api.db.model">Model</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getModel()" class="member-name-link">getModel</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCurrent()" class="member-name-link">getCurrent</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the Model that defines this object.</div>
+<div class="block">Get the corresponding entity from the current version via migration rules.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNext()" class="member-name-link">getNext</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../model/Model.html" title="class in gov.niem.tools.api.db.model">Model</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getModel()" class="member-name-link">getModel</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Corresponding entity from the next version of the model.</div>
+<div class="block">Gets the Model that defines this object.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNiemVersion()" class="member-name-link">getNiemVersion</a>()</code></div>
@@ -237,34 +174,26 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">For a component in a subset, gets the component from the original source.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPrev()" class="member-name-link">getPrev</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Corresponding entity from the previous version of the model.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="../version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getVersion()" class="member-name-link">getVersion</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionId()" class="member-name-link">getVersionId</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="../version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getVersion()" class="member-name-link">getVersion</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionId()" class="member-name-link">getVersionId</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the version database id.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionNumber()" class="member-name-link">getVersionNumber</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionNumber()" class="member-name-link">getVersionNumber</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A number which identifies a version within a model.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionSummary()" class="member-name-link">getVersionSummary</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionSummary()" class="member-name-link">getVersionSummary</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isDeprecated()" class="member-name-link">isDeprecated</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isCurrent()" class="member-name-link">isCurrent</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">True if an entity is deprecated; false or null otherwise.</div>
+<div class="block">True if this entity is from the current version; false otherwise.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isOriginal()" class="member-name-link">isOriginal</a>()</code></div>
@@ -273,33 +202,12 @@ loadScripts(document, 'script');</script>
  if an entity is being referenced and reused from another model and version
  and is restricted in the changes that can be made (subset options).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDeprecated(boolean)" class="member-name-link">setDeprecated</a><wbr>(boolean&nbsp;isDeprecated)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">True if an entity is deprecated; false or null otherwise.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setNext(T)" class="member-name-link">setNext</a><wbr>(<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;next)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Corresponding entity mapped from the next version.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOriginal(T)" class="member-name-link">setOriginal</a><wbr>(<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;original)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">For a subset that reuses content from another model, this is the link to the
- original entity.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPrev(T)" class="member-name-link">setPrev</a><wbr>(<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;prev)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Corresponding entity mapped from the previous version.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionedEntity">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a></h3>
+<code><a href="BaseVersionedEntity.html#getNext()">getNext</a>, <a href="BaseVersionedEntity.html#getPrev()">getPrev</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseModelEntity">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></h3>
 <code><a href="BaseModelEntity.html#getModelKey()">getModelKey</a>, <a href="BaseModelEntity.html#getModelSummary()">getModelSummary</a>, <a href="BaseModelEntity.html#getSteward()">getSteward</a></code></div>
@@ -308,85 +216,25 @@ loadScripts(document, 'script');</script>
 <code><a href="BaseStewardEntity.html#getStewardKey()">getStewardKey</a>, <a href="BaseStewardEntity.html#getStewardSummary()">getStewardSummary</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseEntity">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></h3>
-<code><a href="BaseEntity.html#getClassName()">getClassName</a>, <a href="BaseEntity.html#getCreatedBy()">getCreatedBy</a>, <a href="BaseEntity.html#getCreatedDate()">getCreatedDate</a>, <a href="BaseEntity.html#getFullIdentifier()">getFullIdentifier</a>, <a href="BaseEntity.html#getId()">getId</a>, <a href="BaseEntity.html#getLastModifiedBy()">getLastModifiedBy</a>, <a href="BaseEntity.html#getLastModifiedDate()">getLastModifiedDate</a>, <a href="BaseEntity.html#getLocalIdentifier()">getLocalIdentifier</a>, <a href="BaseEntity.html#getParentEntity()">getParentEntity</a>, <a href="BaseEntity.html#getRoute()">getRoute</a>, <a href="BaseEntity.html#getTitle()">getTitle</a>, <a href="BaseEntity.html#setCreatedBy(java.lang.String)">setCreatedBy</a>, <a href="BaseEntity.html#setCreatedDate(java.time.LocalDateTime)">setCreatedDate</a>, <a href="BaseEntity.html#setId(java.lang.Long)">setId</a>, <a href="BaseEntity.html#setLastModifiedBy(java.lang.String)">setLastModifiedBy</a>, <a href="BaseEntity.html#setLastModifiedDate(java.time.LocalDateTime)">setLastModifiedDate</a></code></div>
+<code><a href="BaseEntity.html#getClassName()">getClassName</a>, <a href="BaseEntity.html#getIdLabel()">getIdLabel</a>, <a href="BaseEntity.html#getIdLocalLabel()">getIdLocalLabel</a>, <a href="BaseEntity.html#getParentEntity()">getParentEntity</a>, <a href="BaseEntity.html#getRoute()">getRoute</a>, <a href="BaseEntity.html#getTitle()">getTitle</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ============ FIELD DETAIL =========== -->
-<li>
-<section class="field-details" id="field-detail">
-<h2>Field Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="prev">
-<h3>prev</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a> extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&gt;</span>&nbsp;<span class="element-name">prev</span></div>
-<div class="block">Corresponding entity mapped from the previous version.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="next">
-<h3>next</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a> extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&gt;</span>&nbsp;<span class="element-name">next</span></div>
-<div class="block">Corresponding entity mapped from the next version.</div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(gov.niem.tools.api.db.base.BaseVersionEntity.BaseVersionEntityBuilder)">
-<h3>BaseVersionEntity</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">BaseVersionEntity</span><wbr><span class="parameters">(<a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity.BaseVersionEntityBuilder</a>&lt;<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>,<wbr>?,<wbr>?&gt;&nbsp;b)</span></div>
-</section>
-</li>
-<li>
 <section class="detail" id="&lt;init&gt;()">
 <h3>BaseVersionEntity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BaseVersionEntity</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(T,T,T,boolean)">
-<h3 id="&lt;init&gt;(gov.niem.tools.api.db.base.BaseVersionEntity,gov.niem.tools.api.db.base.BaseVersionEntity,gov.niem.tools.api.db.base.BaseVersionEntity,boolean)">BaseVersionEntity</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BaseVersionEntity</span><wbr><span class="parameters">(<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;prev,
- <a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;next,
- <a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;original,
- boolean&nbsp;isDeprecated)</span></div>
-<div class="block">Creates a new <code>BaseVersionEntity</code> instance.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>prev</code> - Corresponding entity mapped from the previous version.</dd>
-<dd><code>next</code> - Corresponding entity mapped from the next version.</dd>
-<dd><code>original</code> - For a subset that reuses content from another model, this is the link to the
- original entity. The value is null if this entity is actually defined by its
- version rather than reused from another model as part of a subset.
-
- <p>Example 1: NIEM model 5.2 is the original source of property "nc:Person".
- In this case, this property is itself the original and has no other original
- source to point to.  The value of original is null.
-
- <p>Example 2: Acme Crash Driver 1.0 reuses property nc:Person from NIEM model 5.2
- and is not its original source.  The value of original is a reference
- to the NIEM model 5.2 nc:Person property.
-
- <p>Although most information about an entity will be duplicated between the original
- and its usages via subsets, tracking the usages of each entity independently
- supports subset-approved customizations, like adjusted cardinality, custom
- namespace prefixes, property aliases, inlined substitutions, and flattened types.</dd>
-<dd><code>isDeprecated</code> - True if an entity is deprecated; false or null otherwise.</dd>
-</dl>
 </section>
 </li>
 </ul>
@@ -404,19 +252,22 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getPrev()">
-<h3>getPrev</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a></span>&nbsp;<span class="element-name">getPrev</span>()</div>
-<div class="block">Corresponding entity from the previous version of the model.
- The Hibernate proxy (from lazy loading) is initialized.</div>
+<section class="detail" id="isCurrent()">
+<h3>isCurrent</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isCurrent</span>()
+                  throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">True if this entity is from the current version; false otherwise.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getNext()">
-<h3>getNext</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a></span>&nbsp;<span class="element-name">getNext</span>()</div>
-<div class="block">Corresponding entity from the next version of the model.
- The Hibernate proxy (from lazy loading) is initialized.</div>
+<section class="detail" id="getCurrent()">
+<h3>getCurrent</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a></span>&nbsp;<span class="element-name">getCurrent</span>()</div>
+<div class="block">Get the corresponding entity from the current version via migration rules.</div>
 </section>
 </li>
 <li>
@@ -477,96 +328,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="BaseModelEntity.html#getModel()">getModel</a></code>&nbsp;in class&nbsp;<code><a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="isDeprecated()">
-<h3>isDeprecated</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isDeprecated</span>()</div>
-<div class="block">True if an entity is deprecated; false or null otherwise.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setPrev(T)">
-<h3 id="setPrev(gov.niem.tools.api.db.base.BaseVersionEntity)">setPrev</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPrev</span><wbr><span class="parameters">(<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;prev)</span></div>
-<div class="block">Corresponding entity mapped from the previous version.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setNext(T)">
-<h3 id="setNext(gov.niem.tools.api.db.base.BaseVersionEntity)">setNext</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setNext</span><wbr><span class="parameters">(<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;next)</span></div>
-<div class="block">Corresponding entity mapped from the next version.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setOriginal(T)">
-<h3 id="setOriginal(gov.niem.tools.api.db.base.BaseVersionEntity)">setOriginal</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setOriginal</span><wbr><span class="parameters">(<a href="BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&nbsp;original)</span></div>
-<div class="block">For a subset that reuses content from another model, this is the link to the
- original entity. The value is null if this entity is actually defined by its
- version rather than reused from another model as part of a subset.
-
- <p>Example 1: NIEM model 5.2 is the original source of property "nc:Person".
- In this case, this property is itself the original and has no other original
- source to point to.  The value of original is null.
-
- <p>Example 2: Acme Crash Driver 1.0 reuses property nc:Person from NIEM model 5.2
- and is not its original source.  The value of original is a reference
- to the NIEM model 5.2 nc:Person property.
-
- <p>Although most information about an entity will be duplicated between the original
- and its usages via subsets, tracking the usages of each entity independently
- supports subset-approved customizations, like adjusted cardinality, custom
- namespace prefixes, property aliases, inlined substitutions, and flattened types.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setDeprecated(boolean)">
-<h3>setDeprecated</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDeprecated</span><wbr><span class="parameters">(boolean&nbsp;isDeprecated)</span></div>
-<div class="block">True if an entity is deprecated; false or null otherwise.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="toString()">
-<h3>toString</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="BaseModelEntity.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="equals(java.lang.Object)">
-<h3>equals</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="BaseModelEntity.html#equals(java.lang.Object)">equals</a></code>&nbsp;in class&nbsp;<code><a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="canEqual(java.lang.Object)">
-<h3>canEqual</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">canEqual</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;other)</span></div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="BaseModelEntity.html#canEqual(java.lang.Object)">canEqual</a></code>&nbsp;in class&nbsp;<code><a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="hashCode()">
-<h3>hashCode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="BaseModelEntity.html#hashCode()">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></code></dd>
 </dl>
 </section>
 </li>

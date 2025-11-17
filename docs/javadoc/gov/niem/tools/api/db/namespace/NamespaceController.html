@@ -122,6 +122,23 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countNamespaces(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.namespace.Namespace.Category)" class="member-name-link">countNamespaces</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count all namespaces in the version with the given fields.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHistory(java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean)" class="member-name-link">getHistory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+ boolean&nbsp;includePreRelease)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the history of the namespace with the given fields.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNamespace(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getNamespace</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
@@ -139,53 +156,45 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get a namespace in CMF with the given fields.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNamespaceProperties(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getNamespaceProperties</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNext(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getNext</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets all properties from a namespace.</div>
+<div class="block">Get the current version of the namespace with the given fields.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNamespacePropertiesCmf(java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">getNamespacePropertiesCmf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNext(java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean)" class="member-name-link">getNext</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="../../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</code></div>
+ boolean&nbsp;includePreRelease)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets all properties from a namespace in CMF.</div>
+<div class="block">Get the next version of the namespace with the given fields.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNamespaceTypes(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getNamespaceTypes</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPrev(java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean)" class="member-name-link">getPrev</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+ boolean&nbsp;includePreRelease)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets all types from a namespace.</div>
+<div class="block">Get the previous version of the namespace with the given fields.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNamespaceTypesCmf(java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">getNamespaceTypesCmf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="../../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets all types in CMF from a namespace.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionNamespaces(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getVersionNamespaces</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionNamespaces(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getVersionNamespaces</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get all namespaces from a version of a model.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionNamespacesCmf(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">getVersionNamespacesCmf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionNamespacesCmf(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">getVersionNamespacesCmf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
  <a href="../../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get all namespaces as CMF from a version of a model.</div>
 </div>
 </div>
@@ -238,14 +247,14 @@ loadScripts(document, 'script');</script>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 <dt>Example:</dt>
-<dd>http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces/nc</dd>
+<dd>http://api.niemopen.org/v2/stewards/niem/models/model/versions/5.2/namespaces/nc</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getNamespaceCmf(java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.core.config.Config.AppMediaType)">
 <h3>getNamespaceCmf</h3>
-<div class="member-signature"><span class="annotations">@GetMapping("/namespaces.cmf/{prefix}")
+<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/{prefix}/formats/cmf")
 @ResponseStatus(code=OK)
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">getNamespaceCmf</span><wbr><span class="parameters">(@PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
@@ -262,8 +271,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
-<dt>Example:</dt>
-<dd>http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces.cmf/nc</dd>
 </dl>
 </section>
 </li>
@@ -284,14 +291,14 @@ loadScripts(document, 'script');</script>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 <dt>Example:</dt>
-<dd>http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces</dd>
+<dd>http://api.niemopen.org/v2/stewards/niem/models/model/versions/5.2/namespaces</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getVersionNamespacesCmf(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.core.config.Config.AppMediaType)">
 <h3>getVersionNamespacesCmf</h3>
-<div class="member-signature"><span class="annotations">@GetMapping("/namespaces.cmf")
+<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/formats/cmf")
 @ResponseStatus(code=OK)
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">getVersionNamespacesCmf</span><wbr><span class="parameters">(@PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
@@ -306,38 +313,36 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
-<dt>Example:</dt>
-<dd>http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces.cmf</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getNamespaceTypes(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
-<h3>getNamespaceTypes</h3>
-<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/{prefix}/types")
+<section class="detail" id="countNamespaces(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.namespace.Namespace.Category)">
+<h3>countNamespaces</h3>
+<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/count")
 @ResponseStatus(code=OK)
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</span>&nbsp;<span class="element-name">getNamespaceTypes</span><wbr><span class="parameters">(@PathVariable
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">countNamespaces</span><wbr><span class="parameters">(@PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  @PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  @PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
- @PathVariable
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span>
-                             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
-<div class="block">Gets all types from a namespace.</div>
+ @RequestParam(required=false)
+ <a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</span>
+                     throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Count all namespaces in the version with the given fields.</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getNamespaceTypesCmf(java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.core.config.Config.AppMediaType)">
-<h3>getNamespaceTypesCmf</h3>
-<div class="member-signature"><span class="annotations">@GetMapping("/namespaces.cmf/{prefix}/types")
+<section class="detail" id="getPrev(java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean)">
+<h3>getPrev</h3>
+<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/{prefix}/prev")
 @ResponseStatus(code=OK)
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">getNamespaceTypesCmf</span><wbr><span class="parameters">(@PathVariable
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a></span>&nbsp;<span class="element-name">getPrev</span><wbr><span class="parameters">(@PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  @PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
@@ -345,43 +350,25 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
  @PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- @RequestParam(required=false,defaultValue="json")
- <a href="../../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</span>
-                            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
-<div class="block">Gets all types in CMF from a namespace.</div>
+ @RequestParam(required=false,defaultValue="false")
+ boolean&nbsp;includePreRelease)</span>
+                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Get the previous version of the namespace with the given fields.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>includePreRelease</code> - - True to return a result from a pre-release if applicable;
+     false to iterate until an official version is reached.</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getNamespaceProperties(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
-<h3>getNamespaceProperties</h3>
-<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/{prefix}/properties")
+<section class="detail" id="getNext(java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean)">
+<h3>getNext</h3>
+<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/{prefix}/next")
 @ResponseStatus(code=OK)
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</span>&nbsp;<span class="element-name">getNamespaceProperties</span><wbr><span class="parameters">(@PathVariable
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
- @PathVariable
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
- @PathVariable
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
- @PathVariable
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span>
-                                      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
-<div class="block">Gets all properties from a namespace.</div>
-<dl class="notes">
-<dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getNamespacePropertiesCmf(java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.core.config.Config.AppMediaType)">
-<h3>getNamespacePropertiesCmf</h3>
-<div class="member-signature"><span class="annotations">@GetMapping("/namespaces.cmf/{prefix}/properties")
-@ResponseStatus(code=OK)
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">getNamespacePropertiesCmf</span><wbr><span class="parameters">(@PathVariable
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a></span>&nbsp;<span class="element-name">getNext</span><wbr><span class="parameters">(@PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  @PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
@@ -389,11 +376,61 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
  @PathVariable
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- @RequestParam(required=false,defaultValue="json")
- <a href="../../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</span>
-                                 throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
-<div class="block">Gets all properties from a namespace in CMF.</div>
+ @RequestParam(required=false,defaultValue="false")
+ boolean&nbsp;includePreRelease)</span>
+                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Get the next version of the namespace with the given fields.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>includePreRelease</code> - - True to return a result from a pre-release if applicable;
+     false to iterate until an official version is reached.</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getNext(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>getNext</h3>
+<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/{prefix}/current")
+@ResponseStatus(code=OK)
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a></span>&nbsp;<span class="element-name">getNext</span><wbr><span class="parameters">(@PathVariable
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ @PathVariable
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ @PathVariable
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ @PathVariable
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span>
+                  throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Get the current version of the namespace with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getHistory(java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean)">
+<h3>getHistory</h3>
+<div class="member-signature"><span class="annotations">@GetMapping("/namespaces/{prefix}/history")
+@ResponseStatus(code=OK)
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</span>&nbsp;<span class="element-name">getHistory</span><wbr><span class="parameters">(@PathVariable
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ @PathVariable
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ @PathVariable
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ @PathVariable
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+ @RequestParam(required=false,defaultValue="false")
+ boolean&nbsp;includePreRelease)</span>
+                           throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Get the history of the namespace with the given fields.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>includePreRelease</code> - - True to return a result from a pre-release if applicable;
+     false to iterate until an official version is reached.</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 </dl>

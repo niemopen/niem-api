@@ -37,7 +37,7 @@ loadScripts(document, 'script');</script>
 <li>
 <p>Summary:</p>
 <ul>
-<li>Nested</li>
+<li><a href="#nested-class-summary">Nested</a></li>
 <li><a href="#field-summary">Field</a></li>
 <li><a href="#constructor-summary">Constr</a></li>
 <li><a href="#method-summary">Method</a></li>
@@ -57,7 +57,7 @@ loadScripts(document, 'script');</script>
 <div id="navbar-sub-list">
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
@@ -96,6 +96,23 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<li>
+<section class="nested-class-summary" id="nested-class-summary">
+<h2>Nested Class Summary</h2>
+<div class="caption"><span>Nested Classes</span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Class</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="SearchService.SortOrder.html" class="type-name-link" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Defines options for sorting search results.</div>
+</div>
+</div>
+</section>
+</li>
 <!-- =========== FIELD SUMMARY =========== -->
 <li>
 <section class="field-summary" id="field-summary">
@@ -141,28 +158,31 @@ loadScripts(document, 'script');</script>
 <div class="block">Initialize database indexes.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.hibernate.search.engine.search.query.SearchResult<wbr>&lt;<a href="../db/property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#searchProperty(java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Boolean,java.lang.Boolean,gov.niem.tools.api.db.namespace.Namespace.Category%5B%5D,java.lang.Integer,java.lang.Integer)" class="member-name-link">searchProperty</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#searchProperty(java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Boolean,java.lang.Boolean,gov.niem.tools.api.db.namespace.Namespace.Category%5B%5D,gov.niem.tools.api.search.SearchService.SortOrder,java.lang.Integer,java.lang.Integer)" class="member-name-link">searchProperty</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokens,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;substrings,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;prefixes,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;types,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;groups,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;stewards,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;models,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isAbstract,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isElement,
  <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategories,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Search properties in the database.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.hibernate.search.engine.search.query.SearchResult<wbr>&lt;<a href="../db/type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#searchType(java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Integer,java.lang.Integer)" class="member-name-link">searchType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#searchType(java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,gov.niem.tools.api.db.type.Type.Category,gov.niem.tools.api.db.namespace.Namespace.Category%5B%5D,gov.niem.tools.api.search.SearchService.SortOrder,java.lang.Integer,java.lang.Integer)" class="member-name-link">searchType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokens,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;substrings,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;prefixes,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="../db/type/Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category,
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategories,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Search types in the database.</div>
@@ -170,7 +190,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setResponseHeaders(jakarta.servlet.http.HttpServletResponse,org.hibernate.search.engine.search.query.SearchResult,java.lang.Integer,java.lang.Integer,java.lang.String)" class="member-name-link">setResponseHeaders</a><wbr>(jakarta.servlet.http.HttpServletResponse&nbsp;response,
  org.hibernate.search.engine.search.query.SearchResult&lt;? extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;searchResult,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;requestUrl)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -231,32 +251,35 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="searchProperty(java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Boolean,java.lang.Boolean,gov.niem.tools.api.db.namespace.Namespace.Category[],java.lang.Integer,java.lang.Integer)">
+<section class="detail" id="searchProperty(java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Boolean,java.lang.Boolean,gov.niem.tools.api.db.namespace.Namespace.Category[],gov.niem.tools.api.search.SearchService.SortOrder,java.lang.Integer,java.lang.Integer)">
 <h3>searchProperty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">org.hibernate.search.engine.search.query.SearchResult&lt;<a href="../db/property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</span>&nbsp;<span class="element-name">searchProperty</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokens,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;substrings,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;prefixes,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;types,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;groups,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;stewards,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;models,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isAbstract,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isElement,
  <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategories,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit)</span></div>
 <div class="block">Search properties in the database.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="searchType(java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Integer,java.lang.Integer)">
+<section class="detail" id="searchType(java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],gov.niem.tools.api.db.type.Type.Category,gov.niem.tools.api.db.namespace.Namespace.Category[],gov.niem.tools.api.search.SearchService.SortOrder,java.lang.Integer,java.lang.Integer)">
 <h3>searchType</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">org.hibernate.search.engine.search.query.SearchResult&lt;<a href="../db/type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</span>&nbsp;<span class="element-name">searchType</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;tokens,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;substrings,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;prefixes,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="../db/type/Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category,
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategories,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit)</span></div>
 <div class="block">Search types in the database.</div>
 </section>
@@ -266,7 +289,7 @@ loadScripts(document, 'script');</script>
 <h3>setResponseHeaders</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setResponseHeaders</span><wbr><span class="parameters">(jakarta.servlet.http.HttpServletResponse&nbsp;response,
  org.hibernate.search.engine.search.query.SearchResult&lt;? extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;searchResult,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;requestUrl)</span></div>
 <div class="block">Set search response headers to include the total number of hits, the

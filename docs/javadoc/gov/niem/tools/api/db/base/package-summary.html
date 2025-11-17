@@ -83,22 +83,25 @@ loadScripts(document, 'script');</script>
 </li>
 <li>
 <div id="class-summary">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button><button id="class-summary-tab3" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab3', 2)" class="table-tab">Enum Classes</button></div>
 <div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="BaseCmfEntity.html" title="interface in gov.niem.tools.api.db.base">BaseCmfEntity</a>&lt;T&gt;</div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
-<div class="block">Superclass for a CMF object.</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="AddModelReason.html" title="enum class in gov.niem.tools.api.db.base">AddModelReason</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
+<div class="block">Identifies why a component was added to a CMF model, either directly due to a task
+ like migration or transformation, or indirectly as a required dependency.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="BaseCmfEntity.html" title="interface in gov.niem.tools.api.db.base">BaseCmfEntity</a>&lt;T&gt;</div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="block">Interface for a model object that can be represented as a CMF object.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">A parent class for all kinds of entities used to represent the structure of a
  NIEM model.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="BaseEntity.BaseEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseEntity.BaseEntityBuilder</a>&lt;C extends <a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>,<wbr>B extends <a href="BaseEntity.BaseEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseEntity.BaseEntityBuilder</a>&lt;C,<wbr>B&gt;&gt;</div>
-<div class="col-last even-row-color class-summary class-summary-tab2">&nbsp;</div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseEntityService.html" title="class in gov.niem.tools.api.db.base">BaseEntityService</a>&lt;T extends <a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&gt;</div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Abstract class that provides basic database operations for data model items.</div>
@@ -107,27 +110,28 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Adds reusable methods for entities that belong to a model: Version, Namespace, Property, etc.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;C extends <a href="BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a>,<wbr>B extends <a href="BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;C,<wbr>B&gt;&gt;</div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">&nbsp;</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="BaseNamespaceEntity.html" title="class in gov.niem.tools.api.db.base">BaseNamespaceEntity</a>&lt;T extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;T&gt;&gt;</div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseNamespaceEntity.html" title="class in gov.niem.tools.api.db.base">BaseNamespaceEntity</a>&lt;T extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;T&gt;&gt;</div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Adds reusable methods for entities that belong to a namespace:
  Property, Type, Facet, etc.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseNamespaceEntity.BaseNamespaceEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseNamespaceEntity.BaseNamespaceEntityBuilder</a>&lt;T extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;T&gt;,<wbr>C extends <a href="BaseNamespaceEntity.html" title="class in gov.niem.tools.api.db.base">BaseNamespaceEntity</a>&lt;T&gt;,<wbr>B extends <a href="BaseNamespaceEntity.BaseNamespaceEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseNamespaceEntity.BaseNamespaceEntityBuilder</a>&lt;T,<wbr>C,<wbr>B&gt;&gt;</div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">&nbsp;</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Adds reusable methods for entities that belong to a steward: Model, Version, Namespace, etc.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseStewardEntity.BaseStewardEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity.BaseStewardEntityBuilder</a>&lt;C extends <a href="BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity</a>,<wbr>B extends <a href="BaseStewardEntity.BaseStewardEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity.BaseStewardEntityBuilder</a>&lt;C,<wbr>B&gt;&gt;</div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">&nbsp;</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a>&lt;T extends <a href="BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a>&lt;T&gt;&gt;</div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Adds reusable methods for entities that can be versioned: Version, Namespace, Property, etc.</div>
+</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;T extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;T&gt;&gt;</div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Adds reusable methods for entities that belong to a version: Namespace, Property, etc.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity.BaseVersionEntityBuilder</a>&lt;T extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;T&gt;,<wbr>C extends <a href="BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;T&gt;,<wbr>B extends <a href="BaseVersionEntity.BaseVersionEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity.BaseVersionEntityBuilder</a>&lt;T,<wbr>C,<wbr>B&gt;&gt;</div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">&nbsp;</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntityService</a>&lt;U extends <a href="BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a>&lt;U&gt;&gt;</div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Abstract class the provides additional database operations for data
+ model items that are versioned (e.g., versions, namespaces, properties, etc.)</div>
+</div>
 </div>
 </div>
 </div>

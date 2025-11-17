@@ -7,30 +7,30 @@
     },
     "description": "Community support for common NIEM tool functionality to browse and search the model, build and migrate subsets, and check conformance",
     "title": "NIEM API 2.0",
-    "version": "2.0-alpha06"
+    "version": "2.0-alpha08.1"
   },
   "servers": [
     {
-      "url": "https://tools.niem.gov/api/v2",
+      "url": "https://api.niemopen.org/v2",
       "description": "Production server"
     },
     {
-      "url": "https://tools.niem.gov/api/mep",
+      "url": "https://api.niemopen.org/mep",
       "description": "MEP instance server"
     },
     {
-      "url": "http://localhost:8080/api/v2",
+      "url": "http://localhost:8080/v2",
       "description": "Local machine"
     }
   ],
   "tags": [
     {
-      "description": "A property represents a concept, idea, or thing. It defines specific semantics and appears in exchanges as the tag or label for a field.",
-      "name": "Data-5: Properties"
-    },
-    {
       "description": "A group or entity responsible for managing NIEM content.",
       "name": "Data-1: Stewards"
+    },
+    {
+      "description": "A property represents a concept, idea, or thing. It defines specific semantics and appears in exchanges as the tag or label for a field.",
+      "name": "Data-5: Properties"
     },
     {
       "description": "Transformations",
@@ -163,252 +163,6 @@
         ]
       }
     },
-    "/search.cmf/properties": {
-      "get": {
-        "description": "Search properties in the database based on the given criteria and return results in CMF.",
-        "operationId": "getPropertySearchCmf",
-        "parameters": [
-          {
-            "description": "A base NIEM version number (e.g., \"5.2\") to search for NIEM\n     and community content. Defaults to the current NIEM version if not provided.",
-            "in": "query",
-            "name": "niemVersionNumber",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Search for full tokens in component names and definitions with stemming.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\" but does not\n     return \"Alarm\", \"Firearm\", \"Harm\", etc.",
-            "in": "query",
-            "name": "token",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "description": "Search for partial text in component names and definitions.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n     \"Firearm\", \"Harm\", etc.",
-            "in": "query",
-            "name": "substring",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "description": "Filter results on the given prefix(es)",
-            "in": "query",
-            "name": "prefix",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "description": "Filter results by substring matching on one of the given types.\n     Example: [\"text\", \"boolean\"] matches properties with types that include\n     nc:TextType and niem-xs:boolean.",
-            "in": "query",
-            "name": "type",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "description": "True if only abstract properties should be returned; false if only\n     non-abstract (concrete) properties should be returned.\n     Omit parameter to return either kind.",
-            "in": "query",
-            "name": "isAbstract",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "description": "True if only element properties should be returned; false if only\n     attribute properties should be returned.\n     Omit parameter to return either kind.",
-            "in": "query",
-            "name": "isElement",
-            "required": false,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "description": "A number of results to skip.  Defaults to 0.",
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "description": "A maximum number of results to return.  Defaults to and will not exceed 100.",
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        },
-        "summary": "Search properties in the database based on the given criteria and return results in CMF.",
-        "tags": [
-          "Search"
-        ]
-      }
-    },
-    "/search.cmf/types": {
-      "get": {
-        "description": "Search types based on given criteria and returns results in CMF.",
-        "operationId": "getTypeSearchCmf",
-        "parameters": [
-          {
-            "description": "A base NIEM version number (e.g., \"5.2\") to search\n     for NIEM and community content.\n     Defaults to the current NIEM version if not provided.",
-            "in": "query",
-            "name": "niemVersionNumber",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Search for full tokens in component names and definitions with stemming.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\"\n     but does not return \"Alarm\", \"Firearm\", \"Harm\", etc.",
-            "in": "query",
-            "name": "token",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "description": "Search for partial text in component names and definitions.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n     \"Firearm\", \"Harm\", etc.",
-            "in": "query",
-            "name": "substring",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "description": "Filter results on the given prefix(es)",
-            "in": "query",
-            "name": "prefix",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "description": "A number of results to skip. Defaults to 0.",
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "description": "A maximum number of results to return. Defaults to and will not exceed 100.",
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        },
-        "summary": "Search types based on given criteria and returns results in CMF.",
-        "tags": [
-          "Search"
-        ]
-      }
-    },
     "/search/properties": {
       "get": {
         "description": "Search properties based on the given criteria.",
@@ -490,23 +244,56 @@
             }
           },
           {
-            "description": "A number of results to skip.  Defaults to 0.",
             "in": "query",
-            "name": "offset",
+            "name": "namespaceCategory",
             "required": false,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "core",
+                  "domain",
+                  "code",
+                  "adapter",
+                  "auxiliary",
+                  "external",
+                  "utility",
+                  "core_supplement",
+                  "domain_update",
+                  "extension",
+                  "exchange",
+                  "built_in",
+                  "other"
+                ]
+              }
             }
           },
           {
-            "description": "A maximum number of results to return.  Defaults to and will not exceed 100.",
             "in": "query",
-            "name": "limit",
+            "name": "sortOrder",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "score_name",
+                "score_qname",
+                "rank_qname",
+                "rank_name",
+                "name",
+                "qname"
+              ]
+            }
+          },
+          {
+            "description": "Page number of results to return.  Defaults to 0 (first page).",
+            "in": "query",
+            "name": "page",
             "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 0
             }
           }
         ],
@@ -515,10 +302,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Property"
-                  }
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageProperty"
                 }
               }
             },
@@ -532,6 +316,177 @@
           }
         },
         "summary": "Search properties based on the given criteria.",
+        "tags": [
+          "Search"
+        ]
+      }
+    },
+    "/search/properties/formats/cmf": {
+      "get": {
+        "description": "Search properties in the database based on the given criteria and return results in CMF.",
+        "operationId": "getPropertySearchCmf",
+        "parameters": [
+          {
+            "description": "A base NIEM version number (e.g., \"5.2\") to search for NIEM\n     and community content. Defaults to the current NIEM version if not provided.",
+            "in": "query",
+            "name": "niemVersionNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search for full tokens in component names and definitions with stemming.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\" but does not\n     return \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Search for partial text in component names and definitions.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n     \"Firearm\", \"Harm\", etc.",
+            "in": "query",
+            "name": "substring",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Filter results on the given prefix(es)",
+            "in": "query",
+            "name": "prefix",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Filter results by substring matching on one of the given types.\n     Example: [\"text\", \"boolean\"] matches properties with types that include\n     nc:TextType and niem-xs:boolean.",
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "True if only abstract properties should be returned; false if only\n     non-abstract (concrete) properties should be returned.\n     Omit parameter to return either kind.",
+            "in": "query",
+            "name": "isAbstract",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "True if only element properties should be returned; false if only\n     attribute properties should be returned.\n     Omit parameter to return either kind.",
+            "in": "query",
+            "name": "isElement",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "namespaceCategory",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "core",
+                  "domain",
+                  "code",
+                  "adapter",
+                  "auxiliary",
+                  "external",
+                  "utility",
+                  "core_supplement",
+                  "domain_update",
+                  "extension",
+                  "exchange",
+                  "built_in",
+                  "other"
+                ]
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "score_name",
+                "score_qname",
+                "rank_qname",
+                "rank_name",
+                "name",
+                "qname"
+              ]
+            }
+          },
+          {
+            "description": "Page number of results to return.  Defaults to 0.",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "xml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Search properties in the database based on the given criteria and return results in CMF.",
         "tags": [
           "Search"
         ]
@@ -588,23 +543,69 @@
             }
           },
           {
-            "description": "A number of results to skip. Defaults to 0.",
             "in": "query",
-            "name": "offset",
+            "name": "category",
             "required": false,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "enum": [
+                "complex_object",
+                "complex_value",
+                "simple_value"
+              ]
             }
           },
           {
-            "description": "A maximum number of results to return. Defaults to and will not exceed 100.",
             "in": "query",
-            "name": "limit",
+            "name": "namespaceCategory",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "core",
+                  "domain",
+                  "code",
+                  "adapter",
+                  "auxiliary",
+                  "external",
+                  "utility",
+                  "core_supplement",
+                  "domain_update",
+                  "extension",
+                  "exchange",
+                  "built_in",
+                  "other"
+                ]
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "score_name",
+                "score_qname",
+                "rank_qname",
+                "rank_name",
+                "name",
+                "qname"
+              ]
+            }
+          },
+          {
+            "description": "Page number of results to return.  Defaults to 0.",
+            "in": "query",
+            "name": "page",
             "required": false,
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 0
             }
           }
         ],
@@ -613,10 +614,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Type"
-                  }
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageType"
                 }
               }
             },
@@ -630,6 +628,160 @@
           }
         },
         "summary": "Search types based on given criteria.",
+        "tags": [
+          "Search"
+        ]
+      }
+    },
+    "/search/types/formats/cmf": {
+      "get": {
+        "description": "Search types based on given criteria and returns results in CMF.",
+        "operationId": "getTypeSearchCmf",
+        "parameters": [
+          {
+            "description": "A base NIEM version number (e.g., \"5.2\") to search\n     for NIEM and community content.\n     Defaults to the current NIEM version if not provided.",
+            "in": "query",
+            "name": "niemVersionNumber",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search for full tokens in component names and definitions with stemming.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", and \"Arming\"\n     but does not return \"Alarm\", \"Firearm\", \"Harm\", etc.",
+            "in": "query",
+            "name": "token",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Search for partial text in component names and definitions.\n     Example: \"arm\" returns property names with \"Arm\", \"Armed\", \"Arming\", \"Alarm\",\n     \"Firearm\", \"Harm\", etc.",
+            "in": "query",
+            "name": "substring",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "description": "Filter results on the given prefix(es)",
+            "in": "query",
+            "name": "prefix",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "complex_object",
+                "complex_value",
+                "simple_value"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "namespaceCategory",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "core",
+                  "domain",
+                  "code",
+                  "adapter",
+                  "auxiliary",
+                  "external",
+                  "utility",
+                  "core_supplement",
+                  "domain_update",
+                  "extension",
+                  "exchange",
+                  "built_in",
+                  "other"
+                ]
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "score_name",
+                "score_qname",
+                "rank_qname",
+                "rank_name",
+                "name",
+                "qname"
+              ]
+            }
+          },
+          {
+            "description": "Page number of results to return.  Defaults to 0.",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "xml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Search types based on given criteria and returns results in CMF.",
         "tags": [
           "Search"
         ]
@@ -655,6 +807,29 @@
           }
         },
         "summary": "Get all stewards.",
+        "tags": [
+          "Data-1: Stewards"
+        ]
+      }
+    },
+    "/stewards/count": {
+      "get": {
+        "description": "Get the count of all stewards.",
+        "operationId": "countStewards",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the count of all stewards.",
         "tags": [
           "Data-1: Stewards"
         ]
@@ -697,7 +872,7 @@
     },
     "/stewards/{stewardKey}/models": {
       "get": {
-        "description": "Use wildcard \u0027*\u0027 for the steward key to return all models",
+        "description": "Use wildcard steward key \u0027*\u0027 to return all models",
         "operationId": "getStewardModels",
         "parameters": [
           {
@@ -718,6 +893,38 @@
                   "items": {
                     "$ref": "#/components/schemas/Model"
                   }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Data-2: Models"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/count": {
+      "get": {
+        "description": "Use wildcard steward key \u0027*\u0027 to count all models",
+        "operationId": "countModels",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
                 }
               }
             },
@@ -815,10 +1022,10 @@
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions.cmf/{versionKey}": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/count": {
       "get": {
-        "description": "Gets the version with the given fields in CMF.",
-        "operationId": "getVersionCmf",
+        "description": "Count all versions from the model with the given fields.",
+        "operationId": "countVersions",
         "parameters": [
           {
             "in": "path",
@@ -835,26 +1042,46 @@
             "schema": {
               "type": "string"
             }
-          },
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all versions from the model with the given fields.",
+        "tags": [
+          "Data-3: Versions"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/current": {
+      "get": {
+        "description": "Get the current instance of the version with the given fields.",
+        "operationId": "getCurrent_4",
+        "parameters": [
           {
             "in": "path",
-            "name": "versionKey",
+            "name": "stewardKey",
             "required": true,
             "schema": {
               "type": "string"
             }
           },
           {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
             "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
+              "type": "string"
             }
           }
         ],
@@ -863,23 +1090,20 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/Version"
                 }
               }
             },
             "description": "OK"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
           }
         },
-        "summary": "Gets the version with the given fields in CMF.",
+        "summary": "Get the current instance of the version with the given fields.",
         "tags": [
           "Data-3: Versions"
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionKey}": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}": {
       "get": {
         "description": "Gets the version with the given fields.",
         "operationId": "getVersion",
@@ -902,7 +1126,7 @@
           },
           {
             "in": "path",
-            "name": "versionKey",
+            "name": "versionNumber",
             "required": true,
             "schema": {
               "type": "string"
@@ -925,6 +1149,172 @@
           }
         },
         "summary": "Gets the version with the given fields.",
+        "tags": [
+          "Data-3: Versions"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/facets": {
+      "get": {
+        "description": "Gets all facets from the version with the given criteria.",
+        "operationId": "getVersionFacets",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageFacet"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets all facets from the version with the given criteria.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/facets/count": {
+      "get": {
+        "description": "Count all facets in the version with the given fields.",
+        "operationId": "countVersionFacets",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all facets in the version with the given fields.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/history": {
+      "get": {
+        "description": "Get the history of the version with the given fields.",
+        "operationId": "getHistory_5",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Version"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the history of the version with the given fields.",
         "tags": [
           "Data-3: Versions"
         ]
@@ -984,7 +1374,79 @@
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces.cmf": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/count": {
+      "get": {
+        "description": "Count all namespaces in the version with the given fields.",
+        "operationId": "countNamespaces",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "core",
+                "domain",
+                "code",
+                "adapter",
+                "auxiliary",
+                "external",
+                "utility",
+                "core_supplement",
+                "domain_update",
+                "extension",
+                "exchange",
+                "built_in",
+                "other"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all namespaces in the version with the given fields.",
+        "tags": [
+          "Data-4: Namespace"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/formats/cmf": {
       "get": {
         "description": "Get all namespaces as CMF from a version of a model.",
         "operationId": "getVersionNamespacesCmf",
@@ -1043,222 +1505,6 @@
           }
         },
         "summary": "Get all namespaces as CMF from a version of a model.",
-        "tags": [
-          "Data-4: Namespace"
-        ]
-      }
-    },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces.cmf/{prefix}": {
-      "get": {
-        "description": "Get a namespace in CMF with the given fields.",
-        "operationId": "getNamespaceCmf",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "stewardKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "modelKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "versionNumber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "prefix",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "summary": "Get a namespace in CMF with the given fields.",
-        "tags": [
-          "Data-4: Namespace"
-        ]
-      }
-    },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces.cmf/{prefix}/properties": {
-      "get": {
-        "description": "Gets all properties from a namespace in CMF.",
-        "operationId": "getNamespacePropertiesCmf",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "stewardKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "modelKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "versionNumber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "prefix",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "summary": "Gets all properties from a namespace in CMF.",
-        "tags": [
-          "Data-4: Namespace"
-        ]
-      }
-    },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces.cmf/{prefix}/types": {
-      "get": {
-        "description": "Gets all types in CMF from a namespace.",
-        "operationId": "getNamespaceTypesCmf",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "stewardKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "modelKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "versionNumber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "prefix",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "summary": "Gets all types in CMF from a namespace.",
         "tags": [
           "Data-4: Namespace"
         ]
@@ -1323,10 +1569,10 @@
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/properties": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/current": {
       "get": {
-        "description": "Gets all properties from a namespace.",
-        "operationId": "getNamespaceProperties",
+        "description": "Get the current version of the namespace with the given fields.",
+        "operationId": "getNext_6",
         "parameters": [
           {
             "in": "path",
@@ -1366,10 +1612,393 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/Namespace"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the current version of the namespace with the given fields.",
+        "tags": [
+          "Data-4: Namespace"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/facets": {
+      "get": {
+        "description": "Gets all facets from the namespace with the given criteria.",
+        "operationId": "getNamespaceFacets",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageFacet"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets all facets from the namespace with the given criteria.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/facets/count": {
+      "get": {
+        "description": "Count all facets in the namespace with the given fields.",
+        "operationId": "countNamespaceFacets",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all facets in the namespace with the given fields.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/history": {
+      "get": {
+        "description": "Get the history of the namespace with the given fields.",
+        "operationId": "getHistory_4",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Property"
+                    "$ref": "#/components/schemas/Namespace"
                   }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the history of the namespace with the given fields.",
+        "tags": [
+          "Data-4: Namespace"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/next": {
+      "get": {
+        "description": "Get the next version of the namespace with the given fields.",
+        "operationId": "getNext_5",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Namespace"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the next version of the namespace with the given fields.",
+        "tags": [
+          "Data-4: Namespace"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/prev": {
+      "get": {
+        "description": "Get the previous version of the namespace with the given fields.",
+        "operationId": "getPrev_5",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Namespace"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the previous version of the namespace with the given fields.",
+        "tags": [
+          "Data-4: Namespace"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/properties": {
+      "get": {
+        "description": "Gets all properties from the namespace with the given fields.\n Default sort is namespace rank (e.g., Core first), prefix, and then name.",
+        "operationId": "getNamespaceProperties",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageProperty"
                 }
               }
             },
@@ -1379,9 +2008,159 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Gets all properties from a namespace.",
+        "summary": "Gets all properties from the namespace with the given fields.",
         "tags": [
-          "Data-4: Namespace"
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/properties/count": {
+      "get": {
+        "description": "Count all properties in the namespace with the given fields.",
+        "operationId": "countNamespaceProperties",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "element",
+                "abstract_element",
+                "attribute"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all properties in the namespace with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/properties/formats/cmf": {
+      "get": {
+        "description": "Gets all properties from a namespace with the given fields in CMF.",
+        "operationId": "getNamespacePropertiesCmf",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "xml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Gets all properties from a namespace with the given fields in CMF.",
+        "tags": [
+          "Data-5: Properties"
         ]
       }
     },
@@ -1445,10 +2224,10 @@
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/types": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/subproperties/count": {
       "get": {
-        "description": "Gets all types from a namespace.",
-        "operationId": "getNamespaceTypes",
+        "description": "Count all subproperties in a namespace with the given fields.",
+        "operationId": "countNamespaceSubproperties",
         "parameters": [
           {
             "in": "path",
@@ -1488,10 +2267,72 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Type"
-                  }
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all subproperties in a namespace with the given fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/types": {
+      "get": {
+        "description": "Gets all types from a namespace.",
+        "operationId": "getNamespaceTypes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageType"
                 }
               }
             },
@@ -1503,14 +2344,14 @@
         },
         "summary": "Gets all types from a namespace.",
         "tags": [
-          "Data-4: Namespace"
+          "Data-6: Types"
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/types/count": {
       "get": {
-        "description": "Gets all properties from the version with the given fields.\n Note: Currently returns null until pagination support is added.",
-        "operationId": "getAllProperties",
+        "description": "Count all types in the namespace with the given fields.",
+        "operationId": "countNamespaceTypes",
         "parameters": [
           {
             "in": "path",
@@ -1534,6 +2375,27 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "prefix",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "complex_object",
+                "complex_value",
+                "simple_value"
+              ]
             }
           }
         ],
@@ -1542,29 +2404,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Property"
-                  }
+                  "type": "integer",
+                  "format": "int64"
                 }
               }
             },
             "description": "OK"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
           }
         },
-        "summary": "Gets all properties from the version with the given fields.",
+        "summary": "Count all types in the namespace with the given fields.",
         "tags": [
-          "Data-5: Properties"
+          "Data-6: Types"
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties.cmf/{qname}": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/namespaces/{prefix}/types/formats/cmf": {
       "get": {
-        "description": "Gets a property in CMF with the given fields.",
-        "operationId": "getPropertyCmf",
+        "description": "Gets all types in CMF from a namespace.",
+        "operationId": "getNamespaceTypesCmf",
         "parameters": [
           {
             "in": "path",
@@ -1592,10 +2449,18 @@
           },
           {
             "in": "path",
-            "name": "qname",
+            "name": "prefix",
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
             }
           },
           {
@@ -1627,7 +2492,307 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Gets a property in CMF with the given fields.",
+        "summary": "Gets all types in CMF from a namespace.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/next": {
+      "get": {
+        "description": "Get the next version of the version with the given fields.",
+        "operationId": "getNext_4",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Version"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the next version of the version with the given fields.",
+        "tags": [
+          "Data-3: Versions"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/prev": {
+      "get": {
+        "description": "Get the previous version of the version with the given fields.",
+        "operationId": "getPrev_4",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Version"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the previous version of the version with the given fields.",
+        "tags": [
+          "Data-3: Versions"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties": {
+      "get": {
+        "description": "Gets all properties from the version with the given fields.",
+        "operationId": "getVersionProperties",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageProperty"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Gets all properties from the version with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/count": {
+      "get": {
+        "description": "Count all properties in the version with the given fields.",
+        "operationId": "countVersionProperties",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "element",
+                "abstract_element",
+                "attribute"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all properties in the version with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/keyword/{keyword}": {
+      "get": {
+        "description": "Gets a list of the top 10 properties with the keyword from the version with the given fields.",
+        "operationId": "getKeywordProperties",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- A keyword in a property name.  May be qualified with a namespace prefix\n      or with an empty string to treat the keyword as a starts-with search vs leading and\n      trailing wildcards.  Note that spaces in the keyword are not supported.",
+            "in": "path",
+            "name": "keyword",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Property"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Gets a list of the top 10 properties with the keyword from the version with the given fields.",
         "tags": [
           "Data-5: Properties"
         ]
@@ -1752,6 +2917,631 @@
         ]
       }
     },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/current": {
+      "get": {
+        "description": "Get the current version of the property with the given fields.",
+        "operationId": "getCurrent_3",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Property"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the current version of the property with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/facets": {
+      "get": {
+        "description": "Gets all facets from the type of the property with the given criteria.",
+        "operationId": "getPropertyFacets",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageFacet"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets all facets from the type of the property with the given criteria.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/facets/count": {
+      "get": {
+        "description": "Count all facets in the type of the property with the given fields.",
+        "operationId": "countPropertyFacets",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all facets in the type of the property with the given fields.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/formats/cmf": {
+      "get": {
+        "description": "Gets a property in CMF with the given fields.",
+        "operationId": "getPropertyCmf",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "xml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Gets a property in CMF with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/groups": {
+      "get": {
+        "description": "Get the list of substitution group heads for the property with the given fields.\n\n \u003cp\u003eNote that for substitutable properties, this is usually a single abstract property\n on its own.  Occasionally, this abstract property may also belong to its own substitution\n group. This chain of substitution groups may be needed when dealing with property\n dependencies.",
+        "operationId": "getSubstitutionGroups",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Property"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the list of substitution group heads for the property with the given fields",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/history": {
+      "get": {
+        "description": "Get the history of the property with the given fields.",
+        "operationId": "getHistory_3",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Property"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the history of the property with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/next": {
+      "get": {
+        "description": "Get the next version of the property with the given fields.",
+        "operationId": "getNext_3",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Property"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the next version of the property with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/prev": {
+      "get": {
+        "description": "Get the previous version of the property with the given fields.",
+        "operationId": "getPrev_3",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Property"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the previous version of the property with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/subproperties/count": {
+      "get": {
+        "description": "Count all subproperty occurrences for a property with the given fields.",
+        "operationId": "countPropertySubproperties",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all subproperty occurrences for a property with the given fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/properties/{qname}/substitutions": {
+      "get": {
+        "description": "Get the list of substitutions for the property with the given fields.",
+        "operationId": "getSubstitutions",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Property"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the list of substitutions for the property with the given fields.",
+        "tags": [
+          "Data-5: Properties"
+        ]
+      }
+    },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/subproperties": {
       "get": {
         "description": "Gets all subproperties from the database in the version with the given fields.",
@@ -1804,10 +3594,10 @@
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/subproperties/count": {
       "get": {
-        "description": "Gets all types in the version matching the given fields.\n Note: Currently returns null until pagination is supported.",
-        "operationId": "getAllTypes",
+        "description": "Count all subproperties in a version with the given fields.",
+        "operationId": "countVersionSubproperties",
         "parameters": [
           {
             "in": "path",
@@ -1828,6 +3618,185 @@
           {
             "in": "path",
             "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all subproperties in a version with the given fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types": {
+      "get": {
+        "description": "Gets all types in the version matching the given fields.",
+        "operationId": "getVersionTypes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageType"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Gets all types in the version matching the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/count": {
+      "get": {
+        "description": "Count all types in the version with the given fields.",
+        "operationId": "countVersionTypes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "complex_object",
+                "complex_value",
+                "simple_value"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all types in the version with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/keyword/{keyword}": {
+      "get": {
+        "description": "Gets a list of the top 10 types with the keyword from the version with the given fields.",
+        "operationId": "getKeywordTypes",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- A keyword in a type name.  May be qualified with a namespace prefix\n      or with an empty string to treat the keyword as a starts-with search vs leading and\n      trailing wildcards.  Note that spaces in the keyword are not supported.",
+            "in": "path",
+            "name": "keyword",
             "required": true,
             "schema": {
               "type": "string"
@@ -1852,395 +3821,9 @@
             "description": "Unprocessable Entity"
           }
         },
-        "summary": "Gets all types in the version matching the given fields.",
+        "summary": "Gets a list of the top 10 types with the keyword from the version with the given fields.",
         "tags": [
           "Data-6: Types"
-        ]
-      }
-    },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{qname}": {
-      "get": {
-        "description": "Gets the type with the given fields in CMF.",
-        "operationId": "getTypeCmf",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "stewardKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "modelKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "versionNumber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "qname",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          }
-        },
-        "summary": "Gets the type with the given fields in CMF.",
-        "tags": [
-          "Data-6: Types"
-        ]
-      }
-    },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{qname}/facets": {
-      "get": {
-        "description": "Gets all facets in CMF from the type with the given criteria.",
-        "operationId": "getFacetsCmf",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "stewardKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "modelKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "versionNumber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "qname",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Gets all facets in CMF from the type with the given criteria.",
-        "tags": [
-          "Data-8: Facets"
-        ]
-      }
-    },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{qname}/facets/{category}\u003d{value}": {
-      "get": {
-        "description": "Gets a facet in CMF with the given criteria.",
-        "operationId": "getFacetCmf",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "stewardKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "modelKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "versionNumber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "qname",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "category",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "enumeration",
-                "pattern",
-                "length",
-                "minLength",
-                "maxLength",
-                "minExclusive",
-                "maxExclusive",
-                "minInclusive",
-                "maxInclusive",
-                "fractionDigits",
-                "totalDigits",
-                "whiteSpace"
-              ]
-            }
-          },
-          {
-            "in": "path",
-            "name": "value",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Gets a facet in CMF with the given criteria.",
-        "tags": [
-          "Data-8: Facets"
-        ]
-      }
-    },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{typeQname}/subproperties": {
-      "get": {
-        "description": "Gets all subproperties from the database in the type with the given fields, in CMF.",
-        "operationId": "getTypeSubpropertiesCmf",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "stewardKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "modelKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "versionNumber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "typeQname",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Gets all subproperties from the database in the type with the given fields, in CMF.",
-        "tags": [
-          "Data-7: Subproperties"
-        ]
-      }
-    },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types.cmf/{typeQname}/subproperties/{propertyQname}": {
-      "get": {
-        "description": "Gets a subproperty from the database with the type with the given type fields and\n the property with the given qualified name, converted to CMF.",
-        "operationId": "getSubpropertyCmf",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "stewardKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "modelKey",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "versionNumber",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "typeQname",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "path",
-            "name": "propertyQname",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "mediaType",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "default": "json",
-              "enum": [
-                "json",
-                "xml"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Gets a subproperty from the database with the type with the given type fields and\n the property with the given qualified name, converted to CMF.",
-        "tags": [
-          "Data-7: Subproperties"
         ]
       }
     },
@@ -2303,10 +3886,66 @@
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/augmentation-point": {
       "get": {
-        "description": "Gets all facets from the type with the given criteria.",
-        "operationId": "getFacets",
+        "description": "Get the augmentation point element for the type with the given fields.",
+        "operationId": "getTypeAugmentationPoint",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Property"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the augmentation point element for the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/augmentations": {
+      "get": {
+        "description": "Get the augmentations for the type with the given fields.",
+        "operationId": "getTypeAugmentations",
         "parameters": [
           {
             "in": "path",
@@ -2348,9 +3987,302 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Facet"
-                  },
-                  "uniqueItems": true
+                    "$ref": "#/components/schemas/Property"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the augmentations for the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/augmented-type": {
+      "get": {
+        "description": "Get the base type being augmented by the type with the given fields.\n For example, returns nc:PersonType given the fields for type j:PersonAugmentationType.",
+        "operationId": "getAugmentedType",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Type"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the base type being augmented by the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/bases": {
+      "get": {
+        "description": "Get the type inheritance or restriction chain for the type with the given fields.",
+        "operationId": "getBases",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Type"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the type inheritance or restriction chain for the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/children": {
+      "get": {
+        "description": "Get the types that extend or restrict the type with the given fields.",
+        "operationId": "getChildren",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Type"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the types that extend or restrict the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/current": {
+      "get": {
+        "description": "Get the current version of the type with the given fields.",
+        "operationId": "getCurrent_2",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Type"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the current version of the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets": {
+      "get": {
+        "description": "Gets all facets from the type with the given criteria.",
+        "operationId": "getTypeFacets",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageFacet"
                 }
               }
             },
@@ -2363,7 +4295,141 @@
         ]
       }
     },
-    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/{category}\u003d{value}": {
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/count": {
+      "get": {
+        "description": "Count all facets in the type with the given fields.",
+        "operationId": "countTypeFacets",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all facets in the type with the given fields.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/formats/cmf": {
+      "get": {
+        "description": "Gets all facets in CMF from the type with the given criteria.",
+        "operationId": "getTypeFacetsCmf",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "xml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets all facets in CMF from the type with the given criteria.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/{category}/{value}": {
       "get": {
         "description": "Gets a facet with the given criteria.",
         "operationId": "getFacet",
@@ -2449,6 +4515,777 @@
         ]
       }
     },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/{category}/{value}/current": {
+      "get": {
+        "description": "Get the current version of the facet with the given fields.",
+        "operationId": "getCurrent_1",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "category",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "enumeration",
+                "pattern",
+                "length",
+                "minLength",
+                "maxLength",
+                "minExclusive",
+                "maxExclusive",
+                "minInclusive",
+                "maxInclusive",
+                "fractionDigits",
+                "totalDigits",
+                "whiteSpace"
+              ]
+            }
+          },
+          {
+            "in": "path",
+            "name": "value",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Facet"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the current version of the facet with the given fields.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/{category}/{value}/history": {
+      "get": {
+        "description": "Get the history of the facet with the given fields.",
+        "operationId": "getHistory_2",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "category",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "enumeration",
+                "pattern",
+                "length",
+                "minLength",
+                "maxLength",
+                "minExclusive",
+                "maxExclusive",
+                "minInclusive",
+                "maxInclusive",
+                "fractionDigits",
+                "totalDigits",
+                "whiteSpace"
+              ]
+            }
+          },
+          {
+            "in": "path",
+            "name": "value",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Facet"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the history of the facet with the given fields.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/{category}/{value}/next": {
+      "get": {
+        "description": "Get the next version of the facet with the given fields.",
+        "operationId": "getNext_2",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "category",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "enumeration",
+                "pattern",
+                "length",
+                "minLength",
+                "maxLength",
+                "minExclusive",
+                "maxExclusive",
+                "minInclusive",
+                "maxInclusive",
+                "fractionDigits",
+                "totalDigits",
+                "whiteSpace"
+              ]
+            }
+          },
+          {
+            "in": "path",
+            "name": "value",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Facet"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the next version of the facet with the given fields.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/facets/{category}/{value}/prev": {
+      "get": {
+        "description": "Get the previous version of the facet with the given fields.",
+        "operationId": "getPrev_2",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "category",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "enumeration",
+                "pattern",
+                "length",
+                "minLength",
+                "maxLength",
+                "minExclusive",
+                "maxExclusive",
+                "minInclusive",
+                "maxInclusive",
+                "fractionDigits",
+                "totalDigits",
+                "whiteSpace"
+              ]
+            }
+          },
+          {
+            "in": "path",
+            "name": "value",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Facet"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the previous version of the facet with the given fields.",
+        "tags": [
+          "Data-8: Facets"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/formats/cmf": {
+      "get": {
+        "description": "Gets the type with the given fields in CMF.",
+        "operationId": "getTypeCmf",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "xml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "summary": "Gets the type with the given fields in CMF.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/history": {
+      "get": {
+        "description": "Get the history of the type with the given fields.",
+        "operationId": "getHistory_1",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Type"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the history of the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/next": {
+      "get": {
+        "description": "Get the next version of the type with the given fields.",
+        "operationId": "getNext_1",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Type"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the next version of the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/prev": {
+      "get": {
+        "description": "Get the previous version of the type with the given fields.",
+        "operationId": "getPrev_1",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Type"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the previous version of the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/subproperties/count": {
+      "get": {
+        "description": "Count all subproperties of a type with the given fields.",
+        "operationId": "countTypeSubproperties",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Count all subproperties of a type with the given fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{qname}/usages": {
+      "get": {
+        "description": "Get a page of properties of the type with the given fields.",
+        "operationId": "getTypeUsages",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "qname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageable",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/org.springdoc.core.converters.models.Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/org.springframework.data.domain.PageProperty"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get a page of properties of the type with the given fields.",
+        "tags": [
+          "Data-6: Types"
+        ]
+      }
+    },
     "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties": {
       "get": {
         "description": "Gets all subproperties from the database in the type with the give fields.",
@@ -2504,6 +5341,75 @@
           }
         },
         "summary": "Gets all subproperties from the database in the type with the give fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties/formats/cmf": {
+      "get": {
+        "description": "Gets all subproperties from the database in the type with the given fields, in CMF.",
+        "operationId": "getTypeSubpropertiesCmf",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "typeQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "xml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets all subproperties from the database in the type with the given fields, in CMF.",
         "tags": [
           "Data-7: Subproperties"
         ]
@@ -2573,6 +5479,372 @@
         ]
       }
     },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties/{propertyQname}/current": {
+      "get": {
+        "description": "Get the next current of the subproperty with the given fields.",
+        "operationId": "getCurrent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "typeQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "propertyQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subproperty"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the next current of the subproperty with the given fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties/{propertyQname}/formats/cmf": {
+      "get": {
+        "description": "Gets a subproperty from the database with the type with the given type fields and\n the property with the given qualified name, converted to CMF.",
+        "operationId": "getSubpropertyCmf",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "typeQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "propertyQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mediaType",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "xml"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Gets a subproperty from the database with the type with the given type fields and\n the property with the given qualified name, converted to CMF.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties/{propertyQname}/history": {
+      "get": {
+        "description": "Get the history of the subproperty with the given fields.",
+        "operationId": "getHistory",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "typeQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "propertyQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subproperty"
+                  }
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the history of the subproperty with the given fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties/{propertyQname}/next": {
+      "get": {
+        "description": "Get the next version of the subproperty with the given fields.",
+        "operationId": "getNext",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "typeQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "propertyQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subproperty"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the next version of the subproperty with the given fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
+    "/stewards/{stewardKey}/models/{modelKey}/versions/{versionNumber}/types/{typeQname}/subproperties/{propertyQname}/prev": {
+      "get": {
+        "description": "Get the previous version of the subproperty with the given fields.",
+        "operationId": "getPrev",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "stewardKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "modelKey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "versionNumber",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "typeQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "propertyQname",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "- True to return a result from a pre-release if applicable;\n     false to iterate until an official version is reached.",
+            "in": "query",
+            "name": "includePreRelease",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subproperty"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "summary": "Get the previous version of the subproperty with the given fields.",
+        "tags": [
+          "Data-7: Subproperties"
+        ]
+      }
+    },
     "/transforms/models": {
       "post": {
         "description": "Transform a model from one supported NIEM format to another.",
@@ -2600,7 +5872,7 @@
               "type": "string",
               "enum": [
                 "cmf",
-                "owl",
+                "rdf",
                 "xsd",
                 "json_schema"
               ]
@@ -3163,7 +6435,7 @@
           "@id": {
             "type": "string",
             "description": "A unique identifier.  For a facet, this is combines the stewardKey, modelKey, versionNumber, qualified type, facet category, and facet value fields.",
-            "example": "niem/model/5.2/nc:AddressCategoryCodeSimpleType/enumeration\u003dresidential"
+            "example": "niem/model/5.2/nc:AddressCategoryCodeSimpleType/enumeration/residential"
           },
           "@type": {
             "type": "string",
@@ -3191,19 +6463,18 @@
           "definition": {
             "type": "string"
           },
+          "isCurrent": {
+            "type": "boolean"
+          },
           "isDeprecated": {
             "type": "boolean",
             "description": "True if an entity is deprecated; false or null otherwise.",
             "example": false
           },
-          "isOriginal": {
-            "type": "boolean",
-            "example": false
-          },
-          "localIdentifier": {
+          "localID": {
             "type": "string",
             "description": "An identifier, unique within its immediate scope.  For a facet, this is the qname of its type followed by facet category and value (unique within its version starting with NIEM 6.0).",
-            "example": "nc:AddressCategoryCodeSimpleType/enumeration\u003dresidential"
+            "example": "nc:AddressCategoryCodeSimpleType/enumeration/residential"
           },
           "model": {
             "type": "object",
@@ -3222,7 +6493,7 @@
           "route": {
             "type": "string",
             "description": "An endpoint to get information about a facet.",
-            "example": "https://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/types/nc:AddressCategoryCodeType/enumeration\u003dresidential"
+            "example": "https://api.niemopen.org/v2/stewards/niem/models/model/versions/5.2/types/nc:AddressCategoryCodeType/enumeration/residential"
           },
           "steward": {
             "type": "object",
@@ -3292,7 +6563,7 @@
             "description": "A common alias, term, or phrase that would help to facilitate search and\n discovery of this IEPD.",
             "example": "crash, accident, vehicle, injury, charge, driver"
           },
-          "localIdentifier": {
+          "localID": {
             "type": "string",
             "description": "An identifier, unique within its immediate scope.  For a model, this is the same as the modelKey field (unique within its steward).",
             "example": "crash-driver"
@@ -3326,7 +6597,7 @@
           "route": {
             "type": "string",
             "description": "An endpoint to get information about a model.",
-            "example": "https://tools.niem.gov/api/v2/stewards/niem/models/crash-driver"
+            "example": "https://api.niemopen.org/v2/stewards/niem/models/crash-driver"
           },
           "shortName": {
             "type": "string",
@@ -3356,7 +6627,10 @@
             "description": "A website address by which a person or organization may be contacted.",
             "example": "https://niem.github.io/training/"
           }
-        }
+        },
+        "required": [
+          "shortName"
+        ]
       },
       "Namespace": {
         "type": "object",
@@ -3426,16 +6700,15 @@
             "type": "boolean",
             "example": true
           },
+          "isCurrent": {
+            "type": "boolean"
+          },
           "isDeprecated": {
             "type": "boolean",
             "description": "True if an entity is deprecated; false or null otherwise.",
             "example": false
           },
-          "isOriginal": {
-            "type": "boolean",
-            "example": false
-          },
-          "localIdentifier": {
+          "localID": {
             "type": "string",
             "description": "An identifier, unique within its immediate scope.  For a namespace, this is the same as the prefix field (unique within its version).",
             "example": "nc"
@@ -3457,10 +6730,15 @@
             "description": "A short, non-normative identifier for a namespace.",
             "example": "nc"
           },
+          "rank": {
+            "type": "integer",
+            "format": "int32",
+            "description": "A ranking used to support sorting namespaces by category, with\n Core and Core Supplements sorting first, followed by domains, etc."
+          },
           "route": {
             "type": "string",
             "description": "An endpoint to get information about a namespace.",
-            "example": "https://tools.niem.gov/api/v2/stewards/niem/models/crash-driver/version/1.1/namespaces/nc"
+            "example": "https://api.niemopen.org/v2/stewards/niem/models/crash-driver/version/1.1/namespaces/nc"
           },
           "steward": {
             "type": "object",
@@ -3499,6 +6777,32 @@
           }
         }
       },
+      "PageableObject": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paged": {
+            "type": "boolean"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "unpaged": {
+            "type": "boolean"
+          }
+        }
+      },
       "Property": {
         "type": "object",
         "description": "A property represents a concept, idea, or thing.",
@@ -3525,6 +6829,15 @@
               "attribute"
             ]
           },
+          "contentStyle": {
+            "type": "string",
+            "description": "An alternate way to categorize a property based on its type.  Identifies\n whether it carries properties (an object)",
+            "enum": [
+              "object",
+              "value",
+              "none"
+            ]
+          },
           "definition": {
             "type": "string",
             "description": "A definition describing a property or type.",
@@ -3546,6 +6859,9 @@
           "isAttribute": {
             "type": "boolean"
           },
+          "isCurrent": {
+            "type": "boolean"
+          },
           "isDeprecated": {
             "type": "boolean",
             "description": "True if an entity is deprecated; false or null otherwise.",
@@ -3554,14 +6870,10 @@
           "isElement": {
             "type": "boolean"
           },
-          "isOriginal": {
-            "type": "boolean",
-            "example": false
-          },
           "keywords": {
             "type": "string"
           },
-          "localIdentifier": {
+          "localID": {
             "type": "string",
             "description": "An identifier, unique within its immediate scope.  For a property, this is the same as the qname field (unique within its version).",
             "example": "nc:PersonGivenName"
@@ -3585,6 +6897,11 @@
             },
             "description": "Namespace that defines this component."
           },
+          "namespaceRank": {
+            "type": "integer",
+            "format": "int32",
+            "description": "A ranking used to support sorting component namespaces by category, with\n Core and Core Supplements sorting first, followed by domains, etc."
+          },
           "prefix": {
             "type": "string",
             "description": "A namespace prefix for the property or type.",
@@ -3596,7 +6913,7 @@
           "route": {
             "type": "string",
             "description": "An endpoint to get information about a property.",
-            "example": "https://tools.niem.gov/api/v2/stewards/niem/models/crash-driver/version/1.1/properties/nc:PersonGivenName"
+            "example": "https://api.niemopen.org/v2/stewards/niem/models/crash-driver/version/1.1/properties/nc:PersonGivenName"
           },
           "steward": {
             "type": "object",
@@ -3634,6 +6951,20 @@
               "type": "string"
             },
             "description": "Gets the version in which this namespace belongs."
+          }
+        }
+      },
+      "SortObject": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          },
+          "sorted": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
           }
         }
       },
@@ -3980,7 +7311,7 @@
             "description": "A name of an organization.",
             "example": "NIEM Management Office"
           },
-          "localIdentifier": {
+          "localID": {
             "type": "string",
             "description": "A scoped identifier.  For a steward, this is the stewardKey field.",
             "example": "niem"
@@ -3993,7 +7324,7 @@
           "route": {
             "type": "string",
             "description": "An endpoint to get information about a steward.",
-            "example": "https://tools.niem.gov/api/v2/stewards/niem"
+            "example": "https://api.niemopen.org/v2/stewards/niem"
           },
           "shortName": {
             "type": "string",
@@ -4026,7 +7357,10 @@
             "description": "A website address by which a person or organization may be contacted.",
             "example": "https://niem.gov"
           }
-        }
+        },
+        "required": [
+          "shortName"
+        ]
       },
       "Subproperty": {
         "type": "object",
@@ -4045,16 +7379,15 @@
           "definition": {
             "type": "string"
           },
+          "isCurrent": {
+            "type": "boolean"
+          },
           "isDeprecated": {
             "type": "boolean",
             "description": "True if an entity is deprecated; false or null otherwise.",
             "example": false
           },
-          "isOriginal": {
-            "type": "boolean",
-            "example": false
-          },
-          "localIdentifier": {
+          "localID": {
             "type": "string",
             "description": "An identifier, unique within its immediate scope.  For a subproperty, this is the qname of type container type followed by the the qname of the contained property (unique within its version).",
             "example": "nc:PersonType/nc:PersonName"
@@ -4093,7 +7426,7 @@
           "route": {
             "type": "string",
             "description": "An endpoint to get information about a subproperty.",
-            "example": "https://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/types/nc:PersonType/subproperties/nc:PersonName"
+            "example": "https://api.niemopen.org/v2/stewards/niem/models/model/versions/5.2/types/nc:PersonType/subproperties/nc:PersonName"
           },
           "sequence": {
             "type": "integer",
@@ -4175,13 +7508,12 @@
           "isComplexContent": {
             "type": "boolean"
           },
+          "isCurrent": {
+            "type": "boolean"
+          },
           "isDeprecated": {
             "type": "boolean",
             "description": "True if an entity is deprecated; false or null otherwise.",
-            "example": false
-          },
-          "isOriginal": {
-            "type": "boolean",
             "example": false
           },
           "isSimple": {
@@ -4190,7 +7522,7 @@
           "isSimpleContent": {
             "type": "boolean"
           },
-          "localIdentifier": {
+          "localID": {
             "type": "string",
             "description": "An identifier, unique within its immediate scope.  For a type, this is the same as the qname field (unique within its version).",
             "example": "nc:PersonType"
@@ -4213,6 +7545,11 @@
               "type": "string"
             },
             "description": "Namespace that defines this component."
+          },
+          "namespaceRank": {
+            "type": "integer",
+            "format": "int32",
+            "description": "A ranking used to support sorting component namespaces by category, with\n Core and Core Supplements sorting first, followed by domains, etc."
           },
           "pattern": {
             "type": "string",
@@ -4239,7 +7576,7 @@
           "route": {
             "type": "string",
             "description": "An endpoint to get information about a type.",
-            "example": "https://tools.niem.gov/api/v2/stewards/niem/models/crash-driver/version/1.1/types/nc:PersonType"
+            "example": "https://api.niemopen.org/v2/stewards/niem/models/crash-driver/version/1.1/types/nc:PersonType"
           },
           "steward": {
             "type": "object",
@@ -4302,6 +7639,10 @@
             "description": "A list of one or more URIs that each represents an IEPD class to which the\n IEPD claims conformance.",
             "example": "http://reference.niem.gov/niem/specification/model-package-description/5.0/#IEPD"
           },
+          "description": {
+            "type": "string",
+            "description": "A description of the main content or changes in a version."
+          },
           "draft": {
             "type": "string",
             "description": "A draft of a version, such as \"alpha1\" or \"rc2\".",
@@ -4327,7 +7668,12 @@
             "description": "True if a version has been published and the content is to be considered\n finalized; false otherwise.",
             "example": false
           },
-          "localIdentifier": {
+          "link": {
+            "type": "string",
+            "description": "A URL for a website where a version has been published.",
+            "example": "https://github.com/niemopen/niem-model/tree/6.0-ps02"
+          },
+          "localID": {
             "type": "string",
             "description": "An identifier, unique within its immediate scope.  For a version, this is the same as the versionNumber field (unique within its model).",
             "example": 1.1
@@ -4351,7 +7697,7 @@
           "route": {
             "type": "string",
             "description": "An endpoint to get information about a version.",
-            "example": "https://tools.niem.gov/api/v2/stewards/niem/models/crash-driver/version/1.1"
+            "example": "https://api.niemopen.org/v2/stewards/niem/models/crash-driver/version/1.1"
           },
           "status": {
             "type": "string",
@@ -4379,6 +7725,165 @@
             "type": "string",
             "description": "A number which identifies a version of a model, such as \"5.2\" or \"1.0.1\".",
             "example": 1.1
+          }
+        }
+      },
+      "org.springdoc.core.converters.models.Pageable": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "org.springframework.data.domain.PageFacet": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Facet"
+            }
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/PageableObject"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "org.springframework.data.domain.PageProperty": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Property"
+            }
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/PageableObject"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "org.springframework.data.domain.PageType": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Type"
+            }
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/PageableObject"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       }

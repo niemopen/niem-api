@@ -134,27 +134,31 @@ loadScripts(document, 'script');</script>
 <div class="block">Check if the input file has a valid extension for a transformation.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>byte[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateOutput(org.mitre.niem.cmf.Model,gov.niem.tools.api.transform.TransformTo,java.lang.String)" class="member-name-link">generateOutput</a><wbr>(org.mitre.niem.cmf.Model&nbsp;model,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateOutput(org.mitre.niem.cmf.Model,gov.niem.tools.api.transform.TransformTo,java.lang.String,java.lang.String)" class="member-name-link">generateOutput</a><wbr>(org.mitre.niem.cmf.Model&nbsp;model,
  <a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputExtension)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Second pass of transformation.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>byte[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateXsdOutput(org.mitre.niem.cmf.Model,java.lang.String)" class="member-name-link">generateXsdOutput</a><wbr>(org.mitre.niem.cmf.Model&nbsp;model,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#generateXsdOutput(org.mitre.niem.cmf.Model,java.lang.String,java.lang.Boolean)" class="member-name-link">generateXsdOutput</a><wbr>(org.mitre.niem.cmf.Model&nbsp;model,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;returnSingleXsd)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Second pass of transformation for XSD output.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOutputFilename(gov.niem.tools.api.transform.TransformTo,java.lang.String)" class="member-name-link">getOutputFilename</a><wbr>(<a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOutputFilename(gov.niem.tools.api.transform.TransformTo,java.lang.String,java.lang.String)" class="member-name-link">getOutputFilename</a><wbr>(<a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputExtension)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get the output filename with extension based on the kind of transformation
  and the original filename.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.springframework.http.MediaType</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOutputMediaType(gov.niem.tools.api.transform.TransformTo)" class="member-name-link">getOutputMediaType</a><wbr>(<a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOutputMediaType(gov.niem.tools.api.transform.TransformTo,java.lang.String)" class="member-name-link">getOutputMediaType</a><wbr>(<a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputExtension)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get the content media type for the response based on the kind of transformation.</div>
 </div>
@@ -275,11 +279,12 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="generateOutput(org.mitre.niem.cmf.Model,gov.niem.tools.api.transform.TransformTo,java.lang.String)">
+<section class="detail" id="generateOutput(org.mitre.niem.cmf.Model,gov.niem.tools.api.transform.TransformTo,java.lang.String,java.lang.String)">
 <h3>generateOutput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">generateOutput</span><wbr><span class="parameters">(org.mitre.niem.cmf.Model&nbsp;model,
  <a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase)</span>
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputExtension)</span>
                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Second pass of transformation. Convert the input file from the given
  `from` format to the given `to` format.</div>
@@ -290,24 +295,29 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="generateXsdOutput(org.mitre.niem.cmf.Model,java.lang.String)">
+<section class="detail" id="generateXsdOutput(org.mitre.niem.cmf.Model,java.lang.String,java.lang.Boolean)">
 <h3>generateXsdOutput</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">byte[]</span>&nbsp;<span class="element-name">generateXsdOutput</span><wbr><span class="parameters">(org.mitre.niem.cmf.Model&nbsp;model,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase)</span>
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;returnSingleXsd)</span>
                          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Second pass of transformation for XSD output. Generate XML Schema files
  from a CMF model and zip the results.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>returnSingleXsd</code> - - True to return a single XSD file with the
+      given name (filenameBase) instead of the full zip.</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getOutputFilename(gov.niem.tools.api.transform.TransformTo,java.lang.String)">
+<section class="detail" id="getOutputFilename(gov.niem.tools.api.transform.TransformTo,java.lang.String,java.lang.String)">
 <h3>getOutputFilename</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getOutputFilename</span><wbr><span class="parameters">(<a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase)</span>
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputExtension)</span>
                          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Get the output filename with extension based on the kind of transformation
  and the original filename.</div>
@@ -318,9 +328,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getOutputMediaType(gov.niem.tools.api.transform.TransformTo)">
+<section class="detail" id="getOutputMediaType(gov.niem.tools.api.transform.TransformTo,java.lang.String)">
 <h3>getOutputMediaType</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">org.springframework.http.MediaType</span>&nbsp;<span class="element-name">getOutputMediaType</span><wbr><span class="parameters">(<a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to)</span>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">org.springframework.http.MediaType</span>&nbsp;<span class="element-name">getOutputMediaType</span><wbr><span class="parameters">(<a href="TransformTo.html" title="enum class in gov.niem.tools.api.transform">TransformTo</a>&nbsp;to,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;inputExtension)</span>
                                                       throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Get the content media type for the response based on the kind of transformation.</div>
 <dl class="notes">

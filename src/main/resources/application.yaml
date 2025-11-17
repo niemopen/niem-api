@@ -1,6 +1,6 @@
 
 app:
-  baseUrl: http://localhost:8080/api/v2
+  baseUrl: http://localhost:8080/v2
   cmf:
     version: 1.0
     uri: https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/
@@ -47,7 +47,7 @@ server:
     include-message: always
     include-stacktrace: never
   servlet:
-    context-path: /api/v2
+    context-path: /v2
 
 spring:
   config:

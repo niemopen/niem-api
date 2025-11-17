@@ -86,8 +86,10 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance"><a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseEntityService</a>&lt;<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;
+<div class="inheritance"><a href="../base/BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionEntityService</a>&lt;<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;
 <div class="inheritance"><a href="../component/ComponentService.html" title="class in gov.niem.tools.api.db.component">gov.niem.tools.api.db.component.ComponentService</a>&lt;<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>,<wbr><a href="TypeRepository.html" title="interface in gov.niem.tools.api.db.type">TypeRepository</a>&gt;
 <div class="inheritance">gov.niem.tools.api.db.type.TypeService</div>
+</div>
 </div>
 </div>
 </div>
@@ -157,15 +159,89 @@ loadScripts(document, 'script');</script>
 <div class="block">Create a new type in the database with the given prefix and name and add to
  the version with the given version fields.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countByNamespace(java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.type.Type.Category)" class="member-name-link">countByNamespace</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+ <a href="Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count all types in a namespace with the given fields.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countByVersion(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.type.Type.Category)" class="member-name-link">countByVersion</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count all types in a version with the given fields.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAugmentationPoint(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">findAugmentationPoint</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeQname)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Find the augmentation point element for the type with the given fields.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAugmentations(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">findAugmentations</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeQname)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Find augmentations for the type with the given fields.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAugmentedType(gov.niem.tools.api.db.type.Type)" class="member-name-link">findAugmentedType</a><wbr>(<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&nbsp;augmentationType)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Find the type being augmented by the type with the given fields.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAugmentedType(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">findAugmentedType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeQname)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Find the type being augmented by the type with the given fields.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.springframework.data.domain.Page<wbr>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findUsages(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.data.domain.Pageable)" class="member-name-link">findUsages</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeQname,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Find a page of properties of the type with the given fields.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBases(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getBases</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;qname)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the type inheritance or restriction chain.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getChildren(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">getChildren</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;qname)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the list of types that extend or restrict the type with the given fields.</div>
+</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.component.ComponentService">Methods inherited from class&nbsp;gov.niem.tools.api.db.component.<a href="../component/ComponentService.html" title="class in gov.niem.tools.api.db.component">ComponentService</a></h3>
-<code><a href="../component/ComponentService.html#add(gov.niem.tools.api.db.namespace.Namespace,java.lang.String,T)">add</a>, <a href="../component/ComponentService.html#add(gov.niem.tools.api.db.namespace.Namespace,T)">add</a>, <a href="../component/ComponentService.html#add(gov.niem.tools.api.db.version.Version,java.lang.String,java.lang.String,T)">add</a>, <a href="../component/ComponentService.html#add(gov.niem.tools.api.db.version.Version,T)">add</a>, <a href="../component/ComponentService.html#add(java.lang.String,java.lang.String,java.lang.String,T)">add</a>, <a href="../component/ComponentService.html#add(T)">add</a>, <a href="../component/ComponentService.html#assertRequiredLocalFields(T)">assertRequiredLocalFields</a>, <a href="../component/ComponentService.html#assertUnique(T)">assertUnique</a>, <a href="../component/ComponentService.html#findByNamespace(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findByNamespace</a>, <a href="../component/ComponentService.html#findByVersion(java.lang.String,java.lang.String,java.lang.String)">findByVersion</a>, <a href="../component/ComponentService.html#findOne(gov.niem.tools.api.db.version.Version,java.lang.String)">findOne</a>, <a href="../component/ComponentService.html#findOne(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findOne</a>, <a href="../component/ComponentService.html#findOne(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findOne</a>, <a href="../component/ComponentService.html#findOne(T)">findOne</a>, <a href="../component/ComponentService.html#findOneOptional(gov.niem.tools.api.db.version.Version,java.lang.String)">findOneOptional</a>, <a href="../component/ComponentService.html#findOneOptional(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findOneOptional</a>, <a href="../component/ComponentService.html#findOneOptional(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findOneOptional</a>, <a href="../component/ComponentService.html#getQualifiedName(java.lang.String)">getQualifiedName</a>, <a href="../component/ComponentService.html#getQualifiedPrefix(java.lang.String)">getQualifiedPrefix</a>, <a href="../component/ComponentService.html#repository()">repository</a></code></div>
+<code><a href="../component/ComponentService.html#add(gov.niem.tools.api.db.namespace.Namespace,java.lang.String,T)">add</a>, <a href="../component/ComponentService.html#add(gov.niem.tools.api.db.namespace.Namespace,T)">add</a>, <a href="../component/ComponentService.html#add(gov.niem.tools.api.db.version.Version,java.lang.String,java.lang.String,T)">add</a>, <a href="../component/ComponentService.html#add(gov.niem.tools.api.db.version.Version,T)">add</a>, <a href="../component/ComponentService.html#add(java.lang.String,java.lang.String,java.lang.String,T)">add</a>, <a href="../component/ComponentService.html#add(T)">add</a>, <a href="../component/ComponentService.html#assertRequiredLocalFields(T)">assertRequiredLocalFields</a>, <a href="../component/ComponentService.html#assertUnique(T)">assertUnique</a>, <a href="../component/ComponentService.html#countByNamespace(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">countByNamespace</a>, <a href="../component/ComponentService.html#countByVersion(java.lang.String,java.lang.String,java.lang.String)">countByVersion</a>, <a href="../component/ComponentService.html#findByKeyword(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findByKeyword</a>, <a href="../component/ComponentService.html#findByNamespace(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.data.domain.Pageable)">findByNamespace</a>, <a href="../component/ComponentService.html#findByVersion(java.lang.String,java.lang.String,java.lang.String,org.springframework.data.domain.Pageable)">findByVersion</a>, <a href="../component/ComponentService.html#findOne(gov.niem.tools.api.db.version.Version,java.lang.String)">findOne</a>, <a href="../component/ComponentService.html#findOne(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findOne</a>, <a href="../component/ComponentService.html#findOne(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findOne</a>, <a href="../component/ComponentService.html#findOne(T)">findOne</a>, <a href="../component/ComponentService.html#findOneOptional(gov.niem.tools.api.db.version.Version,java.lang.String)">findOneOptional</a>, <a href="../component/ComponentService.html#findOneOptional(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findOneOptional</a>, <a href="../component/ComponentService.html#findOneOptional(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">findOneOptional</a>, <a href="../component/ComponentService.html#getQualifiedName(java.lang.String)">getQualifiedName</a>, <a href="../component/ComponentService.html#getQualifiedPrefix(java.lang.String)">getQualifiedPrefix</a>, <a href="../component/ComponentService.html#repository()">repository</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionEntityService">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntityService</a></h3>
+<code><a href="../base/BaseVersionEntityService.html#getHistory(U,boolean)">getHistory</a>, <a href="../base/BaseVersionEntityService.html#getNext(U,boolean)">getNext</a>, <a href="../base/BaseVersionEntityService.html#getPrev(U,boolean)">getPrev</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseEntityService">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">BaseEntityService</a></h3>
-<code><a href="../base/BaseEntityService.html#assertFieldNotNullAndNotEmpty(java.lang.String,java.lang.String)">assertFieldNotNullAndNotEmpty</a>, <a href="../base/BaseEntityService.html#delete(T)">delete</a>, <a href="../base/BaseEntityService.html#edit(java.lang.Long,T)">edit</a>, <a href="../base/BaseEntityService.html#findOneOptional(T)">findOneOptional</a>, <a href="../base/BaseEntityService.html#getEntityClassName()">getEntityClassName</a>, <a href="../base/BaseEntityService.html#getNotFoundException(java.lang.String)">getNotFoundException</a>, <a href="../base/BaseEntityService.html#loadId(T)">loadId</a>, <a href="../base/BaseEntityService.html#merge(T)">merge</a>, <a href="../base/BaseEntityService.html#saveExisting(T)">saveExisting</a>, <a href="../base/BaseEntityService.html#saveNew(T)">saveNew</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(java.lang.String,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(java.lang.String,java.lang.String)">throwNotUnique</a></code></div>
+<code><a href="../base/BaseEntityService.html#assertFieldNotNullAndNotEmpty(java.lang.String,java.lang.String)">assertFieldNotNullAndNotEmpty</a>, <a href="../base/BaseEntityService.html#count()">count</a>, <a href="../base/BaseEntityService.html#delete(T)">delete</a>, <a href="../base/BaseEntityService.html#edit(java.lang.Long,T)">edit</a>, <a href="../base/BaseEntityService.html#findOneOptional(T)">findOneOptional</a>, <a href="../base/BaseEntityService.html#getEntityClassName()">getEntityClassName</a>, <a href="../base/BaseEntityService.html#getNotFoundException(java.lang.String)">getNotFoundException</a>, <a href="../base/BaseEntityService.html#loadId(T)">loadId</a>, <a href="../base/BaseEntityService.html#merge(T)">merge</a>, <a href="../base/BaseEntityService.html#saveExisting(T)">saveExisting</a>, <a href="../base/BaseEntityService.html#saveNew(T)">saveNew</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(java.lang.String,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(java.lang.String,java.lang.String)">throwNotUnique</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -236,6 +312,142 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="countByVersion(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.type.Type.Category)">
+<h3>countByVersion</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">countByVersion</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category)</span>
+                    throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Count all types in a version with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="countByNamespace(java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.type.Type.Category)">
+<h3>countByNamespace</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">countByNamespace</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+ <a href="Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category)</span>
+                      throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Count all types in a namespace with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getBases(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>getBases</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</span>&nbsp;<span class="element-name">getBases</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;qname)</span>
+                    throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Get the type inheritance or restriction chain.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getChildren(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>getChildren</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</span>&nbsp;<span class="element-name">getChildren</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;qname)</span>
+                       throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Get the list of types that extend or restrict the type with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findAugmentationPoint(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>findAugmentationPoint</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a></span>&nbsp;<span class="element-name">findAugmentationPoint</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeQname)</span>
+                               throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Find the augmentation point element for the type with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findAugmentations(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>findAugmentations</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</span>&nbsp;<span class="element-name">findAugmentations</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeQname)</span>
+                                 throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Find augmentations for the type with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findAugmentedType(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>findAugmentedType</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a></span>&nbsp;<span class="element-name">findAugmentedType</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeQname)</span>
+                       throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Find the type being augmented by the type with the given fields.
+ For example, given fields for type j:PersonAugmentationType, return type nc:PersonType.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findAugmentedType(gov.niem.tools.api.db.type.Type)">
+<h3>findAugmentedType</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a></span>&nbsp;<span class="element-name">findAugmentedType</span><wbr><span class="parameters">(<a href="Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&nbsp;augmentationType)</span>
+                       throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Find the type being augmented by the type with the given fields.
+ For example, given fields for type j:PersonAugmentationType, return type nc:PersonType.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findUsages(java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.data.domain.Pageable)">
+<h3>findUsages</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">org.springframework.data.domain.Page&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</span>&nbsp;<span class="element-name">findUsages</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeQname,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</span>
+                                                          throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Find a page of properties of the type with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
 </dl>
 </section>
 </li>

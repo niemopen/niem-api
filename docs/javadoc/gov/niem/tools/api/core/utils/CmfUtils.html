@@ -120,55 +120,82 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkVersion(java.io.File)" class="member-name-link">checkVersion</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkFileExtension(java.io.File)" class="member-name-link">checkFileExtension</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Checks that the given file contains the URI for the currently-supported
- version of CMF.</div>
+<div class="block">Check that the file extension of the given file has a valid CMF extension.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkVersion(java.lang.String)" class="member-name-link">checkVersion</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;cmfString)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkFileExtension(java.lang.String)" class="member-name-link">checkFileExtension</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileExtension)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Checks that the given CMF string contains the URI for the currently-supported
+<div class="block">Check that the given CMF file has a valid file extension.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkFileExtension(org.springframework.web.multipart.MultipartFile)" class="member-name-link">checkFileExtension</a><wbr>(org.springframework.web.multipart.MultipartFile&nbsp;multipartFile)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Check that the file extension of the given file has a valid CMF extension.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkVersion(java.io.File)" class="member-name-link">checkVersion</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks that the given file contains the URI for the currently-supported
  version of CMF.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkVersion(org.springframework.web.multipart.MultipartFile)" class="member-name-link">checkVersion</a><wbr>(org.springframework.web.multipart.MultipartFile&nbsp;multipartFile)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkVersion(java.lang.String)" class="member-name-link">checkVersion</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;cmfString)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Checks that the given CMF string contains the URI for the currently-supported
+ version of CMF.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#checkVersion(org.springframework.web.multipart.MultipartFile)" class="member-name-link">checkVersion</a><wbr>(org.springframework.web.multipart.MultipartFile&nbsp;multipartFile)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Checks that the given file contains the URI for the currently-supported
  version of CMF.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateString(org.mitre.niem.cmf.Model)" class="member-name-link">generateString</a><wbr>(org.mitre.niem.cmf.Model&nbsp;model)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateString(org.mitre.niem.cmf.Model)" class="member-name-link">generateString</a><wbr>(org.mitre.niem.cmf.Model&nbsp;model)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Generate the given CMF model as a CMF XML string.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateString(org.mitre.niem.cmf.Model,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">generateString</a><wbr>(org.mitre.niem.cmf.Model&nbsp;model,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#generateString(org.mitre.niem.cmf.Model,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">generateString</a><wbr>(org.mitre.niem.cmf.Model&nbsp;model,
  <a href="../config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Generate the given CMF model as a CMF XML or JSON string.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static org.mitre.niem.cmf.Model</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#loadCmf(org.springframework.web.multipart.MultipartFile)" class="member-name-link">loadCmf</a><wbr>(org.springframework.web.multipart.MultipartFile&nbsp;multipartFile)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getAugmentationClassName(java.lang.String)" class="member-name-link">getAugmentationClassName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;augmentedTypeName)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns the augmentation type name for the given type name being augmented.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getAugmentationClassQname(java.lang.String,java.lang.String)" class="member-name-link">getAugmentationClassQname</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;augmentationPrefix,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;augmentedTypeName)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Returns the qualified augmentation type name with the given namespace prefix as is, and
+ the given augmentedTypeName converted to an augmentation type name.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static org.mitre.niem.cmf.Model</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#loadCmf(org.springframework.web.multipart.MultipartFile)" class="member-name-link">loadCmf</a><wbr>(org.springframework.web.multipart.MultipartFile&nbsp;multipartFile)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Checks that the given file contains the URI for the currently-supported
  version of CMF, and if so, loads it into a CMF Model object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#saveCmfModel(org.mitre.niem.cmf.Model,java.nio.file.Path,java.lang.String)" class="member-name-link">saveCmfModel</a><wbr>(org.mitre.niem.cmf.Model&nbsp;cmf,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#saveCmfModel(org.mitre.niem.cmf.Model,java.nio.file.Path,java.lang.String)" class="member-name-link">saveCmfModel</a><wbr>(org.mitre.niem.cmf.Model&nbsp;cmfModel,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Write a CMF model to an XML file.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#subpropertyMax(org.mitre.niem.cmf.HasProperty)" class="member-name-link">subpropertyMax</a><wbr>(org.mitre.niem.cmf.HasProperty&nbsp;hasProperty)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#subpropertyMax(org.mitre.niem.cmf.PropertyAssociation)" class="member-name-link">subpropertyMax</a><wbr>(org.mitre.niem.cmf.PropertyAssociation&nbsp;propertyAssociation)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get subproperty max as a string with either a numeric value or "unbounded".</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#subpropertyMin(org.mitre.niem.cmf.HasProperty)" class="member-name-link">subpropertyMin</a><wbr>(org.mitre.niem.cmf.HasProperty&nbsp;hasProperty)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#subpropertyMin(org.mitre.niem.cmf.PropertyAssociation)" class="member-name-link">subpropertyMin</a><wbr>(org.mitre.niem.cmf.PropertyAssociation&nbsp;propertyAssociation)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Get the subproperty min as a string.</div>
 </div>
 </div>
@@ -206,14 +233,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="loadCmf(org.springframework.web.multipart.MultipartFile)">
 <h3>loadCmf</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">org.mitre.niem.cmf.Model</span>&nbsp;<span class="element-name">loadCmf</span><wbr><span class="parameters">(org.springframework.web.multipart.MultipartFile&nbsp;multipartFile)</span>
-                                        throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a>,
-<a href="../exceptions/BadRequestException.html" title="class in gov.niem.tools.api.core.exceptions">BadRequestException</a></span></div>
+                                        throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Checks that the given file contains the URI for the currently-supported
  version of CMF, and if so, loads it into a CMF Model object.</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/IOException.html" title="class or interface in java.io" class="external-link">IOException</a></code></dd>
-<dd><code><a href="../exceptions/BadRequestException.html" title="class in gov.niem.tools.api.core.exceptions">BadRequestException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 </dl>
 </section>
 </li>
@@ -259,6 +284,32 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="checkFileExtension(org.springframework.web.multipart.MultipartFile)">
+<h3>checkFileExtension</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">checkFileExtension</span><wbr><span class="parameters">(org.springframework.web.multipart.MultipartFile&nbsp;multipartFile)</span></div>
+<div class="block">Check that the file extension of the given file has a valid CMF extension.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="checkFileExtension(java.io.File)">
+<h3>checkFileExtension</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">checkFileExtension</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a>&nbsp;file)</span></div>
+<div class="block">Check that the file extension of the given file has a valid CMF extension.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="checkFileExtension(java.lang.String)">
+<h3>checkFileExtension</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">checkFileExtension</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;fileExtension)</span>
+                               throws <span class="exceptions"><a href="../exceptions/BadRequestException.html" title="class in gov.niem.tools.api.core.exceptions">BadRequestException</a></span></div>
+<div class="block">Check that the given CMF file has a valid file extension.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/BadRequestException.html" title="class in gov.niem.tools.api.core.exceptions">BadRequestException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="generateString(org.mitre.niem.cmf.Model,gov.niem.tools.api.core.config.Config.AppMediaType)">
 <h3>generateString</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">generateString</span><wbr><span class="parameters">(org.mitre.niem.cmf.Model&nbsp;model,
@@ -286,14 +337,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="saveCmfModel(org.mitre.niem.cmf.Model,java.nio.file.Path,java.lang.String)">
 <h3>saveCmfModel</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a></span>&nbsp;<span class="element-name">saveCmfModel</span><wbr><span class="parameters">(org.mitre.niem.cmf.Model&nbsp;cmf,
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html" title="class or interface in java.io" class="external-link">File</a></span>&nbsp;<span class="element-name">saveCmfModel</span><wbr><span class="parameters">(org.mitre.niem.cmf.Model&nbsp;cmfModel,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a>&nbsp;path,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filenameBase)</span>
                          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Write a CMF model to an XML file.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>cmf</code> - CMF model</dd>
+<dd><code>cmfModel</code> - CMF model</dd>
 <dd><code>path</code> - Directory to save the file.</dd>
 <dd><code>filenameBase</code> - Filename without the extension.</dd>
 <dt>Throws:</dt>
@@ -302,17 +353,38 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="subpropertyMin(org.mitre.niem.cmf.HasProperty)">
+<section class="detail" id="subpropertyMin(org.mitre.niem.cmf.PropertyAssociation)">
 <h3>subpropertyMin</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">subpropertyMin</span><wbr><span class="parameters">(org.mitre.niem.cmf.HasProperty&nbsp;hasProperty)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">subpropertyMin</span><wbr><span class="parameters">(org.mitre.niem.cmf.PropertyAssociation&nbsp;propertyAssociation)</span></div>
 <div class="block">Get the subproperty min as a string.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="subpropertyMax(org.mitre.niem.cmf.HasProperty)">
+<section class="detail" id="subpropertyMax(org.mitre.niem.cmf.PropertyAssociation)">
 <h3>subpropertyMax</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">subpropertyMax</span><wbr><span class="parameters">(org.mitre.niem.cmf.HasProperty&nbsp;hasProperty)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">subpropertyMax</span><wbr><span class="parameters">(org.mitre.niem.cmf.PropertyAssociation&nbsp;propertyAssociation)</span></div>
 <div class="block">Get subproperty max as a string with either a numeric value or "unbounded".</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getAugmentationClassName(java.lang.String)">
+<h3>getAugmentationClassName</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getAugmentationClassName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;augmentedTypeName)</span></div>
+<div class="block">Returns the augmentation type name for the given type name being augmented.
+
+ <p>For example, returns "PersonAugmentationType" when given "PersonType".</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getAugmentationClassQname(java.lang.String,java.lang.String)">
+<h3>getAugmentationClassQname</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getAugmentationClassQname</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;augmentationPrefix,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;augmentedTypeName)</span></div>
+<div class="block">Returns the qualified augmentation type name with the given namespace prefix as is, and
+ the given augmentedTypeName converted to an augmentation type name.
+
+ <p>For example, given prefix "j" and type name "PersonType", returns
+ "j:PersonAugmentationType".</div>
 </section>
 </li>
 </ul>

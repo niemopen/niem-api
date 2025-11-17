@@ -1,6 +1,6 @@
 
 app:
-  baseUrl: https://tools.niem.gov/api/v2
+  baseUrl: https://api.niemopen.org/v2
 
 spring:
   datasource:

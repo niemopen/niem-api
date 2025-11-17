@@ -86,14 +86,16 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance"><a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseEntityService</a>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;
+<div class="inheritance"><a href="../base/BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionEntityService</a>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;
 <div class="inheritance">gov.niem.tools.api.db.subproperty.SubpropertyService</div>
+</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="annotations">@Component
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">SubpropertyService</span>
-<span class="extends-implements">extends <a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">BaseEntityService</a>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</span></div>
+<span class="extends-implements">extends <a href="../base/BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntityService</a>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</span></div>
 <div class="block">Operations for subproperties.</div>
 <dl class="notes">
 <dt>Todo:</dt>
@@ -157,15 +159,61 @@ loadScripts(document, 'script');</script>
  type fields.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#assertRequiredLocalFields(gov.niem.tools.api.db.subproperty.Subproperty)" class="member-name-link">assertRequiredLocalFields</a><wbr>(<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&nbsp;subproperty)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addToCmfModel(gov.niem.tools.api.db.subproperty.Subproperty,org.mitre.niem.cmf.Model,java.lang.Boolean,gov.niem.tools.api.db.base.AddModelReason,gov.niem.tools.api.validation.Test)" class="member-name-link">addToCmfModel</a><wbr>(<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&nbsp;subproperty,
+ org.mitre.niem.cmf.Model&nbsp;cmfModel,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;addDependencies,
+ <a href="../base/AddModelReason.html" title="enum class in gov.niem.tools.api.db.base">AddModelReason</a>&nbsp;addModelReason,
+ <a href="../../validation/Test.html" title="class in gov.niem.tools.api.validation">Test</a>&nbsp;test)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Checks that the object has the required fields.</div>
+<div class="block">Adds the given subproperty to the given CMF model as either a CMF property association
+ or a CMF augmentation record.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#assertUnique(gov.niem.tools.api.db.subproperty.Subproperty)" class="member-name-link">assertUnique</a><wbr>(<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&nbsp;subproperty)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#assertRequiredLocalFields(gov.niem.tools.api.db.subproperty.Subproperty)" class="member-name-link">assertRequiredLocalFields</a><wbr>(<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&nbsp;subproperty)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Checks that the object has the required fields.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#assertUnique(gov.niem.tools.api.db.subproperty.Subproperty)" class="member-name-link">assertUnique</a><wbr>(<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&nbsp;subproperty)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Checks that the database does not contain a subproperty with the same identifying
  fields in the given subproperty object.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countByNamespace(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">countByNamespace</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count subproperties in the namespace matching the given fields.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countByProperty(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">countByProperty</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;qname)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count subproperties occurrence for the property matching the given fields.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countByType(java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">countByType</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;qname)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count subproperties for the type matching the given fields.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countByVersion(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">countByVersion</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count subproperties in the version matching the given fields.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAugmentationPoint(gov.niem.tools.api.db.type.Type)" class="member-name-link">findAugmentationPoint</a><wbr>(<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&nbsp;type)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Find the augmentation point subproperty for the type with the given fields.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findByProperty(gov.niem.tools.api.db.property.Property)" class="member-name-link">findByProperty</a><wbr>(<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&nbsp;property)</code></div>
@@ -264,8 +312,11 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <div class="inherited-list">
+<h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionEntityService">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntityService</a></h3>
+<code><a href="../base/BaseVersionEntityService.html#getHistory(U,boolean)">getHistory</a>, <a href="../base/BaseVersionEntityService.html#getNext(U,boolean)">getNext</a>, <a href="../base/BaseVersionEntityService.html#getPrev(U,boolean)">getPrev</a></code></div>
+<div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseEntityService">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">BaseEntityService</a></h3>
-<code><a href="../base/BaseEntityService.html#add(T)">add</a>, <a href="../base/BaseEntityService.html#assertFieldNotNullAndNotEmpty(java.lang.String,java.lang.String)">assertFieldNotNullAndNotEmpty</a>, <a href="../base/BaseEntityService.html#delete(T)">delete</a>, <a href="../base/BaseEntityService.html#edit(java.lang.Long,T)">edit</a>, <a href="../base/BaseEntityService.html#findOneOptional(T)">findOneOptional</a>, <a href="../base/BaseEntityService.html#getEntityClassName()">getEntityClassName</a>, <a href="../base/BaseEntityService.html#getNotFoundException(java.lang.String)">getNotFoundException</a>, <a href="../base/BaseEntityService.html#loadId(T)">loadId</a>, <a href="../base/BaseEntityService.html#merge(T)">merge</a>, <a href="../base/BaseEntityService.html#saveExisting(T)">saveExisting</a>, <a href="../base/BaseEntityService.html#saveNew(T)">saveNew</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(java.lang.String,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(java.lang.String,java.lang.String)">throwNotUnique</a></code></div>
+<code><a href="../base/BaseEntityService.html#add(T)">add</a>, <a href="../base/BaseEntityService.html#assertFieldNotNullAndNotEmpty(java.lang.String,java.lang.String)">assertFieldNotNullAndNotEmpty</a>, <a href="../base/BaseEntityService.html#count()">count</a>, <a href="../base/BaseEntityService.html#delete(T)">delete</a>, <a href="../base/BaseEntityService.html#edit(java.lang.Long,T)">edit</a>, <a href="../base/BaseEntityService.html#findOneOptional(T)">findOneOptional</a>, <a href="../base/BaseEntityService.html#getEntityClassName()">getEntityClassName</a>, <a href="../base/BaseEntityService.html#getNotFoundException(java.lang.String)">getNotFoundException</a>, <a href="../base/BaseEntityService.html#loadId(T)">loadId</a>, <a href="../base/BaseEntityService.html#merge(T)">merge</a>, <a href="../base/BaseEntityService.html#saveExisting(T)">saveExisting</a>, <a href="../base/BaseEntityService.html#saveNew(T)">saveNew</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(java.lang.String,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(java.lang.String,java.lang.String)">throwNotUnique</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -527,6 +578,77 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="findAugmentationPoint(gov.niem.tools.api.db.type.Type)">
+<h3>findAugmentationPoint</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a></span>&nbsp;<span class="element-name">findAugmentationPoint</span><wbr><span class="parameters">(<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&nbsp;type)</span>
+                                  throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Find the augmentation point subproperty for the type with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="countByVersion(java.lang.String,java.lang.String,java.lang.String)">
+<h3>countByVersion</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">countByVersion</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber)</span>
+                    throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Count subproperties in the version matching the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="countByNamespace(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>countByNamespace</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">countByNamespace</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span>
+                      throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Count subproperties in the namespace matching the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="countByType(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>countByType</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">countByType</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;qname)</span>
+                 throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Count subproperties for the type matching the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="countByProperty(java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
+<h3>countByProperty</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">countByProperty</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;qname)</span>
+                     throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Count subproperties occurrence for the property matching the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="assertRequiredLocalFields(gov.niem.tools.api.db.subproperty.Subproperty)">
 <h3>assertRequiredLocalFields</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">assertRequiredLocalFields</span><wbr><span class="parameters">(<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&nbsp;subproperty)</span>
@@ -553,6 +675,23 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../base/BaseEntityService.html#assertUnique(T)">assertUnique</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">BaseEntityService</a>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></dd>
 <dt>Throws:</dt>
 <dd><code><a href="../exceptions/EntityNotUniqueException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotUniqueException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="addToCmfModel(gov.niem.tools.api.db.subproperty.Subproperty,org.mitre.niem.cmf.Model,java.lang.Boolean,gov.niem.tools.api.db.base.AddModelReason,gov.niem.tools.api.validation.Test)">
+<h3>addToCmfModel</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addToCmfModel</span><wbr><span class="parameters">(<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&nbsp;subproperty,
+ org.mitre.niem.cmf.Model&nbsp;cmfModel,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;addDependencies,
+ <a href="../base/AddModelReason.html" title="enum class in gov.niem.tools.api.db.base">AddModelReason</a>&nbsp;addModelReason,
+ <a href="../../validation/Test.html" title="class in gov.niem.tools.api.validation">Test</a>&nbsp;test)</span>
+                   throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Adds the given subproperty to the given CMF model as either a CMF property association
+ or a CMF augmentation record.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 </dl>
 </section>
 </li>

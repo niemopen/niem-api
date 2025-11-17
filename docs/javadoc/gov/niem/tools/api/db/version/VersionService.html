@@ -86,14 +86,16 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance"><a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseEntityService</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;
+<div class="inheritance"><a href="../base/BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionEntityService</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;
 <div class="inheritance">gov.niem.tools.api.db.version.VersionService</div>
+</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="annotations">@Service
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">VersionService</span>
-<span class="extends-implements">extends <a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">BaseEntityService</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;</span></div>
+<span class="extends-implements">extends <a href="../base/BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntityService</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;</span></div>
 <div class="block">Operations supporting versions.</div>
 </section>
 <section class="summary">
@@ -153,52 +155,64 @@ loadScripts(document, 'script');</script>
 <div class="block">Checks the the database does not contain another version with the same
  identifying fields as the given version object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">delete</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count(java.lang.String,java.lang.String)" class="member-name-link">count</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Count the number of versions for the model with the given fields.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">delete</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Deletes a version in the database with the given fields.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edit(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.version.Version)" class="member-name-link">edit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oldStewardKey,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edit(java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.version.Version)" class="member-name-link">edit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oldStewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oldModelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oldVersionNumber,
  <a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;updatedVersion)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates a version in the database with the given fields to the fields in the
  given version object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAll()" class="member-name-link">findAll</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findAll()" class="member-name-link">findAll</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Finds all versions in the database.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findByKeys(java.lang.String,java.lang.String)" class="member-name-link">findByKeys</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findByModel(java.lang.String,java.lang.String)" class="member-name-link">findByModel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Finds all versions in the model with the given fields.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findId(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">findId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findId(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">findId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Finds the version with the given fields.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findOne(gov.niem.tools.api.db.version.Version)" class="member-name-link">findOne</a><wbr>(<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;version)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findOne(gov.niem.tools.api.db.version.Version)" class="member-name-link">findOne</a><wbr>(<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;version)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Finds the version in the database with the identifying fields from the given
  version object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findOne(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">findOne</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findOne(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">findOne</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Finds the version in the database with the given fields.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findOneCurrent(java.lang.String,java.lang.String)" class="member-name-link">findOneCurrent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Finds the version with the given fields that is marked as current.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findOneNiem(java.lang.String)" class="member-name-link">findOneNiem</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber)</code></div>
@@ -219,8 +233,11 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <div class="inherited-list">
+<h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionEntityService">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntityService</a></h3>
+<code><a href="../base/BaseVersionEntityService.html#getHistory(U,boolean)">getHistory</a>, <a href="../base/BaseVersionEntityService.html#getNext(U,boolean)">getNext</a>, <a href="../base/BaseVersionEntityService.html#getPrev(U,boolean)">getPrev</a></code></div>
+<div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseEntityService">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseEntityService.html" title="class in gov.niem.tools.api.db.base">BaseEntityService</a></h3>
-<code><a href="../base/BaseEntityService.html#add(T)">add</a>, <a href="../base/BaseEntityService.html#assertFieldNotNullAndNotEmpty(java.lang.String,java.lang.String)">assertFieldNotNullAndNotEmpty</a>, <a href="../base/BaseEntityService.html#delete(T)">delete</a>, <a href="../base/BaseEntityService.html#edit(java.lang.Long,T)">edit</a>, <a href="../base/BaseEntityService.html#findOneOptional(T)">findOneOptional</a>, <a href="../base/BaseEntityService.html#getEntityClassName()">getEntityClassName</a>, <a href="../base/BaseEntityService.html#getNotFoundException(java.lang.String)">getNotFoundException</a>, <a href="../base/BaseEntityService.html#loadId(T)">loadId</a>, <a href="../base/BaseEntityService.html#merge(T)">merge</a>, <a href="../base/BaseEntityService.html#saveExisting(T)">saveExisting</a>, <a href="../base/BaseEntityService.html#saveNew(T)">saveNew</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(java.lang.String,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(java.lang.String,java.lang.String)">throwNotUnique</a></code></div>
+<code><a href="../base/BaseEntityService.html#add(T)">add</a>, <a href="../base/BaseEntityService.html#assertFieldNotNullAndNotEmpty(java.lang.String,java.lang.String)">assertFieldNotNullAndNotEmpty</a>, <a href="../base/BaseEntityService.html#count()">count</a>, <a href="../base/BaseEntityService.html#delete(T)">delete</a>, <a href="../base/BaseEntityService.html#edit(java.lang.Long,T)">edit</a>, <a href="../base/BaseEntityService.html#findOneOptional(T)">findOneOptional</a>, <a href="../base/BaseEntityService.html#getEntityClassName()">getEntityClassName</a>, <a href="../base/BaseEntityService.html#getNotFoundException(java.lang.String)">getNotFoundException</a>, <a href="../base/BaseEntityService.html#loadId(T)">loadId</a>, <a href="../base/BaseEntityService.html#merge(T)">merge</a>, <a href="../base/BaseEntityService.html#saveExisting(T)">saveExisting</a>, <a href="../base/BaseEntityService.html#saveNew(T)">saveNew</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotFound(java.lang.String,java.lang.String)">throwNotFound</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)">throwNotUnique</a>, <a href="../base/BaseEntityService.html#throwNotUnique(java.lang.String,java.lang.String)">throwNotUnique</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -389,11 +406,24 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="findByKeys(java.lang.String,java.lang.String)">
-<h3>findByKeys</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;</span>&nbsp;<span class="element-name">findByKeys</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+<section class="detail" id="findOneCurrent(java.lang.String,java.lang.String)">
+<h3>findOneCurrent</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a></span>&nbsp;<span class="element-name">findOneCurrent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey)</span>
-                        throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+                       throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Finds the version with the given fields that is marked as current.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="findByModel(java.lang.String,java.lang.String)">
+<h3>findByModel</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt;</span>&nbsp;<span class="element-name">findByModel</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey)</span>
+                          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
 <div class="block">Finds all versions in the model with the given fields.</div>
 <dl class="notes">
 <dt>Throws:</dt>
@@ -409,6 +439,19 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;versionNumber)</span>
             throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
 <div class="block">Finds the version with the given fields.</div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="count(java.lang.String,java.lang.String)">
+<h3>count</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">count</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;stewardKey,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;modelKey)</span>
+           throws <span class="exceptions"><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></span></div>
+<div class="block">Count the number of versions for the model with the given fields.</div>
 <dl class="notes">
 <dt>Throws:</dt>
 <dd><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></dd>

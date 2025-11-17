@@ -107,33 +107,50 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="Subpro
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionId(java.lang.Long)" class="member-name-link">findByVersionId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByProperty_Id(java.lang.Long)" class="member-name-link">countByProperty_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;propertyId)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByProperty_Namespace_Id(java.lang.Long)" class="member-name-link">countByProperty_Namespace_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByType_Id(java.lang.Long)" class="member-name-link">countByType_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByType_Namespace_Id(java.lang.Long)" class="member-name-link">countByType_Namespace_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByType_Namespace_Version_Id(java.lang.Long)" class="member-name-link">countByType_Namespace_Version_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndProperty_Namespace_PrefixAndProperty_NameOrderByType_NameAsc(java.lang.Long,java.lang.String,java.lang.String)" class="member-name-link">findByVersionIdAndProperty_Namespace_PrefixAndProperty_NameOrderByType_NameAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionId(java.lang.Long)" class="member-name-link">findByVersionId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndProperty_Namespace_PrefixOrderByType_NameAscSequence(java.lang.Long,java.lang.String)" class="member-name-link">findByVersionIdAndProperty_Namespace_PrefixOrderByType_NameAscSequence</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndProperty_Namespace_PrefixAndProperty_NameOrderByType_NameAsc(java.lang.Long,java.lang.String,java.lang.String)" class="member-name-link">findByVersionIdAndProperty_Namespace_PrefixAndProperty_NameOrderByType_NameAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndType_Namespace_PrefixAndType_NameOrderBySequenceAsc(java.lang.Long,java.lang.String,java.lang.String)" class="member-name-link">findByVersionIdAndType_Namespace_PrefixAndType_NameOrderBySequenceAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndProperty_Namespace_PrefixOrderByType_NameAscSequence(java.lang.Long,java.lang.String)" class="member-name-link">findByVersionIdAndProperty_Namespace_PrefixOrderByType_NameAscSequence</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndType_Namespace_PrefixOrderByType_NameAscSequenceAsc(java.lang.Long,java.lang.String)" class="member-name-link">findByVersionIdAndType_Namespace_PrefixOrderByType_NameAscSequenceAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndType_Namespace_PrefixAndType_NameOrderBySequenceAsc(java.lang.Long,java.lang.String,java.lang.String)" class="member-name-link">findByVersionIdAndType_Namespace_PrefixAndType_NameOrderBySequenceAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndType_Namespace_PrefixOrderByType_NameAscSequenceAsc(java.lang.Long,java.lang.String)" class="member-name-link">findByVersionIdAndType_Namespace_PrefixOrderByType_NameAscSequenceAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOneByTypeIdAndPropertyNameEndingWith(java.lang.Long,java.lang.String)" class="member-name-link">findOneByTypeIdAndPropertyNameEndingWith</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nameSuffix)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOneByVersionIdAndType_Namespace_PrefixAndType_NameAndProperty_Namespace_PrefixAndProperty_Name(java.lang.Long,java.lang.String,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">findOneByVersionIdAndType_Namespace_PrefixAndType_NameAndProperty_Namespace_PrefixAndProperty_Name</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typePrefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeName,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;propertyPrefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;propertyName)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOneByVersionIdAndTypeIdAndPropertyId(java.lang.Long,java.lang.Long,java.lang.Long)" class="member-name-link">findOneByVersionIdAndTypeIdAndPropertyId</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;propertyId)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
 </div>
@@ -168,13 +185,11 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="Subpro
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="findOneByVersionIdAndType_Namespace_PrefixAndType_NameAndProperty_Namespace_PrefixAndProperty_Name(java.lang.Long,java.lang.String,java.lang.String,java.lang.String,java.lang.String)">
-<h3>findOneByVersionIdAndType_Namespace_PrefixAndType_NameAndProperty_Namespace_PrefixAndProperty_Name</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</span>&nbsp;<span class="element-name">findOneByVersionIdAndType_Namespace_PrefixAndType_NameAndProperty_Namespace_PrefixAndProperty_Name</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typePrefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;typeName,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;propertyPrefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;propertyName)</span></div>
+<section class="detail" id="findOneByVersionIdAndTypeIdAndPropertyId(java.lang.Long,java.lang.Long,java.lang.Long)">
+<h3>findOneByVersionIdAndTypeIdAndPropertyId</h3>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</span>&nbsp;<span class="element-name">findOneByVersionIdAndTypeIdAndPropertyId</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;propertyId)</span></div>
 </section>
 </li>
 <li>
@@ -211,6 +226,43 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="Subpro
 <section class="detail" id="findByVersionId(java.lang.Long)">
 <h3>findByVersionId</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a>&gt;</span>&nbsp;<span class="element-name">findByVersionId</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="findOneByTypeIdAndPropertyNameEndingWith(java.lang.Long,java.lang.String)">
+<h3>findOneByTypeIdAndPropertyNameEndingWith</h3>
+<div class="member-signature"><span class="return-type"><a href="Subproperty.html" title="class in gov.niem.tools.api.db.subproperty">Subproperty</a></span>&nbsp;<span class="element-name">findOneByTypeIdAndPropertyNameEndingWith</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nameSuffix)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByType_Namespace_Version_Id(java.lang.Long)">
+<h3>countByType_Namespace_Version_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByType_Namespace_Version_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByType_Namespace_Id(java.lang.Long)">
+<h3>countByType_Namespace_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByType_Namespace_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByType_Id(java.lang.Long)">
+<h3>countByType_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByType_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByProperty_Namespace_Id(java.lang.Long)">
+<h3>countByProperty_Namespace_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByProperty_Namespace_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByProperty_Id(java.lang.Long)">
+<h3>countByProperty_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByProperty_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;propertyId)</span></div>
 </section>
 </li>
 </ul>

@@ -112,19 +112,32 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;T,<wbr><a href=
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByNamespace_IdOrderByNamespace_PrefixAscNameAsc(java.lang.Long)" class="member-name-link">findByNamespace_IdOrderByNamespace_PrefixAscNameAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByNamespace_Id(long)" class="member-name-link">countByNamespace_Id</a><wbr>(long&nbsp;namespaceId)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByNamespace_Version_Id(long)" class="member-name-link">countByNamespace_Version_Id</a><wbr>(long&nbsp;versionId)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.data.domain.Page<wbr>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findAllByNamespace_Id(java.lang.Long,org.springframework.data.domain.Pageable)" class="member-name-link">findAllByNamespace_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.data.domain.Page<wbr>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findAllByNamespace_Version_Id(java.lang.Long,org.springframework.data.domain.Pageable)" class="member-name-link">findAllByNamespace_Version_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOneByNamespace_IdAndName(java.lang.Long,java.lang.String)" class="member-name-link">findOneByNamespace_IdAndName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByNamespace_PrefixOrderByNameAsc(java.lang.String)" class="member-name-link">findByNamespace_PrefixOrderByNameAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByNamespace_Version_IdOrderByNamespace_PrefixAscNameAsc(java.lang.Long)" class="member-name-link">findByNamespace_Version_IdOrderByNamespace_PrefixAscNameAsc</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOneByNamespace_IdAndName(java.lang.Long,java.lang.String)" class="member-name-link">findOneByNamespace_IdAndName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findTop10ByNamespace_IdAndNameLikeIgnoreCase(java.lang.Long,java.lang.String)" class="member-name-link">findTop10ByNamespace_IdAndNameLikeIgnoreCase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findTop10ByNamespace_Version_IdAndNameLikeIgnoreCase(java.lang.Long,java.lang.String)" class="member-name-link">findTop10ByNamespace_Version_IdAndNameLikeIgnoreCase</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -165,21 +178,43 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;T,<wbr><a href=
 </section>
 </li>
 <li>
-<section class="detail" id="findByNamespace_Version_IdOrderByNamespace_PrefixAscNameAsc(java.lang.Long)">
-<h3>findByNamespace_Version_IdOrderByNamespace_PrefixAscNameAsc</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</span>&nbsp;<span class="element-name">findByNamespace_Version_IdOrderByNamespace_PrefixAscNameAsc</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</span></div>
+<section class="detail" id="findAllByNamespace_Version_Id(java.lang.Long,org.springframework.data.domain.Pageable)">
+<h3>findAllByNamespace_Version_Id</h3>
+<div class="member-signature"><span class="return-type">org.springframework.data.domain.Page&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</span>&nbsp;<span class="element-name">findAllByNamespace_Version_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="findByNamespace_IdOrderByNamespace_PrefixAscNameAsc(java.lang.Long)">
-<h3>findByNamespace_IdOrderByNamespace_PrefixAscNameAsc</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</span>&nbsp;<span class="element-name">findByNamespace_IdOrderByNamespace_PrefixAscNameAsc</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId)</span></div>
+<section class="detail" id="findAllByNamespace_Id(java.lang.Long,org.springframework.data.domain.Pageable)">
+<h3>findAllByNamespace_Id</h3>
+<div class="member-signature"><span class="return-type">org.springframework.data.domain.Page&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</span>&nbsp;<span class="element-name">findAllByNamespace_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="findByNamespace_PrefixOrderByNameAsc(java.lang.String)">
-<h3>findByNamespace_PrefixOrderByNameAsc</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</span>&nbsp;<span class="element-name">findByNamespace_PrefixOrderByNameAsc</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span></div>
+<section class="detail" id="findTop10ByNamespace_IdAndNameLikeIgnoreCase(java.lang.Long,java.lang.String)">
+<h3>findTop10ByNamespace_IdAndNameLikeIgnoreCase</h3>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</span>&nbsp;<span class="element-name">findTop10ByNamespace_IdAndNameLikeIgnoreCase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="findTop10ByNamespace_Version_IdAndNameLikeIgnoreCase(java.lang.Long,java.lang.String)">
+<h3>findTop10ByNamespace_Version_IdAndNameLikeIgnoreCase</h3>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ComponentRepository.html" title="type parameter in ComponentRepository">T</a>&gt;</span>&nbsp;<span class="element-name">findTop10ByNamespace_Version_IdAndNameLikeIgnoreCase</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByNamespace_Id(long)">
+<h3>countByNamespace_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByNamespace_Id</span><wbr><span class="parameters">(long&nbsp;namespaceId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByNamespace_Version_Id(long)">
+<h3>countByNamespace_Version_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByNamespace_Version_Id</span><wbr><span class="parameters">(long&nbsp;versionId)</span></div>
 </section>
 </li>
 </ul>

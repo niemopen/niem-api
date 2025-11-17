@@ -120,8 +120,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../db/property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertySearch(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Boolean,java.lang.Boolean,java.lang.Integer,java.lang.Integer)" class="member-name-link">getPropertySearch</a><wbr>(jakarta.servlet.http.HttpServletRequest&nbsp;request,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.springframework.data.domain.Page<wbr>&lt;<a href="../db/property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertySearch(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Boolean,java.lang.Boolean,gov.niem.tools.api.db.namespace.Namespace.Category%5B%5D,gov.niem.tools.api.search.SearchService.SortOrder,int)" class="member-name-link">getPropertySearch</a><wbr>(jakarta.servlet.http.HttpServletRequest&nbsp;request,
  jakarta.servlet.http.HttpServletResponse&nbsp;response,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;token,
@@ -130,13 +130,14 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;type,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isAbstract,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isElement,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit)</code></div>
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategory,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ int&nbsp;page)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Search properties based on the given criteria.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertySearchCmf(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Boolean,java.lang.Boolean,java.lang.Integer,java.lang.Integer,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">getPropertySearchCmf</a><wbr>(jakarta.servlet.http.HttpServletRequest&nbsp;request,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPropertySearchCmf(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Boolean,java.lang.Boolean,gov.niem.tools.api.db.namespace.Namespace.Category%5B%5D,gov.niem.tools.api.search.SearchService.SortOrder,java.lang.Integer,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">getPropertySearchCmf</a><wbr>(jakarta.servlet.http.HttpServletRequest&nbsp;request,
  jakarta.servlet.http.HttpServletResponse&nbsp;response,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;token,
@@ -145,33 +146,38 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;type,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isAbstract,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isElement,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit,
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategory,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  <a href="../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Search properties in the database based on the given criteria and return results in CMF.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../db/type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeSearch(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Integer,java.lang.Integer)" class="member-name-link">getTypeSearch</a><wbr>(jakarta.servlet.http.HttpServletRequest&nbsp;request,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.springframework.data.domain.Page<wbr>&lt;<a href="../db/type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeSearch(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,gov.niem.tools.api.db.type.Type.Category,gov.niem.tools.api.db.namespace.Namespace.Category%5B%5D,gov.niem.tools.api.search.SearchService.SortOrder,int)" class="member-name-link">getTypeSearch</a><wbr>(jakarta.servlet.http.HttpServletRequest&nbsp;request,
  jakarta.servlet.http.HttpServletResponse&nbsp;response,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;token,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;substring,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit)</code></div>
+ <a href="../db/type/Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category,
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategory,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ int&nbsp;page)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Search types based on given criteria.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeSearchCmf(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.Integer,java.lang.Integer,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">getTypeSearchCmf</a><wbr>(jakarta.servlet.http.HttpServletRequest&nbsp;request,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypeSearchCmf(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String%5B%5D,java.lang.String%5B%5D,java.lang.String%5B%5D,gov.niem.tools.api.db.type.Type.Category,gov.niem.tools.api.db.namespace.Namespace.Category%5B%5D,gov.niem.tools.api.search.SearchService.SortOrder,java.lang.Integer,gov.niem.tools.api.core.config.Config.AppMediaType)" class="member-name-link">getTypeSearchCmf</a><wbr>(jakarta.servlet.http.HttpServletRequest&nbsp;request,
  jakarta.servlet.http.HttpServletResponse&nbsp;response,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;token,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;substring,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit,
+ <a href="../db/type/Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category,
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategory,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  <a href="../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Search types based on given criteria and returns results in CMF.</div>
@@ -218,11 +224,11 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getPropertySearch(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Boolean,java.lang.Boolean,java.lang.Integer,java.lang.Integer)">
+<section class="detail" id="getPropertySearch(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Boolean,java.lang.Boolean,gov.niem.tools.api.db.namespace.Namespace.Category[],gov.niem.tools.api.search.SearchService.SortOrder,int)">
 <h3>getPropertySearch</h3>
 <div class="member-signature"><span class="annotations">@GetMapping("/search/properties")
 @ResponseStatus(code=OK)
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../db/property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</span>&nbsp;<span class="element-name">getPropertySearch</span><wbr><span class="parameters">(jakarta.servlet.http.HttpServletRequest&nbsp;request,
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">org.springframework.data.domain.Page&lt;<a href="../db/property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</span>&nbsp;<span class="element-name">getPropertySearch</span><wbr><span class="parameters">(jakarta.servlet.http.HttpServletRequest&nbsp;request,
  jakarta.servlet.http.HttpServletResponse&nbsp;response,
  @RequestParam(required=false)
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
@@ -239,9 +245,11 @@ loadScripts(document, 'script');</script>
  @RequestParam(required=false)
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isElement,
  @RequestParam(required=false)
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategory,
  @RequestParam(required=false)
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit)</span></div>
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ @RequestParam(required=false,defaultValue="0")
+ int&nbsp;page)</span></div>
 <div class="block">Search properties based on the given criteria.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -263,15 +271,14 @@ loadScripts(document, 'script');</script>
 <dd><code>isElement</code> - True if only element properties should be returned; false if
      only attribute properties should be returned.
      Omit parameter to return either kind.</dd>
-<dd><code>offset</code> - A number of results to skip.  Defaults to 0.</dd>
-<dd><code>limit</code> - A maximum number of results to return.  Defaults to and will not exceed 100.</dd>
+<dd><code>page</code> - Page number of results to return.  Defaults to 0 (first page).</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getPropertySearchCmf(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Boolean,java.lang.Boolean,java.lang.Integer,java.lang.Integer,gov.niem.tools.api.core.config.Config.AppMediaType)">
+<section class="detail" id="getPropertySearchCmf(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Boolean,java.lang.Boolean,gov.niem.tools.api.db.namespace.Namespace.Category[],gov.niem.tools.api.search.SearchService.SortOrder,java.lang.Integer,gov.niem.tools.api.core.config.Config.AppMediaType)">
 <h3>getPropertySearchCmf</h3>
-<div class="member-signature"><span class="annotations">@GetMapping("/search.cmf/properties")
+<div class="member-signature"><span class="annotations">@GetMapping("/search/properties/formats/cmf")
 @ResponseStatus(code=OK)
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">getPropertySearchCmf</span><wbr><span class="parameters">(jakarta.servlet.http.HttpServletRequest&nbsp;request,
  jakarta.servlet.http.HttpServletResponse&nbsp;response,
@@ -290,9 +297,11 @@ loadScripts(document, 'script');</script>
  @RequestParam(required=false)
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isElement,
  @RequestParam(required=false)
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategory,
  @RequestParam(required=false)
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit,
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ @RequestParam(required=false,defaultValue="0")
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  @RequestParam(required=false,defaultValue="json")
  <a href="../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</span>
                             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
@@ -317,19 +326,18 @@ loadScripts(document, 'script');</script>
 <dd><code>isElement</code> - True if only element properties should be returned; false if only
      attribute properties should be returned.
      Omit parameter to return either kind.</dd>
-<dd><code>offset</code> - A number of results to skip.  Defaults to 0.</dd>
-<dd><code>limit</code> - A maximum number of results to return.  Defaults to and will not exceed 100.</dd>
+<dd><code>page</code> - Page number of results to return.  Defaults to 0.</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getTypeSearch(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Integer,java.lang.Integer)">
+<section class="detail" id="getTypeSearch(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],gov.niem.tools.api.db.type.Type.Category,gov.niem.tools.api.db.namespace.Namespace.Category[],gov.niem.tools.api.search.SearchService.SortOrder,int)">
 <h3>getTypeSearch</h3>
 <div class="member-signature"><span class="annotations">@GetMapping("/search/types")
 @ResponseStatus(code=OK)
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../db/type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</span>&nbsp;<span class="element-name">getTypeSearch</span><wbr><span class="parameters">(jakarta.servlet.http.HttpServletRequest&nbsp;request,
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">org.springframework.data.domain.Page&lt;<a href="../db/type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</span>&nbsp;<span class="element-name">getTypeSearch</span><wbr><span class="parameters">(jakarta.servlet.http.HttpServletRequest&nbsp;request,
  jakarta.servlet.http.HttpServletResponse&nbsp;response,
  @RequestParam(required=false)
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;niemVersionNumber,
@@ -340,9 +348,13 @@ loadScripts(document, 'script');</script>
  @RequestParam(required=false)
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;prefix,
  @RequestParam(required=false)
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="../db/type/Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category,
  @RequestParam(required=false)
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit)</span></div>
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategory,
+ @RequestParam(required=false)
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ @RequestParam(required=false,defaultValue="0")
+ int&nbsp;page)</span></div>
 <div class="block">Search types based on given criteria.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -356,15 +368,14 @@ loadScripts(document, 'script');</script>
      Example: "arm" returns property names with "Arm", "Armed", "Arming", "Alarm",
      "Firearm", "Harm", etc.</dd>
 <dd><code>prefix</code> - Filter results on the given prefix(es)</dd>
-<dd><code>offset</code> - A number of results to skip. Defaults to 0.</dd>
-<dd><code>limit</code> - A maximum number of results to return. Defaults to and will not exceed 100.</dd>
+<dd><code>page</code> - Page number of results to return.  Defaults to 0.</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getTypeSearchCmf(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],java.lang.Integer,java.lang.Integer,gov.niem.tools.api.core.config.Config.AppMediaType)">
+<section class="detail" id="getTypeSearchCmf(jakarta.servlet.http.HttpServletRequest,jakarta.servlet.http.HttpServletResponse,java.lang.String,java.lang.String[],java.lang.String[],java.lang.String[],gov.niem.tools.api.db.type.Type.Category,gov.niem.tools.api.db.namespace.Namespace.Category[],gov.niem.tools.api.search.SearchService.SortOrder,java.lang.Integer,gov.niem.tools.api.core.config.Config.AppMediaType)">
 <h3>getTypeSearchCmf</h3>
-<div class="member-signature"><span class="annotations">@GetMapping("/search.cmf/types")
+<div class="member-signature"><span class="annotations">@GetMapping("/search/types/formats/cmf")
 @ResponseStatus(code=OK)
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>&nbsp;<span class="element-name">getTypeSearchCmf</span><wbr><span class="parameters">(jakarta.servlet.http.HttpServletRequest&nbsp;request,
  jakarta.servlet.http.HttpServletResponse&nbsp;response,
@@ -377,9 +388,13 @@ loadScripts(document, 'script');</script>
  @RequestParam(required=false)
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;prefix,
  @RequestParam(required=false)
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;offset,
+ <a href="../db/type/Type.Category.html" title="enum class in gov.niem.tools.api.db.type">Type.Category</a>&nbsp;category,
  @RequestParam(required=false)
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;limit,
+ <a href="../db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>[]&nbsp;namespaceCategory,
+ @RequestParam(required=false)
+ <a href="SearchService.SortOrder.html" title="enum class in gov.niem.tools.api.search">SearchService.SortOrder</a>&nbsp;sortOrder,
+ @RequestParam(required=false,defaultValue="0")
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;page,
  @RequestParam(required=false,defaultValue="json")
  <a href="../core/config/Config.AppMediaType.html" title="enum class in gov.niem.tools.api.core.config">Config.AppMediaType</a>&nbsp;mediaType)</span>
                         throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
@@ -396,8 +411,7 @@ loadScripts(document, 'script');</script>
      Example: "arm" returns property names with "Arm", "Armed", "Arming", "Alarm",
      "Firearm", "Harm", etc.</dd>
 <dd><code>prefix</code> - Filter results on the given prefix(es)</dd>
-<dd><code>offset</code> - A number of results to skip. Defaults to 0.</dd>
-<dd><code>limit</code> - A maximum number of results to return. Defaults to and will not exceed 100.</dd>
+<dd><code>page</code> - Page number of results to return.  Defaults to 0.</dd>
 <dt>Throws:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
 </dl>

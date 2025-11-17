@@ -85,7 +85,7 @@ artifactory:
     - podman logout $ARTIFACTORY_URL_GTRI
 
     - podman login -u $ARTIFACTORY_USER --password $ARTIFACTORY_TOKEN $ARTIFACTORY_URL
-    - echo "$IMAGE:PROFILE"
+    - echo "$IMAGE:$PROFILE"
     - echo "$IMAGE_FULL_NAME"
   script:
     - podman build -t $IMAGE:$PROFILE .

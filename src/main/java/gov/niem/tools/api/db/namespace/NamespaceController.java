@@ -40,7 +40,7 @@ public class NamespaceController {
   /**
    * Get a namespace with the given fields.
    *
-   * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces/nc
+   * @example http://api.niemopen.org/v2/stewards/niem/models/model/versions/5.2/namespaces/nc
    */
   @GetMapping("/namespaces/{prefix}")
   @ResponseStatus(code = HttpStatus.OK)
@@ -77,7 +77,7 @@ public class NamespaceController {
   /**
    * Get all namespaces from a version of a model.
    *
-   * @example http://tools.niem.gov/api/v2/stewards/niem/models/model/versions/5.2/namespaces
+   * @example http://api.niemopen.org/v2/stewards/niem/models/model/versions/5.2/namespaces
    */
   @GetMapping("/namespaces")
   @ResponseStatus(code = HttpStatus.OK)

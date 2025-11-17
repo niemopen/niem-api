@@ -199,8 +199,8 @@ Run the application:
 
 API documentation files:
 
-- **OpenAPI JSON** available at https://tools.niem.gov/api/v2/api-docs or in the project repo under `/docs/openapi.json`.
-- **Swagger HTML** available at https://tools.niem.gov/api/v2/swagger-ui/index.html.
+- **OpenAPI JSON** available at https://api.niemopen.org/v2/api-docs or in the project repo under `/docs/openapi.json`.
+- **Swagger HTML** available at https://api.niemopen.org/v2/swagger-ui/index.html.
 
 Build documentation:
 

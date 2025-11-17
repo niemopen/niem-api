@@ -90,7 +90,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="../component/ComponentService.html" title="class in gov.niem.tools.api.db.component">ComponentService</a></code>, <code><a href="../facet/FacetService.html" title="class in gov.niem.tools.api.db.facet">FacetService</a></code>, <code><a href="../model/ModelService.html" title="class in gov.niem.tools.api.db.model">ModelService</a></code>, <code><a href="../namespace/NamespaceService.html" title="class in gov.niem.tools.api.db.namespace">NamespaceService</a></code>, <code><a href="../steward/StewardService.html" title="class in gov.niem.tools.api.db.steward">StewardService</a></code>, <code><a href="../subproperty/SubpropertyService.html" title="class in gov.niem.tools.api.db.subproperty">SubpropertyService</a></code>, <code><a href="../version/VersionService.html" title="class in gov.niem.tools.api.db.version">VersionService</a></code></dd>
+<dd><code><a href="BaseVersionEntityService.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntityService</a></code>, <code><a href="../model/ModelService.html" title="class in gov.niem.tools.api.db.model">ModelService</a></code>, <code><a href="../steward/StewardService.html" title="class in gov.niem.tools.api.db.steward">StewardService</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">BaseEntityService&lt;T extends <a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&gt;</span>
@@ -144,92 +144,97 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Checks that the object will be unique and will not clash with another object in the database.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(T)" class="member-name-link">delete</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#count()" class="member-name-link">count</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Counts the total number of entries.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#delete(T)" class="member-name-link">delete</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Deletes the object in the database with the id from the given object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edit(java.lang.Long,T)" class="member-name-link">edit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;id,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edit(java.lang.Long,T)" class="member-name-link">edit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;id,
  <a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;updatedObject)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Modifies the object in the database with the given id with the fields from the given object.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOne(T)" class="member-name-link">findOne</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOne(T)" class="member-name-link">findOne</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Finds an object based on the given object fields.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findOneOptional(T)" class="member-name-link">findOneOptional</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#findOneOptional(T)" class="member-name-link">findOneOptional</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Optionally finds an object based on the given object fields.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEntityClassName()" class="member-name-link">getEntityClassName</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNotFoundException(java.lang.String)" class="member-name-link">getNotFoundException</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEntityClassName()" class="member-name-link">getEntityClassName</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../exceptions/EntityNotFoundException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotFoundException</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNotFoundException(java.lang.String)" class="member-name-link">getNotFoundException</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Throws an exception for when an entity was not found in the database.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadId(T)" class="member-name-link">loadId</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loadId(T)" class="member-name-link">loadId</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets an object from the database matching the given object criteria.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#merge(T)" class="member-name-link">merge</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#merge(T)" class="member-name-link">merge</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Syncs the given plain object with object information from the database.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract org.springframework.data.jpa.repository.JpaRepository<wbr>&lt;<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#repository()" class="member-name-link">repository</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#saveExisting(T)" class="member-name-link">saveExisting</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract org.springframework.data.jpa.repository.JpaRepository<wbr>&lt;<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#repository()" class="member-name-link">repository</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#saveExisting(T)" class="member-name-link">saveExisting</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Saves changes in the database to the existing object based on the object id.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#saveNew(T)" class="member-name-link">saveNew</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#saveNew(T)" class="member-name-link">saveNew</a><wbr>(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds the object to the database.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotFound(gov.niem.tools.api.db.base.BaseEntity)" class="member-name-link">throwNotFound</a><wbr>(<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&nbsp;entity)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Throws an exception for when an entity was not found in the database.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotFound(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)" class="member-name-link">throwNotFound</a><wbr>(<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&nbsp;entity,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotFound(gov.niem.tools.api.db.base.BaseEntity)" class="member-name-link">throwNotFound</a><wbr>(<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&nbsp;entity)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Throws an exception for when an entity was not found in the database.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotFound(java.lang.String,java.lang.String)" class="member-name-link">throwNotFound</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;entityClassName,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotFound(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)" class="member-name-link">throwNotFound</a><wbr>(<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&nbsp;entity,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Throws an exception for when an entity was not found in the database.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity)" class="member-name-link">throwNotUnique</a><wbr>(<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&nbsp;entity)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotFound(java.lang.String,java.lang.String)" class="member-name-link">throwNotFound</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;entityClassName,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Throws an exception for when an entity with the same required fields already exists
- in the database.</div>
+<div class="block">Throws an exception for when an entity was not found in the database.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)" class="member-name-link">throwNotUnique</a><wbr>(<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&nbsp;entity,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity)" class="member-name-link">throwNotUnique</a><wbr>(<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&nbsp;entity)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Throws an exception for when an entity with the same required fields already exists
  in the database.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotUnique(java.lang.String,java.lang.String)" class="member-name-link">throwNotUnique</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;entityClassName,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotUnique(gov.niem.tools.api.db.base.BaseEntity,java.lang.String)" class="member-name-link">throwNotUnique</a><wbr>(<a href="BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>&nbsp;entity,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Throws an exception for when an entity with the same required fields already exists
+ in the database.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#throwNotUnique(java.lang.String,java.lang.String)" class="member-name-link">throwNotUnique</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;entityClassName,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;label)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Throws an exception for when an entity with the same required fields already exists
  in the database.</div>
 </div>
@@ -373,6 +378,13 @@ loadScripts(document, 'script');</script>
 <h3 id="findOneOptional(gov.niem.tools.api.db.base.BaseEntity)">findOneOptional</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&gt;</span>&nbsp;<span class="element-name">findOneOptional</span><wbr><span class="parameters">(<a href="BaseEntityService.html" title="type parameter in BaseEntityService">T</a>&nbsp;object)</span></div>
 <div class="block">Optionally finds an object based on the given object fields.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="count()">
+<h3>count</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">count</span>()</div>
+<div class="block">Counts the total number of entries.</div>
 </section>
 </li>
 <li>

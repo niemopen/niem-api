@@ -132,9 +132,34 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="serialized-class-details" id="gov.niem.tools.api.db.base.BaseVersionedEntity">
+<h3>Class&nbsp;<a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionedEntity</a></h3>
+<div class="type-signature">class BaseVersionedEntity extends <a href="gov/niem/tools/api/db/base/BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a> implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+<ul class="block-list">
+<li>
+<section class="detail">
+<h4>Serialized Fields</h4>
+<ul class="block-list">
+<li class="block-list">
+<h5>next</h5>
+<pre><a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="type parameter in BaseVersionedEntity">T</a> extends <a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a>&lt;<a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="type parameter in BaseVersionedEntity">T</a>&gt; next</pre>
+<div class="block">Corresponding entity mapped from the next version.</div>
+</li>
+<li class="block-list">
+<h5>prev</h5>
+<pre><a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="type parameter in BaseVersionedEntity">T</a> extends <a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a>&lt;<a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="type parameter in BaseVersionedEntity">T</a>&gt; prev</pre>
+<div class="block">Corresponding entity mapped from the previous version.</div>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<li>
 <section class="serialized-class-details" id="gov.niem.tools.api.db.base.BaseVersionEntity">
 <h3>Class&nbsp;<a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionEntity</a></h3>
-<div class="type-signature">class BaseVersionEntity extends <a href="gov/niem/tools/api/db/base/BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a> implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+<div class="type-signature">class BaseVersionEntity extends <a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a>&lt;<a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a> extends <a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&gt;&gt; implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
 <ul class="block-list">
 <li>
 <section class="detail">
@@ -144,11 +169,6 @@ loadScripts(document, 'script');</script>
 <h5>isDeprecated</h5>
 <pre>boolean isDeprecated</pre>
 <div class="block">True if an entity is deprecated; false or null otherwise.</div>
-</li>
-<li class="block-list">
-<h5>next</h5>
-<pre><a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a> extends <a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&gt; next</pre>
-<div class="block">Corresponding entity mapped from the next version.</div>
 </li>
 <li class="block-list">
 <h5>original</h5>
@@ -169,11 +189,6 @@ loadScripts(document, 'script');</script>
  and its usages via subsets, tracking the usages of each entity independently
  supports subset-approved customizations, like adjusted cardinality, custom
  namespace prefixes, property aliases, inlined substitutions, and flattened types.</div>
-</li>
-<li class="block-list">
-<h5>prev</h5>
-<pre><a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a> extends <a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="gov/niem/tools/api/db/base/BaseVersionEntity.html" title="type parameter in BaseVersionEntity">T</a>&gt; prev</pre>
-<div class="block">Corresponding entity mapped from the previous version.</div>
 </li>
 </ul>
 </section>
@@ -213,6 +228,12 @@ loadScripts(document, 'script');</script>
 <div class="block">Namespace that defines this component.</div>
 </li>
 <li class="block-list">
+<h5>namespaceRank</h5>
+<pre>int namespaceRank</pre>
+<div class="block">A ranking used to support sorting component namespaces by category, with
+ Core and Core Supplements sorting first, followed by domains, etc.</div>
+</li>
+<li class="block-list">
 <h5>prefix</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> prefix</pre>
 <div class="block">A namespace prefix for the property or type.</div>
@@ -234,6 +255,12 @@ loadScripts(document, 'script');</script>
 <section class="serialized-package-container">
 <h2 title="Package">Package&nbsp;<a href="gov/niem/tools/api/db/exceptions/package-summary.html">gov.niem.tools.api.db.exceptions</a></h2>
 <ul class="block-list">
+<li>
+<section class="serialized-class-details" id="gov.niem.tools.api.db.exceptions.ArgumentNotValidException">
+<h3>Exception Class&nbsp;<a href="gov/niem/tools/api/db/exceptions/ArgumentNotValidException.html" title="class in gov.niem.tools.api.db.exceptions">gov.niem.tools.api.db.exceptions.ArgumentNotValidException</a></h3>
+<div class="type-signature">class ArgumentNotValidException extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/RuntimeException.html" title="class or interface in java.lang" class="external-link">RuntimeException</a> implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+</section>
+</li>
 <li>
 <section class="serialized-class-details" id="gov.niem.tools.api.db.exceptions.DatabaseKeyViolationException">
 <h3>Exception Class&nbsp;<a href="gov/niem/tools/api/db/exceptions/DatabaseKeyViolationException.html" title="class in gov.niem.tools.api.db.exceptions">gov.niem.tools.api.db.exceptions.DatabaseKeyViolationException</a></h3>
@@ -426,6 +453,10 @@ loadScripts(document, 'script');</script>
 <h5>category</h5>
 <pre><a href="gov/niem/tools/api/db/namespace/Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a> category</pre>
 <div class="block">A kind of namespace.</div>
+</li>
+<li class="block-list">
+<h5>cmfNamespace</h5>
+<pre>org.mitre.niem.cmf.Namespace cmfNamespace</pre>
 </li>
 <li class="block-list">
 <h5>definition</h5>
@@ -779,7 +810,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="serialized-class-details" id="gov.niem.tools.api.db.version.Version">
 <h3>Class&nbsp;<a href="gov/niem/tools/api/db/version/Version.html" title="class in gov.niem.tools.api.db.version">gov.niem.tools.api.db.version.Version</a></h3>
-<div class="type-signature">class Version extends <a href="gov/niem/tools/api/db/base/BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a> implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+<div class="type-signature">class Version extends <a href="gov/niem/tools/api/db/base/BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a>&lt;<a href="gov/niem/tools/api/db/version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&gt; implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
 <ul class="block-list">
 <li>
 <section class="detail">
@@ -795,6 +826,11 @@ loadScripts(document, 'script');</script>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> conformanceTargets</pre>
 <div class="block">A list of one or more URIs that each represents an IEPD class to which the
  IEPD claims conformance.</div>
+</li>
+<li class="block-list">
+<h5>description</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> description</pre>
+<div class="block">A description of the main content or changes in a version.</div>
 </li>
 <li class="block-list">
 <h5>draft</h5>
@@ -823,6 +859,11 @@ loadScripts(document, 'script');</script>
  finalized; false otherwise.</div>
 </li>
 <li class="block-list">
+<h5>link</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> link</pre>
+<div class="block">A URL for a website where a version has been published.</div>
+</li>
+<li class="block-list">
 <h5>messageRoots</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="gov/niem/tools/api/db/property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt; messageRoots</pre>
 <div class="block">A set of properties that serve as the root or starting point of message instances.</div>
@@ -837,19 +878,9 @@ loadScripts(document, 'script');</script>
 <div class="block">A set of namespaces defined by a version of a model.</div>
 </li>
 <li class="block-list">
-<h5>next</h5>
-<pre><a href="gov/niem/tools/api/db/version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a> next</pre>
-<div class="block">Corresponding entity mapped from the next version.</div>
-</li>
-<li class="block-list">
 <h5>niemVersion</h5>
 <pre><a href="gov/niem/tools/api/db/version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a> niemVersion</pre>
 <div class="block">A NIEM version on which this version is based, or itself if this is a NIEM version.</div>
-</li>
-<li class="block-list">
-<h5>prev</h5>
-<pre><a href="gov/niem/tools/api/db/version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a> prev</pre>
-<div class="block">Corresponding entity mapped from the previous version.</div>
 </li>
 <li class="block-list">
 <h5>revised</h5>

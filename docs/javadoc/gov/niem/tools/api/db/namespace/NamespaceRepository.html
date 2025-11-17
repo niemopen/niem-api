@@ -107,6 +107,13 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="Namesp
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByVersion_Id(java.lang.Long)" class="member-name-link">countByVersion_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByVersion_IdAndCategory(java.lang.Long,gov.niem.tools.api.db.namespace.Namespace.Category)" class="member-name-link">countByVersion_IdAndCategory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOneByVersion_IdAndPrefix(java.lang.Long,java.lang.String)" class="member-name-link">findOneByVersion_IdAndPrefix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
@@ -148,6 +155,19 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="Namesp
 <h3>findOneByVersion_IdAndPrefix</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</span>&nbsp;<span class="element-name">findOneByVersion_IdAndPrefix</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByVersion_Id(java.lang.Long)">
+<h3>countByVersion_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByVersion_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByVersion_IdAndCategory(java.lang.Long,gov.niem.tools.api.db.namespace.Namespace.Category)">
+<h3>countByVersion_IdAndCategory</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByVersion_IdAndCategory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ <a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</span></div>
 </section>
 </li>
 </ul>

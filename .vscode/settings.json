@@ -17,13 +17,13 @@
   "java.debug.settings.onBuildFailureProceed": true,
   "rest-client.environmentVariables": {
     "localhost": {
-      "baseUrl": "http://localhost:8080/api/v2"
+      "baseUrl": "http://localhost:8080/v2"
     },
     "prod": {
-      "baseUrl": "https://tools.niem.gov/api/v2"
+      "baseUrl": "https://api.niemopen.org/v2"
     },
     "mep": {
-      "baseUrl": "https://tools.niem.gov/api/mep"
+      "baseUrl": "https://api.niemopen.org/mep"
     },
     "$shared": {
       "boundary": "----WebKitFormBoundary-------------------",

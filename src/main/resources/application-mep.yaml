@@ -1,6 +1,6 @@
 
 app:
-  baseUrl: https://tools.niem.gov/api/mep
+  baseUrl: https://api.niemopen.org/mep
 
 spring:
   datasource:

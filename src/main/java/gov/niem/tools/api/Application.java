@@ -47,15 +47,15 @@ public class Application {
                       .url("https://niemopen.org")))
       .addServersItem(
         new Server()
-        .url("https://tools.niem.gov/api/v2")
+        .url("https://api.niemopen.org/v2")
         .description("Production server"))
       .addServersItem(
           new Server()
-              .url("https://tools.niem.gov/api/mep")
+              .url("https://api.niemopen.org/mep")
               .description("MEP instance server"))
       .addServersItem(
           new Server()
-              .url("http://localhost:8080/api/v2")
+              .url("http://localhost:8080/v2")
               .description("Local machine"));
   }
 

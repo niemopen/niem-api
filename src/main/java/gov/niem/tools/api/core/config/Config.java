@@ -28,7 +28,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class Config {
 
   // Constant required for use in annotations
-  public static final String BASE_URL = "https://tools.niem.gov/api/v2";
+  public static final String BASE_URL = "https://api.niemopen.org/v2";
 
   public static String baseUrl;
 

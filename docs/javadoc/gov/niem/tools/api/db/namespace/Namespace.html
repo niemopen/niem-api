@@ -38,7 +38,7 @@ loadScripts(document, 'script');</script>
 <p>Summary:</p>
 <ul>
 <li><a href="#nested-class-summary">Nested</a></li>
-<li><a href="#field-summary">Field</a></li>
+<li>Field</li>
 <li><a href="#constructor-summary">Constr</a></li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
@@ -58,7 +58,7 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li><a href="#nested-class-summary">Nested</a>&nbsp;|&nbsp;</li>
-<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
@@ -88,8 +88,10 @@ loadScripts(document, 'script');</script>
 <div class="inheritance"><a href="../base/BaseEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseEntity</a>
 <div class="inheritance"><a href="../base/BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseStewardEntity</a>
 <div class="inheritance"><a href="../base/BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseModelEntity</a>
+<div class="inheritance"><a href="../base/BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionedEntity</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;
 <div class="inheritance"><a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionEntity</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;
 <div class="inheritance">gov.niem.tools.api.db.namespace.Namespace</div>
+</div>
 </div>
 </div>
 </div>
@@ -98,14 +100,14 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../base/BaseCmfEntity.html" title="interface in gov.niem.tools.api.db.base">BaseCmfEntity</a>&lt;org.mitre.niem.cmf.Namespace&gt;</code>, <code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></code></dd>
+<dd><code><a href="../base/BaseCmfEntity.html" title="interface in gov.niem.tools.api.db.base">BaseCmfEntity</a>&lt;org.mitre.niem.cmf.Namespace&gt;</code>, <code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></code>, <code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations">@Entity
 @Indexed
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">Namespace</span>
 <span class="extends-implements">extends <a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;
-implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.tools.api.db.base">BaseCmfEntity</a>&lt;org.mitre.niem.cmf.Namespace&gt;</span></div>
+implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.tools.api.db.base">BaseCmfEntity</a>&lt;org.mitre.niem.cmf.Namespace&gt;, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</span></div>
 <div class="block">A collection of properties and types managed by an authoritative source.</div>
 <dl class="notes">
 <dt>See Also:</dt>
@@ -139,36 +141,12 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
  built, schemas that are to be included as static files, and schemas that
  do not have to be included at all (e.g., the schema for XML Schema).</div>
 </div>
-<div class="col-first even-row-color"><code>static class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="Namespace.NamespaceBuilder.html" class="type-name-link" title="class in gov.niem.tools.api.db.namespace">Namespace.NamespaceBuilder</a>&lt;<a href="Namespace.NamespaceBuilder.html" title="type parameter in Namespace.NamespaceBuilder">C</a> extends <a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>,<wbr><a href="Namespace.NamespaceBuilder.html" title="type parameter in Namespace.NamespaceBuilder">B</a> extends <a href="Namespace.NamespaceBuilder.html" title="class in gov.niem.tools.api.db.namespace">Namespace.NamespaceBuilder</a>&lt;<a href="Namespace.NamespaceBuilder.html" title="type parameter in Namespace.NamespaceBuilder">C</a>,<wbr><a href="Namespace.NamespaceBuilder.html" title="type parameter in Namespace.NamespaceBuilder">B</a>&gt;&gt;</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>static enum&nbsp;</code></div>
-<div class="col-second odd-row-color"><code><a href="Namespace.NdrTarget.html" class="type-name-link" title="enum class in gov.niem.tools.api.db.namespace">Namespace.NdrTarget</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="Namespace.NdrTarget.html" class="type-name-link" title="enum class in gov.niem.tools.api.db.namespace">Namespace.NdrTarget</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Kinds of NDR targets, such as REF and EXT.</div>
 </div>
 </div>
-<div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionEntity">Nested classes/interfaces inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a></h2>
-<code><a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity.BaseVersionEntityBuilder</a>&lt;<a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">T</a> extends <a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">T</a>&gt;,<wbr><a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">C</a> extends <a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">T</a>&gt;,<wbr><a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">B</a> extends <a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity.BaseVersionEntityBuilder</a>&lt;<a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">T</a>,<wbr><a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">C</a>,<wbr><a href="../base/BaseVersionEntity.BaseVersionEntityBuilder.html" title="type parameter in BaseVersionEntity.BaseVersionEntityBuilder">B</a>&gt;&gt;</code></div>
-<div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-gov.niem.tools.api.db.base.BaseModelEntity">Nested classes/interfaces inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></h2>
-<code><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;<a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="type parameter in BaseModelEntity.BaseModelEntityBuilder">C</a> extends <a href="../base/BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a>,<wbr><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="type parameter in BaseModelEntity.BaseModelEntityBuilder">B</a> extends <a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;<a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="type parameter in BaseModelEntity.BaseModelEntityBuilder">C</a>,<wbr><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="type parameter in BaseModelEntity.BaseModelEntityBuilder">B</a>&gt;&gt;</code></div>
-<div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-gov.niem.tools.api.db.base.BaseStewardEntity">Nested classes/interfaces inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity</a></h2>
-<code><a href="../base/BaseStewardEntity.BaseStewardEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity.BaseStewardEntityBuilder</a>&lt;<a href="../base/BaseStewardEntity.BaseStewardEntityBuilder.html" title="type parameter in BaseStewardEntity.BaseStewardEntityBuilder">C</a> extends <a href="../base/BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity</a>,<wbr><a href="../base/BaseStewardEntity.BaseStewardEntityBuilder.html" title="type parameter in BaseStewardEntity.BaseStewardEntityBuilder">B</a> extends <a href="../base/BaseStewardEntity.BaseStewardEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity.BaseStewardEntityBuilder</a>&lt;<a href="../base/BaseStewardEntity.BaseStewardEntityBuilder.html" title="type parameter in BaseStewardEntity.BaseStewardEntityBuilder">C</a>,<wbr><a href="../base/BaseStewardEntity.BaseStewardEntityBuilder.html" title="type parameter in BaseStewardEntity.BaseStewardEntityBuilder">B</a>&gt;&gt;</code></div>
-<div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-gov.niem.tools.api.db.base.BaseEntity">Nested classes/interfaces inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></h2>
-<code><a href="../base/BaseEntity.BaseEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseEntity.BaseEntityBuilder</a>&lt;<a href="../base/BaseEntity.BaseEntityBuilder.html" title="type parameter in BaseEntity.BaseEntityBuilder">C</a> extends <a href="../base/BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a>,<wbr><a href="../base/BaseEntity.BaseEntityBuilder.html" title="type parameter in BaseEntity.BaseEntityBuilder">B</a> extends <a href="../base/BaseEntity.BaseEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseEntity.BaseEntityBuilder</a>&lt;<a href="../base/BaseEntity.BaseEntityBuilder.html" title="type parameter in BaseEntity.BaseEntityBuilder">C</a>,<wbr><a href="../base/BaseEntity.BaseEntityBuilder.html" title="type parameter in BaseEntity.BaseEntityBuilder">B</a>&gt;&gt;</code></div>
-</section>
-</li>
-<!-- =========== FIELD SUMMARY =========== -->
-<li>
-<section class="field-summary" id="field-summary">
-<h2>Field Summary</h2>
-<div class="inherited-list">
-<h3 id="fields-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionEntity">Fields inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a></h3>
-<code><a href="../base/BaseVersionEntity.html#next">next</a>, <a href="../base/BaseVersionEntity.html#prev">prev</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -176,33 +154,11 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 <section class="constructor-summary" id="constructor-summary">
 <h2>Constructor Summary</h2>
 <div class="caption"><span>Constructors</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier</div>
-<div class="table-header col-second">Constructor</div>
+<div class="summary-table two-column-summary">
+<div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>&nbsp;</code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">Namespace</a>()</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected </code></div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(gov.niem.tools.api.db.namespace.Namespace.NamespaceBuilder)" class="member-name-link">Namespace</a><wbr>(<a href="Namespace.NamespaceBuilder.html" title="class in gov.niem.tools.api.db.namespace">Namespace.NamespaceBuilder</a>&lt;?,<wbr>?&gt;&nbsp;b)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>&nbsp;</code></div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(gov.niem.tools.api.db.version.Version,java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.namespace.Namespace.Category,java.lang.String,gov.niem.tools.api.db.namespace.Namespace.NdrTarget,gov.niem.tools.api.db.namespace.Namespace.Generation,java.lang.String,java.lang.String,java.util.Set,java.util.Set)" class="member-name-link">Namespace</a><wbr>(<a href="../version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;version,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;uri,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;definition,
- <a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;draft,
- <a href="Namespace.NdrTarget.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.NdrTarget</a>&nbsp;target,
- <a href="Namespace.Generation.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Generation</a>&nbsp;generation,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filepath,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;&nbsp;types,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;&nbsp;properties)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Creates a new <code>Namespace</code> instance.</div>
-</div>
 </div>
 </section>
 </li>
@@ -211,40 +167,39 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addToCmfModel(org.mitre.niem.cmf.Model)" class="member-name-link">addToCmfModel</a><wbr>(org.mitre.niem.cmf.Model&nbsp;cmfModel)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.mitre.niem.cmf.Namespace</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addToCmfModel(org.mitre.niem.cmf.Model,boolean,gov.niem.tools.api.db.base.AddModelReason,gov.niem.tools.api.validation.Test)" class="member-name-link">addToCmfModel</a><wbr>(org.mitre.niem.cmf.Model&nbsp;cmfModel,
+ boolean&nbsp;addDependencies,
+ <a href="../base/AddModelReason.html" title="enum class in gov.niem.tools.api.db.base">AddModelReason</a>&nbsp;addModelReason,
+ <a href="../../validation/Test.html" title="class in gov.niem.tools.api.validation">Test</a>&nbsp;test)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds this namespace to the given CMF model.</div>
+<div class="block">Adds this namespace to the given CMF model if it does not already exist.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Namespace.NamespaceBuilder.html" title="class in gov.niem.tools.api.db.namespace">Namespace.NamespaceBuilder</a><wbr>&lt;?,<wbr>?&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#builder()" class="member-name-link">builder</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#canEqual(java.lang.Object)" class="member-name-link">canEqual</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;other)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#categoryFromCmf(int)" class="member-name-link">categoryFromCmf</a><wbr>(int&nbsp;kind)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts CMF namespace categories to API namespace categories.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#categoryToCmf(gov.niem.tools.api.db.namespace.Namespace.Category)" class="member-name-link">categoryToCmf</a><wbr>(<a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#categoryToCmfInt(gov.niem.tools.api.db.namespace.Namespace.Category)" class="member-name-link">categoryToCmfInt</a><wbr>(<a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Converts API namespace categories to CMF namespace categories.</div>
+<div class="block">Converts API namespace categories to CMF namespace kinds (int).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCategory()" class="member-name-link">getCategory</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#categoryToCmfString(gov.niem.tools.api.db.namespace.Namespace.Category)" class="member-name-link">categoryToCmfString</a><wbr>(<a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Converts API namespace categories to CMF namespace kinds (string).</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#compareTo(gov.niem.tools.api.db.namespace.Namespace)" class="member-name-link">compareTo</a><wbr>(<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&nbsp;other)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A kind of namespace.</div>
+<div class="block">Custom sorting function for namespaces.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getClassName()" class="member-name-link">getClassName</a>()</code></div>
@@ -257,46 +212,14 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 <div class="block">Returns the name of the conformance target.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDefinition()" class="member-name-link">getDefinition</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A definition that describes a namespace.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDraft()" class="member-name-link">getDraft</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A draft version of a namespace.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFilename()" class="member-name-link">getFilename</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The filename to use for representations of this namespace such as XML schemas,
- without a file extension.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFilepath()" class="member-name-link">getFilepath</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The filepath to use for nested representations of this namespace such as
- for XML schemas, without the filename or extension.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFullIdentifier()" class="member-name-link">getFullIdentifier</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getIdLabel()" class="member-name-link">getIdLabel</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A human-readable and url-friendly unique identifier for an entity.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Namespace.Generation.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Generation</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGeneration()" class="member-name-link">getGeneration</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A means by which a namespace should be generated.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLocalIdentifier()" class="member-name-link">getLocalIdentifier</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">An identifier, unique within its immediate scope.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getName()" class="member-name-link">getName</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getIdLocalLabel()" class="member-name-link">getIdLocalLabel</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A name of a namespace.</div>
+<div class="block">An identifier, unique within its immediate scope.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNdrConformanceTarget()" class="member-name-link">getNdrConformanceTarget</a>()</code></div>
@@ -320,128 +243,42 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">An immediate entity or scope to which this entity belongs.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPrefix()" class="member-name-link">getPrefix</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRank()" class="member-name-link">getRank</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A short, non-normative identifier for a namespace.</div>
+<div class="block">A ranking used to support sorting namespaces by category, with
+ Core and Core Supplements sorting first, followed by domains, etc.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getProperties()" class="member-name-link">getProperties</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRoute()" class="member-name-link">getRoute</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">An endpoint to get information about an entity.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Namespace.NdrTarget.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.NdrTarget</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTarget()" class="member-name-link">getTarget</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getRoute()" class="member-name-link">getRoute</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A code representing an NDR conformance target, or null if the namespace
- is not meant to be conformant.</div>
+<div class="block">An endpoint to get information about an entity.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A descriptive label or title used to identify an entity.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTypes()" class="member-name-link">getTypes</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUri()" class="member-name-link">getUri</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A normative identifier for a namespace.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersion()" class="member-name-link">getVersion</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the version to which this namespace belongs.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasTarget()" class="member-name-link">hasTarget</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasTarget()" class="member-name-link">hasTarget</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">True if the namespace has a NDR conformance target and is meant to be
  conforming; false if the namespace is a utility, external, or is otherwise
  not meant to be conforming.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setCategory(gov.niem.tools.api.db.namespace.Namespace.Category)" class="member-name-link">setCategory</a><wbr>(<a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A kind of namespace.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDefinition(java.lang.String)" class="member-name-link">setDefinition</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;definition)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A definition that describes a namespace.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDraft(java.lang.String)" class="member-name-link">setDraft</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;draft)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A draft version of a namespace.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFilename(java.lang.String)" class="member-name-link">setFilename</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The filename to use for representations of this namespace such as XML schemas,
- without a file extension.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setFilepath(java.lang.String)" class="member-name-link">setFilepath</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filepath)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">The filepath to use for nested representations of this namespace such as
- for XML schemas, without the filename or extension.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setGeneration(gov.niem.tools.api.db.namespace.Namespace.Generation)" class="member-name-link">setGeneration</a><wbr>(<a href="Namespace.Generation.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Generation</a>&nbsp;generation)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A means by which a namespace should be generated.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setName(java.lang.String)" class="member-name-link">setName</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A name of a namespace.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPrefix(java.lang.String)" class="member-name-link">setPrefix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A short, non-normative identifier for a namespace.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setProperties(java.util.Set)" class="member-name-link">setProperties</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;&nbsp;properties)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTarget(gov.niem.tools.api.db.namespace.Namespace.NdrTarget)" class="member-name-link">setTarget</a><wbr>(<a href="Namespace.NdrTarget.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.NdrTarget</a>&nbsp;target)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A code representing an NDR conformance target, or null if the namespace
- is not meant to be conformant.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTypes(java.util.Set)" class="member-name-link">setTypes</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;&nbsp;types)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setUri(java.lang.String)" class="member-name-link">setUri</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;uri)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">A normative identifier for a namespace.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setVersion(gov.niem.tools.api.db.version.Version)" class="member-name-link">setVersion</a><wbr>(<a href="../version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;version)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Model version in which this entity is defined.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>org.mitre.niem.cmf.Namespace</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toCmf()" class="member-name-link">toCmf</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Converts this namespace to a CMF namespace object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toSummary()" class="member-name-link">toSummary</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toSummary()" class="member-name-link">toSummary</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets key fields about a namespace.</div>
 </div>
 </div>
@@ -449,7 +286,10 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionEntity">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a></h3>
-<code><a href="../base/BaseVersionEntity.html#getModel()">getModel</a>, <a href="../base/BaseVersionEntity.html#getNext()">getNext</a>, <a href="../base/BaseVersionEntity.html#getNiemVersion()">getNiemVersion</a>, <a href="../base/BaseVersionEntity.html#getNiemVersionNumber()">getNiemVersionNumber</a>, <a href="../base/BaseVersionEntity.html#getOriginal()">getOriginal</a>, <a href="../base/BaseVersionEntity.html#getPrev()">getPrev</a>, <a href="../base/BaseVersionEntity.html#getVersionId()">getVersionId</a>, <a href="../base/BaseVersionEntity.html#getVersionNumber()">getVersionNumber</a>, <a href="../base/BaseVersionEntity.html#getVersionSummary()">getVersionSummary</a>, <a href="../base/BaseVersionEntity.html#isDeprecated()">isDeprecated</a>, <a href="../base/BaseVersionEntity.html#isOriginal()">isOriginal</a>, <a href="../base/BaseVersionEntity.html#setDeprecated(boolean)">setDeprecated</a>, <a href="../base/BaseVersionEntity.html#setNext(T)">setNext</a>, <a href="../base/BaseVersionEntity.html#setOriginal(T)">setOriginal</a>, <a href="../base/BaseVersionEntity.html#setPrev(T)">setPrev</a></code></div>
+<code><a href="../base/BaseVersionEntity.html#getCurrent()">getCurrent</a>, <a href="../base/BaseVersionEntity.html#getModel()">getModel</a>, <a href="../base/BaseVersionEntity.html#getNiemVersion()">getNiemVersion</a>, <a href="../base/BaseVersionEntity.html#getNiemVersionNumber()">getNiemVersionNumber</a>, <a href="../base/BaseVersionEntity.html#getOriginal()">getOriginal</a>, <a href="../base/BaseVersionEntity.html#getVersionId()">getVersionId</a>, <a href="../base/BaseVersionEntity.html#getVersionNumber()">getVersionNumber</a>, <a href="../base/BaseVersionEntity.html#getVersionSummary()">getVersionSummary</a>, <a href="../base/BaseVersionEntity.html#isCurrent()">isCurrent</a>, <a href="../base/BaseVersionEntity.html#isOriginal()">isOriginal</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionedEntity">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseVersionedEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity</a></h3>
+<code><a href="../base/BaseVersionedEntity.html#getNext()">getNext</a>, <a href="../base/BaseVersionedEntity.html#getPrev()">getPrev</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseModelEntity">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseModelEntity.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity</a></h3>
 <code><a href="../base/BaseModelEntity.html#getModelKey()">getModelKey</a>, <a href="../base/BaseModelEntity.html#getModelSummary()">getModelSummary</a>, <a href="../base/BaseModelEntity.html#getSteward()">getSteward</a></code></div>
@@ -457,11 +297,8 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseStewardEntity">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseStewardEntity.html" title="class in gov.niem.tools.api.db.base">BaseStewardEntity</a></h3>
 <code><a href="../base/BaseStewardEntity.html#getStewardKey()">getStewardKey</a>, <a href="../base/BaseStewardEntity.html#getStewardSummary()">getStewardSummary</a></code></div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseEntity">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></h3>
-<code><a href="../base/BaseEntity.html#getCreatedBy()">getCreatedBy</a>, <a href="../base/BaseEntity.html#getCreatedDate()">getCreatedDate</a>, <a href="../base/BaseEntity.html#getId()">getId</a>, <a href="../base/BaseEntity.html#getLastModifiedBy()">getLastModifiedBy</a>, <a href="../base/BaseEntity.html#getLastModifiedDate()">getLastModifiedDate</a>, <a href="../base/BaseEntity.html#setCreatedBy(java.lang.String)">setCreatedBy</a>, <a href="../base/BaseEntity.html#setCreatedDate(java.time.LocalDateTime)">setCreatedDate</a>, <a href="../base/BaseEntity.html#setId(java.lang.Long)">setId</a>, <a href="../base/BaseEntity.html#setLastModifiedBy(java.lang.String)">setLastModifiedBy</a>, <a href="../base/BaseEntity.html#setLastModifiedDate(java.time.LocalDateTime)">setLastModifiedDate</a></code></div>
-<div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
-<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
+<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 </section>
 </li>
 </ul>
@@ -474,62 +311,9 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(gov.niem.tools.api.db.namespace.Namespace.NamespaceBuilder)">
-<h3>Namespace</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">Namespace</span><wbr><span class="parameters">(<a href="Namespace.NamespaceBuilder.html" title="class in gov.niem.tools.api.db.namespace">Namespace.NamespaceBuilder</a>&lt;?,<wbr>?&gt;&nbsp;b)</span></div>
-</section>
-</li>
-<li>
 <section class="detail" id="&lt;init&gt;()">
 <h3>Namespace</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Namespace</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="&lt;init&gt;(gov.niem.tools.api.db.version.Version,java.lang.String,java.lang.String,java.lang.String,java.lang.String,gov.niem.tools.api.db.namespace.Namespace.Category,java.lang.String,gov.niem.tools.api.db.namespace.Namespace.NdrTarget,gov.niem.tools.api.db.namespace.Namespace.Generation,java.lang.String,java.lang.String,java.util.Set,java.util.Set)">
-<h3>Namespace</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Namespace</span><wbr><span class="parameters">(<a href="../version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;version,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;uri,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;definition,
- <a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;draft,
- <a href="Namespace.NdrTarget.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.NdrTarget</a>&nbsp;target,
- <a href="Namespace.Generation.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Generation</a>&nbsp;generation,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filepath,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;&nbsp;types,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;&nbsp;properties)</span></div>
-<div class="block">Creates a new <code>Namespace</code> instance.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>version</code> - Model version in which this entity is defined.</dd>
-<dd><code>prefix</code> - A short, non-normative identifier for a namespace.</dd>
-<dd><code>name</code> - A name of a namespace.</dd>
-<dd><code>uri</code> - A normative identifier for a namespace.</dd>
-<dd><code>definition</code> - A definition that describes a namespace.</dd>
-<dd><code>category</code> - A kind of namespace.</dd>
-<dd><code>draft</code> - A draft version of a namespace. NIEM conventions are to use the value "1"
- for a namespace that has reached release candidate status or has been
- published.</dd>
-<dd><code>target</code> - A code representing an NDR conformance target, or null if the namespace
- is not meant to be conformant.</dd>
-<dd><code>generation</code> - A means by which a namespace should be generated.
- <ul>
-   <li>build: Generate by assembling its properties and types</li>
-   <li>static_file: Include it's pre-built file (e.g., externals and utilities)</li>
-   <li>none: Namespace may be referenced but does not need to be included
-     (e.g., XML Schema)</li>
- </ul>
- Defaults to "build".</dd>
-<dd><code>filename</code> - The filename to use for representations of this namespace such as XML schemas,
- without a file extension.</dd>
-<dd><code>filepath</code> - The filepath to use for nested representations of this namespace such as
- for XML schemas, without the filename or extension.</dd>
-<dd><code>types</code> - </dd>
-<dd><code>properties</code> - </dd>
-</dl>
 </section>
 </li>
 </ul>
@@ -540,6 +324,16 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 <section class="method-details" id="method-detail">
 <h2>Method Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="getRank()">
+<h3>getRank</h3>
+<div class="member-signature"><span class="annotations">@IndexingDependency(derivedFrom=@ObjectPath(@PropertyValue(propertyName="category")))
+@GenericField(sortable=YES)
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getRank</span>()</div>
+<div class="block">A ranking used to support sorting namespaces by category, with
+ Core and Core Supplements sorting first, followed by domains, etc.</div>
+</section>
+</li>
 <li>
 <section class="detail" id="getVersion()">
 <h3>getVersion</h3>
@@ -599,28 +393,28 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 </section>
 </li>
 <li>
-<section class="detail" id="getFullIdentifier()">
-<h3>getFullIdentifier</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getFullIdentifier</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../base/BaseEntity.html#getFullIdentifier()">BaseEntity</a></code></span></div>
+<section class="detail" id="getIdLabel()">
+<h3>getIdLabel</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getIdLabel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../base/BaseEntity.html#getIdLabel()">BaseEntity</a></code></span></div>
 <div class="block">A human-readable and url-friendly unique identifier for an entity.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../base/BaseEntity.html#getFullIdentifier()">getFullIdentifier</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></code></dd>
+<dd><code><a href="../base/BaseEntity.html#getIdLabel()">getIdLabel</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></code></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="getLocalIdentifier()">
-<h3>getLocalIdentifier</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getLocalIdentifier</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../base/BaseEntity.html#getLocalIdentifier()">BaseEntity</a></code></span></div>
+<section class="detail" id="getIdLocalLabel()">
+<h3>getIdLocalLabel</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getIdLocalLabel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="../base/BaseEntity.html#getIdLocalLabel()">BaseEntity</a></code></span></div>
 <div class="block">An identifier, unique within its immediate scope.
  Examples include a prefix (uniquely identifying a namespace) or a qualified
  name (uniquely identifying a property or a type) within a version of a model.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../base/BaseEntity.html#getLocalIdentifier()">getLocalIdentifier</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></code></dd>
+<dd><code><a href="../base/BaseEntity.html#getIdLocalLabel()">getIdLocalLabel</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseEntity.html" title="class in gov.niem.tools.api.db.base">BaseEntity</a></code></dd>
 </dl>
 </section>
 </li>
@@ -675,16 +469,29 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 </section>
 </li>
 <li>
-<section class="detail" id="addToCmfModel(org.mitre.niem.cmf.Model)">
+<section class="detail" id="addToCmfModel(org.mitre.niem.cmf.Model,boolean,gov.niem.tools.api.db.base.AddModelReason,gov.niem.tools.api.validation.Test)">
 <h3>addToCmfModel</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addToCmfModel</span><wbr><span class="parameters">(org.mitre.niem.cmf.Model&nbsp;cmfModel)</span>
-                   throws <span class="exceptions">org.mitre.niem.cmf.CMFException</span></div>
-<div class="block">Adds this namespace to the given CMF model.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">org.mitre.niem.cmf.Namespace</span>&nbsp;<span class="element-name">addToCmfModel</span><wbr><span class="parameters">(org.mitre.niem.cmf.Model&nbsp;cmfModel,
+ boolean&nbsp;addDependencies,
+ <a href="../base/AddModelReason.html" title="enum class in gov.niem.tools.api.db.base">AddModelReason</a>&nbsp;addModelReason,
+ <a href="../../validation/Test.html" title="class in gov.niem.tools.api.validation">Test</a>&nbsp;test)</span>
+                                           throws <span class="exceptions">org.mitre.niem.cmf.CMFException,
+<a href="../exceptions/EntityNotUniqueException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotUniqueException</a></span></div>
+<div class="block">Adds this namespace to the given CMF model if it does not already exist.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../base/BaseCmfEntity.html#addToCmfModel(org.mitre.niem.cmf.Model)">addToCmfModel</a></code>&nbsp;in interface&nbsp;<code><a href="../base/BaseCmfEntity.html" title="interface in gov.niem.tools.api.db.base">BaseCmfEntity</a>&lt;org.mitre.niem.cmf.Namespace&gt;</code></dd>
+<dd><code><a href="../base/BaseCmfEntity.html#addToCmfModel(org.mitre.niem.cmf.Model,boolean,gov.niem.tools.api.db.base.AddModelReason,gov.niem.tools.api.validation.Test)">addToCmfModel</a></code>&nbsp;in interface&nbsp;<code><a href="../base/BaseCmfEntity.html" title="interface in gov.niem.tools.api.db.base">BaseCmfEntity</a>&lt;org.mitre.niem.cmf.Namespace&gt;</code></dd>
+<dt>Parameters:</dt>
+<dd><code>cmfModel</code> - The CMF model.</dd>
+<dd><code>addDependencies</code> - True to also add namespace dependencies (local terminology);
+     false to just add this namespace.</dd>
+<dd><code>addModelReason</code> - Indicates the reason why a component is being added to the
+     model, either directly due to a task like migration or transformation, or indirectly
+     as a required dependency.</dd>
+<dd><code>test</code> - If present, log info to given test object.</dd>
 <dt>Throws:</dt>
 <dd><code>org.mitre.niem.cmf.CMFException</code></dd>
+<dd><code><a href="../exceptions/EntityNotUniqueException.html" title="class in gov.niem.tools.api.db.exceptions">EntityNotUniqueException</a></code></dd>
 </dl>
 </section>
 </li>
@@ -710,262 +517,44 @@ implements <a href="../base/BaseCmfEntity.html" title="interface in gov.niem.too
 </section>
 </li>
 <li>
-<section class="detail" id="categoryToCmf(gov.niem.tools.api.db.namespace.Namespace.Category)">
-<h3>categoryToCmf</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">categoryToCmf</span><wbr><span class="parameters">(<a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</span></div>
-<div class="block">Converts API namespace categories to CMF namespace categories.
+<section class="detail" id="categoryToCmfInt(gov.niem.tools.api.db.namespace.Namespace.Category)">
+<h3>categoryToCmfInt</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">categoryToCmfInt</span><wbr><span class="parameters">(<a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</span></div>
+<div class="block">Converts API namespace categories to CMF namespace kinds (int).
 
  <p>From CMF: cmf/NamespaceKind.java
- NSK_EXTENSION = 0; has conformance assertion, not in NIEM model
- NSK_DOMAIN    = 1; domain schema
- NSK_CORE      = 2; niem core schema
- NSK_OTHERNIEM = 3; other niem model; starts with release or publication prefix
- NSK_BUILTIN   = 4; appinfo, code-lists, conformance, proxy, structures
- NSK_XSD       = 5; namespace for XSD datatypes
- NSK_XML       = 6; namespace for xml: attributes
- NSK_EXTERNAL  = 7; imported with appinfo:externalImportIndicator
- NSK_UNKNOWN   = 8; no conformance assertion; not any of the above
- NSK_NUMKINDS  = 9; this many kinds of namespaces</div>
+ NSK_EXTENSION  = 0; has conformance assertion, not in NIEM model
+ NSK_DOMAIN     = 1; domain schema
+ NSK_CORE       = 2; niem core schema
+ NSK_OTHERNIEM  = 3; other niem model; starts with release or publication prefix
+ NSK_APPINFO    = 4; appinfo
+ NSK_CLSA       = 5; code lists schema appinfo
+ NSK_CLI        = 6; code lists instance
+ NSK_NIEM_XS    = 7; proxy
+ NSK_STRUCTURES = 8; structures
+ NSK_XSD        = 9; namespace for XSD
+ NSK_XML        = 10; namespace for xml: attributes
+ NSK_EXTERNAL   = 11; was imported with appinfo:externalImportIndicator
+ NSK_NOTNIEM    = 12; none of the above; no conformance assertion or external appinfo
+ NSK_UNKNOWN    = 13; can't figure it out; probably an error
+ NSK_NUMKINDS   = 14; this many kinds of namespaces</div>
 </section>
 </li>
 <li>
-<section class="detail" id="builder()">
-<h3>builder</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Namespace.NamespaceBuilder.html" title="class in gov.niem.tools.api.db.namespace">Namespace.NamespaceBuilder</a>&lt;?,<wbr>?&gt;</span>&nbsp;<span class="element-name">builder</span>()</div>
+<section class="detail" id="categoryToCmfString(gov.niem.tools.api.db.namespace.Namespace.Category)">
+<h3>categoryToCmfString</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">categoryToCmfString</span><wbr><span class="parameters">(<a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</span></div>
+<div class="block">Converts API namespace categories to CMF namespace kinds (string).</div>
 </section>
 </li>
 <li>
-<section class="detail" id="getPrefix()">
-<h3>getPrefix</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getPrefix</span>()</div>
-<div class="block">A short, non-normative identifier for a namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getName()">
-<h3>getName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getName</span>()</div>
-<div class="block">A name of a namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getUri()">
-<h3>getUri</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getUri</span>()</div>
-<div class="block">A normative identifier for a namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getDefinition()">
-<h3>getDefinition</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getDefinition</span>()</div>
-<div class="block">A definition that describes a namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getCategory()">
-<h3>getCategory</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a></span>&nbsp;<span class="element-name">getCategory</span>()</div>
-<div class="block">A kind of namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getDraft()">
-<h3>getDraft</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getDraft</span>()</div>
-<div class="block">A draft version of a namespace. NIEM conventions are to use the value "1"
- for a namespace that has reached release candidate status or has been
- published.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getTarget()">
-<h3>getTarget</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Namespace.NdrTarget.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.NdrTarget</a></span>&nbsp;<span class="element-name">getTarget</span>()</div>
-<div class="block">A code representing an NDR conformance target, or null if the namespace
- is not meant to be conformant.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getGeneration()">
-<h3>getGeneration</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Namespace.Generation.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Generation</a></span>&nbsp;<span class="element-name">getGeneration</span>()</div>
-<div class="block">A means by which a namespace should be generated.
- <ul>
-   <li>build: Generate by assembling its properties and types</li>
-   <li>static_file: Include it's pre-built file (e.g., externals and utilities)</li>
-   <li>none: Namespace may be referenced but does not need to be included
-     (e.g., XML Schema)</li>
- </ul>
- Defaults to "build".</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getFilename()">
-<h3>getFilename</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getFilename</span>()</div>
-<div class="block">The filename to use for representations of this namespace such as XML schemas,
- without a file extension.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getFilepath()">
-<h3>getFilepath</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getFilepath</span>()</div>
-<div class="block">The filepath to use for nested representations of this namespace such as
- for XML schemas, without the filename or extension.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getTypes()">
-<h3>getTypes</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;</span>&nbsp;<span class="element-name">getTypes</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getProperties()">
-<h3>getProperties</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;</span>&nbsp;<span class="element-name">getProperties</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setVersion(gov.niem.tools.api.db.version.Version)">
-<h3>setVersion</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setVersion</span><wbr><span class="parameters">(<a href="../version/Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;version)</span></div>
-<div class="block">Model version in which this entity is defined.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setPrefix(java.lang.String)">
-<h3>setPrefix</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPrefix</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span></div>
-<div class="block">A short, non-normative identifier for a namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setName(java.lang.String)">
-<h3>setName</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setName</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
-<div class="block">A name of a namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setUri(java.lang.String)">
-<h3>setUri</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setUri</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;uri)</span></div>
-<div class="block">A normative identifier for a namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setDefinition(java.lang.String)">
-<h3>setDefinition</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDefinition</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;definition)</span></div>
-<div class="block">A definition that describes a namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setCategory(gov.niem.tools.api.db.namespace.Namespace.Category)">
-<h3>setCategory</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCategory</span><wbr><span class="parameters">(<a href="Namespace.Category.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Category</a>&nbsp;category)</span></div>
-<div class="block">A kind of namespace.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setDraft(java.lang.String)">
-<h3>setDraft</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDraft</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;draft)</span></div>
-<div class="block">A draft version of a namespace. NIEM conventions are to use the value "1"
- for a namespace that has reached release candidate status or has been
- published.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setTarget(gov.niem.tools.api.db.namespace.Namespace.NdrTarget)">
-<h3>setTarget</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTarget</span><wbr><span class="parameters">(<a href="Namespace.NdrTarget.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.NdrTarget</a>&nbsp;target)</span></div>
-<div class="block">A code representing an NDR conformance target, or null if the namespace
- is not meant to be conformant.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setGeneration(gov.niem.tools.api.db.namespace.Namespace.Generation)">
-<h3>setGeneration</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setGeneration</span><wbr><span class="parameters">(<a href="Namespace.Generation.html" title="enum class in gov.niem.tools.api.db.namespace">Namespace.Generation</a>&nbsp;generation)</span></div>
-<div class="block">A means by which a namespace should be generated.
- <ul>
-   <li>build: Generate by assembling its properties and types</li>
-   <li>static_file: Include it's pre-built file (e.g., externals and utilities)</li>
-   <li>none: Namespace may be referenced but does not need to be included
-     (e.g., XML Schema)</li>
- </ul>
- Defaults to "build".</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setFilename(java.lang.String)">
-<h3>setFilename</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setFilename</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filename)</span></div>
-<div class="block">The filename to use for representations of this namespace such as XML schemas,
- without a file extension.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setFilepath(java.lang.String)">
-<h3>setFilepath</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setFilepath</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;filepath)</span></div>
-<div class="block">The filepath to use for nested representations of this namespace such as
- for XML schemas, without the filename or extension.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="setTypes(java.util.Set)">
-<h3>setTypes</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTypes</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../type/Type.html" title="class in gov.niem.tools.api.db.type">Type</a>&gt;&nbsp;types)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="setProperties(java.util.Set)">
-<h3>setProperties</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setProperties</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;&nbsp;properties)</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="toString()">
-<h3>toString</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
+<section class="detail" id="compareTo(gov.niem.tools.api.db.namespace.Namespace)">
+<h3>compareTo</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">compareTo</span><wbr><span class="parameters">(<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&nbsp;other)</span></div>
+<div class="block">Custom sorting function for namespaces.  Sorts by namespace rank, then prefix.</div>
 <dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="../base/BaseVersionEntity.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="equals(java.lang.Object)">
-<h3>equals</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="../base/BaseVersionEntity.html#equals(java.lang.Object)">equals</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="canEqual(java.lang.Object)">
-<h3>canEqual</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">canEqual</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;other)</span></div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="../base/BaseVersionEntity.html#canEqual(java.lang.Object)">canEqual</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="hashCode()">
-<h3>hashCode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="../base/BaseVersionEntity.html#hashCode()">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseVersionEntity.html" title="class in gov.niem.tools.api.db.base">BaseVersionEntity</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html#compareTo(T)" title="class or interface in java.lang" class="external-link">compareTo</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;</code></dd>
 </dl>
 </section>
 </li>

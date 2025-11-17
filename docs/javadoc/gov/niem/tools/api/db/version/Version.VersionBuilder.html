@@ -88,7 +88,9 @@ loadScripts(document, 'script');</script>
 <div class="inheritance"><a href="../base/BaseEntity.BaseEntityBuilder.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseEntity.BaseEntityBuilder</a>&lt;C,<wbr>B&gt;
 <div class="inheritance"><a href="../base/BaseStewardEntity.BaseStewardEntityBuilder.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseStewardEntity.BaseStewardEntityBuilder</a>&lt;C,<wbr>B&gt;
 <div class="inheritance"><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseModelEntity.BaseModelEntityBuilder</a>&lt;C,<wbr>B&gt;
+<div class="inheritance"><a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html" title="class in gov.niem.tools.api.db.base">gov.niem.tools.api.db.base.BaseVersionedEntity.BaseVersionedEntityBuilder</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr>C,<wbr>B&gt;
 <div class="inheritance">gov.niem.tools.api.db.version.Version.VersionBuilder&lt;C,<wbr>B&gt;</div>
+</div>
 </div>
 </div>
 </div>
@@ -100,7 +102,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract static class </span><span class="element-name type-name-label">Version.VersionBuilder&lt;C extends <a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr>B extends Version.VersionBuilder&lt;C,<wbr>B&gt;&gt;</span>
-<span class="extends-implements">extends <a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;C,<wbr>B&gt;</span></div>
+<span class="extends-implements">extends <a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity.BaseVersionedEntityBuilder</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr>C,<wbr>B&gt;</span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -143,30 +145,40 @@ loadScripts(document, 'script');</script>
  IEPD claims conformance.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#draft(java.lang.String)" class="member-name-link">draft</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;draft)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#description(java.lang.String)" class="member-name-link">description</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A description of the main content or changes in a version.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#draft(java.lang.String)" class="member-name-link">draft</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;draft)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A draft of a version, such as "alpha1" or "rc2".</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exchangePartners(java.lang.String)" class="member-name-link">exchangePartners</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;exchangePartners)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exchangePartners(java.lang.String)" class="member-name-link">exchangePartners</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;exchangePartners)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A name of an entity or organization that uses this IEPD.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exchangePattern(java.lang.String)" class="member-name-link">exchangePattern</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;exchangePattern)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#exchangePattern(java.lang.String)" class="member-name-link">exchangePattern</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;exchangePattern)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A description of a transactional or design pattern used for this IEPD.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isCurrent(boolean)" class="member-name-link">isCurrent</a><wbr>(boolean&nbsp;isCurrent)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isCurrent(boolean)" class="member-name-link">isCurrent</a><wbr>(boolean&nbsp;isCurrent)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">True if this version of the model is considered the current version; false otherwise.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPublished(boolean)" class="member-name-link">isPublished</a><wbr>(boolean&nbsp;isPublished)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPublished(boolean)" class="member-name-link">isPublished</a><wbr>(boolean&nbsp;isPublished)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">True if a version has been published and the content is to be considered
  finalized; false otherwise.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#link(java.lang.String)" class="member-name-link">link</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;link)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A URL for a website where a version has been published.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#messageRoots(java.util.Set)" class="member-name-link">messageRoots</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;&nbsp;messageRoots)</code></div>
@@ -182,19 +194,9 @@ loadScripts(document, 'script');</script>
 <div class="block">A set of namespaces defined by a version of a model.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#next(gov.niem.tools.api.db.version.Version)" class="member-name-link">next</a><wbr>(<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;next)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#niemVersion(gov.niem.tools.api.db.version.Version)" class="member-name-link">niemVersion</a><wbr>(<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;niemVersion)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Corresponding entity mapped from the next version.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#niemVersion(gov.niem.tools.api.db.version.Version)" class="member-name-link">niemVersion</a><wbr>(<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;niemVersion)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A NIEM version on which this version is based, or itself if this is a NIEM version.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#prev(gov.niem.tools.api.db.version.Version)" class="member-name-link">prev</a><wbr>(<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;prev)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Corresponding entity mapped from the previous version.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#revised(java.lang.String)" class="member-name-link">revised</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;revised)</code></div>
@@ -227,6 +229,9 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 </div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseVersionedEntity.BaseVersionedEntityBuilder">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity.BaseVersionedEntityBuilder</a></h3>
+<code><a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html#next(T)">next</a>, <a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html#prev(T)">prev</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-gov.niem.tools.api.db.base.BaseEntity.BaseEntityBuilder">Methods inherited from class&nbsp;gov.niem.tools.api.db.base.<a href="../base/BaseEntity.BaseEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseEntity.BaseEntityBuilder</a></h3>
 <code><a href="../base/BaseEntity.BaseEntityBuilder.html#createdBy(java.lang.String)">createdBy</a>, <a href="../base/BaseEntity.BaseEntityBuilder.html#createdDate(java.time.LocalDateTime)">createdDate</a>, <a href="../base/BaseEntity.BaseEntityBuilder.html#id(java.lang.Long)">id</a>, <a href="../base/BaseEntity.BaseEntityBuilder.html#lastModifiedBy(java.lang.String)">lastModifiedBy</a>, <a href="../base/BaseEntity.BaseEntityBuilder.html#lastModifiedDate(java.time.LocalDateTime)">lastModifiedDate</a></code></div>
@@ -395,6 +400,28 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="description(java.lang.String)">
+<h3>description</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></span>&nbsp;<span class="element-name">description</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;description)</span></div>
+<div class="block">A description of the main content or changes in a version.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>this</code>.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="link(java.lang.String)">
+<h3>link</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></span>&nbsp;<span class="element-name">link</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;link)</span></div>
+<div class="block">A URL for a website where a version has been published.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>this</code>.</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="namespaces(java.util.Set)">
 <h3>namespaces</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></span>&nbsp;<span class="element-name">namespaces</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../namespace/Namespace.html" title="class in gov.niem.tools.api.db.namespace">Namespace</a>&gt;&nbsp;namespaces)</span></div>
@@ -410,28 +437,6 @@ loadScripts(document, 'script');</script>
 <h3>messageRoots</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></span>&nbsp;<span class="element-name">messageRoots</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../property/Property.html" title="class in gov.niem.tools.api.db.property">Property</a>&gt;&nbsp;messageRoots)</span></div>
 <div class="block">A set of properties that serve as the root or starting point of message instances.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd><code>this</code>.</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="prev(gov.niem.tools.api.db.version.Version)">
-<h3>prev</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></span>&nbsp;<span class="element-name">prev</span><wbr><span class="parameters">(<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;prev)</span></div>
-<div class="block">Corresponding entity mapped from the previous version.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd><code>this</code>.</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="next(gov.niem.tools.api.db.version.Version)">
-<h3>next</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></span>&nbsp;<span class="element-name">next</span><wbr><span class="parameters">(<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>&nbsp;next)</span></div>
-<div class="block">Corresponding entity mapped from the next version.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd><code>this</code>.</dd>
@@ -455,7 +460,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">protected abstract</span>&nbsp;<span class="return-type"><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a></span>&nbsp;<span class="element-name">self</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html#self()">self</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a> extends <a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a> extends <a href="Version.VersionBuilder.html" title="class in gov.niem.tools.api.db.version">Version.VersionBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a>&gt;&gt;</code></dd>
+<dd><code><a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html#self()">self</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity.BaseVersionedEntityBuilder</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a> extends <a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a> extends <a href="Version.VersionBuilder.html" title="class in gov.niem.tools.api.db.version">Version.VersionBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a>&gt;&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -465,7 +470,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a></span>&nbsp;<span class="element-name">build</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html#build()">build</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a> extends <a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a> extends <a href="Version.VersionBuilder.html" title="class in gov.niem.tools.api.db.version">Version.VersionBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a>&gt;&gt;</code></dd>
+<dd><code><a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html#build()">build</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity.BaseVersionedEntityBuilder</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a> extends <a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a> extends <a href="Version.VersionBuilder.html" title="class in gov.niem.tools.api.db.version">Version.VersionBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a>&gt;&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -475,7 +480,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
 <dl class="notes">
 <dt>Overrides:</dt>
-<dd><code><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseModelEntity.BaseModelEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseModelEntity.BaseModelEntityBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a> extends <a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a> extends <a href="Version.VersionBuilder.html" title="class in gov.niem.tools.api.db.version">Version.VersionBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a>&gt;&gt;</code></dd>
+<dd><code><a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html#toString()">toString</a></code>&nbsp;in class&nbsp;<code><a href="../base/BaseVersionedEntity.BaseVersionedEntityBuilder.html" title="class in gov.niem.tools.api.db.base">BaseVersionedEntity.BaseVersionedEntityBuilder</a>&lt;<a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a> extends <a href="Version.html" title="class in gov.niem.tools.api.db.version">Version</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a> extends <a href="Version.VersionBuilder.html" title="class in gov.niem.tools.api.db.version">Version.VersionBuilder</a>&lt;<a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">C</a>,<wbr><a href="Version.VersionBuilder.html" title="type parameter in Version.VersionBuilder">B</a>&gt;&gt;</code></dd>
 </dl>
 </section>
 </li>

@@ -48,7 +48,7 @@ public abstract class BaseModelEntity extends BaseStewardEntity {
 
   // @JacksonXmlProperty(localName = "ModelRouteID")
   // @Schema(
-  //   example = "https://tools.niem.gov/api/v2/stewards/niem",
+  //   example = "https://api.niemopen.org/v2/stewards/niem",
   //   description = "An endpoint to get information about a steward."
   // )
   // public String getModelRoute() {

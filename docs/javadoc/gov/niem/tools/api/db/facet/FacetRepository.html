@@ -107,14 +107,26 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="Facet.
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndPrefix(java.lang.Long,java.lang.String)" class="member-name-link">findByVersionIdAndPrefix</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByType_Id(java.lang.Long)" class="member-name-link">countByType_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a><wbr>&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findByVersionIdAndPrefixAndType_Name(java.lang.Long,java.lang.String,java.lang.String)" class="member-name-link">findByVersionIdAndPrefixAndType_Name</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByType_Namespace_Id(java.lang.Long)" class="member-name-link">countByType_Namespace_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#countByType_Namespace_Version_Id(java.lang.Long)" class="member-name-link">countByType_Namespace_Version_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.data.domain.Page<wbr>&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findAllByType_Id(java.lang.Long,org.springframework.data.domain.Pageable)" class="member-name-link">findAllByType_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.data.domain.Page<wbr>&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findAllByType_Namespace_Id(java.lang.Long,org.springframework.data.domain.Pageable)" class="member-name-link">findAllByType_Namespace_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.data.domain.Page<wbr>&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findAllByType_Namespace_Version_Id(java.lang.Long,org.springframework.data.domain.Pageable)" class="member-name-link">findAllByType_Namespace_Version_Id</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#findOneByVersionIdAndPrefixAndType_NameAndCategoryAndValue(java.lang.Long,java.lang.String,java.lang.String,gov.niem.tools.api.db.facet.Facet.Category,java.lang.String)" class="member-name-link">findOneByVersionIdAndPrefixAndType_NameAndCategoryAndValue</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
@@ -166,18 +178,42 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="Facet.
 </section>
 </li>
 <li>
-<section class="detail" id="findByVersionIdAndPrefix(java.lang.Long,java.lang.String)">
-<h3>findByVersionIdAndPrefix</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</span>&nbsp;<span class="element-name">findByVersionIdAndPrefix</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix)</span></div>
+<section class="detail" id="findAllByType_Namespace_Version_Id(java.lang.Long,org.springframework.data.domain.Pageable)">
+<h3>findAllByType_Namespace_Version_Id</h3>
+<div class="member-signature"><span class="return-type">org.springframework.data.domain.Page&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</span>&nbsp;<span class="element-name">findAllByType_Namespace_Version_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="findByVersionIdAndPrefixAndType_Name(java.lang.Long,java.lang.String,java.lang.String)">
-<h3>findByVersionIdAndPrefixAndType_Name</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</span>&nbsp;<span class="element-name">findByVersionIdAndPrefixAndType_Name</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;prefix,
- <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<section class="detail" id="findAllByType_Namespace_Id(java.lang.Long,org.springframework.data.domain.Pageable)">
+<h3>findAllByType_Namespace_Id</h3>
+<div class="member-signature"><span class="return-type">org.springframework.data.domain.Page&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</span>&nbsp;<span class="element-name">findAllByType_Namespace_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="findAllByType_Id(java.lang.Long,org.springframework.data.domain.Pageable)">
+<h3>findAllByType_Id</h3>
+<div class="member-signature"><span class="return-type">org.springframework.data.domain.Page&lt;<a href="Facet.html" title="class in gov.niem.tools.api.db.facet">Facet</a>&gt;</span>&nbsp;<span class="element-name">findAllByType_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId,
+ org.springframework.data.domain.Pageable&nbsp;pageable)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByType_Namespace_Version_Id(java.lang.Long)">
+<h3>countByType_Namespace_Version_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByType_Namespace_Version_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;versionId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByType_Namespace_Id(java.lang.Long)">
+<h3>countByType_Namespace_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByType_Namespace_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;namespaceId)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="countByType_Id(java.lang.Long)">
+<h3>countByType_Id</h3>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">countByType_Id</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;typeId)</span></div>
 </section>
 </li>
 </ul>

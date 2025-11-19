@@ -12,7 +12,7 @@ plugins {
 
 group = 'gov.niem.tools'
 version = '2.0'
-project.ext.draft = '2.0-alpha08.1'
+project.ext.draft = '2.0-alpha09-SNAPSHOT'
 
 application {
   mainClass = 'gov.niem.tools.api.Application'
@@ -20,21 +20,19 @@ application {
 
 java {
   sourceCompatibility = JavaVersion.VERSION_21
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
 }
 
-// subprojects {
-//   apply plugin: 'java'
-//   java {
-//     sourceCompatibility = JavaVersion.VERSION_17
-//   }
-//   test {
-//     // enabled = false
-//   	useJUnitPlatform()
-//   }
-//   dependencies {
-//     testImplementation 'org.junit.jupiter:junit-jupiter'
-//   }
-// }
+subprojects {
+  apply plugin: 'java'
+  java {
+    toolchain {
+      languageVersion = JavaLanguageVersion.of(21)
+    }
+  }
+}
 
 springBoot {
   mainClass = 'gov.niem.tools.api.Application'
@@ -148,6 +146,7 @@ checkstyle {
   // https://checkstyle.sourceforge.io/version/9.3/
   println "Checkstyle version " + checkstyle.toolVersion
   toolVersion = "9.3"
+  println "Checkstyle version " + checkstyle.toolVersion
 }
 
 checkstyleMain {
@@ -168,7 +167,6 @@ javadoc {
   options.destinationDirectory = file("/docs/javadoc")
   // include("gov/niem/tools/api/**")
   exclude "org/mitre/**", "**libs/**"
-  println "IN JAVADOC TASK"
 }
 
 // task copyJavadocs(type: Copy) {
@@ -195,9 +193,17 @@ openApi {
 task copyOpenApi(type: Copy) {
   group = "documentation"
   description = "Copy the OpenAPI JSON file to /docs/"
-  println "Copying the OpenAPI JSON file to /docs/"
   from "build/openapi.json"
   into "/docs/"
 }
 
 generateOpenApiDocs.finalizedBy copyOpenApi
+
+
+// Install or update submodules ****************************************
+
+task submodules(type: Exec) {
+  group = "build setup"
+  description = "Updates CMF and CMF Tool"
+  commandLine "git", "submodule", "update", "--init", "--recursive", "--remote"
+}
